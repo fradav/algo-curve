@@ -33,7 +33,7 @@ citation:
   url: https://computo.sfds.asso.fr/template-computo-quarto
   publisher: "Société Française de Statistique"
   issn: "2824-7795"
-bibliography: references.bib
+bibliography: algo-curve.bib
 github-user: computorg
 repo: "template-computo-r"
 draft: true # set to false once the build is running
