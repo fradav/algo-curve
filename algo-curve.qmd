@@ -63,9 +63,7 @@ format:
  \newcommand{\ind}[1]{\mathbb{1}_{\left\{#1 \right\}}}
  \newcommand{\cH}{\mathcal{H}}
  \newcommand{\cK}{\mathcal{K}}
- \newcommand{\cP}{\mathcal{P}}
  \newcommand{\Rfam}{\mathfrak{R}}
- \newcommand{\setK}{\mathcal{K}}
  \newcommand{\FDP}{\mathrm{FDP}}
  \newcommand{\FDR}{\mathrm{FDR}}
  \newcommand{\JER}{\mathrm{JER}}
