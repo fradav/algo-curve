@@ -39,8 +39,21 @@ repo: "algo-curve"
 draft: true # set to false once the build is running
 published: false # will be set to true once accepted
 format:
-  computo-html: default
-  computo-pdf: default
+  computo-html: 
+    html-math-method: mathjax
+    include-in-header:
+      - text: |
+          <script>
+          window.MathJax = {
+            tex: {
+              tags: 'ams'
+            }
+          };
+          </script>
+  computo-pdf: 
+    include-in-header:
+      - text: |
+          \usepackage{amsmath}
 ---
 
 # Introduction
