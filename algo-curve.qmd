@@ -15,7 +15,7 @@ date: last-modified
 date-modified: last-modified
 abstract: >+
   \newcommand{\Rfam}{\mathfrak{R}} \newcommand{\Vstar}{V^*_{\Rfam}}
-  This paper presents a new algorithm (and an additional trick) that allow to compute fastly an entire curve of post hoc bounds for the False Discovery Proportion when the underlying bound $\Vstar$ construction is based on a reference family $\Rfam$ with a forest structure à la @MR4178188. By an entire curve, we mean the values $\Vstar(S_1),\dotsc,\Vstar(S_m)$ computed on a path of increasing selection sets $S_1\subsetneq\dotsb\subsetneq S_m$, $|S_t|=t$. The new algorithm leverages the fact that going from $S_t$ to $S_{t+1}$ is done by only adding one hypothesis.
+  This paper presents a new algorithm (and an additional trick) that allows to compute fastly an entire curve of post hoc bounds for the False Discovery Proportion when the underlying bound $\Vstar$ construction is based on a reference family $\Rfam$ with a forest structure à la @MR4178188. By an entire curve, we mean the values $\Vstar(S_1),\dotsc,\Vstar(S_m)$ computed on a path of increasing selection sets $S_1\subsetneq\dotsb\subsetneq S_m$, $|S_t|=t$. The new algorithm leverages the fact that going from $S_t$ to $S_{t+1}$ is done by adding only one hypothesis.
 keywords: [multiple testing, algorithmic, post hoc inference, false discovery proportion, confidence bound]
 citation:
   type: article-journal
