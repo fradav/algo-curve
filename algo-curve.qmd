@@ -1,24 +1,16 @@
 ---
-title: "Template for contribution to Computo"
-subtitle: "Example dedicated to `R` users"
+title: "Fast algorithm to compute a curve of confidence upper bounds for the False Discovery Proportion using a reference family with a forest structure"
+# subtitle: ""
 author:
-  - name: Jane Doe
+  - name: Guillermo Durand
     corresponding: true
-    email: janedoe@nowhere.moon
-    url: https://janedoe.someplace.themoon.org
-    orcid: 0000-0000-0000-0000
+    email: guillermo.durand@universite-paris-saclay.fr
+    url: https://durandg12.github.io/
+    orcid: 0000-0003-4056-5631
     affiliations:
-      - name: Name of Affiliation one
-        department: Statistics
-        url: https://someplace.themoon.org
-  - name: John Doe
-    email: johndoe@nowhere.moon
-    url: https://johndoe.someplace.themoon.org
-    orcid: 0000-0000-0000-0000
-    affiliations:
-      - name: Name of Afficiliation two
-        department: Computer Science
-        url: https://someplace.themoon.org
+      - name: Université Paris-Saclay
+        department: Laboratoire de Mathématiques d'Orsay
+        url: https://www.imo.universite-paris-saclay.fr/fr/
 date: last-modified
 date-modified: last-modified
 description: |
