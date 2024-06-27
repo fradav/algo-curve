@@ -13,11 +13,10 @@ author:
         url: https://www.imo.universite-paris-saclay.fr/fr/
 date: last-modified
 date-modified: last-modified
-description: |
-  This document provides a template based on the [`quarto`](https://quarto.org/) system for contributions to Computo, using the [`quarto journal extension`](https://github.com/computorg/computo-quarto-extension), the knitr kernel (R user) and [`renv`](https://rstudio.github.io/renv/articles/renv.html) to set-up the dependencies.
 abstract: >+
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur posuere vestibulum facilisis. Aenean pretium orci augue, quis lobortis libero accumsan eu. Nam mollis lorem sit amet pellentesque ullamcorper. Curabitur lobortis libero eget malesuada vestibulum. Nam nec nibh massa. Pellentesque porttitor cursus tellus. Mauris urna erat, rhoncus sed faucibus sit amet, venenatis eu ipsum.
-keywords: [key1, key2, key3]
+  \newcommand{\Rfam}{\mathfrak{R}} \newcommand{\Vstar}{V^*_{\Rfam}}
+  This paper presents a new algorithm (and an additional trick) that allow to compute fastly an entire curve of post hoc bounds for the False Discovery Proportion when the underlying bound $\Vstar$ construction is based on a reference family $\Rfam$ with a forest structure à la @MR4178188. By an entire curve, we mean the values $\Vstar(S_1),\dotsc,\Vstar(S_m)$ computed on a path of increasing selection sets $S_1\subsetneq\dotsb\subsetneq S_m$, $|S_t|=t$. The new algorithm leverages the fact that going from $S_t$ to $S_{t+1}$ is done by only adding one hypothesis.
+keywords: [multiple testing, algorithmic, post hoc inference, false discovery proportion, confidence bound]
 citation:
   type: article-journal
   container-title: "Computo"
@@ -57,10 +56,11 @@ format:
  \newcommand{\ind}[1]{\mathbb{1}_{\left\{#1 \right\}}}
  \newcommand{\cH}{\mathcal{H}}
  \newcommand{\cK}{\mathcal{K}}
- \newcommand{\Rfam}{\mathfrak{R}}
  \newcommand{\FDP}{\mathrm{FDP}}
  \newcommand{\FDR}{\mathrm{FDR}}
  \newcommand{\JER}{\mathrm{JER}}
+ \newcommand{\Rfam}{\mathfrak{R}}
+ \newcommand{\Vstar}{V^*_{\Rfam}}
 :::
 
 # Introduction
