@@ -1,5 +1,5 @@
 ---
-title: "Fast algorithm to compute a curve of confidence upper bounds for the False Discovery Proportion using a reference family with a forest structure"
+title: "A fast algorithm to compute a curve of confidence upper bounds for the False Discovery Proportion using a reference family with a forest structure"
 # subtitle: ""
 author:
   - name: Guillermo Durand
