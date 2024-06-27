@@ -46,6 +46,8 @@ format:
     include-in-header:
       - text: |
           \usepackage{amsmath}
+    cite-method: natbib
+    natbiboptions: round
 ---
 
 ::: {.hidden}
