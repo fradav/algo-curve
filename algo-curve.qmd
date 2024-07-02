@@ -14,8 +14,7 @@ author:
 date: last-modified
 date-modified: last-modified
 abstract: >+
-  \newcommand{\Rfam}{\mathfrak{R}} \newcommand{\Vstar}{V^*_{\Rfam}}
-  This paper presents a new algorithm (and an additional trick) that allows to compute fastly an entire curve of post hoc bounds for the False Discovery Proportion when the underlying bound $\Vstar$ construction is based on a reference family $\Rfam$ with a forest structure à la @MR4178188. By an entire curve, we mean the values $\Vstar(S_1),\dotsc,\Vstar(S_m)$ computed on a path of increasing selection sets $S_1\subsetneq\dotsb\subsetneq S_m$, $|S_t|=t$. The new algorithm leverages the fact that going from $S_t$ to $S_{t+1}$ is done by adding only one hypothesis.
+  This paper presents a new algorithm (and an additional trick) that allows to compute fastly an entire curve of post hoc bounds for the False Discovery Proportion when the underlying bound $V^*_{\mathfrak{R}}$ construction is based on a reference family $\mathfrak{R}$ with a forest structure à la @MR4178188. By an entire curve, we mean the values $V^*_{\mathfrak{R}}(S_1),\dotsc,V^*_{\mathfrak{R}}(S_m)$ computed on a path of increasing selection sets $S_1\subsetneq\dotsb\subsetneq S_m$, $|S_t|=t$. The new algorithm leverages the fact that going from $S_t$ to $S_{t+1}$ is done by adding only one hypothesis.
 keywords: [multiple testing, algorithmic, post hoc inference, false discovery proportion, confidence bound]
 citation:
   type: article-journal
@@ -89,41 +88,28 @@ format:
 #| pdf-placement: "htb!"
 #| pdf-line-number: true
 \begin{algorithm}
-\caption{Pruning of $\newcommand{\comp}[1]{{#1}^{\mathsf{c}}}
- \newcommand{\Pro}[1]{\mathbb{P}\left(#1\right)} 
- \newcommand{\Esp}[1]{\mathbb{E}\left[ #1 \right]}
- \newcommand{\ind}[1]{\mathbb{1}_{\left\{#1 \right\}}}
- \newcommand{\cH}{\mathcal{H}}
- \newcommand{\cK}{\mathcal{K}}
- \newcommand{\FDP}{\mathrm{FDP}}
- \newcommand{\FDR}{\mathrm{FDR}}
- \newcommand{\JER}{\mathrm{JER}}
- \newcommand{\Rfam}{\mathfrak{R}}
- \newcommand{\Vstar}{V^*_{\Rfam}}
- \newcommand{\Nm}{\mathbb{N}_m}
- \newcommand{\pr}{\mathfrak{pr}}
- \Rfam$}
+\caption{Pruning of $\mathfrak{R}$}
 \begin{algorithmic}
-\Procedure{Pruning}{$\Rfam=(R_{k},\zeta_{k})_{k\in\cK}$  with $\Rfam$ complete}
-  \State $\cK^\pr\gets\cK$
-  \State $ H \gets \max_{k\in\cK} \phi(k)  $ \Comment{max depth}
+\Procedure{Pruning}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$  with $\mathfrak{R}$ complete}
+  \State $\mathcal{K}^{\mathfrak{pr}}\gets\mathcal{K}$
+  \State $ H \gets \max_{k\in\mathcal{K}} \phi(k)  $ \Comment{maximum depth}
   \For{$h = H-1, \dotsc, 1$}
-    \State $\cK^h\gets \{ k\in\cK : \phi(k) =h  \}$
-    \State $newVec\gets (0)_{k \in  \cK^h}$
-    \For{$k \in  \cK^h$}
-      \State $Succ_k \gets \{ k' \in  \cK^{h+1} : R_{k'}\subseteq R_k\}$
+    \State $\mathcal{K}^h\gets \{ k\in\mathcal{K} : \phi(k) =h  \}$
+    \State $newVec\gets (0)_{k \in  \mathcal{K}^h}$
+    \For{$k \in  \mathcal{K}^h$}
+      \State $Succ_k \gets \{ k' \in  \mathcal{K}^{h+1} : R_{k'}\subseteq R_k\}$
       \If{$Succ_k=\varnothing$}
         \State $newVec_k \gets \zeta_k$
       \Else
         \If{$\zeta_{k} \geq  \sum_{k'\in Succ_k} Vec_{k'}$}
-          \State $\cK^\pr\gets \cK^\pr\setminus \{ k \}$
+          \State $\mathcal{K}^{\mathfrak{pr}}\gets \mathcal{K}^{\mathfrak{pr}}\setminus \{ k \}$
         \EndIf
         \State $newVec_k \gets \min\left( \zeta_{k} ,  \sum_{k'\in Succ_k} Vec_{k'}   \right)$
       \EndIf
     \EndFor
     \State $Vec\gets newVec$
   \EndFor
-  \Return $(\cK^\pr,\sum_{k\in\cK^1} Vec_k  )$
+  \Return $(\mathcal{K}^{\mathfrak{pr}},\sum_{k\in\mathcal{K}^1} Vec_k  )$
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
