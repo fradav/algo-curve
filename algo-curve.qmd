@@ -61,6 +61,8 @@ format:
  \newcommand{\JER}{\mathrm{JER}}
  \newcommand{\Rfam}{\mathfrak{R}}
  \newcommand{\Vstar}{V^*_{\Rfam}}
+ \newcommand{\Nm}{\mathbb{N}_m}
+ \newcommand{\pr}{\mathfrak{pr}}
 :::
 
 # Introduction
@@ -77,7 +79,61 @@ format:
 
 ## Pruning the forest
 
+```pseudocode
+#| label: alg-pruning
+#| html-indent-size: "1.2em"
+#| html-comment-delimiter: "//"
+#| html-line-number: true
+#| html-line-number-punc: ":"
+#| html-no-end: false
+#| pdf-placement: "htb!"
+#| pdf-line-number: true
+\begin{algorithm}
+\caption{Pruning of $\newcommand{\comp}[1]{{#1}^{\mathsf{c}}}
+ \newcommand{\Pro}[1]{\mathbb{P}\left(#1\right)} 
+ \newcommand{\Esp}[1]{\mathbb{E}\left[ #1 \right]}
+ \newcommand{\ind}[1]{\mathbb{1}_{\left\{#1 \right\}}}
+ \newcommand{\cH}{\mathcal{H}}
+ \newcommand{\cK}{\mathcal{K}}
+ \newcommand{\FDP}{\mathrm{FDP}}
+ \newcommand{\FDR}{\mathrm{FDR}}
+ \newcommand{\JER}{\mathrm{JER}}
+ \newcommand{\Rfam}{\mathfrak{R}}
+ \newcommand{\Vstar}{V^*_{\Rfam}}
+ \newcommand{\Nm}{\mathbb{N}_m}
+ \newcommand{\pr}{\mathfrak{pr}}
+ \Rfam$}
+\begin{algorithmic}
+\Procedure{Pruning}{$\Rfam=(R_{k},\zeta_{k})_{k\in\cK}$  with $\Rfam$ complete}
+  \State $\cK^\pr\gets\cK$
+  \State $ H \gets \max_{k\in\cK} \phi(k)  $ \Comment{max depth}
+  \For{$h = H-1, \dotsc, 1$}
+    \State $\cK^h\gets \{ k\in\cK : \phi(k) =h  \}$
+    \State $newVec\gets (0)_{k \in  \cK^h}$
+    \For{$k \in  \cK^h$}
+      \State $Succ_k \gets \{ k' \in  \cK^{h+1} : R_{k'}\subseteq R_k\}$
+      \If{$Succ_k=\varnothing$}
+        \State $newVec_k \gets \zeta_k$
+      \Else
+        \If{$\zeta_{k} \geq  \sum_{k'\in Succ_k} Vec_{k'}$}
+          \State $\cK^\pr\gets \cK^\pr\setminus \{ k \}$
+        \EndIf
+        \State $newVec_k \gets \min\left( \zeta_{k} ,  \sum_{k'\in Succ_k} Vec_{k'}   \right)$
+      \EndIf
+    \EndFor
+    \State $Vec\gets newVec$
+  \EndFor
+  \Return $(\cK^\pr,\sum_{k\in\cK^1} Vec_k  )$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+```
+
+<!--Remarque dans l'implémentation pratique $Vec$ et $newVec$ sont toujours de taille le nombre de feuilles, et pas le cardinal de $\cK^h$. Et la somme $\sum_{k'\in Succ_k} Vec_{k'}$ est très facilement calculée, si $R_k = \bigcup_{\ell=1}^L P_{i_\ell, i_{\ell+1}}$ alors on somme Vec sur les indices $i_\ell$ à $i_{L+1}$, tout simplement, donc même chercher $Succ_k$ n'est pas nécessaire.-->
+
 ## Fast algorithm to compute a curve of confidence bounds on a path of selection sets
+
+
 
 # Numerical experiments
 
