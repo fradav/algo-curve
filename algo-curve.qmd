@@ -119,7 +119,41 @@ format:
 
 ## Fast algorithm to compute a curve of confidence bounds on a path of selection sets
 
+```pseudocode
+#| label: alg-formal-curve
+#| html-indent-size: "1.2em"
+#| html-comment-delimiter: "//"
+#| html-line-number: true
+#| html-line-number-punc: ":"
+#| html-no-end: false
+#| pdf-placement: "htb!"
+#| pdf-line-number: true
+\begin{algorithm}
+\caption{Formal computation of $(V^*_{\mathfrak{R}}(S_t))_{0\leq t\leq m}$}
+\begin{algorithmic}
+\Procedure{Curve}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$  with $\mathfrak{R}$ complete, path $(S_t)_{1\leq t \leq m}$ with $S_t=\{i_1, \dotsc, i_t\}$}
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+```
 
+```pseudocode
+#| label: alg-curve
+#| html-indent-size: "1.2em"
+#| html-comment-delimiter: "//"
+#| html-line-number: true
+#| html-line-number-punc: ":"
+#| html-no-end: false
+#| pdf-placement: "htb!"
+#| pdf-line-number: true
+\begin{algorithm}
+\caption{Implementation of $(V^*_{\mathfrak{R}}(S_t))_{0\leq t\leq m}$}
+\begin{algorithmic}
+\Procedure{Curve}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$  with $\mathfrak{R}$ complete, path $(S_t)_{1\leq t \leq m}$ with $S_t=\{i_1, \dotsc, i_t\}$}
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+```
 
 # Numerical experiments
 
