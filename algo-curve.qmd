@@ -154,7 +154,7 @@ format:
         \EndIf
       \EndFor
       \If{the loop has been broken}
-        For all $k\in\cK$ not visited during the loop, that is all $k\not\in\{k^{(t,h)}, 1\leq h\leq h^f_t   \}$, let $\eta^t_k=\eta^{t-1}_k$
+        \State $\eta^t_k\gets\eta^{t-1}_k$ for all $k\in\mathcal{K}$ not visited during the loop, that is all $k\not\in\{k^{(t,h)}, 1\leq h\leq h^f_t   \}$
       \Else
         \State $\mathcal{P}^t \gets \mathcal{P}^{t-1}$
         \State $\mathcal{K}^-_t \gets \mathcal{K}^-_{t-1}$
@@ -192,7 +192,7 @@ format:
         \State find $k^{(t,h)}\in\mathcal{K}^{h}$ such that $i_t\in R_{k^{(t,h)}}$
         \State $\eta_{k^{(t,h)}}\gets\eta_{k^{(t,h)}} + 1$
         \If{$\eta_{k^{(t,h)}}<\zeta_k$}
-          pass
+          \State pass
         \Else
           \State $\mathcal{K}^- \gets \mathcal{K}^-\cup \{ k^{(t,h)} \}$
           \State break the loop
