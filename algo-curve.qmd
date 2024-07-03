@@ -62,6 +62,7 @@ format:
  \newcommand{\Vstar}{V^*_{\Rfam}}
  \newcommand{\Nm}{\mathbb{N}_m}
  \newcommand{\pr}{\mathfrak{pr}}
+ \newcommand{\kth}[2]{k^{(#1,#2)}}
 :::
 
 # Introduction
@@ -132,6 +133,36 @@ format:
 \caption{Formal computation of $(V^*_{\mathfrak{R}}(S_t))_{0\leq t\leq m}$}
 \begin{algorithmic}
 \Procedure{Curve}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$  with $\mathfrak{R}$ complete, path $(S_t)_{1\leq t \leq m}$ with $S_t=\{i_1, \dotsc, i_t\}$}
+  \State $\mathcal{P}^0\gets\{(i,i): 1\leq i \leq n\}$ \Comment{the set of all atoms indices}
+  \State $\mathcal{K}^-_0\gets\{k\in\mathcal{K} : \zeta_k=0  \}$
+  \State $\eta^0_k\gets0$ for all $k\in\mathcal{K}$
+  \For{$t=1,\dotsc, m$}
+    \If{$i_t\in\bigcup_{k\in\mathcal{K}^-_{t-1}}R_k$}
+      \State $\mathcal{P}^t \gets \mathcal{P}^{t-1}$
+      \State $\mathcal{K}^-_t \gets \mathcal{K}^-_{t-1}$
+      \State $\eta^t_k\gets\eta^{t-1}_k$ for all $k\in\mathcal{K}$
+    \Else
+      \For{$h=1,\dotsc,h_{\max}(t)$}
+        \State $\eta^t_{k^{(t,h)}}\gets\eta^{t-1}_{k^{(t,h)}} + 1$
+        \If{$\eta^t_{k^{(t,h)}}<\zeta_k$}
+          \State Pass
+        \Else
+          \State $h^f_t \gets h$.
+          \State $\mathcal{P}^t \gets\left( \mathcal{P}^{t-1}\setminus \{ k\in \mathcal{P}^{t-1} : R_k\subseteq R_{k^{(t,h^f_t)}} \}\right)\cup \{ k^{(t,h^f_t)} \}$
+          \State $\mathcal{K}^-_t \gets \mathcal{K}^-_{t-1} \cup \{k^{(t,h^f_t)}\}$
+          \State Break the loop
+        \EndIf
+      \EndFor
+      \If{the loop has been broken}
+        For all $k\in\cK$ not visited during the loop, that is all $k\not\in\{k^{(t,h)}, 1\leq h\leq h^f_t   \}$, let $\eta^t_k=\eta^{t-1}_k$
+      \Else
+        \State $\mathcal{P}^t \gets \mathcal{P}^{t-1}$
+        \State $\mathcal{K}^-_t \gets \mathcal{K}^-_{t-1}$
+        \State $\eta^t_k\gets\eta^{t-1}_k$ for all $k\in\mathcal{K}$ not visited during the loop, that is all $k\not\in\{k^{(t,h)}, 1\leq h\leq h_{\max}(t)   \}$
+      \EndIf
+    \EndIf
+  \EndFor
+  \Return $\mathcal{P}^t, \eta^t_k$ for all $t=1,\dotsc, m$ and $k\in\mathcal{K}$
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
@@ -150,6 +181,27 @@ format:
 \caption{Implementation of $(V^*_{\mathfrak{R}}(S_t))_{0\leq t\leq m}$}
 \begin{algorithmic}
 \Procedure{Curve}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$  with $\mathfrak{R}$ complete, path $(S_t)_{1\leq t \leq m}$ with $S_t=\{i_1, \dotsc, i_t\}$}
+  \State $V_0\gets 0$
+  \State $\mathcal{K}^-\gets\{k\in\mathcal{K} : \zeta_k=0  \}$
+  \State $\eta_k\gets 0$ for all $k\in\mathcal{K}$
+  \For{$t=1,\dotsc, m$}
+    \If{$i_t\in\bigcup_{k\in\mathcal{K}^-}R_k$}
+      \State $V_{t}\gets V_{t-1}$
+    \Else
+      \For{$h=1,\dotsc,h_{\max}(t)$}
+        \State find $k^{(t,h)}\in\mathcal{K}^{h}$ such that $i_t\in R_{k^{(t,h)}}$
+        \State $\eta_{k^{(t,h)}}\gets\eta_{k^{(t,h)}} + 1$
+        \If{$\eta_{k^{(t,h)}}<\zeta_k$}
+          pass
+        \Else
+          \State $\mathcal{K}^- \gets \mathcal{K}^-\cup \{ k^{(t,h)} \}$
+          \State break the loop
+        \EndIf
+      \EndFor
+     \State $V_{t}\gets V_{t-1} + 1$
+    \EndIf
+  \EndFor
+  \Return $(V_t)_{1\leq t \leq m}$
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
