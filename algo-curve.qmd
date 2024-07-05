@@ -47,6 +47,7 @@ format:
           \usepackage{amsmath}
     cite-method: natbib
     natbiboptions: round
+    keep-tex: true
 ---
 
 ::: {.hidden}
