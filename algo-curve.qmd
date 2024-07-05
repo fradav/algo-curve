@@ -78,9 +78,9 @@ Mathematically speaking, a confidence upper bound (we prefer to say upper bound 
 $$
 \forall \alpha \in ]0,1[, \Pro{\forall S \subseteq \Nm^*, |S\cap \cH_0|\leq \Vhat(S)}\geq 1-\alpha.
 $$ {#eq-confidence}
-Here, $\alpha$ is a target error rate and $\cH_0$ is the set of hypotheses indices that are true null hypotheses. Note that the construction of $\Vhat$ depends on $\alpha$ and on the random data $X$ and the dependence is omitted to lighten notation and because there is no ambiguity. The meaning of @eq-confidence is that $\Vhat$ provides an upper bound of the number of null hypotheses in $S$ for any selection set $S\subseteq \Nm^*$, which allows the user to perform post hoc selection on their data without breaching the statistical guarantee. Also note that by dividing by $|S|\wedge 1$ in @eq-confidence we also get a confidence bound for the FDP:
+Here, $\alpha$ is a target error rate and $\cH_0$ is the set of hypotheses indices that are true null hypotheses. Note that the construction of $\Vhat$ depends on $\alpha$ and on the random data $X$ and the dependence is omitted to lighten notation and because there is no ambiguity. The meaning of @eq-confidence is that $\Vhat$ provides an upper bound of the number of null hypotheses in $S$ for any selection set $S\subseteq \Nm^*$, which allows the user to perform post hoc selection on their data without breaching the statistical guarantee. Also note that by dividing by $|S|\vee 1$ in @eq-confidence we also get a confidence bound for the FDP:
 $$
-\forall \alpha \in ]0,1[, \Pro{\forall S \subseteq \Nm^*, \FDP(S)\leq \frac{\Vhat(S)}{|S|\wedge 1}}\geq 1-\alpha.
+\forall \alpha \in ]0,1[, \Pro{\forall S \subseteq \Nm^*, \FDP(S)\leq \frac{\Vhat(S)}{|S|\vee 1}}\geq 1-\alpha.
 $$ {#eq-confidence-fdp}
 So post hoc bounds provide ways to construct FDP-controlling sets instead of FDR-controlling sets, which is much more desirable given the nature of the FDR as an expected value. See for example [@MR3418717, Figure 4] for a credible example where the FDR is controlled but the FDP has a highly undesirable behavior (either 0 because no discoveries at all are made, either higher than the target level).
 
