@@ -283,7 +283,7 @@ ISSN 2824-7795</p>
 <h1 data-number="3"><span class="header-section-number">3</span> New algorithms</h1>
 <section id="sec-pruning" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="sec-pruning"><span class="header-section-number">3.1</span> Pruning the forest</h2>
-<div id="alg-pruning" class="pseudocode-container" data-no-end="false" data-comment-delimiter="//" data-line-number="true" data-indent-size="1.2em" data-pseudocode-index="1" data-line-number-punc=":" data-alg-title="Algorithm">
+<div id="alg-pruning" class="pseudocode-container" data-indent-size="1.2em" data-pseudocode-index="1" data-line-number-punc=":" data-alg-title="Algorithm" data-line-number="true" data-no-end="false" data-comment-delimiter="//">
 <div class="pseudocode">
 \begin{algorithm} \caption{Pruning of $\mathfrak{R}$} \begin{algorithmic} \Procedure{Pruning}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$ with $\mathfrak{R}$ complete} \State $\mathcal{K}^{\mathfrak{pr}}\gets\mathcal{K}$ \State $ H \gets \max_{k\in\mathcal{K}} \phi(k) $ \Comment{maximum depth} \For{$h = H-1, \dotsc, 1$} \State $\mathcal{K}^h\gets \{ k\in\mathcal{K} : \phi(k) =h \}$ \State $newVec\gets (0)_{k \in \mathcal{K}^h}$ \For{$k \in \mathcal{K}^h$} \State $Succ_k \gets \{ k' \in \mathcal{K}^{h+1} : R_{k'}\subseteq R_k\}$ \If{$Succ_k=\varnothing$} \State $newVec_k \gets \zeta_k$ \Else \If{$\zeta_{k} \geq \sum_{k'\in Succ_k} Vec_{k'}$} \State $\mathcal{K}^{\mathfrak{pr}}\gets \mathcal{K}^{\mathfrak{pr}}\setminus \{ k \}$ \EndIf \State $newVec_k \gets \min\left( \zeta_{k} , \sum_{k'\in Succ_k} Vec_{k'} \right)$ \EndIf \EndFor \State $Vec\gets newVec$ \EndFor \State\Return $(\mathcal{K}^{\mathfrak{pr}},\sum_{k\in\mathcal{K}^1} Vec_k )$ \EndProcedure \end{algorithmic} \end{algorithm}
 </div>
@@ -307,7 +307,7 @@ Tip
 </section>
 <section id="sec-fast-curve" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="sec-fast-curve"><span class="header-section-number">3.2</span> Fast algorithm to compute a curve of confidence bounds on a path of selection sets</h2>
-<div id="alg-formal-curve" class="pseudocode-container" data-no-end="false" data-comment-delimiter="//" data-line-number="true" data-indent-size="1.2em" data-pseudocode-index="2" data-line-number-punc=":" data-alg-title="Algorithm">
+<div id="alg-formal-curve" class="pseudocode-container" data-indent-size="1.2em" data-pseudocode-index="2" data-line-number-punc=":" data-alg-title="Algorithm" data-line-number="true" data-no-end="false" data-comment-delimiter="//">
 <div class="pseudocode">
 \begin{algorithm} \caption{Formal computation of $(V^*_{\mathfrak{R}}(S_t))_{0\leq t\leq m}$} \begin{algorithmic} \Procedure{Curve}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$ with $\mathfrak{R}$ complete, path $(S_t)_{1\leq t \leq m}$ with $S_t=\{i_1, \dotsc, i_t\}$} \State $\mathcal{P}^0\gets\{(i,i): 1\leq i \leq n\}$ \Comment{the set of all atoms indices} \State $\mathcal{K}^-_0\gets\{k\in\mathcal{K} : \zeta_k=0 \}$ \State $\eta^0_k\gets0$ for all $k\in\mathcal{K}$ \For{$t=1,\dotsc, m$} \If{$i_t\in\bigcup_{k\in\mathcal{K}^-_{t-1}}R_k$} \State $\mathcal{P}^t \gets \mathcal{P}^{t-1}$ \State $\mathcal{K}^-_t \gets \mathcal{K}^-_{t-1}$ \State $\eta^t_k\gets\eta^{t-1}_k$ for all $k\in\mathcal{K}$ \Else \For{$h=1,\dotsc,h_{\max}(t)$} \State $\eta^t_{k^{(t,h)}}\gets\eta^{t-1}_{k^{(t,h)}} + 1$ \If{$\eta^t_{k^{(t,h)}}&lt;\zeta_k$} \State Pass \Else \State $h^f_t \gets h$. \State $\mathcal{P}^t \gets\left( \mathcal{P}^{t-1}\setminus \{ k\in \mathcal{P}^{t-1} : R_k\subseteq R_{k^{(t,h^f_t)}} \}\right)\cup \{ k^{(t,h^f_t)} \}$ \State $\mathcal{K}^-_t \gets \mathcal{K}^-_{t-1} \cup \{k^{(t,h^f_t)}\}$ \State Break the loop \EndIf \EndFor \If{the loop has been broken} \State $\eta^t_k\gets\eta^{t-1}_k$ for all $k\in\mathcal{K}$ not visited during the loop, that is all $k\not\in\{k^{(t,h)}, 1\leq h\leq h^f_t \}$ \Else \State $\mathcal{P}^t \gets \mathcal{P}^{t-1}$ \State $\mathcal{K}^-_t \gets \mathcal{K}^-_{t-1}$ \State $\eta^t_k\gets\eta^{t-1}_k$ for all $k\in\mathcal{K}$ not visited during the loop, that is all $k\not\in\{k^{(t,h)}, 1\leq h\leq h_{\max}(t) \}$ \EndIf \EndIf \EndFor \State\Return $\mathcal{P}^t, \eta^t_k$ for all $t=1,\dotsc, m$ and $k\in\mathcal{K}$ \EndProcedure \end{algorithmic} \end{algorithm}
 </div>
@@ -321,7 +321,7 @@ Tip
 <div id="cor-easy-impl" class="theorem corollary">
 <p><span class="theorem-title"><strong>Corollary 1 (Easy implementation)</strong></span> &nbsp;</p>
 </div>
-<div id="alg-curve" class="pseudocode-container" data-no-end="false" data-comment-delimiter="//" data-line-number="true" data-indent-size="1.2em" data-pseudocode-index="3" data-line-number-punc=":" data-alg-title="Algorithm">
+<div id="alg-curve" class="pseudocode-container" data-indent-size="1.2em" data-pseudocode-index="3" data-line-number-punc=":" data-alg-title="Algorithm" data-line-number="true" data-no-end="false" data-comment-delimiter="//">
 <div class="pseudocode">
 \begin{algorithm} \caption{Implementation of $(V^*_{\mathfrak{R}}(S_t))_{0\leq t\leq m}$} \begin{algorithmic} \Procedure{Curve}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$ with $\mathfrak{R}$ complete, path $(S_t)_{1\leq t \leq m}$ with $S_t=\{i_1, \dotsc, i_t\}$} \State $V_0\gets 0$ \State $\mathcal{K}^-\gets\{k\in\mathcal{K} : \zeta_k=0 \}$ \State $\eta_k\gets 0$ for all $k\in\mathcal{K}$ \For{$t=1,\dotsc, m$} \If{$i_t\in\bigcup_{k\in\mathcal{K}^-}R_k$} \State $V_{t}\gets V_{t-1}$ \Else \For{$h=1,\dotsc,h_{\max}(t)$} \State find $k^{(t,h)}\in\mathcal{K}^{h}$ such that $i_t\in R_{k^{(t,h)}}$ \State $\eta_{k^{(t,h)}}\gets\eta_{k^{(t,h)}} + 1$ \If{$\eta_{k^{(t,h)}}&lt;\zeta_k$} \State pass \Else \State $\mathcal{K}^- \gets \mathcal{K}^-\cup \{ k^{(t,h)} \}$ \State break the loop \EndIf \EndFor \State $V_{t}\gets V_{t-1} + 1$ \EndIf \EndFor \State\Return $(V_t)_{1\leq t \leq m}$ \EndProcedure \end{algorithmic} \end{algorithm}
 </div>
@@ -970,234 +970,235 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="co">          \usepackage{amsmath}</span></span>
 <span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="co">    cite-method: natbib</span></span>
 <span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="co">    natbiboptions: round</span></span>
-<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>::: {.hidden}</span>
-<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a> \newcommand{\comp}<span class="co">[</span><span class="ot">1</span><span class="co">]</span>{{#1}^{\mathsf{c}}}</span>
-<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a> \newcommand{\Pro}<span class="co">[</span><span class="ot">1</span><span class="co">]</span>{\mathbb{P}\left(#1\right)} </span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a> \newcommand{\Esp}<span class="co">[</span><span class="ot">1</span><span class="co">]</span>{\mathbb{E}\left<span class="co">[</span><span class="ot"> #1 \right</span><span class="co">]</span>}</span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a> \newcommand{\ind}<span class="co">[</span><span class="ot">1</span><span class="co">]</span>{\mathbb{1}_{\left<span class="sc">\{</span>#1 \right<span class="sc">\}</span>}}</span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a> \newcommand{\cH}{\mathcal{H}}</span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a> \newcommand{\cK}{\mathcal{K}}</span>
-<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a> \newcommand{\cP}{\mathcal{P}}</span>
-<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a> \newcommand{\FDP}{\mathrm{FDP}}</span>
-<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a> \newcommand{\FDR}{\mathrm{FDR}}</span>
-<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a> \newcommand{\JER}{\mathrm{JER}}</span>
-<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a> \newcommand{\Rfam}{\mathfrak{R}}</span>
-<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a> \newcommand{\Hoi}{H_{0,i}}</span>
-<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a> \newcommand{\Vhat}{\widehat V}</span>
-<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a> \newcommand{\Vstar}{V^*_{\Rfam}}</span>
-<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a> \newcommand{\Nm}{\mathbb{N}_m}</span>
-<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a> \newcommand{\pr}{\mathfrak{pr}}</span>
-<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a> \newcommand{\kth}<span class="co">[</span><span class="ot">2</span><span class="co">]</span>{k^{(#1,#2)}}</span>
-<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a><span class="fu"># Introduction</span></span>
-<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>Multiple testing theory is often used for exploratory analysis, like Genome-Wide Association Studies, where multiple features are tested to find promising ones. Classical multiple testing theory like Family-Wise Error Rate (FWER) control or False Discovery Rate (FDR) control <span class="co">[</span><span class="ot">@MR1325392</span><span class="co">]</span> can be used, but a more recent trend consists in the computation of post hoc bounds, also named post selection bounds or confidence envelopes, for the number of false positives, or, equivalently, for the False Discovery Proportion (FDP). This approach is notably advocated for in the context of exploratory research by <span class="co">[</span><span class="ot">@MR2951390, Section 1</span><span class="co">]</span>. </span>
-<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>Mathematically speaking, a confidence upper bound (we prefer to say upper bound instead of envelope for obvious reasons) is a function $\Vhat : \cP(\Nm^*) \to \Nm$, where $\Nm=\{0,\dotsc,m\}$, $\Nm^*=<span class="sc">\{</span>1,\dotsc,m<span class="sc">\}</span>$ and $m$ is the number of hypotheses, such that </span>
-<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>\forall \alpha \in ]0,1[, \Pro{\forall S \subseteq \Nm^*, |S\cap \cH_0|\leq \Vhat(S)}\geq 1-\alpha.</span>
-<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>$$ {#eq-confidence}</span>
-<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>Here, $\alpha$ is a target error rate and $\cH_0$ is the set of hypotheses indices that are true null hypotheses. Note that the construction of $\Vhat$ depends on $\alpha$ and on the random data $X$ and the dependence is omitted to lighten notation and because there is no ambiguity. The meaning of @eq-confidence is that $\Vhat$ provides an upper bound of the number of null hypotheses in $S$ for any selection set $S\subseteq \Nm^*$, which allows the user to perform post hoc selection on their data without breaching the statistical guarantee. Also note that by dividing by $|S|\wedge 1$ in @eq-confidence we also get a confidence bound for the FDP:</span>
-<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>\forall \alpha \in ]0,1[, \Pro{\forall S \subseteq \Nm^*, \FDP(S)\leq \frac{\Vhat(S)}{|S|\wedge 1}}\geq 1-\alpha.</span>
-<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>$$ {#eq-confidence-fdp}</span>
-<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>So post hoc bounds provide ways to construct FDP-controlling sets instead of FDR-controlling sets, which is much more desirable given the nature of the FDR as an expected value. See for example <span class="co">[</span><span class="ot">@MR3418717, Figure 4</span><span class="co">]</span> for a credible example where the FDR is controlled but the FDP has a highly undesirable behavior (either 0 because no discoveries at all are made, either higher than the target level).</span>
-<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>The first confidence bounds are found in <span class="co">[</span><span class="ot">@MR2279468</span><span class="co">]</span> and <span class="co">[</span><span class="ot">@MR2279639</span><span class="co">]</span>, although, in the latter, only for selection sets of the form $<span class="sc">\{</span>i\in\Nm : P_i\leq t<span class="sc">\}</span>$ where $P_i$ is the $p$-value associated to the null hypothesis $\Hoi$. In <span class="co">[</span><span class="ot">@MR2951390</span><span class="co">]</span> the authors re-wrote the generic construction of <span class="co">[</span><span class="ot">@MR2279468</span><span class="co">]</span> in terms of closed testing <span class="co">[</span><span class="ot">@MR468056</span><span class="co">]</span>, proposed several practical constructions and sparked a new interest in multiple testing procedures based on confidence envelopes. This work was followed by a prolific series of works like <span class="co">[</span><span class="ot">@MR3305943</span><span class="co">]</span> and <span class="co">[</span><span class="ot">@MR4731977</span><span class="co">]</span>. In <span class="co">[</span><span class="ot">@MR4124323</span><span class="co">]</span>, the authors introduce the new point of view of references families (see @sec-reference-fam) to construct post hoc bounds, and show the links between this meta-technique and the closed testing one, along with new bounds. </span>
-<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>Following the reference family trail, in <span class="co">[</span><span class="ot">@MR4178188</span><span class="co">]</span> the authors introduce new reference families with a special set-theoretic constraint that allows an efficient computation of the bound denoted by $\Vstar$ on a single selection set $S$. The problem is that one often wants to compute $\Vstar$ on a whole path of selection sets $(S_t)_{t\in\Nm^*}$, for example the hypotheses attached to the $t$ smallest $p$-values. Whereas the algorithm provided the aforementioned work [@MR4178188, Algorithm 1] is fast for a single evaluation, it is slow and inefficient to repeatedly call it to compute each $\Vstar(S_t)$. If the $S_t$'s are nested, and growing by one, that is $S_1\subsetneq\dotsb\subsetneq S_m$ and $|S_t|=t$, there is a way to efficiently compute $\left(\Vstar(S_t)\right)_{t\in\Nm}$ by leveraging the nested structure. </span>
-<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>This is the main contribution of the present paper: a new and fast algorithm computing the curve $\left(\Vstar(S_t)\right)_{t\in\Nm}$ for a nested path of selection sets, that is presented in @sec-fast-curve. An additional algorithm that can speed up computations both for the single-evaluation algorithm and the new curve-evaluation algorithm is also presented, in @sec-pruning. In @sec-notation, all necessary notation and vocabulary is re-introduced, most of it being the same as in <span class="co">[</span><span class="ot">@MR4178188</span><span class="co">]</span>. Finally, a few numerical experiments are presented in Section @sec-numeric to demonstrate the computation time gain.</span>
-<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a><span class="fu"># Notation and reference family methodology</span></span>
-<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a><span class="fu">## Multiple testing notation {#sec-notation}</span></span>
-<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a><span class="fu">## Post hoc bounds with reference families {#sec-reference-fam}</span></span>
-<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a><span class="fu">## Deterministic regions with a forest structure</span></span>
-<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a><span class="fu"># New algorithms</span></span>
-<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a><span class="fu">## Pruning the forest {#sec-pruning}</span></span>
-<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a><span class="in">```pseudocode</span></span>
-<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: alg-pruning</span></span>
-<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-indent-size: "1.2em"</span></span>
-<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-comment-delimiter: "//"</span></span>
-<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-line-number: true</span></span>
-<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-line-number-punc: ":"</span></span>
-<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-no-end: false</span></span>
-<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a><span class="in">#| pdf-placement: "htb!"</span></span>
-<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a><span class="in">#| pdf-line-number: true</span></span>
-<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{algorithm}</span></span>
-<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a><span class="in">\caption{Pruning of $\mathfrak{R}$}</span></span>
-<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{algorithmic}</span></span>
-<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a><span class="in">\Procedure{Pruning}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$  with $\mathfrak{R}$ complete}</span></span>
-<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a><span class="in">  \State $\mathcal{K}^{\mathfrak{pr}}\gets\mathcal{K}$</span></span>
-<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a><span class="in">  \State $ H \gets \max_{k\in\mathcal{K}} \phi(k)  $ \Comment{maximum depth}</span></span>
-<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a><span class="in">  \For{$h = H-1, \dotsc, 1$}</span></span>
-<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a><span class="in">    \State $\mathcal{K}^h\gets \{ k\in\mathcal{K} : \phi(k) =h  \}$</span></span>
-<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a><span class="in">    \State $newVec\gets (0)_{k \in  \mathcal{K}^h}$</span></span>
-<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a><span class="in">    \For{$k \in  \mathcal{K}^h$}</span></span>
-<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a><span class="in">      \State $Succ_k \gets \{ k' \in  \mathcal{K}^{h+1} : R_{k'}\subseteq R_k\}$</span></span>
-<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a><span class="in">      \If{$Succ_k=\varnothing$}</span></span>
-<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a><span class="in">        \State $newVec_k \gets \zeta_k$</span></span>
-<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a><span class="in">      \Else</span></span>
-<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a><span class="in">        \If{$\zeta_{k} \geq  \sum_{k'\in Succ_k} Vec_{k'}$}</span></span>
-<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a><span class="in">          \State $\mathcal{K}^{\mathfrak{pr}}\gets \mathcal{K}^{\mathfrak{pr}}\setminus \{ k \}$</span></span>
-<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a><span class="in">        \EndIf</span></span>
-<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a><span class="in">        \State $newVec_k \gets \min\left( \zeta_{k} ,  \sum_{k'\in Succ_k} Vec_{k'}   \right)$</span></span>
-<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a><span class="in">      \EndIf</span></span>
-<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a><span class="in">    \EndFor</span></span>
-<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a><span class="in">    \State $Vec\gets newVec$</span></span>
-<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a><span class="in">  \EndFor</span></span>
-<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a><span class="in">  \State\Return $(\mathcal{K}^{\mathfrak{pr}},\sum_{k\in\mathcal{K}^1} Vec_k  )$</span></span>
-<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a><span class="in">\EndProcedure</span></span>
-<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a><span class="in">\end{algorithmic}</span></span>
-<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a><span class="in">\end{algorithm}</span></span>
-<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
-<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--Remarque dans l'implémentation pratique $Vec$ et $newVec$ sont toujours de taille le nombre de feuilles, et pas le cardinal de $\cK^h$. Et la somme $\sum_{k'\in Succ_k} Vec_{k'}$ est très facilement calculée, si $R_k = \bigcup_{\ell=1}^L P_{i_\ell, i_{\ell+1}}$ alors on somme Vec sur les indices $i_\ell$ à $i_{L+1}$, tout simplement, donc même chercher $Succ_k$ n'est pas nécessaire.--&gt;</span></span>
-<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a>::: {#prp-pruning}</span>
-<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a><span class="fu">## Pruning</span></span>
-<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a><span class="co">    keep-tex: true</span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>::: {.hidden}</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a> \newcommand{\comp}<span class="co">[</span><span class="ot">1</span><span class="co">]</span>{{#1}^{\mathsf{c}}}</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a> \newcommand{\Pro}<span class="co">[</span><span class="ot">1</span><span class="co">]</span>{\mathbb{P}\left(#1\right)} </span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a> \newcommand{\Esp}<span class="co">[</span><span class="ot">1</span><span class="co">]</span>{\mathbb{E}\left<span class="co">[</span><span class="ot"> #1 \right</span><span class="co">]</span>}</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a> \newcommand{\ind}<span class="co">[</span><span class="ot">1</span><span class="co">]</span>{\mathbb{1}_{\left<span class="sc">\{</span>#1 \right<span class="sc">\}</span>}}</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a> \newcommand{\cH}{\mathcal{H}}</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a> \newcommand{\cK}{\mathcal{K}}</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a> \newcommand{\cP}{\mathcal{P}}</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a> \newcommand{\FDP}{\mathrm{FDP}}</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a> \newcommand{\FDR}{\mathrm{FDR}}</span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a> \newcommand{\JER}{\mathrm{JER}}</span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a> \newcommand{\Rfam}{\mathfrak{R}}</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a> \newcommand{\Hoi}{H_{0,i}}</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a> \newcommand{\Vhat}{\widehat V}</span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a> \newcommand{\Vstar}{V^*_{\Rfam}}</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a> \newcommand{\Nm}{\mathbb{N}_m}</span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a> \newcommand{\pr}{\mathfrak{pr}}</span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a> \newcommand{\kth}<span class="co">[</span><span class="ot">2</span><span class="co">]</span>{k^{(#1,#2)}}</span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a><span class="fu"># Introduction</span></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>Multiple testing theory is often used for exploratory analysis, like Genome-Wide Association Studies, where multiple features are tested to find promising ones. Classical multiple testing theory like Family-Wise Error Rate (FWER) control or False Discovery Rate (FDR) control <span class="co">[</span><span class="ot">@MR1325392</span><span class="co">]</span> can be used, but a more recent trend consists in the computation of post hoc bounds, also named post selection bounds or confidence envelopes, for the number of false positives, or, equivalently, for the False Discovery Proportion (FDP). This approach is notably advocated for in the context of exploratory research by <span class="co">[</span><span class="ot">@MR2951390, Section 1</span><span class="co">]</span>. </span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>Mathematically speaking, a confidence upper bound (we prefer to say upper bound instead of envelope for obvious reasons) is a function $\Vhat : \cP(\Nm^*) \to \Nm$, where $\Nm=\{0,\dotsc,m\}$, $\Nm^*=<span class="sc">\{</span>1,\dotsc,m<span class="sc">\}</span>$ and $m$ is the number of hypotheses, such that </span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>\forall \alpha \in ]0,1[, \Pro{\forall S \subseteq \Nm^*, |S\cap \cH_0|\leq \Vhat(S)}\geq 1-\alpha.</span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>$$ {#eq-confidence}</span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>Here, $\alpha$ is a target error rate and $\cH_0$ is the set of hypotheses indices that are true null hypotheses. Note that the construction of $\Vhat$ depends on $\alpha$ and on the random data $X$ and the dependence is omitted to lighten notation and because there is no ambiguity. The meaning of @eq-confidence is that $\Vhat$ provides an upper bound of the number of null hypotheses in $S$ for any selection set $S\subseteq \Nm^*$, which allows the user to perform post hoc selection on their data without breaching the statistical guarantee. Also note that by dividing by $|S|\wedge 1$ in @eq-confidence we also get a confidence bound for the FDP:</span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>\forall \alpha \in ]0,1[, \Pro{\forall S \subseteq \Nm^*, \FDP(S)\leq \frac{\Vhat(S)}{|S|\wedge 1}}\geq 1-\alpha.</span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>$$ {#eq-confidence-fdp}</span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>So post hoc bounds provide ways to construct FDP-controlling sets instead of FDR-controlling sets, which is much more desirable given the nature of the FDR as an expected value. See for example <span class="co">[</span><span class="ot">@MR3418717, Figure 4</span><span class="co">]</span> for a credible example where the FDR is controlled but the FDP has a highly undesirable behavior (either 0 because no discoveries at all are made, either higher than the target level).</span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>The first confidence bounds are found in <span class="co">[</span><span class="ot">@MR2279468</span><span class="co">]</span> and <span class="co">[</span><span class="ot">@MR2279639</span><span class="co">]</span>, although, in the latter, only for selection sets of the form $<span class="sc">\{</span>i\in\Nm : P_i\leq t<span class="sc">\}</span>$ where $P_i$ is the $p$-value associated to the null hypothesis $\Hoi$. In <span class="co">[</span><span class="ot">@MR2951390</span><span class="co">]</span> the authors re-wrote the generic construction of <span class="co">[</span><span class="ot">@MR2279468</span><span class="co">]</span> in terms of closed testing <span class="co">[</span><span class="ot">@MR468056</span><span class="co">]</span>, proposed several practical constructions and sparked a new interest in multiple testing procedures based on confidence envelopes. This work was followed by a prolific series of works like <span class="co">[</span><span class="ot">@MR3305943</span><span class="co">]</span> and <span class="co">[</span><span class="ot">@MR4731977</span><span class="co">]</span>. In <span class="co">[</span><span class="ot">@MR4124323</span><span class="co">]</span>, the authors introduce the new point of view of references families (see @sec-reference-fam) to construct post hoc bounds, and show the links between this meta-technique and the closed testing one, along with new bounds. </span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>Following the reference family trail, in <span class="co">[</span><span class="ot">@MR4178188</span><span class="co">]</span> the authors introduce new reference families with a special set-theoretic constraint that allows an efficient computation of the bound denoted by $\Vstar$ on a single selection set $S$. The problem is that one often wants to compute $\Vstar$ on a whole path of selection sets $(S_t)_{t\in\Nm^*}$, for example the hypotheses attached to the $t$ smallest $p$-values. Whereas the algorithm provided the aforementioned work [@MR4178188, Algorithm 1] is fast for a single evaluation, it is slow and inefficient to repeatedly call it to compute each $\Vstar(S_t)$. If the $S_t$'s are nested, and growing by one, that is $S_1\subsetneq\dotsb\subsetneq S_m$ and $|S_t|=t$, there is a way to efficiently compute $\left(\Vstar(S_t)\right)_{t\in\Nm}$ by leveraging the nested structure. </span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>This is the main contribution of the present paper: a new and fast algorithm computing the curve $\left(\Vstar(S_t)\right)_{t\in\Nm}$ for a nested path of selection sets, that is presented in @sec-fast-curve. An additional algorithm that can speed up computations both for the single-evaluation algorithm and the new curve-evaluation algorithm is also presented, in @sec-pruning. In @sec-notation, all necessary notation and vocabulary is re-introduced, most of it being the same as in <span class="co">[</span><span class="ot">@MR4178188</span><span class="co">]</span>. Finally, a few numerical experiments are presented in Section @sec-numeric to demonstrate the computation time gain.</span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a><span class="fu"># Notation and reference family methodology</span></span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a><span class="fu">## Multiple testing notation {#sec-notation}</span></span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a><span class="fu">## Post hoc bounds with reference families {#sec-reference-fam}</span></span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a><span class="fu">## Deterministic regions with a forest structure</span></span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a><span class="fu"># New algorithms</span></span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a><span class="fu">## Pruning the forest {#sec-pruning}</span></span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a><span class="in">```pseudocode</span></span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: alg-pruning</span></span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-indent-size: "1.2em"</span></span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-comment-delimiter: "//"</span></span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-line-number: true</span></span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-line-number-punc: ":"</span></span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-no-end: false</span></span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a><span class="in">#| pdf-placement: "htb!"</span></span>
+<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a><span class="in">#| pdf-line-number: true</span></span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{algorithm}</span></span>
+<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a><span class="in">\caption{Pruning of $\mathfrak{R}$}</span></span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{algorithmic}</span></span>
+<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a><span class="in">\Procedure{Pruning}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$  with $\mathfrak{R}$ complete}</span></span>
+<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a><span class="in">  \State $\mathcal{K}^{\mathfrak{pr}}\gets\mathcal{K}$</span></span>
+<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a><span class="in">  \State $ H \gets \max_{k\in\mathcal{K}} \phi(k)  $ \Comment{maximum depth}</span></span>
+<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a><span class="in">  \For{$h = H-1, \dotsc, 1$}</span></span>
+<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a><span class="in">    \State $\mathcal{K}^h\gets \{ k\in\mathcal{K} : \phi(k) =h  \}$</span></span>
+<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a><span class="in">    \State $newVec\gets (0)_{k \in  \mathcal{K}^h}$</span></span>
+<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a><span class="in">    \For{$k \in  \mathcal{K}^h$}</span></span>
+<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a><span class="in">      \State $Succ_k \gets \{ k' \in  \mathcal{K}^{h+1} : R_{k'}\subseteq R_k\}$</span></span>
+<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a><span class="in">      \If{$Succ_k=\varnothing$}</span></span>
+<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a><span class="in">        \State $newVec_k \gets \zeta_k$</span></span>
+<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a><span class="in">      \Else</span></span>
+<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a><span class="in">        \If{$\zeta_{k} \geq  \sum_{k'\in Succ_k} Vec_{k'}$}</span></span>
+<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a><span class="in">          \State $\mathcal{K}^{\mathfrak{pr}}\gets \mathcal{K}^{\mathfrak{pr}}\setminus \{ k \}$</span></span>
+<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a><span class="in">        \EndIf</span></span>
+<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a><span class="in">        \State $newVec_k \gets \min\left( \zeta_{k} ,  \sum_{k'\in Succ_k} Vec_{k'}   \right)$</span></span>
+<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a><span class="in">      \EndIf</span></span>
+<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a><span class="in">    \EndFor</span></span>
+<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a><span class="in">    \State $Vec\gets newVec$</span></span>
+<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a><span class="in">  \EndFor</span></span>
+<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a><span class="in">  \State\Return $(\mathcal{K}^{\mathfrak{pr}},\sum_{k\in\mathcal{K}^1} Vec_k  )$</span></span>
+<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a><span class="in">\EndProcedure</span></span>
+<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a><span class="in">\end{algorithmic}</span></span>
+<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a><span class="in">\end{algorithm}</span></span>
+<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--Remarque dans l'implémentation pratique $Vec$ et $newVec$ sont toujours de taille le nombre de feuilles, et pas le cardinal de $\cK^h$. Et la somme $\sum_{k'\in Succ_k} Vec_{k'}$ est très facilement calculée, si $R_k = \bigcup_{\ell=1}^L P_{i_\ell, i_{\ell+1}}$ alors on somme Vec sur les indices $i_\ell$ à $i_{L+1}$, tout simplement, donc même chercher $Succ_k$ n'est pas nécessaire.--&gt;</span></span>
+<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a>::: {#prp-pruning}</span>
+<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a><span class="fu">## Pruning</span></span>
+<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fast algorithm to compute a curve of confidence bounds on a path of selection sets {#sec-fast-curve}</span></span>
-<span id="cb3-154"><a href="#cb3-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-155"><a href="#cb3-155" aria-hidden="true" tabindex="-1"></a><span class="in">```pseudocode</span></span>
-<span id="cb3-156"><a href="#cb3-156" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: alg-formal-curve</span></span>
-<span id="cb3-157"><a href="#cb3-157" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-indent-size: "1.2em"</span></span>
-<span id="cb3-158"><a href="#cb3-158" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-comment-delimiter: "//"</span></span>
-<span id="cb3-159"><a href="#cb3-159" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-line-number: true</span></span>
-<span id="cb3-160"><a href="#cb3-160" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-line-number-punc: ":"</span></span>
-<span id="cb3-161"><a href="#cb3-161" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-no-end: false</span></span>
-<span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a><span class="in">#| pdf-placement: "htb!"</span></span>
-<span id="cb3-163"><a href="#cb3-163" aria-hidden="true" tabindex="-1"></a><span class="in">#| pdf-line-number: true</span></span>
-<span id="cb3-164"><a href="#cb3-164" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{algorithm}</span></span>
-<span id="cb3-165"><a href="#cb3-165" aria-hidden="true" tabindex="-1"></a><span class="in">\caption{Formal computation of $(V^*_{\mathfrak{R}}(S_t))_{0\leq t\leq m}$}</span></span>
-<span id="cb3-166"><a href="#cb3-166" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{algorithmic}</span></span>
-<span id="cb3-167"><a href="#cb3-167" aria-hidden="true" tabindex="-1"></a><span class="in">\Procedure{Curve}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$  with $\mathfrak{R}$ complete, path $(S_t)_{1\leq t \leq m}$ with $S_t=\{i_1, \dotsc, i_t\}$}</span></span>
-<span id="cb3-168"><a href="#cb3-168" aria-hidden="true" tabindex="-1"></a><span class="in">  \State $\mathcal{P}^0\gets\{(i,i): 1\leq i \leq n\}$ \Comment{the set of all atoms indices}</span></span>
-<span id="cb3-169"><a href="#cb3-169" aria-hidden="true" tabindex="-1"></a><span class="in">  \State $\mathcal{K}^-_0\gets\{k\in\mathcal{K} : \zeta_k=0  \}$</span></span>
-<span id="cb3-170"><a href="#cb3-170" aria-hidden="true" tabindex="-1"></a><span class="in">  \State $\eta^0_k\gets0$ for all $k\in\mathcal{K}$</span></span>
-<span id="cb3-171"><a href="#cb3-171" aria-hidden="true" tabindex="-1"></a><span class="in">  \For{$t=1,\dotsc, m$}</span></span>
-<span id="cb3-172"><a href="#cb3-172" aria-hidden="true" tabindex="-1"></a><span class="in">    \If{$i_t\in\bigcup_{k\in\mathcal{K}^-_{t-1}}R_k$}</span></span>
-<span id="cb3-173"><a href="#cb3-173" aria-hidden="true" tabindex="-1"></a><span class="in">      \State $\mathcal{P}^t \gets \mathcal{P}^{t-1}$</span></span>
-<span id="cb3-174"><a href="#cb3-174" aria-hidden="true" tabindex="-1"></a><span class="in">      \State $\mathcal{K}^-_t \gets \mathcal{K}^-_{t-1}$</span></span>
-<span id="cb3-175"><a href="#cb3-175" aria-hidden="true" tabindex="-1"></a><span class="in">      \State $\eta^t_k\gets\eta^{t-1}_k$ for all $k\in\mathcal{K}$</span></span>
-<span id="cb3-176"><a href="#cb3-176" aria-hidden="true" tabindex="-1"></a><span class="in">    \Else</span></span>
-<span id="cb3-177"><a href="#cb3-177" aria-hidden="true" tabindex="-1"></a><span class="in">      \For{$h=1,\dotsc,h_{\max}(t)$}</span></span>
-<span id="cb3-178"><a href="#cb3-178" aria-hidden="true" tabindex="-1"></a><span class="in">        \State $\eta^t_{k^{(t,h)}}\gets\eta^{t-1}_{k^{(t,h)}} + 1$</span></span>
-<span id="cb3-179"><a href="#cb3-179" aria-hidden="true" tabindex="-1"></a><span class="in">        \If{$\eta^t_{k^{(t,h)}}&lt;\zeta_k$}</span></span>
-<span id="cb3-180"><a href="#cb3-180" aria-hidden="true" tabindex="-1"></a><span class="in">          \State Pass</span></span>
-<span id="cb3-181"><a href="#cb3-181" aria-hidden="true" tabindex="-1"></a><span class="in">        \Else</span></span>
-<span id="cb3-182"><a href="#cb3-182" aria-hidden="true" tabindex="-1"></a><span class="in">          \State $h^f_t \gets h$.</span></span>
-<span id="cb3-183"><a href="#cb3-183" aria-hidden="true" tabindex="-1"></a><span class="in">          \State $\mathcal{P}^t \gets\left( \mathcal{P}^{t-1}\setminus \{ k\in \mathcal{P}^{t-1} : R_k\subseteq R_{k^{(t,h^f_t)}} \}\right)\cup \{ k^{(t,h^f_t)} \}$</span></span>
-<span id="cb3-184"><a href="#cb3-184" aria-hidden="true" tabindex="-1"></a><span class="in">          \State $\mathcal{K}^-_t \gets \mathcal{K}^-_{t-1} \cup \{k^{(t,h^f_t)}\}$</span></span>
-<span id="cb3-185"><a href="#cb3-185" aria-hidden="true" tabindex="-1"></a><span class="in">          \State Break the loop</span></span>
-<span id="cb3-186"><a href="#cb3-186" aria-hidden="true" tabindex="-1"></a><span class="in">        \EndIf</span></span>
-<span id="cb3-187"><a href="#cb3-187" aria-hidden="true" tabindex="-1"></a><span class="in">      \EndFor</span></span>
-<span id="cb3-188"><a href="#cb3-188" aria-hidden="true" tabindex="-1"></a><span class="in">      \If{the loop has been broken}</span></span>
-<span id="cb3-189"><a href="#cb3-189" aria-hidden="true" tabindex="-1"></a><span class="in">        \State $\eta^t_k\gets\eta^{t-1}_k$ for all $k\in\mathcal{K}$ not visited during the loop, that is all $k\not\in\{k^{(t,h)}, 1\leq h\leq h^f_t   \}$</span></span>
-<span id="cb3-190"><a href="#cb3-190" aria-hidden="true" tabindex="-1"></a><span class="in">      \Else</span></span>
-<span id="cb3-191"><a href="#cb3-191" aria-hidden="true" tabindex="-1"></a><span class="in">        \State $\mathcal{P}^t \gets \mathcal{P}^{t-1}$</span></span>
-<span id="cb3-192"><a href="#cb3-192" aria-hidden="true" tabindex="-1"></a><span class="in">        \State $\mathcal{K}^-_t \gets \mathcal{K}^-_{t-1}$</span></span>
-<span id="cb3-193"><a href="#cb3-193" aria-hidden="true" tabindex="-1"></a><span class="in">        \State $\eta^t_k\gets\eta^{t-1}_k$ for all $k\in\mathcal{K}$ not visited during the loop, that is all $k\not\in\{k^{(t,h)}, 1\leq h\leq h_{\max}(t)   \}$</span></span>
-<span id="cb3-194"><a href="#cb3-194" aria-hidden="true" tabindex="-1"></a><span class="in">      \EndIf</span></span>
-<span id="cb3-195"><a href="#cb3-195" aria-hidden="true" tabindex="-1"></a><span class="in">    \EndIf</span></span>
-<span id="cb3-196"><a href="#cb3-196" aria-hidden="true" tabindex="-1"></a><span class="in">  \EndFor</span></span>
-<span id="cb3-197"><a href="#cb3-197" aria-hidden="true" tabindex="-1"></a><span class="in">  \State\Return $\mathcal{P}^t, \eta^t_k$ for all $t=1,\dotsc, m$ and $k\in\mathcal{K}$</span></span>
-<span id="cb3-198"><a href="#cb3-198" aria-hidden="true" tabindex="-1"></a><span class="in">\EndProcedure</span></span>
-<span id="cb3-199"><a href="#cb3-199" aria-hidden="true" tabindex="-1"></a><span class="in">\end{algorithmic}</span></span>
-<span id="cb3-200"><a href="#cb3-200" aria-hidden="true" tabindex="-1"></a><span class="in">\end{algorithm}</span></span>
-<span id="cb3-201"><a href="#cb3-201" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-202"><a href="#cb3-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-203"><a href="#cb3-203" aria-hidden="true" tabindex="-1"></a>::: {#thm-curve-path}</span>
-<span id="cb3-204"><a href="#cb3-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-205"><a href="#cb3-205" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fast curve computation</span></span>
-<span id="cb3-206"><a href="#cb3-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-207"><a href="#cb3-207" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb3-208"><a href="#cb3-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-209"><a href="#cb3-209" aria-hidden="true" tabindex="-1"></a>::: {.proof}</span>
-<span id="cb3-210"><a href="#cb3-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-211"><a href="#cb3-211" aria-hidden="true" tabindex="-1"></a>Content</span>
-<span id="cb3-212"><a href="#cb3-212" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb3-213"><a href="#cb3-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-214"><a href="#cb3-214" aria-hidden="true" tabindex="-1"></a>::: {#cor-easy-impl}</span>
-<span id="cb3-215"><a href="#cb3-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-216"><a href="#cb3-216" aria-hidden="true" tabindex="-1"></a><span class="fu">## Easy implementation</span></span>
-<span id="cb3-217"><a href="#cb3-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-218"><a href="#cb3-218" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb3-219"><a href="#cb3-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-154"><a href="#cb3-154" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fast algorithm to compute a curve of confidence bounds on a path of selection sets {#sec-fast-curve}</span></span>
+<span id="cb3-155"><a href="#cb3-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-156"><a href="#cb3-156" aria-hidden="true" tabindex="-1"></a><span class="in">```pseudocode</span></span>
+<span id="cb3-157"><a href="#cb3-157" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: alg-formal-curve</span></span>
+<span id="cb3-158"><a href="#cb3-158" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-indent-size: "1.2em"</span></span>
+<span id="cb3-159"><a href="#cb3-159" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-comment-delimiter: "//"</span></span>
+<span id="cb3-160"><a href="#cb3-160" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-line-number: true</span></span>
+<span id="cb3-161"><a href="#cb3-161" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-line-number-punc: ":"</span></span>
+<span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-no-end: false</span></span>
+<span id="cb3-163"><a href="#cb3-163" aria-hidden="true" tabindex="-1"></a><span class="in">#| pdf-placement: "htb!"</span></span>
+<span id="cb3-164"><a href="#cb3-164" aria-hidden="true" tabindex="-1"></a><span class="in">#| pdf-line-number: true</span></span>
+<span id="cb3-165"><a href="#cb3-165" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{algorithm}</span></span>
+<span id="cb3-166"><a href="#cb3-166" aria-hidden="true" tabindex="-1"></a><span class="in">\caption{Formal computation of $(V^*_{\mathfrak{R}}(S_t))_{0\leq t\leq m}$}</span></span>
+<span id="cb3-167"><a href="#cb3-167" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{algorithmic}</span></span>
+<span id="cb3-168"><a href="#cb3-168" aria-hidden="true" tabindex="-1"></a><span class="in">\Procedure{Curve}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$  with $\mathfrak{R}$ complete, path $(S_t)_{1\leq t \leq m}$ with $S_t=\{i_1, \dotsc, i_t\}$}</span></span>
+<span id="cb3-169"><a href="#cb3-169" aria-hidden="true" tabindex="-1"></a><span class="in">  \State $\mathcal{P}^0\gets\{(i,i): 1\leq i \leq n\}$ \Comment{the set of all atoms indices}</span></span>
+<span id="cb3-170"><a href="#cb3-170" aria-hidden="true" tabindex="-1"></a><span class="in">  \State $\mathcal{K}^-_0\gets\{k\in\mathcal{K} : \zeta_k=0  \}$</span></span>
+<span id="cb3-171"><a href="#cb3-171" aria-hidden="true" tabindex="-1"></a><span class="in">  \State $\eta^0_k\gets0$ for all $k\in\mathcal{K}$</span></span>
+<span id="cb3-172"><a href="#cb3-172" aria-hidden="true" tabindex="-1"></a><span class="in">  \For{$t=1,\dotsc, m$}</span></span>
+<span id="cb3-173"><a href="#cb3-173" aria-hidden="true" tabindex="-1"></a><span class="in">    \If{$i_t\in\bigcup_{k\in\mathcal{K}^-_{t-1}}R_k$}</span></span>
+<span id="cb3-174"><a href="#cb3-174" aria-hidden="true" tabindex="-1"></a><span class="in">      \State $\mathcal{P}^t \gets \mathcal{P}^{t-1}$</span></span>
+<span id="cb3-175"><a href="#cb3-175" aria-hidden="true" tabindex="-1"></a><span class="in">      \State $\mathcal{K}^-_t \gets \mathcal{K}^-_{t-1}$</span></span>
+<span id="cb3-176"><a href="#cb3-176" aria-hidden="true" tabindex="-1"></a><span class="in">      \State $\eta^t_k\gets\eta^{t-1}_k$ for all $k\in\mathcal{K}$</span></span>
+<span id="cb3-177"><a href="#cb3-177" aria-hidden="true" tabindex="-1"></a><span class="in">    \Else</span></span>
+<span id="cb3-178"><a href="#cb3-178" aria-hidden="true" tabindex="-1"></a><span class="in">      \For{$h=1,\dotsc,h_{\max}(t)$}</span></span>
+<span id="cb3-179"><a href="#cb3-179" aria-hidden="true" tabindex="-1"></a><span class="in">        \State $\eta^t_{k^{(t,h)}}\gets\eta^{t-1}_{k^{(t,h)}} + 1$</span></span>
+<span id="cb3-180"><a href="#cb3-180" aria-hidden="true" tabindex="-1"></a><span class="in">        \If{$\eta^t_{k^{(t,h)}}&lt;\zeta_k$}</span></span>
+<span id="cb3-181"><a href="#cb3-181" aria-hidden="true" tabindex="-1"></a><span class="in">          \State Pass</span></span>
+<span id="cb3-182"><a href="#cb3-182" aria-hidden="true" tabindex="-1"></a><span class="in">        \Else</span></span>
+<span id="cb3-183"><a href="#cb3-183" aria-hidden="true" tabindex="-1"></a><span class="in">          \State $h^f_t \gets h$.</span></span>
+<span id="cb3-184"><a href="#cb3-184" aria-hidden="true" tabindex="-1"></a><span class="in">          \State $\mathcal{P}^t \gets\left( \mathcal{P}^{t-1}\setminus \{ k\in \mathcal{P}^{t-1} : R_k\subseteq R_{k^{(t,h^f_t)}} \}\right)\cup \{ k^{(t,h^f_t)} \}$</span></span>
+<span id="cb3-185"><a href="#cb3-185" aria-hidden="true" tabindex="-1"></a><span class="in">          \State $\mathcal{K}^-_t \gets \mathcal{K}^-_{t-1} \cup \{k^{(t,h^f_t)}\}$</span></span>
+<span id="cb3-186"><a href="#cb3-186" aria-hidden="true" tabindex="-1"></a><span class="in">          \State Break the loop</span></span>
+<span id="cb3-187"><a href="#cb3-187" aria-hidden="true" tabindex="-1"></a><span class="in">        \EndIf</span></span>
+<span id="cb3-188"><a href="#cb3-188" aria-hidden="true" tabindex="-1"></a><span class="in">      \EndFor</span></span>
+<span id="cb3-189"><a href="#cb3-189" aria-hidden="true" tabindex="-1"></a><span class="in">      \If{the loop has been broken}</span></span>
+<span id="cb3-190"><a href="#cb3-190" aria-hidden="true" tabindex="-1"></a><span class="in">        \State $\eta^t_k\gets\eta^{t-1}_k$ for all $k\in\mathcal{K}$ not visited during the loop, that is all $k\not\in\{k^{(t,h)}, 1\leq h\leq h^f_t   \}$</span></span>
+<span id="cb3-191"><a href="#cb3-191" aria-hidden="true" tabindex="-1"></a><span class="in">      \Else</span></span>
+<span id="cb3-192"><a href="#cb3-192" aria-hidden="true" tabindex="-1"></a><span class="in">        \State $\mathcal{P}^t \gets \mathcal{P}^{t-1}$</span></span>
+<span id="cb3-193"><a href="#cb3-193" aria-hidden="true" tabindex="-1"></a><span class="in">        \State $\mathcal{K}^-_t \gets \mathcal{K}^-_{t-1}$</span></span>
+<span id="cb3-194"><a href="#cb3-194" aria-hidden="true" tabindex="-1"></a><span class="in">        \State $\eta^t_k\gets\eta^{t-1}_k$ for all $k\in\mathcal{K}$ not visited during the loop, that is all $k\not\in\{k^{(t,h)}, 1\leq h\leq h_{\max}(t)   \}$</span></span>
+<span id="cb3-195"><a href="#cb3-195" aria-hidden="true" tabindex="-1"></a><span class="in">      \EndIf</span></span>
+<span id="cb3-196"><a href="#cb3-196" aria-hidden="true" tabindex="-1"></a><span class="in">    \EndIf</span></span>
+<span id="cb3-197"><a href="#cb3-197" aria-hidden="true" tabindex="-1"></a><span class="in">  \EndFor</span></span>
+<span id="cb3-198"><a href="#cb3-198" aria-hidden="true" tabindex="-1"></a><span class="in">  \State\Return $\mathcal{P}^t, \eta^t_k$ for all $t=1,\dotsc, m$ and $k\in\mathcal{K}$</span></span>
+<span id="cb3-199"><a href="#cb3-199" aria-hidden="true" tabindex="-1"></a><span class="in">\EndProcedure</span></span>
+<span id="cb3-200"><a href="#cb3-200" aria-hidden="true" tabindex="-1"></a><span class="in">\end{algorithmic}</span></span>
+<span id="cb3-201"><a href="#cb3-201" aria-hidden="true" tabindex="-1"></a><span class="in">\end{algorithm}</span></span>
+<span id="cb3-202"><a href="#cb3-202" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-203"><a href="#cb3-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-204"><a href="#cb3-204" aria-hidden="true" tabindex="-1"></a>::: {#thm-curve-path}</span>
+<span id="cb3-205"><a href="#cb3-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-206"><a href="#cb3-206" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fast curve computation</span></span>
+<span id="cb3-207"><a href="#cb3-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-208"><a href="#cb3-208" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb3-209"><a href="#cb3-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-210"><a href="#cb3-210" aria-hidden="true" tabindex="-1"></a>::: {.proof}</span>
+<span id="cb3-211"><a href="#cb3-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-212"><a href="#cb3-212" aria-hidden="true" tabindex="-1"></a>Content</span>
+<span id="cb3-213"><a href="#cb3-213" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb3-214"><a href="#cb3-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-215"><a href="#cb3-215" aria-hidden="true" tabindex="-1"></a>::: {#cor-easy-impl}</span>
+<span id="cb3-216"><a href="#cb3-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-217"><a href="#cb3-217" aria-hidden="true" tabindex="-1"></a><span class="fu">## Easy implementation</span></span>
+<span id="cb3-218"><a href="#cb3-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-219"><a href="#cb3-219" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb3-220"><a href="#cb3-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-221"><a href="#cb3-221" aria-hidden="true" tabindex="-1"></a><span class="in">```pseudocode</span></span>
-<span id="cb3-222"><a href="#cb3-222" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: alg-curve</span></span>
-<span id="cb3-223"><a href="#cb3-223" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-indent-size: "1.2em"</span></span>
-<span id="cb3-224"><a href="#cb3-224" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-comment-delimiter: "//"</span></span>
-<span id="cb3-225"><a href="#cb3-225" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-line-number: true</span></span>
-<span id="cb3-226"><a href="#cb3-226" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-line-number-punc: ":"</span></span>
-<span id="cb3-227"><a href="#cb3-227" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-no-end: false</span></span>
-<span id="cb3-228"><a href="#cb3-228" aria-hidden="true" tabindex="-1"></a><span class="in">#| pdf-placement: "htb!"</span></span>
-<span id="cb3-229"><a href="#cb3-229" aria-hidden="true" tabindex="-1"></a><span class="in">#| pdf-line-number: true</span></span>
-<span id="cb3-230"><a href="#cb3-230" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{algorithm}</span></span>
-<span id="cb3-231"><a href="#cb3-231" aria-hidden="true" tabindex="-1"></a><span class="in">\caption{Implementation of $(V^*_{\mathfrak{R}}(S_t))_{0\leq t\leq m}$}</span></span>
-<span id="cb3-232"><a href="#cb3-232" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{algorithmic}</span></span>
-<span id="cb3-233"><a href="#cb3-233" aria-hidden="true" tabindex="-1"></a><span class="in">\Procedure{Curve}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$  with $\mathfrak{R}$ complete, path $(S_t)_{1\leq t \leq m}$ with $S_t=\{i_1, \dotsc, i_t\}$}</span></span>
-<span id="cb3-234"><a href="#cb3-234" aria-hidden="true" tabindex="-1"></a><span class="in">  \State $V_0\gets 0$</span></span>
-<span id="cb3-235"><a href="#cb3-235" aria-hidden="true" tabindex="-1"></a><span class="in">  \State $\mathcal{K}^-\gets\{k\in\mathcal{K} : \zeta_k=0  \}$</span></span>
-<span id="cb3-236"><a href="#cb3-236" aria-hidden="true" tabindex="-1"></a><span class="in">  \State $\eta_k\gets 0$ for all $k\in\mathcal{K}$</span></span>
-<span id="cb3-237"><a href="#cb3-237" aria-hidden="true" tabindex="-1"></a><span class="in">  \For{$t=1,\dotsc, m$}</span></span>
-<span id="cb3-238"><a href="#cb3-238" aria-hidden="true" tabindex="-1"></a><span class="in">    \If{$i_t\in\bigcup_{k\in\mathcal{K}^-}R_k$}</span></span>
-<span id="cb3-239"><a href="#cb3-239" aria-hidden="true" tabindex="-1"></a><span class="in">      \State $V_{t}\gets V_{t-1}$</span></span>
-<span id="cb3-240"><a href="#cb3-240" aria-hidden="true" tabindex="-1"></a><span class="in">    \Else</span></span>
-<span id="cb3-241"><a href="#cb3-241" aria-hidden="true" tabindex="-1"></a><span class="in">      \For{$h=1,\dotsc,h_{\max}(t)$}</span></span>
-<span id="cb3-242"><a href="#cb3-242" aria-hidden="true" tabindex="-1"></a><span class="in">        \State find $k^{(t,h)}\in\mathcal{K}^{h}$ such that $i_t\in R_{k^{(t,h)}}$</span></span>
-<span id="cb3-243"><a href="#cb3-243" aria-hidden="true" tabindex="-1"></a><span class="in">        \State $\eta_{k^{(t,h)}}\gets\eta_{k^{(t,h)}} + 1$</span></span>
-<span id="cb3-244"><a href="#cb3-244" aria-hidden="true" tabindex="-1"></a><span class="in">        \If{$\eta_{k^{(t,h)}}&lt;\zeta_k$}</span></span>
-<span id="cb3-245"><a href="#cb3-245" aria-hidden="true" tabindex="-1"></a><span class="in">          \State pass</span></span>
-<span id="cb3-246"><a href="#cb3-246" aria-hidden="true" tabindex="-1"></a><span class="in">        \Else</span></span>
-<span id="cb3-247"><a href="#cb3-247" aria-hidden="true" tabindex="-1"></a><span class="in">          \State $\mathcal{K}^- \gets \mathcal{K}^-\cup \{ k^{(t,h)} \}$</span></span>
-<span id="cb3-248"><a href="#cb3-248" aria-hidden="true" tabindex="-1"></a><span class="in">          \State break the loop</span></span>
-<span id="cb3-249"><a href="#cb3-249" aria-hidden="true" tabindex="-1"></a><span class="in">        \EndIf</span></span>
-<span id="cb3-250"><a href="#cb3-250" aria-hidden="true" tabindex="-1"></a><span class="in">      \EndFor</span></span>
-<span id="cb3-251"><a href="#cb3-251" aria-hidden="true" tabindex="-1"></a><span class="in">     \State $V_{t}\gets V_{t-1} + 1$</span></span>
-<span id="cb3-252"><a href="#cb3-252" aria-hidden="true" tabindex="-1"></a><span class="in">    \EndIf</span></span>
-<span id="cb3-253"><a href="#cb3-253" aria-hidden="true" tabindex="-1"></a><span class="in">  \EndFor</span></span>
-<span id="cb3-254"><a href="#cb3-254" aria-hidden="true" tabindex="-1"></a><span class="in">  \State\Return $(V_t)_{1\leq t \leq m}$</span></span>
-<span id="cb3-255"><a href="#cb3-255" aria-hidden="true" tabindex="-1"></a><span class="in">\EndProcedure</span></span>
-<span id="cb3-256"><a href="#cb3-256" aria-hidden="true" tabindex="-1"></a><span class="in">\end{algorithmic}</span></span>
-<span id="cb3-257"><a href="#cb3-257" aria-hidden="true" tabindex="-1"></a><span class="in">\end{algorithm}</span></span>
-<span id="cb3-258"><a href="#cb3-258" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-259"><a href="#cb3-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-260"><a href="#cb3-260" aria-hidden="true" tabindex="-1"></a><span class="fu"># Numerical experiments {#sec-numeric}</span></span>
-<span id="cb3-261"><a href="#cb3-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-262"><a href="#cb3-262" aria-hidden="true" tabindex="-1"></a><span class="fu"># Conclusion</span></span>
-<span id="cb3-263"><a href="#cb3-263" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-264"><a href="#cb3-264" aria-hidden="true" tabindex="-1"></a><span class="fu"># Acknowledments</span></span>
-<span id="cb3-265"><a href="#cb3-265" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-266"><a href="#cb3-266" aria-hidden="true" tabindex="-1"></a>This work has been supported by ANR-20-IDEES-0002 (PIA), ANR-19-CHIA-0021 (BISCOTTE), ANR-23-CE40-0018 (BACKUP) and ANR-21-CE23-0035 (ASCAI).</span>
-<span id="cb3-267"><a href="#cb3-267" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-268"><a href="#cb3-268" aria-hidden="true" tabindex="-1"></a><span class="fu"># References {.unnumbered}</span></span>
-<span id="cb3-269"><a href="#cb3-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-270"><a href="#cb3-270" aria-hidden="true" tabindex="-1"></a>::: {#refs}</span>
-<span id="cb3-271"><a href="#cb3-271" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb3-272"><a href="#cb3-272" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-273"><a href="#cb3-273" aria-hidden="true" tabindex="-1"></a><span class="fu"># Session information {.appendix .unnumbered}</span></span>
-<span id="cb3-274"><a href="#cb3-274" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-275"><a href="#cb3-275" aria-hidden="true" tabindex="-1"></a><span class="in">```{r session-info}</span></span>
-<span id="cb3-276"><a href="#cb3-276" aria-hidden="true" tabindex="-1"></a><span class="in">sessionInfo()</span></span>
-<span id="cb3-277"><a href="#cb3-277" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb3-221"><a href="#cb3-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-222"><a href="#cb3-222" aria-hidden="true" tabindex="-1"></a><span class="in">```pseudocode</span></span>
+<span id="cb3-223"><a href="#cb3-223" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: alg-curve</span></span>
+<span id="cb3-224"><a href="#cb3-224" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-indent-size: "1.2em"</span></span>
+<span id="cb3-225"><a href="#cb3-225" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-comment-delimiter: "//"</span></span>
+<span id="cb3-226"><a href="#cb3-226" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-line-number: true</span></span>
+<span id="cb3-227"><a href="#cb3-227" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-line-number-punc: ":"</span></span>
+<span id="cb3-228"><a href="#cb3-228" aria-hidden="true" tabindex="-1"></a><span class="in">#| html-no-end: false</span></span>
+<span id="cb3-229"><a href="#cb3-229" aria-hidden="true" tabindex="-1"></a><span class="in">#| pdf-placement: "htb!"</span></span>
+<span id="cb3-230"><a href="#cb3-230" aria-hidden="true" tabindex="-1"></a><span class="in">#| pdf-line-number: true</span></span>
+<span id="cb3-231"><a href="#cb3-231" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{algorithm}</span></span>
+<span id="cb3-232"><a href="#cb3-232" aria-hidden="true" tabindex="-1"></a><span class="in">\caption{Implementation of $(V^*_{\mathfrak{R}}(S_t))_{0\leq t\leq m}$}</span></span>
+<span id="cb3-233"><a href="#cb3-233" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{algorithmic}</span></span>
+<span id="cb3-234"><a href="#cb3-234" aria-hidden="true" tabindex="-1"></a><span class="in">\Procedure{Curve}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$  with $\mathfrak{R}$ complete, path $(S_t)_{1\leq t \leq m}$ with $S_t=\{i_1, \dotsc, i_t\}$}</span></span>
+<span id="cb3-235"><a href="#cb3-235" aria-hidden="true" tabindex="-1"></a><span class="in">  \State $V_0\gets 0$</span></span>
+<span id="cb3-236"><a href="#cb3-236" aria-hidden="true" tabindex="-1"></a><span class="in">  \State $\mathcal{K}^-\gets\{k\in\mathcal{K} : \zeta_k=0  \}$</span></span>
+<span id="cb3-237"><a href="#cb3-237" aria-hidden="true" tabindex="-1"></a><span class="in">  \State $\eta_k\gets 0$ for all $k\in\mathcal{K}$</span></span>
+<span id="cb3-238"><a href="#cb3-238" aria-hidden="true" tabindex="-1"></a><span class="in">  \For{$t=1,\dotsc, m$}</span></span>
+<span id="cb3-239"><a href="#cb3-239" aria-hidden="true" tabindex="-1"></a><span class="in">    \If{$i_t\in\bigcup_{k\in\mathcal{K}^-}R_k$}</span></span>
+<span id="cb3-240"><a href="#cb3-240" aria-hidden="true" tabindex="-1"></a><span class="in">      \State $V_{t}\gets V_{t-1}$</span></span>
+<span id="cb3-241"><a href="#cb3-241" aria-hidden="true" tabindex="-1"></a><span class="in">    \Else</span></span>
+<span id="cb3-242"><a href="#cb3-242" aria-hidden="true" tabindex="-1"></a><span class="in">      \For{$h=1,\dotsc,h_{\max}(t)$}</span></span>
+<span id="cb3-243"><a href="#cb3-243" aria-hidden="true" tabindex="-1"></a><span class="in">        \State find $k^{(t,h)}\in\mathcal{K}^{h}$ such that $i_t\in R_{k^{(t,h)}}$</span></span>
+<span id="cb3-244"><a href="#cb3-244" aria-hidden="true" tabindex="-1"></a><span class="in">        \State $\eta_{k^{(t,h)}}\gets\eta_{k^{(t,h)}} + 1$</span></span>
+<span id="cb3-245"><a href="#cb3-245" aria-hidden="true" tabindex="-1"></a><span class="in">        \If{$\eta_{k^{(t,h)}}&lt;\zeta_k$}</span></span>
+<span id="cb3-246"><a href="#cb3-246" aria-hidden="true" tabindex="-1"></a><span class="in">          \State pass</span></span>
+<span id="cb3-247"><a href="#cb3-247" aria-hidden="true" tabindex="-1"></a><span class="in">        \Else</span></span>
+<span id="cb3-248"><a href="#cb3-248" aria-hidden="true" tabindex="-1"></a><span class="in">          \State $\mathcal{K}^- \gets \mathcal{K}^-\cup \{ k^{(t,h)} \}$</span></span>
+<span id="cb3-249"><a href="#cb3-249" aria-hidden="true" tabindex="-1"></a><span class="in">          \State break the loop</span></span>
+<span id="cb3-250"><a href="#cb3-250" aria-hidden="true" tabindex="-1"></a><span class="in">        \EndIf</span></span>
+<span id="cb3-251"><a href="#cb3-251" aria-hidden="true" tabindex="-1"></a><span class="in">      \EndFor</span></span>
+<span id="cb3-252"><a href="#cb3-252" aria-hidden="true" tabindex="-1"></a><span class="in">     \State $V_{t}\gets V_{t-1} + 1$</span></span>
+<span id="cb3-253"><a href="#cb3-253" aria-hidden="true" tabindex="-1"></a><span class="in">    \EndIf</span></span>
+<span id="cb3-254"><a href="#cb3-254" aria-hidden="true" tabindex="-1"></a><span class="in">  \EndFor</span></span>
+<span id="cb3-255"><a href="#cb3-255" aria-hidden="true" tabindex="-1"></a><span class="in">  \State\Return $(V_t)_{1\leq t \leq m}$</span></span>
+<span id="cb3-256"><a href="#cb3-256" aria-hidden="true" tabindex="-1"></a><span class="in">\EndProcedure</span></span>
+<span id="cb3-257"><a href="#cb3-257" aria-hidden="true" tabindex="-1"></a><span class="in">\end{algorithmic}</span></span>
+<span id="cb3-258"><a href="#cb3-258" aria-hidden="true" tabindex="-1"></a><span class="in">\end{algorithm}</span></span>
+<span id="cb3-259"><a href="#cb3-259" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-260"><a href="#cb3-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-261"><a href="#cb3-261" aria-hidden="true" tabindex="-1"></a><span class="fu"># Numerical experiments {#sec-numeric}</span></span>
+<span id="cb3-262"><a href="#cb3-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-263"><a href="#cb3-263" aria-hidden="true" tabindex="-1"></a><span class="fu"># Conclusion</span></span>
+<span id="cb3-264"><a href="#cb3-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-265"><a href="#cb3-265" aria-hidden="true" tabindex="-1"></a><span class="fu"># Acknowledments</span></span>
+<span id="cb3-266"><a href="#cb3-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-267"><a href="#cb3-267" aria-hidden="true" tabindex="-1"></a>This work has been supported by ANR-20-IDEES-0002 (PIA), ANR-19-CHIA-0021 (BISCOTTE), ANR-23-CE40-0018 (BACKUP) and ANR-21-CE23-0035 (ASCAI).</span>
+<span id="cb3-268"><a href="#cb3-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-269"><a href="#cb3-269" aria-hidden="true" tabindex="-1"></a><span class="fu"># References {.unnumbered}</span></span>
+<span id="cb3-270"><a href="#cb3-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-271"><a href="#cb3-271" aria-hidden="true" tabindex="-1"></a>::: {#refs}</span>
+<span id="cb3-272"><a href="#cb3-272" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb3-273"><a href="#cb3-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-274"><a href="#cb3-274" aria-hidden="true" tabindex="-1"></a><span class="fu"># Session information {.appendix .unnumbered}</span></span>
+<span id="cb3-275"><a href="#cb3-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-276"><a href="#cb3-276" aria-hidden="true" tabindex="-1"></a><span class="in">```{r session-info}</span></span>
+<span id="cb3-277"><a href="#cb3-277" aria-hidden="true" tabindex="-1"></a><span class="in">sessionInfo()</span></span>
+<span id="cb3-278"><a href="#cb3-278" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <script>
