@@ -28,6 +28,7 @@ github-user: durandg12
 repo: "algo-curve"
 draft: true # set to false once the build is running
 published: false # will be set to true once accepted
+number-sections: true
 format:
   computo-html: 
     html-math-method: mathjax
@@ -69,15 +70,15 @@ format:
 
 # Notation and reference family methodology
 
-## Multiple testing notation
+## Multiple testing notation {#sec-notation}
 
-## Post hoc bounds with reference families
+## Post hoc bounds with reference families {#sec-reference-fam}
 
 ## Deterministic regions with a forest structure
 
 # New algorithms
 
-## Pruning the forest
+## Pruning the forest {#sec-pruning}
 
 ```pseudocode
 #| label: alg-pruning
@@ -123,7 +124,9 @@ format:
 
 
 
-## Fast algorithm to compute a curve of confidence bounds on a path of selection sets
+
+
+## Fast algorithm to compute a curve of confidence bounds on a path of selection sets {#sec-fast-curve}
 
 ```pseudocode
 #| label: alg-formal-curve
@@ -225,7 +228,7 @@ format:
 \end{algorithm}
 ```
 
-# Numerical experiments
+# Numerical experiments {#sec-numeric}
 
 # Conclusion
 
