@@ -132,7 +132,7 @@ This is the main contribution of the present paper: a new and fast algorithm com
     \EndFor
     \State $Vec\gets newVec$
   \EndFor
-  \Return $(\mathcal{K}^{\mathfrak{pr}},\sum_{k\in\mathcal{K}^1} Vec_k  )$
+  \State\Return $(\mathcal{K}^{\mathfrak{pr}},\sum_{k\in\mathcal{K}^1} Vec_k  )$
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
@@ -194,7 +194,7 @@ This is the main contribution of the present paper: a new and fast algorithm com
       \EndIf
     \EndIf
   \EndFor
-  \Return $\mathcal{P}^t, \eta^t_k$ for all $t=1,\dotsc, m$ and $k\in\mathcal{K}$
+  \State\Return $\mathcal{P}^t, \eta^t_k$ for all $t=1,\dotsc, m$ and $k\in\mathcal{K}$
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
@@ -250,7 +250,7 @@ This is the main contribution of the present paper: a new and fast algorithm com
      \State $V_{t}\gets V_{t-1} + 1$
     \EndIf
   \EndFor
-  \Return $(V_t)_{1\leq t \leq m}$
+  \State\Return $(V_t)_{1\leq t \leq m}$
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
