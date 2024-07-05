@@ -56,10 +56,13 @@ format:
  \newcommand{\ind}[1]{\mathbb{1}_{\left\{#1 \right\}}}
  \newcommand{\cH}{\mathcal{H}}
  \newcommand{\cK}{\mathcal{K}}
+ \newcommand{\cP}{\mathcal{P}}
  \newcommand{\FDP}{\mathrm{FDP}}
  \newcommand{\FDR}{\mathrm{FDR}}
  \newcommand{\JER}{\mathrm{JER}}
  \newcommand{\Rfam}{\mathfrak{R}}
+ \newcommand{\Hoi}{H_{0,i}}
+ \newcommand{\Vhat}{\widehat V}
  \newcommand{\Vstar}{V^*_{\Rfam}}
  \newcommand{\Nm}{\mathbb{N}_m}
  \newcommand{\pr}{\mathfrak{pr}}
