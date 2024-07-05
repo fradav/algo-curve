@@ -206,7 +206,10 @@ This is the main contribution of the present paper: a new and fast algorithm com
 
 :::
 
+::: {.proof}
 
+Content
+:::
 
 ::: {#cor-easy-impl}
 
