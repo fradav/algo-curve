@@ -140,6 +140,12 @@ This is the main contribution of the present paper: a new and fast algorithm com
 
 
 
+::: {#prp-pruning}
+
+## Pruning
+
+:::
+
 
 ## Fast algorithm to compute a curve of confidence bounds on a path of selection sets {#sec-fast-curve}
 
@@ -191,7 +197,21 @@ This is the main contribution of the present paper: a new and fast algorithm com
 \end{algorithm}
 ```
 
+::: {#thm-curve-path}
 
+## Fast curve computation
+
+:::
+
+::: {.proof}
+
+:::
+
+::: {#cor-easy-impl}
+
+## Easy implementation
+
+:::
 
 
 ```pseudocode
