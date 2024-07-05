@@ -138,16 +138,7 @@ This is the main contribution of the present paper: a new and fast algorithm com
 \end{algorithm}
 ```
 
-::: {.callout-tip}
 
-<!--Remarque dans l'implémentation pratique $Vec$ et $newVec$ sont toujours de taille le nombre de feuilles, et pas le cardinal de $\cK^h$. Et la somme $\sum_{k'\in Succ_k} Vec_{k'}$ est très facilement calculée, si $R_k = \bigcup_{\ell=1}^L P_{i_\ell, i_{\ell+1}}$ alors on somme Vec sur les indices $i_\ell$ à $i_{L+1}$, tout simplement, donc même chercher $Succ_k$ n'est pas nécessaire.-->
-:::
-
-::: {#prp-pruning}
-
-## Pruning
-
-:::
 
 
 ## Fast algorithm to compute a curve of confidence bounds on a path of selection sets {#sec-fast-curve}
@@ -200,21 +191,7 @@ This is the main contribution of the present paper: a new and fast algorithm com
 \end{algorithm}
 ```
 
-::: {#thm-curve-path}
 
-## Fast curve computation
-
-:::
-
-::: {.proof}
-
-:::
-
-::: {#cor-easy-impl}
-
-## Easy implementation
-
-:::
 
 
 ```pseudocode
