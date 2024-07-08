@@ -150,6 +150,11 @@ This is the main contribution of the present paper: a new and fast algorithm com
 
 :::
 
+::: {.proof}
+
+Content
+:::
+
 
 ## Fast algorithm to compute a curve of confidence bounds on a path of selection sets {#sec-fast-curve}
 
