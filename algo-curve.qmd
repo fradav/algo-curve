@@ -68,6 +68,7 @@ format:
  \newcommand{\Nm}{\mathbb{N}_m}
  \newcommand{\pr}{\mathfrak{pr}}
  \newcommand{\kth}[2]{k^{(#1,#2)}}
+ \newcommand{\RR}{\mathbb{R}}
 :::
 
 # Introduction
@@ -93,6 +94,24 @@ This is the main contribution of the present paper: a new and fast algorithm com
 # Notation and reference family methodology
 
 ## Multiple testing notation {#sec-notation}
+
+As is usual in multiple testing theory, we consider a probability space $(\Omega,\mathcal A, \mathbb P)$, a model $\mathcal{P}$ on a measurable space $(\mathcal{X},\mathfrak{X})$, and data that is represented by a random variable $X:(\Omega,\mathcal A)\to(\mathcal{X},\mathfrak{X})$ with $X\sim P\in \mathcal{P}$, that is, the law of $X$ is comprised in the model $\mathcal{P}$.
+
+Then we consider $m\geq1$ null hypotheses $H_{0,1}, \dotsc, H_{0,m}$ which formally are submodels, that is subsets of $\mathcal{P}$. The associated alternative hypotheses $H_{1,1}, \dotsc, H_{1,m}$ are submodels such that $H_{0,i}\cap H_{1,i}=\varnothing$ for all $i\in\Nm^*$. We denote by $\cH_0=\cH_0(P)$ (the dependence in $P$ will be dropped when there is no ambiguity) the set of all null hypotheses that are true, that is $\cH_0(P)=\{i\in\Nm^* : P\in H_{0,i}\}$. In other words, $H_{0,i}$ is true if and only if $i\in\cH_0$. For testing each $H_{0,i}, i\in\Nm^*$, we have at hand a $p$-value $p_i=p_i(X)$ (the dependence in $X$ will be dropped when there is no ambiguity) which is a random variable with the following property : if $i\in\cH_0$, then the law of $p_i$ is super-uniform, which is sometimes denoted $\mathcal L(p_i)\succeq \mathcal{U}([0,1])$. This means that in such case, the cumulative distribution function (cdf) of $p_i$ is always smaller than or equal to the cdf of a random variable $U\sim \mathcal{U}([0,1])$ :
+$$
+\forall x \in \RR, \Pro{p_i\leq x}\leq \Pro{U\leq x} = 0\vee(x\wedge 1).
+$$ {#eq-super-unif}
+
+For every subset of hypotheses $S\subseteq\Nm^*$, let $V(S)=|S\cap\cH_0|$. If we think of $S$ as a selection set of hypotheses deemed significant, $V(S)$ is then the number of false positives (FP) in $S$. $V(S)$ is our main object of interest and the quantity that we wish to over-estimate with confidence upper bounds (see @eq-confidence).
+
+Finally let us consider the following toy example, that will be re-used in the remainder of the paper.
+
+::: {#exm-gauss}
+
+## Gaussian one-sided
+
+In this case we assume that $X=(X_1,\dotsc,X_m)$ is a Gaussian vector and the null hypotheses refer to the nullity of the means in contrast to their positivity. That is, formally, $(\mathcal{X},\mathfrak{X})=(\mathbb R^m, \mathcal B\left(\mathbb R^m  \right))$, $\mathcal P=\{ \mathcal N(\boldsymbol{\mu}, \Sigma) : \forall j \in\Nm^*, \mu_j\geq 0, \Sigma \text{ positive semidefinite}  \}$, for each $i\in\Nm^*$, $H_{0,i}= \{ \mathcal N(\boldsymbol{\mu}, \Sigma) \in \mathcal P :\mu_i=0 \}$ and $H_{1,i}=\{ \mathcal N(\boldsymbol{\mu}, \Sigma) \in \mathcal P :\mu_i>0 \}$. Then we can construct $p$-values by letting $p_i(X)=\bar\Phi(X_i)=1-\Phi(X_i)$, where $\Phi$ denotes the cdf of $\mathcal N(0,1)$ and $\bar\Phi$ the associated survival function.
+:::
 
 ## Post hoc bounds with reference families {#sec-reference-fam}
 
