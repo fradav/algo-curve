@@ -102,7 +102,7 @@ $$
 \forall x \in \RR, \Pro{p_i\leq x}\leq \Pro{U\leq x} = 0\vee(x\wedge 1).
 $$ {#eq-super-unif}
 
-For every subset of hypotheses $S\subseteq\Nm^*$, let $V(S)=|S\cap\cH_0|$. If we think of $S$ as a selection set of hypotheses deemed significant, $V(S)$ is then the number of false positives (FP) in $S$. $V(S)$ is our main object of interest and the quantity that we wish to over-estimate with confidence upper bounds (see @eq-confidence).<!-- changer la ref  -->
+For every subset of hypotheses $S\subseteq\Nm^*$, let $V(S)=|S\cap\cH_0|$. If we think of $S$ as a selection set of hypotheses deemed significant, $V(S)$ is then the number of false positives (FP) in $S$. $V(S)$ is our main object of interest and the quantity that we wish to over-estimate with confidence upper bounds (see @eq-confidence or the more formal ).<!-- changer la ref  -->
 
 Finally let us consider the following toy example, that will be re-used in the remainder of the paper.
 
