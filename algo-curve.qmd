@@ -102,7 +102,7 @@ $$
 \forall x \in \RR, \Pro{p_i\leq x}\leq \Pro{U\leq x} = 0\vee(x\wedge 1).
 $$ {#eq-super-unif}
 
-For every subset of hypotheses $S\subseteq\Nm^*$, let $V(S)=|S\cap\cH_0|$. If we think of $S$ as a selection set of hypotheses deemed significant, $V(S)$ is then the number of false positives (FP) in $S$. $V(S)$ is our main object of interest and the quantity that we wish to over-estimate with confidence upper bounds (see @eq-confidence).
+For every subset of hypotheses $S\subseteq\Nm^*$, let $V(S)=|S\cap\cH_0|$. If we think of $S$ as a selection set of hypotheses deemed significant, $V(S)$ is then the number of false positives (FP) in $S$. $V(S)$ is our main object of interest and the quantity that we wish to over-estimate with confidence upper bounds (see @eq-confidence).<!-- changer la ref  -->
 
 Finally let us consider the following toy example, that will be re-used in the remainder of the paper.
 
@@ -114,6 +114,8 @@ In this case we assume that $X=(X_1,\dotsc,X_m)$ is a Gaussian vector and the nu
 :::
 
 ## Post hoc bounds with reference families {#sec-reference-fam}
+
+<!-- réécrire l'équation 1 mais bien propre avec un "pour tout modèle, pour tout X qui suit le modèle", et la dep de V chapeau en X -->
 
 ## Deterministic regions with a forest structure
 
