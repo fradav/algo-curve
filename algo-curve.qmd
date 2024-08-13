@@ -97,7 +97,7 @@ This is the main contribution of the present paper: a new and fast algorithm com
 
 As is usual in multiple testing theory, we consider a probability space $(\Omega,\mathcal A, \mathbb P)$, a model $\mathcal{P}$ on a measurable space $(\mathcal{X},\mathfrak{X})$, and data that is represented by a random variable $X:(\Omega,\mathcal A)\to(\mathcal{X},\mathfrak{X})$ with $X\sim P\in \mathcal{P}$, that is, the law of $X$ is comprised in the model $\mathcal{P}$.
 
-Then we consider $m\geq1$ null hypotheses $H_{0,1}, \dotsc, H_{0,m}$ which formally are submodels, that is subsets of $\mathcal{P}$. The associated alternative hypotheses $H_{1,1}, \dotsc, H_{1,m}$ are submodels such that $H_{0,i}\cap H_{1,i}=\varnothing$ for all $i\in\Nm^*$. We denote by $\cH_0=\cH_0(P)$ (the dependence in $P$ will be dropped when there is no ambiguity) the set of all null hypotheses that are true, that is $\cH_0(P)=\{i\in\Nm^* : P\in H_{0,i}\}$. In other words, $H_{0,i}$ is true if and only if $i\in\cH_0$. For testing each $H_{0,i}, i\in\Nm^*$, we have at hand a $p$-value $p_i=p_i(X)$ (the dependence in $X$ will be dropped when there is no ambiguity) which is a random variable with the following property : if $i\in\cH_0$, then the law of $p_i$ is super-uniform, which is sometimes denoted $\mathcal L(p_i)\succeq \mathcal{U}([0,1])$. This means that in such case, the cumulative distribution function (cdf) of $p_i$ is always smaller than or equal to the cdf of a random variable $U\sim \mathcal{U}([0,1])$ :
+Then we consider $m\geq1$ null hypotheses $H_{0,1}, \dotsc, H_{0,m}$ which formally are submodels, that is subsets of $\mathcal{P}$. The associated alternative hypotheses $H_{1,1}, \dotsc, H_{1,m}$ are submodels such that $\Hoi\cap H_{1,i}=\varnothing$ for all $i\in\Nm^*$. We denote by $\cH_0=\cH_0(P)$ (the dependence in $P$ will be dropped when there is no ambiguity) the set of all null hypotheses that are true, that is $\cH_0(P)=\{i\in\Nm^* : P\in \Hoi\}$. In other words, $\Hoi$ is true if and only if $i\in\cH_0$. For testing each $\Hoi, i\in\Nm^*$, we have at hand a $p$-value $p_i=p_i(X)$ (the dependence in $X$ will be dropped when there is no ambiguity) which is a random variable with the following property : if $i\in\cH_0$, then the law of $p_i$ is super-uniform, which is sometimes denoted $\mathcal L(p_i)\succeq \mathcal{U}([0,1])$. This means that in such case, the cumulative distribution function (cdf) of $p_i$ is always smaller than or equal to the cdf of a random variable $U\sim \mathcal{U}([0,1])$ :
 $$
 \forall x \in \RR, \Pro{p_i\leq x}\leq \Pro{U\leq x} = 0\vee(x\wedge 1).
 $$ {#eq-super-unif}
@@ -110,7 +110,7 @@ Finally let us consider the following toy example, that will be re-used in the r
 
 ## Gaussian one-sided
 
-In this case we assume that $X=(X_1,\dotsc,X_m)$ is a Gaussian vector and the null hypotheses refer to the nullity of the means in contrast to their positivity. That is, formally, $(\mathcal{X},\mathfrak{X})=(\mathbb R^m, \mathcal B\left(\mathbb R^m  \right))$, $\mathcal P=\{ \mathcal N(\boldsymbol{\mu}, \Sigma) : \forall j \in\Nm^*, \mu_j\geq 0, \Sigma \text{ positive semidefinite}  \}$, for each $i\in\Nm^*$, $H_{0,i}= \{ \mathcal N(\boldsymbol{\mu}, \Sigma) \in \mathcal P :\mu_i=0 \}$ and $H_{1,i}=\{ \mathcal N(\boldsymbol{\mu}, \Sigma) \in \mathcal P :\mu_i>0 \}$. Then we can construct $p$-values by letting $p_i(X)=\bar\Phi(X_i)=1-\Phi(X_i)$, where $\Phi$ denotes the cdf of $\mathcal N(0,1)$ and $\bar\Phi$ the associated survival function.
+In this case we assume that $X=(X_1,\dotsc,X_m)$ is a Gaussian vector and the null hypotheses refer to the nullity of the means in contrast to their positivity. That is, formally, $(\mathcal{X},\mathfrak{X})=(\mathbb R^m, \mathcal B\left(\mathbb R^m  \right))$, $\mathcal P=\{ \mathcal N(\boldsymbol{\mu}, \Sigma) : \forall j \in\Nm^*, \mu_j\geq 0, \Sigma \text{ positive semidefinite}  \}$, for each $i\in\Nm^*$, $\Hoi= \{ \mathcal N(\boldsymbol{\mu}, \Sigma) \in \mathcal P :\mu_i=0 \}$ and $H_{1,i}=\{ \mathcal N(\boldsymbol{\mu}, \Sigma) \in \mathcal P :\mu_i>0 \}$. Then we can construct $p$-values by letting $p_i(X)=\bar\Phi(X_i)=1-\Phi(X_i)$, where $\Phi$ denotes the cdf of $\mathcal N(0,1)$ and $\bar\Phi$ the associated survival function.
 :::
 
 ## Post hoc bounds with reference families {#sec-reference-fam}
@@ -141,12 +141,155 @@ which optimally uses the information provided by the JER control of the referenc
 
 ## Regions with a forest structure
 
+The core concept of this section is to assume that the regions $R_k$'s of the reference family are what we called in @MR4178188 a forest structure, that is two regions are either disjoint or nested:
+$$
+\forall k,k'\in\mathcal{K} , R_k \cap R_{k'} \in \{ R_k,  R_{k'} , \varnothing \}.
+$$ {#eq-forest}
+Representing the $R_k$'s with a directed graph, where there is an oriented edge $R_k \leftarrow R_{k'}$ if and only if $R_k \subset R_{k'}$ and there is no $R_{k''}$ such that $R_k \subsetneq R_{k''}\subsetneq R_{k'}$ gives a forest, hence the name. See @exm-toy-forest and its representation in @fig-forest-exm.
+
+We also need to introduce the notion of depth with the following function:
+$$
+\phi \:  : \: \left\{
+\begin{array}{l  c l  }
+ \cK & \to & \mathbb{N}^*\\
+k & \mapsto & 1 + \left| \{k'\in\cK: R_k\subsetneq R_{k'} \} \right|   .
+\end{array}
+\right.
+$$ {#eq-depth}
+
+::: {#exm-toy-forest}
+
+Let $m=25$, $R_1 = \{1, \dotsc , 20 \}$, $R_2  =  \{1, 2  \}$, $R_3   =   \{3 , \dotsc , 10 \}$, $R_4  =    \{11, \dotsc , 20 \}$, $R_5 =  \{5, \dotsc , 10 \}$, $R_6   =     \{11, \dotsc , 16 \}$, $R_7  =   \{17, \dotsc ,20  \}$, $R_8=\{21,22\}$, $R_9 = \{22\}$. This is the same example as Example 2 of @MR4178188 and it is graphically depicted in @fig-forest-exm. The sets $R_1$, $R_8$ are of depth $1$; the sets $R_2,R_3,R_4,R_9$ are of depth $2$; the sets $R_5,R_6,R_7$ are of depth $3$.
+:::
+
+:::{#fig-forest-exm}
+
+``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
+\begin{tikzpicture}[scale=0.85]
+ \tikzstyle{quadri}=[circle,draw,text=black, thick]
+ \tikzstyle{estun}=[->,>=latex,very thick]
+ \node[quadri] (R1) at (0,3) {$R_1$};
+ \node[quadri] (R2) at (-2,1) {$R_2$};
+ \node[quadri] (R3) at (0,1) {$R_3$};
+ \node[quadri] (R4) at (2,1) {$R_4$};
+ \node[quadri] (R5) at (0,-1) {$R_5$};
+ \node[quadri] (R6) at (1.5,-1) {$R_6$};
+ \node[quadri] (R7) at (2.5,-1) {$R_7$};
+ \node[quadri] (R8) at (4,3) {$R_8$};
+ \node[quadri] (R9) at (4,1) {$R_9$};
+ \draw[estun] (R1)--(R2);
+ \draw[estun] (R1)--(R3);
+ \draw[estun] (R1)--(R4);
+ \draw[estun] (R3)--(R5);
+ \draw[estun] (R4)--(R6);
+ \draw[estun] (R4)--(R7);
+ \draw[estun] (R8)--(R9);
+\end{tikzpicture}
+```
+
+The regions of @exm-toy-forest.
+
+:::
+
+Another tool of @MR4178188 that will be used is its Lemma 2, that is the identification of $\Rfam$ with a set $\mathcal C\subset \left\{(i,j)\in \left({\mathbb N_N}^*\right)^2 \: : i\leq j\right\}$ such that for $(i,j), (i',j')\in\mathcal C$, $\{i,\dotsc, j\}\cap\{i',\dotsc,j'\}\in\left\{\varnothing, \{i,\dotsc, j\},\{i',\dotsc j'\}  \right\}$. With this identification, each $R_k=R_{(i,j)}$ can be written as $P_{i:j}=\bigcup_{i\leq n\leq j}P_n$ where $(P_n)_{1\leq n \leq N}$ is a partition of $\Nm^*$. The $P_n$'s were called atoms in @MR4178188 because they have the thinnest granularity in the structure, but to continue the analogy with graphs, forests and trees, they can also be called leafs. See @exm-toy-leaves for a concrete example.
+
+::: {#exm-toy-leaves}
+
+## Continuation of @exm-toy-forest
+
+For the reference family given in @exm-toy-forest, a partition of atoms is given by $P_1 =R_2$, $P_2  =   R_3\setminus R_5$, $P_3  =   R_5$, $P_4=R_6$, $P_5=R_7$, $P_6=R_8\setminus R_9$, $P_7=R_9$, $P_8=\Nm^* \setminus \{R_1 \cup R_8 \}$. Then $R_1=P_{1:5}$, $R_3=P_{2:3}$, $R_4=P_{4:5}$ and $R_8=P_{6:7}$. Note that not all atoms are regions of the family. Those new labels are graphically depicted in @fig-leaves-exm. The nodes that correspond to atoms that are not in the family are depicted with a dashed circle. This is the same example as Example 3 of @MR4178188.
+:::
+
+:::{#fig-leaves-exm}
+
+``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
+\begin{tikzpicture}[scale=0.85]
+ \tikzstyle{quadri}=[circle,draw,text=black,thick]
+ \tikzstyle{estun}=[->,>=latex,very thick]
+ \node[quadri] (R1) at (0,3) {$P_{1:5}$};
+ \node[quadri, fill=gray!25] (R2) at (-2,1) {$P_1$};
+ \node[quadri] (R3) at (0,1) {$P_{2:3}$};
+ \node[quadri] (R4) at (2,1) {$P_{4:5}$};
+ \node[quadri, dashed,fill=gray!25] (P2) at (-0.5,-1) {$P_2$};
+ \node[quadri,fill=gray!25] (R5) at (0.5,-1) {$P_3$};
+ \node[quadri,fill=gray!25] (R6) at (1.5,-1) {$P_4$};
+ \node[quadri,fill=gray!25] (R7) at (2.5,-1) {$P_5$};
+ \node[quadri] (R8) at (4,3) {$P_{6:7}$};
+ \node[quadri,dashed,fill=gray!25] (P6) at (3.5,1) {$P_6$};
+ \node[quadri,fill=gray!25] (R9) at (4.5,1) {$P_7$};
+ \node[quadri,dashed,fill=gray!25] (P8) at (6,3) {$P_8$};
+ \draw[estun] (R1)--(R2);
+ \draw[estun] (R1)--(R3);
+ \draw[estun] (R1)--(R4);
+ \draw[estun] (R3)--(R5);
+ \draw[estun,dashed,thick] (R3)--(P2);
+ \draw[estun] (R4)--(R6);
+ \draw[estun] (R4)--(R7);
+ \draw[estun] (R8)--(R9);
+ \draw[estun,dashed,thick] (R8)--(P6);
+\end{tikzpicture}
+```
+
+The regions of @exm-toy-forest but with the labels of @exm-toy-leaves.
+
+:::
+
+When all leaves are regions of the family, it is said that the family is complete. If this is not the case, the family can easily be completed by adding the missing leaves (and using their cardinality as associated $\zeta$) without changing the value $\Vstar$. See Definition 2 and Lemma 6 of @MR4178188 for the details.
+
+@MR4178188 also prove in their Theorem 1 that: 
+$$
+V^*_{\Rfam}(S)=\min_{Q\subseteq\cK}\left(\sum_{k'\in Q}\zeta_{k'}\wedge|S\cap R_{k'}|+\left| S\setminus\bigcup_{k'\in Q} R_{k'}   \right|\right)
+$$ {#eq-vstar-Q} 
+and, even better, in their Corollary 1 *(iii)* that:
+$$
+\Vstar(S) = \min_{Q\in \mathfrak P}\sum_{k'\in Q}\zeta_{k'}\wedge|S\cap R_{k'}|,
+$$ {#eq-vstar-Qpartition}
+provided that the family is complete. Here, $\mathfrak P \subseteq \mathcal P(\cK)$ is the set of subsets of $\cK$ that realize a partition, that is, the set of $Q\subseteq\cK$ such that the $R_k$, $k\in Q$, form a partition of $\Nm^*$. So the minimum in @eq-vstar-Qpartition is over way less elements than in @eq-vstar-Q.
+
+Finally, that paper provides a polynomial algorithm to $V^*_{\Rfam}(S)$ for a single $S\subseteq\Nm^*$, which we reproduce here in @alg-vstar. The family is assumed complete, otherwise the first step would be to complete it. In the original paper, $\cK^h$ used to designate the elements of $\cK$ at depth $h$ plus the atoms at depth $\leq h$. Actually one can realize that the last assumption is not needed for this algorithm to perform exactly the same, with the added benefit of not repeating computations at the atoms that don't have the maximal depth. The only change is that sometimes $Succ_k$ can be empty, in which case we simply let $newVec_k=\zeta_k\wedge|S\cap R_k|$. Thus, here, we can define $\cK^h$ as only the elements of $\cK$ at depth $h$ (the previous intricate definition may still be necessary for the proof of Theorem 1 of @MR4178188): $\cK^h=\{ (i,j)\in\cK : \phi(i,j)=h      \}, \:\:\:h\geq 1.$ Note that in the ongoing analogy with graph theory, the elements of $\cK^1$ are the roots of the different trees making up the forest.
+
+```pseudocode
+#| label: alg-vstar
+#| html-indent-size: "1.2em"
+#| html-comment-delimiter: "//"
+#| html-line-number: true
+#| html-line-number-punc: ":"
+#| html-no-end: false
+#| pdf-placement: "htb!"
+#| pdf-line-number: true
+\begin{algorithm}
+\caption{Computation of a given $\Vstar(S)$}
+\begin{algorithmic}
+\Procedure{Vstar}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$  with $\mathfrak{R}$ complete}
+  \State $ H \gets \max_{k\in\mathcal{K}} \phi(k)  $ \Comment{maximum depth}
+  \For{$h = H-1, \dotsc, 1$}
+    \State $\mathcal{K}^h\gets \{ k\in\mathcal{K} : \phi(k) =h  \}$
+    \State $newVec\gets (0)_{k \in  \mathcal{K}^h}$
+    \For{$k \in  \mathcal{K}^h$}
+      \State $Succ_k \gets \{ k' \in  \mathcal{K}^{h+1} : R_{k'}\subseteq R_k\}$
+      \If{$Succ_k=\varnothing$}
+        \State $newVec_k \gets \zeta_k\wedge|S\cap R_k|$
+      \Else
+        \State $newVec_k \gets \min\left( \zeta_{k}\wedge|S\cap R_k| ,  \sum_{k'\in Succ_k} Vec_{k'}   \right)$
+      \EndIf
+    \EndFor
+    \State $Vec\gets newVec$
+  \EndFor
+  \State\Return $\sum_{k\in\mathcal{K}^1} Vec_k  $
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+```
+::: {.callout-tip}
+
+In the practical implementation of this algorithm (and of the following @alg-pruning), $Vec$ and $newVec$ are always of size $N$ (the number of leaves) instead of the cardinality of $\cK^h$. And the sum $\sum_{k'\in Succ_k} Vec_{k'}$ is really easy to compute: if $R_k= R_{(i_0,i_{p+1}-1)}= \bigcup_{ j=0}^p R_{(i_{ j}, i_{ j+1}-1)}=\bigcup_{i_0\leq n\leq i_{p+1}-1}P_n\in\cK^h$ for some $p\geq1$, a strictly increasing sequence $(i_0,\dotsc,i_{p+1})$ and $R_{(i_{ j}, i_{ j+1}-1)}\in\cK^{h+1}$ for all $0\leq j\leq p$, then we simply sum $Vec$ over the indices from $i_{0}$ to $i_{p+1}-1$. So actually computing $Succ_k$ is not needed and not done.
+:::
+
 ::: {#rem-zeta}
 
 The specific computation of the $R_k$'s and the $\zeta_k$'s such that @eq-jer-control holds is outside the scope of the present paper, but different computations can be found in @MR4124323, @MR4178188 or <!--notip--> for example.
 
 :::
-
 
 # New algorithms
 
@@ -189,10 +332,7 @@ The specific computation of the $R_k$'s and the $\zeta_k$'s such that @eq-jer-co
 \end{algorithm}
 ```
 
-::: {.callout-tip}
 
-<!--Remarque dans l'implémentation pratique $Vec$ et $newVec$ sont toujours de taille le nombre de feuilles, et pas le cardinal de $\cK^h$. Et la somme $\sum_{k'\in Succ_k} Vec_{k'}$ est très facilement calculée, si $R_k = \bigcup_{\ell=1}^L P_{i_\ell, i_{\ell+1}}$ alors on somme Vec sur les indices $i_\ell$ à $i_{L+1}$, tout simplement, donc même chercher $Succ_k$ n'est pas nécessaire.-->
-:::
 
 ::: {#prp-pruning}
 
