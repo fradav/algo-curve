@@ -85,11 +85,11 @@ $$
 $$ {#eq-confidence-fdp}
 So post hoc bounds provide ways to construct FDP-controlling sets instead of FDR-controlling sets, which is much more desirable given the nature of the FDR as an expected value. See for example [@MR3418717, Figure 4] for a credible example where the FDR is controlled but the FDP has a highly undesirable behavior (either 0 because no discoveries at all are made, either higher than the target level).
 
-The first confidence bounds are found in [@MR2279468] and [@MR2279639], although, in the latter, only for selection sets of the form $\{i\in\Nm : P_i\leq t\}$ where $P_i$ is the $p$-value associated to the null hypothesis $\Hoi$. In [@MR2951390] the authors re-wrote the generic construction of [@MR2279468] in terms of closed testing [@MR468056], proposed several practical constructions and sparked a new interest in multiple testing procedures based on confidence envelopes. This work was followed by a prolific series of works like [@MR3305943] and [@MR4731977]. In [@MR4124323], the authors introduce the new point of view of references families (see @sec-reference-fam) to construct post hoc bounds, and show the links between this meta-technique and the closed testing one, along with new bounds. 
+The first confidence bounds are found in @MR2279468 and @MR2279639, although, in the latter, only for selection sets of the form $\{i\in\Nm : P_i\leq t\}$ where $P_i$ is the $p$-value associated to the null hypothesis $\Hoi$. In @MR2951390 the authors re-wrote the generic construction of @MR2279468 in terms of closed testing @MR468056, proposed several practical constructions and sparked a new interest in multiple testing procedures based on confidence envelopes. This work was followed by a prolific series of works like @MR3305943 and @MR4731977. In @MR4124323, the authors introduce the new point of view of references families (see @sec-reference-fam) to construct post hoc bounds, and show the links between this meta-technique and the closed testing one, along with new bounds. 
 
-Following the reference family trail, in [@MR4178188] the authors introduce new reference families with a special set-theoretic constraint that allows an efficient computation of the bound denoted by $\Vstar$ on a single selection set $S$. The problem is that one often wants to compute $\Vstar$ on a whole path of selection sets $(S_t)_{t\in\Nm^*}$, for example the hypotheses attached to the $t$ smallest $p$-values. Whereas the algorithm provided the aforementioned work [@MR4178188, Algorithm 1] is fast for a single evaluation, it is slow and inefficient to repeatedly call it to compute each $\Vstar(S_t)$. If the $S_t$'s are nested, and growing by one, that is $S_1\subsetneq\dotsb\subsetneq S_m$ and $|S_t|=t$, there is a way to efficiently compute $\left(\Vstar(S_t)\right)_{t\in\Nm}$ by leveraging the nested structure. 
+Following the reference family trail, in @MR4178188 the authors introduce new reference families with a special set-theoretic constraint that allows an efficient computation of the bound denoted by $\Vstar$ on a single selection set $S$. The problem is that one often wants to compute $\Vstar$ on a whole path of selection sets $(S_t)_{t\in\Nm^*}$, for example the hypotheses attached to the $t$ smallest $p$-values. Whereas the algorithm provided in the aforementioned work [@MR4178188, Algorithm 1] <!--which is reproduced here, see @ref--> is fast for a single evaluation, it is slow and inefficient to repeatedly call it to compute each $\Vstar(S_t)$. If the $S_t$'s are nested, and growing by one, that is $S_1\subsetneq\dotsb\subsetneq S_m$ and $|S_t|=t$, there is a way to efficiently compute $\left(\Vstar(S_t)\right)_{t\in\Nm}$ by leveraging the nested structure. 
 
-This is the main contribution of the present paper: a new and fast algorithm computing the curve $\left(\Vstar(S_t)\right)_{t\in\Nm}$ for a nested path of selection sets, that is presented in @sec-fast-curve. An additional algorithm that can speed up computations both for the single-evaluation algorithm and the new curve-evaluation algorithm is also presented, in @sec-pruning. In @sec-notation, all necessary notation and vocabulary is re-introduced, most of it being the same as in [@MR4178188]. Finally, a few numerical experiments are presented in Section @sec-numeric to demonstrate the computation time gain.
+This is the main contribution of the present paper: a new and fast algorithm computing the curve $\left(\Vstar(S_t)\right)_{t\in\Nm}$ for a nested path of selection sets, that is presented in @sec-fast-curve. An additional algorithm that can speed up computations both for the single-evaluation algorithm and the new curve-evaluation algorithm is also presented, in @sec-pruning. In @sec-notation, all necessary notation and vocabulary is re-introduced, most of it being the same as in @MR4178188. Finally, a few numerical experiments are presented in Section @sec-numeric to demonstrate the computation time gain.
 
 # Notation and reference family methodology
 
@@ -102,7 +102,7 @@ $$
 \forall x \in \RR, \Pro{p_i\leq x}\leq \Pro{U\leq x} = 0\vee(x\wedge 1).
 $$ {#eq-super-unif}
 
-For every subset of hypotheses $S\subseteq\Nm^*$, let $V(S)=|S\cap\cH_0|$. If we think of $S$ as a selection set of hypotheses deemed significant, $V(S)$ is then the number of false positives (FP) in $S$. $V(S)$ is our main object of interest and the quantity that we wish to over-estimate with confidence upper bounds (see @eq-confidence or the more formal ).<!-- changer la ref  -->
+For every subset of hypotheses $S\subseteq\Nm^*$, let $V(S)=|S\cap\cH_0|$. If we think of $S$ as a selection set of hypotheses deemed significant, $V(S)$ is then the number of false positives (FP) in $S$. $V(S)$ is our main object of interest and the quantity that we wish to over-estimate with confidence upper bounds (see @eq-confidence or the more formal @eq-confidence-formal).
 
 Finally let us consider the following toy example, that will be re-used in the remainder of the paper.
 
@@ -115,7 +115,30 @@ In this case we assume that $X=(X_1,\dotsc,X_m)$ is a Gaussian vector and the nu
 
 ## Post hoc bounds with reference families {#sec-reference-fam}
 
-<!-- réécrire l'équation 1 mais bien propre avec un "pour tout modèle, pour tout X qui suit le modèle", et la dep de V chapeau en X -->
+With the formalism introduced in last section, a confidence upper bound is a functional $\Vhat :\mathcal X\times ]0,1[\to(\mathcal P(\Nm^*) \to \Nm)$  such that,
+$$
+\forall P\in\mathcal P, \forall X\sim P, \forall \alpha \in ]0,1[, \Pro{\forall S \subseteq \Nm^*, V(S)\leq \Vhat(X,\alpha)(S)}\geq 1-\alpha.
+$$ {#eq-confidence-formal}
+In the remainder, the dependence in $(X,\alpha)$ will be dropped when there is no ambiguity and $\Vhat(X,\alpha)$ will simply be written $\Vhat$.
+
+As said in the Introduction, many constructions, ultimately theoretically equivalent but differing by the practical steps involved, exist, and in this paper we focus on the meta-construction of @MR4124323 based on reference families. A reference family is a family $\Rfam=\Rfam(X,\alpha)=(R_k,\zeta_k)_{k\in \mathcal K}$ with $|\mathcal K|\leq 2^m$, $R_k\subseteq\Nm^*$, $\zeta_k\in\left\{0,\dotsc,|R_k|\right\}$ where everything (that is, $\mathcal K$ and all the $R_k$ and $\zeta_k$) depends on $(X,\alpha)$ but the dependency is not explicitly written. We also define the following error criterion for a reference family, named Joint Error Rate (JER):
+$$
+\JER(\Rfam) = \Pro{\exists k\in\mathcal K, |R_k\cap\cH_0| > \zeta_k } = \Pro{\exists k\in\mathcal K, V(R_k) > \zeta_k }.
+$$ {#eq-jer}
+In the following, we are only interested in reference families that control the JER at level $\alpha$:
+$$
+\forall P\in\mathcal P, \forall X\sim P, \forall \alpha \in ]0,1[, 1-\JER(\Rfam(X,\alpha))=\Pro{\forall k\in\mathcal K, V(R_k)\leq \zeta_k} \geq 1-\alpha.
+$$ {#eq-jer-control}
+Note that @eq-jer-control is really similar to @eq-confidence-formal except that the uniform guarantee, instead of being over all $S\subseteq \Nm^*$, is only over all the $R_k\subseteq \Nm^*, k\in\mathcal K$, with $\mathcal K$ having cardinality potentially much smaller than $2^m$. A global confidence bound is then derived from a JER-controlling reference family by interpolation. Let 
+$$
+\mathcal A(\Rfam)= \left\{A\subseteq \Nm^*:  \forall k\in\mathcal K, |R_k\cap A| \leq \zeta_k \right\}.
+$$ {#eq-a}
+What says the JER control is that $\cH_0\in\mathcal A(\Rfam)$. We leverage this information with the following confidence bound construction:
+$$
+\Vstar(S) = \max_{A\in\mathcal A(\Rfam)}|S\cap A|
+$$ {#eq-vstar}
+which optimally uses the information provided by the JER control of the reference family, as proven by Proposition 2.1 of @MR4124323. Because of the $\max_{A\in\mathcal A(\Rfam)}$, the computation of $\Vstar(S)$ is generally intractable (see Proposition 2.2 of @MR4124323), but for specific structures of reference families, a polynomial computation can be derived. This is the topic of @MR4178188 and of next section.
+
 
 ## Deterministic regions with a forest structure
 
