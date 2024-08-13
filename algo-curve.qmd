@@ -139,8 +139,14 @@ $$
 $$ {#eq-vstar}
 which optimally uses the information provided by the JER control of the reference family, as proven by Proposition 2.1 of @MR4124323. Because of the $\max_{A\in\mathcal A(\Rfam)}$, the computation of $\Vstar(S)$ is generally intractable (see Proposition 2.2 of @MR4124323), but for specific structures of reference families, a polynomial computation can be derived. This is the topic of @MR4178188 and of next section.
 
+## Regions with a forest structure
 
-## Deterministic regions with a forest structure
+::: {#rem-zeta}
+
+The specific computation of the $R_k$'s and the $\zeta_k$'s such that @eq-jer-control holds is outside the scope of the present paper, but different computations can be found in @MR4124323, @MR4178188 or <!--notip--> for example.
+
+:::
+
 
 # New algorithms
 
