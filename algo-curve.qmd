@@ -296,7 +296,7 @@ Finally, that paper provides a polynomial algorithm to $V^*_{\Rfam}(S)$ for a si
 ```
 ::: {.callout-tip}
 
-In the practical implementation of this algorithm (and of the following @alg-pruning), $Vec$ and $newVec$ are always of size $N$ (the number of leaves) instead of the cardinality of $\cK^h$. And the sum $\sum_{k'\in Succ_k} Vec_{k'}$ is really easy to compute: if $R_k= R_{(i_0,i_{p}-1)}= \bigcup_{ j=0}^{p-1} R_{(i_{ j}, i_{ j+1}-1)}=\bigcup_{i_0\leq n\leq i_{p}-1}P_n\in\cK^h$ for some $p\geq2$, a strictly increasing sequence $(i_0,\dotsc,i_{p})$ and $R_{(i_{ j-1}, i_{ j}-1)}\in\cK^{h+1}$ for all $1\leq j\leq p$, then we simply sum $Vec$ over the indices from $i_{0}$ to $i_{p}-1$. After that, the computed quantity is set in $newVec$ at index $i_0$. So actually computing $Succ_k$ is not needed and not done.
+In the practical implementation of this algorithm (and of the following @alg-pruning), $Vec$ and $newVec$ are always of size $N$ (the number of leaves) instead of the cardinality of $\cK^h$. And the sum $\sum_{k'\in Succ_k} Vec_{k'}$ is really easy to compute: if $R_k= R_{(i_0,i_{p}-1)}= \bigcup_{ j=1}^{p} R_{(i_{ j-1}, i_{ j}-1)}=\bigcup_{i_0\leq n\leq i_{p}-1}P_n\in\cK^h$ for some $p\geq2$, a strictly increasing sequence $(i_0,\dotsc,i_{p})$ and $R_{(i_{ j-1}, i_{ j}-1)}\in\cK^{h+1}$ for all $1\leq j\leq p$, then we simply sum $Vec$ over the indices from $i_{0}$ to $i_{p}-1$. After that, the computed quantity is set in $newVec$ at index $i_0$. So actually computing $Succ_k$ is not needed and not done.
 :::
 
 ::: {#rem-zeta}
@@ -311,7 +311,7 @@ The specific computation of the $R_k$'s and the $\zeta_k$'s such that Equation \
 
 We remark the simple fact that if, for example, $(1,1), (2,2), (1,2)\in\cK$, and $\zeta_{(1,2)}\geq \zeta_{(1,1)}+\zeta_{(2,2)}$, then $R_{(1,2)}$ never contributes to the computation of any $\Vstar(S)$ and it could just be removed from $\Rfam$. We now formalize and prove this pruning scheme.
 
-We define by $\cK^{\pr}$ ($\cK$ pruned) the set of elements of $\cK$ such that we removed all $(i,i')$ such that there exists $p\geq2$ and integers $i_1,\dotsc,i_{p-1}$ such that, when setting $i_0=i$ and $i_{p}=i'+1$, the sequence $(i_0,\dotsc,i_{p})$ is strictly increasing, $(i_{j-1},i_{j}-1)\in\cK$ for all $1\leq j\leq p$ and finally $\zeta_{(i,i')}=\zeta_{(i_0,i_{p}-1)}\geq \sum_{j=0}^{p-1} \zeta_{(i_j, i_{j+1}-1)}$. 
+We define by $\cK^{\pr}$ ($\cK$ pruned) the set of elements of $\cK$ such that we removed all $(i,i')$ such that there exists $p\geq2$ and integers $i_1,\dotsc,i_{p-1}$ such that, when setting $i_0=i$ and $i_{p}=i'+1$, the sequence $(i_0,\dotsc,i_{p})$ is strictly increasing, $(i_{j-1},i_{j}-1)\in\cK$ for all $1\leq j\leq p$ and finally $\zeta_{(i,i')}=\zeta_{(i_0,i_{p}-1)}\geq \sum_{j=1}^{p} \zeta_{(i_{j-1}, i_{j}-1)}$. 
 
 An important note is that for a removed $(i,i')\in\cK\setminus\cK^{\pr}$, we can always choose the indices $i_1,\dotsc,i_{p-1}$ such that actually $(i_j,i_{j+1}-1)\in\cK^{\pr}$ and not only $\cK$, because if  $(i_j,i_{j+1}-1)\in\cK\setminus\cK^{\pr}$ it can itself be fragmented, and this decreasing recursion eventually ends (the later possible being at the atoms of the forest structure). Also note that removing elements from $\cK$ does not alter the fact that we have at hand a forest structure, that is, the reference family defined by $\Rfam^{\pr}=(R_k,\zeta_k)_{k\in\cK^{\pr}}$ has a forest structure. Because pruning a forest structure does not touch the atoms, note finally that if $\cK$ is complete then so is $\cK^{\pr}$.
 
