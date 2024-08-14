@@ -78,13 +78,15 @@ format:
 Multiple testing theory is often used for exploratory analysis, like Genome-Wide Association Studies, where multiple features are tested to find promising ones. Classical multiple testing theory like Family-Wise Error Rate (FWER) control or False Discovery Rate (FDR) control [@MR1325392] can be used, but a more recent trend consists in the computation of post hoc bounds, also named post selection bounds or confidence envelopes, for the number of false positives, or, equivalently, for the False Discovery Proportion (FDP). This approach is notably advocated for in the context of exploratory research by [@MR2951390, Section 1]. 
 
 Mathematically speaking, a confidence upper bound (we prefer to say upper bound instead of envelope for obvious reasons) is a function $\Vhat : \cP(\Nm^*) \to \Nm$, where $\Nm=\{0,\dotsc,m\}$, $\Nm^*=\{1,\dotsc,m\}$ and $m$ is the number of hypotheses, such that 
-$$
+\begin{equation}
 \forall \alpha \in ]0,1[, \Pro{\forall S \subseteq \Nm^*, |S\cap \cH_0|\leq \Vhat(S)}\geq 1-\alpha.
-$$ {#eq-confidence}
-Here, $\alpha$ is a target error rate and $\cH_0$ is the set of hypotheses indices that are true null hypotheses. Note that the construction of $\Vhat$ depends on $\alpha$ and on the random data $X$ and the dependence is omitted to lighten notation and because there is no ambiguity. The meaning of @eq-confidence is that $\Vhat$ provides an upper bound of the number of null hypotheses in $S$ for any selection set $S\subseteq \Nm^*$, which allows the user to perform post hoc selection on their data without breaching the statistical guarantee. Also note that by dividing by $|S|\vee 1$ in @eq-confidence we also get a confidence bound for the FDP:
-$$
+\label{eq_confidence}
+\end{equation}
+Here, $\alpha$ is a target error rate and $\cH_0$ is the set of hypotheses indices that are true null hypotheses. Note that the construction of $\Vhat$ depends on $\alpha$ and on the random data $X$ and the dependence is omitted to lighten notation and because there is no ambiguity. The meaning of Equation \eqref{eq_confidence} is that $\Vhat$ provides an upper bound of the number of null hypotheses in $S$ for any selection set $S\subseteq \Nm^*$, which allows the user to perform post hoc selection on their data without breaching the statistical guarantee. Also note that by dividing by $|S|\vee 1$ in Equation \eqref{eq_confidence} we also get a confidence bound for the FDP:
+\begin{equation}
 \forall \alpha \in ]0,1[, \Pro{\forall S \subseteq \Nm^*, \FDP(S)\leq \frac{\Vhat(S)}{|S|\vee 1}}\geq 1-\alpha.
-$$ {#eq-confidence-fdp}
+\label{eq_confidence_fdp}
+\end{equation}
 So post hoc bounds provide ways to construct FDP-controlling sets instead of FDR-controlling sets, which is much more desirable given the nature of the FDR as an expected value. See for example [@MR3418717, Figure 4] for a credible example where the FDR is controlled but the FDP has a highly undesirable behavior (either 0 because no discoveries at all are made, either higher than the target level).
 
 The first confidence bounds are found in @MR2279468 and @MR2279639, although, in the latter, only for selection sets of the form $\{i\in\Nm : P_i\leq t\}$ where $P_i$ is the $p$-value associated to the null hypothesis $\Hoi$. In @MR2951390 the authors re-wrote the generic construction of @MR2279468 in terms of closed testing @MR468056, proposed several practical constructions and sparked a new interest in multiple testing procedures based on confidence envelopes. This work was followed by a prolific series of works like @MR3305943 and @MR4731977. In @MR4124323, the authors introduce the new point of view of references families (see @sec-reference-fam) to construct post hoc bounds, and show the links between this meta-technique and the closed testing one, along with new bounds. 
@@ -100,11 +102,12 @@ This is the main contribution of the present paper: a new and fast algorithm com
 As is usual in multiple testing theory, we consider a probability space $(\Omega,\mathcal A, \mathbb P)$, a model $\mathcal{P}$ on a measurable space $(\mathcal{X},\mathfrak{X})$, and data that is represented by a random variable $X:(\Omega,\mathcal A)\to(\mathcal{X},\mathfrak{X})$ with $X\sim P\in \mathcal{P}$, that is, the law of $X$ is comprised in the model $\mathcal{P}$.
 
 Then we consider $m\geq1$ null hypotheses $H_{0,1}, \dotsc, H_{0,m}$ which formally are submodels, that is subsets of $\mathcal{P}$. The associated alternative hypotheses $H_{1,1}, \dotsc, H_{1,m}$ are submodels such that $\Hoi\cap H_{1,i}=\varnothing$ for all $i\in\Nm^*$. We denote by $\cH_0=\cH_0(P)$ (the dependence in $P$ will be dropped when there is no ambiguity) the set of all null hypotheses that are true, that is $\cH_0(P)=\{i\in\Nm^* : P\in \Hoi\}$. In other words, $\Hoi$ is true if and only if $i\in\cH_0$. For testing each $\Hoi, i\in\Nm^*$, we have at hand a $p$-value $p_i=p_i(X)$ (the dependence in $X$ will be dropped when there is no ambiguity) which is a random variable with the following property : if $i\in\cH_0$, then the law of $p_i$ is super-uniform, which is sometimes denoted $\mathcal L(p_i)\succeq \mathcal{U}([0,1])$. This means that in such case, the cumulative distribution function (cdf) of $p_i$ is always smaller than or equal to the cdf of a random variable $U\sim \mathcal{U}([0,1])$ :
-$$
+\begin{equation}
 \forall x \in \RR, \Pro{p_i\leq x}\leq \Pro{U\leq x} = 0\vee(x\wedge 1).
-$$ {#eq-super-unif}
+\label{eq_super_unif}
+\end{equation}
 
-For every subset of hypotheses $S\subseteq\Nm^*$, let $V(S)=|S\cap\cH_0|$. If we think of $S$ as a selection set of hypotheses deemed significant, $V(S)$ is then the number of false positives (FP) in $S$. $V(S)$ is our main object of interest and the quantity that we wish to over-estimate with confidence upper bounds (see @eq-confidence or the more formal @eq-confidence-formal).
+For every subset of hypotheses $S\subseteq\Nm^*$, let $V(S)=|S\cap\cH_0|$. If we think of $S$ as a selection set of hypotheses deemed significant, $V(S)$ is then the number of false positives (FP) in $S$. $V(S)$ is our main object of interest and the quantity that we wish to over-estimate with confidence upper bounds (see Equation \eqref{eq_confidence} or the more formal Equation \eqref{eq_confidence_formal}).
 
 Finally let us consider the following toy example, that will be re-used in the remainder of the paper.
 
@@ -118,46 +121,53 @@ In this case we assume that $X=(X_1,\dotsc,X_m)$ is a Gaussian vector and the nu
 ## Post hoc bounds with reference families {#sec-reference-fam}
 
 With the formalism introduced in last section, a confidence upper bound is a functional $\Vhat :\mathcal X\times ]0,1[\to(\mathcal P(\Nm^*) \to \Nm)$  such that,
-$$
+\begin{equation}
 \forall P\in\mathcal P, \forall X\sim P, \forall \alpha \in ]0,1[, \Pro{\forall S \subseteq \Nm^*, V(S)\leq \Vhat(X,\alpha)(S)}\geq 1-\alpha.
-$$ {#eq-confidence-formal}
+\label{eq_confidence_formal}
+\end{equation}
 In the remainder, the dependence in $(X,\alpha)$ will be dropped when there is no ambiguity and $\Vhat(X,\alpha)$ will simply be written $\Vhat$.
 
 As said in the Introduction, many constructions, ultimately theoretically equivalent but differing by the practical steps involved, exist, and in this paper we focus on the meta-construction of @MR4124323 based on reference families. A reference family is a family $\Rfam=\Rfam(X,\alpha)=(R_k,\zeta_k)_{k\in \mathcal K}$ with $|\mathcal K|\leq 2^m$, $R_k\subseteq\Nm^*$, $\zeta_k\in\left\{0,\dotsc,|R_k|\right\}$ where everything (that is, $\mathcal K$ and all the $R_k$ and $\zeta_k$) depends on $(X,\alpha)$ but the dependency is not explicitly written. We also define the following error criterion for a reference family, named Joint Error Rate (JER):
-$$
+\begin{equation}
 \JER(\Rfam) = \Pro{\exists k\in\mathcal K, |R_k\cap\cH_0| > \zeta_k } = \Pro{\exists k\in\mathcal K, V(R_k) > \zeta_k }.
-$$ {#eq-jer}
+\label{eq_jer}
+\end{equation}
 In the following, we are only interested in reference families that control the JER at level $\alpha$:
-$$
+\begin{equation}
 \forall P\in\mathcal P, \forall X\sim P, \forall \alpha \in ]0,1[, 1-\JER(\Rfam(X,\alpha))=\Pro{\forall k\in\mathcal K, V(R_k)\leq \zeta_k} \geq 1-\alpha.
-$$ {#eq-jer-control}
-Note that @eq-jer-control is really similar to @eq-confidence-formal except that the uniform guarantee, instead of being over all $S\subseteq \Nm^*$, is only over all the $R_k\subseteq \Nm^*, k\in\mathcal K$, with $\mathcal K$ having cardinality potentially much smaller than $2^m$. A global confidence bound is then derived from a JER-controlling reference family by interpolation. Let 
-$$
+\label{eq_jer_control}
+\end{equation}
+Note that Equation \eqref{eq_jer_control} is really similar to Equation \eqref{eq_confidence_formal} except that the uniform guarantee, instead of being over all $S\subseteq \Nm^*$, is only over all the $R_k\subseteq \Nm^*, k\in\mathcal K$, with $\mathcal K$ having cardinality potentially much smaller than $2^m$. A global confidence bound is then derived from a JER-controlling reference family by interpolation. Let 
+\begin{equation}
 \mathcal A(\Rfam)= \left\{A\subseteq \Nm^*:  \forall k\in\mathcal K, |R_k\cap A| \leq \zeta_k \right\}.
-$$ {#eq-a}
+\label{eq_a}
+\end{equation}
 What says the JER control is that $\cH_0\in\mathcal A(\Rfam)$. We leverage this information with the following confidence bound construction:
-$$
+\begin{equation}
 \Vstar(S) = \max_{A\in\mathcal A(\Rfam)}|S\cap A|
-$$ {#eq-vstar}
+\label{eq-vstar}
+\end{equation}
 which optimally uses the information provided by the JER control of the reference family, as proven by Proposition 2.1 of @MR4124323. Because of the $\max_{A\in\mathcal A(\Rfam)}$, the computation of $\Vstar(S)$ is generally intractable (see Proposition 2.2 of @MR4124323), but for specific structures of reference families, a polynomial computation can be derived. This is the topic of @MR4178188 and of next section.
 
 ## Regions with a forest structure
 
 The core concept of this section is to assume that the regions $R_k$'s of the reference family are what we called in @MR4178188 a forest structure, that is two regions are either disjoint or nested:
-$$
+\begin{equation}
 \forall k,k'\in\mathcal{K} , R_k \cap R_{k'} \in \{ R_k,  R_{k'} , \varnothing \}.
-$$ {#eq-forest}
+\label{eq-forest}
+\end{equation}
 Representing the $R_k$'s with a directed graph, where there is an oriented edge $R_k \leftarrow R_{k'}$ if and only if $R_k \subset R_{k'}$ and there is no $R_{k''}$ such that $R_k \subsetneq R_{k''}\subsetneq R_{k'}$ gives a forest, hence the name. See @exm-toy-forest and its representation in @fig-forest-exm.
 
 We also need to introduce the notion of depth with the following function:
-$$
+\begin{equation}
 \phi \:  : \: \left\{
 \begin{array}{l  c l  }
  \cK & \to & \mathbb{N}^*\\
 k & \mapsto & 1 + \left| \{k'\in\cK: R_k\subsetneq R_{k'} \} \right|   .
 \end{array}
 \right.
-$$ {#eq-depth}
+\label{eq-depth}
+\end{equation}
 
 ::: {#exm-toy-forest}
 
@@ -239,14 +249,16 @@ The regions of @exm-toy-forest but with the labels of @exm-toy-leaves.
 When all leaves are regions of the family, it is said that the family is complete. If this is not the case, the family can easily be completed by adding the missing leaves (and using their cardinality as associated $\zeta$) without changing the value $\Vstar$. See Definition 2 and Lemma 6 of @MR4178188 for the details.
 
 @MR4178188 also prove in their Theorem 1 that: 
-$$
+\begin{equation}
 V^*_{\Rfam}(S)=\min_{Q\subseteq\cK}\left(\sum_{k'\in Q}\zeta_{k'}\wedge|S\cap R_{k'}|+\left| S\setminus\bigcup_{k'\in Q} R_{k'}   \right|\right)
-$$ {#eq-vstar-Q} 
+\label{eq_vstar_Q} 
+\end{equation}
 and, even better, in their Corollary 1 *(iii)* that:
-$$
+\begin{equation}
 \Vstar(S) = \min_{Q\in \mathfrak P}\sum_{k'\in Q}\zeta_{k'}\wedge|S\cap R_{k'}|,
-$$ {#eq-vstar-Qpartition}
-provided that the family is complete. Here, $\mathfrak P \subseteq \mathcal P(\cK)$ is the set of subsets of $\cK$ that realize a partition, that is, the set of $Q\subseteq\cK$ such that the $R_k$, $k\in Q$, form a partition of $\Nm^*$. So the minimum in @eq-vstar-Qpartition is over way less elements than in @eq-vstar-Q.
+\label{eq_vstar_Qpartition}
+\end{equation}
+provided that the family is complete. Here, $\mathfrak P \subseteq \mathcal P(\cK)$ is the set of subsets of $\cK$ that realize a partition, that is, the set of $Q\subseteq\cK$ such that the $R_k$, $k\in Q$, form a partition of $\Nm^*$. So the minimum in Equation \eqref{eq_vstar_Qpartition} is over way less elements than in Equation \eqref{eq_vstar_Q}.
 
 Finally, that paper provides a polynomial algorithm to $V^*_{\Rfam}(S)$ for a single $S\subseteq\Nm^*$, which we reproduce here in @alg-vstar. The family is assumed complete, otherwise the first step would be to complete it. In the original paper, $\cK^h$ used to designate the elements of $\cK$ at depth $h$ plus the atoms at depth $\leq h$. Actually one can realize that the last assumption is not needed for this algorithm to perform exactly the same, with the added benefit of not repeating computations at the atoms that don't have the maximal depth. The only change is that sometimes $Succ_k$ can be empty, in which case we simply let $newVec_k=\zeta_k\wedge|S\cap R_k|$. Thus, here, we can define $\cK^h$ as only the elements of $\cK$ at depth $h$ (the previous intricate definition may still be necessary for the proof of Theorem 1 of @MR4178188): $\cK^h=\{ (i,j)\in\cK : \phi(i,j)=h      \}, \:\:\:h\geq 1.$ Note that in the ongoing analogy with graph theory, the elements of $\cK^1$ are the roots of the different trees making up the forest.
 
@@ -289,7 +301,7 @@ In the practical implementation of this algorithm (and of the following @alg-pru
 
 ::: {#rem-zeta}
 
-The specific computation of the $R_k$'s and the $\zeta_k$'s such that @eq-jer-control holds is outside the scope of the present paper, but different computations can be found in @MR4124323, @MR4178188 or <!--notip--> for example.
+The specific computation of the $R_k$'s and the $\zeta_k$'s such that Equation \eqref{eq_jer_control} holds is outside the scope of the present paper, but different computations can be found in @MR4124323, @MR4178188 or <!--notip--> for example.
 
 :::
 
@@ -315,16 +327,18 @@ For any $S\subseteq \Nm^*$, $\Vstar(S)=V^*_{\Rfam^{\pr}}(S)$.
 
 ::: {.proof}
 
-Recall @eq-vstar-Q and, because $\Rfam^{\pr}$ also has a forest structure,
-$$
+Recall Equation \eqref{eq_vstar_Q} and, because $\Rfam^{\pr}$ also has a forest structure,
+\begin{equation}
 V^*_{\Rfam^{\pr}}(S)=\min_{Q\subseteq\cK^{\pr}}\left(\sum_{k'\in Q}\zeta_{k'}\wedge|S\cap R_{k'}|+\left| S\setminus\bigcup_{k'\in Q} R_{k'}   \right|\right),
-$$ {#eq-vstarpruned-Q}
+\label{eq_vstarpruned_Q}
+\end{equation}
 so we immediately get that $V^*_{\Rfam}(S)\leq V^*_{\Rfam^{\pr}}(S)$. 
 
 Let any $Q\subseteq \cK$. We split $Q$ in $A$ elements of $\cK\setminus\cK^{\pr}$, denoted $(i_{0,a}, i_{p_a,a}-1)$, $1\leq a\leq A$ for some $p_a\geq2$, and $B$ elements of $\cK^{\pr}$, simply denoted $k_b$, $1\leq b\leq B$. By the definition of $\cK^{\pr}$ and the previous remarks, for any $1\leq a \leq A$, there exist integers $i_{1,a},\dotsc,i_{p_a-1,a}$ such that $i_{0,a}<i_{1,a}<\dotsb<i_{p_a-1,a} < i_{p_a,a}$, $(i_{j-1,a},i_{j,a}-1)\in\cK^{\pr}$ for all $1\leq j\leq p_a$, and $\zeta_{(i_{0,a}, i_{p_a,a}-1)}\geq \sum_{j=1}^{p_a}\zeta_{(i_{j-1,a},i_{j,a}-1)}$. Now let
-$$
+\begin{equation}
 Q^{\pr}=\{k_b : 1\leq b\leq B \} \cup \{ (i_{j-1,a},i_{j,a}-1) :  1\leq a\leq A, 1\leq j\leq p_a  \}.
-$$ {#eq-Qpr}
+\label{eq_Qpr}
+\end{equation}
 We have that $Q^{\pr}\subseteq \cK^{\pr}$ and $\bigcup_{k\in Q}R_k=\bigcup_{k\in Q^{\pr}}R_k$. Then,
 
 :::
