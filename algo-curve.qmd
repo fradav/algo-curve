@@ -315,7 +315,7 @@ We define by $\cK^{\pr}$ ($\cK$ pruned) the set of elements of $\cK$ such that w
 
 An important note is that for a removed $(i,i')\in\cK\setminus\cK^{\pr}$, we can always choose the indices $i_1,\dotsc,i_{p-1}$ such that actually $(i_j,i_{j+1}-1)\in\cK^{\pr}$ and not only $\cK$, because if  $(i_j,i_{j+1}-1)\in\cK\setminus\cK^{\pr}$ it can itself be fragmented, and this decreasing recursion eventually ends (the later possible being at the atoms of the forest structure). Also note that removing elements from $\cK$ does not alter the fact that we have at hand a forest structure, that is, the reference family defined by $\Rfam^{\pr}=(R_k,\zeta_k)_{k\in\cK^{\pr}}$ has a forest structure. Because pruning a forest structure does not touch the atoms, note finally that if $\cK$ is complete then so is $\cK^{\pr}$.
 
-The following proposition states that pruning the forest does not alter the bound.<!--, so by pruning we get a computational advantage (because $\cK^{\pr}$ is smaller than $\cK$) without any theoretical loss.-->
+The following proposition states that pruning the forest does not alter the bound.
 
 ::: {#prp-pruning}
 
@@ -367,6 +367,10 @@ Note that Equation \eqref{pruning_ineq} is true even if there are some $b\in\{ 1
 We minimize over all $Q$ to get that $\Vstar(S)\geq V^*_{\Rfam^{\pr}}(S)$.
 :::
 
+This gives a practical way to speed up computations by first pruning the family before computing any $\Vstar(S)$, because $\cK^{\pr}$ is smaller than $\cK$, and by the above Proposition there is no theoretical loss in doing so. 
+
+Furthermore, pruning can be done really simply by following @alg-vstar for $S=\Nm^*$, and pruning when appropriate. This gives the following @alg-pruning, assuming, for simplicity, that the family is complete. The computation time of the algorithm is in $O(m|\cK|)$. Note that the only differences between @alg-pruning and @alg-vstar are the pruning step and $\zeta_k$ replacing $\zeta_k\wedge|S\cap R_k|$, because $\zeta_k\leq|R_k|$ and here $S=\Nm^*$, so $\zeta_k\wedge|\Nm^*\cap R_k|=\zeta_k$. Also note that the algorithm also returns $\Vstar(\Nm^*)$ as a by-product.
+
 ```pseudocode
 #| label: alg-pruning
 #| html-indent-size: "1.2em"
@@ -391,7 +395,7 @@ We minimize over all $Q$ to get that $\Vstar(S)\geq V^*_{\Rfam^{\pr}}(S)$.
         \State $newVec_k \gets \zeta_k$
       \Else
         \If{$\zeta_{k} \geq  \sum_{k'\in Succ_k} Vec_{k'}$}
-          \State $\mathcal{K}^{\mathfrak{pr}}\gets \mathcal{K}^{\mathfrak{pr}}\setminus \{ k \}$
+          \State $\mathcal{K}^{\mathfrak{pr}}\gets \mathcal{K}^{\mathfrak{pr}}\setminus \{ k \}$ \Comment{pruning of the region indexed by $k$}
         \EndIf
         \State $newVec_k \gets \min\left( \zeta_{k} ,  \sum_{k'\in Succ_k} Vec_{k'}   \right)$
       \EndIf
