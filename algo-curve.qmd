@@ -332,7 +332,7 @@ Recall Equation \eqref{eq_vstar_Q} and, because $\Rfam^{\pr}$ also has a forest 
 V^*_{\Rfam^{\pr}}(S)=\min_{Q\subseteq\cK^{\pr}}\left(\sum_{k'\in Q}\zeta_{k'}\wedge|S\cap R_{k'}|+\left| S\setminus\bigcup_{k'\in Q} R_{k'}   \right|\right),
 \label{eq_vstarpruned_Q}
 \end{equation}
-so we immediately get that $V^*_{\Rfam}(S)\leq V^*_{\Rfam^{\pr}}(S)$. 
+so we immediately get that $\Vstar(S)\leq V^*_{\Rfam^{\pr}}(S)$. 
 
 Let any $Q\subseteq \cK$. We split $Q$ in $A$ elements of $\cK\setminus\cK^{\pr}$, denoted $(i_{0,a}, i_{p_a,a}-1)$, $1\leq a\leq A$ for some $p_a\geq2$, and $B$ elements of $\cK^{\pr}$, simply denoted $k_b$, $1\leq b\leq B$. By the definition of $\cK^{\pr}$ and the previous remarks, for any $1\leq a \leq A$, there exist integers $i_{1,a},\dotsc,i_{p_a-1,a}$ such that $i_{0,a}<i_{1,a}<\dotsb<i_{p_a-1,a} < i_{p_a,a}$, $(i_{j-1,a},i_{j,a}-1)\in\cK^{\pr}$ for all $1\leq j\leq p_a$, and $\zeta_{(i_{0,a}, i_{p_a,a}-1)}\geq \sum_{j=1}^{p_a}\zeta_{(i_{j-1,a},i_{j,a}-1)}$. Now let
 \begin{equation}
@@ -340,7 +340,31 @@ Q^{\pr}=\{k_b : 1\leq b\leq B \} \cup \{ (i_{j-1,a},i_{j,a}-1) :  1\leq a\leq A,
 \label{eq_Qpr}
 \end{equation}
 We have that $Q^{\pr}\subseteq \cK^{\pr}$ and $\bigcup_{k\in Q}R_k=\bigcup_{k\in Q^{\pr}}R_k$. Then,
-
+\begin{align*}
+\sum_{k\in Q}\zeta_k\wedge|S\cap R_k|+\left| S\setminus\bigcup_{k\in Q} R_k   \right|&=\sum_{b=1}^B\zeta_{k_b}\wedge|S\cap R_{k_b}| \\
+&\qquad+\sum_{a=1}^A\zeta_{(i_{0,a}, i_{p_a,a}-1)}\wedge |S\cap R_{(i_{0,a}, i_{p_a,a}-1)}| \\
+&\qquad+ \left| S\setminus\bigcup_{k\in Q} R_k   \right|    , 
+\end{align*}
+but  for all $1\leq a\leq A$,
+\begin{align*}
+\zeta_{(i_{0,a}, i_{p_a,a}-1)}&\geq  \sum_{j=1}^{p_a}\zeta_{(i_{j-1,a},i_{j,a}-1)} \\
+&\geq   \sum_{j=1}^{p_a}\zeta_{(i_{j-1,a},i_{j,a}-1)} \wedge |S\cap R_{(i_{j-1,a}, i_{j,a}-1)}| ,
+\end{align*}
+so the term $\sum_{a=1}^A\zeta_{(i_{0,a}, i_{p_a,a}-1)}\wedge |S\cap R_{(i_{0,a}, i_{p_a,a}-1)}|$ is greater than or equal to 
+\begin{equation*}
+\sum_{a=1}^A\left(  \sum_{j=1}^{p_a}\zeta_{(i_{j-1,a},i_{j,a}-1)} \wedge |S\cap R_{(i_{j-1,a}, i_{j,a}-1)}| \right)\wedge |S\cap R_{(i_{0,a}, i_{p_a,a}-1)}| ,
+\end{equation*}
+ which is simply equal to
+\begin{equation*}
+ \sum_{a=1}^A  \sum_{j=1}^{p_a}\zeta_{(i_{j-1,a},i_{j,a}-1)} \wedge |S\cap R_{(i_{j-1,a}, i_{j,a}-1)}|.
+\end{equation*}
+Furthermore $\left|S\setminus\bigcup_{k\in Q} R_k\right|= \left|S\setminus\bigcup_{k\in Q^{\pr}} R_k\right|$ so finally:
+\begin{align}
+\sum_{k\in Q}\zeta_k\wedge|S\cap R_k|+\left| S\setminus\bigcup_{k\in Q} R_k   \right| &\geq \sum_{k\in Q^{\pr}}\zeta_k\wedge|S\cap R_k|+\left| S\setminus\bigcup_{k\in Q^{\pr}} R_k   \right|   \label{pruning_ineq}\\
+&\geq V^*_{\Rfam^{\pr}}(S). \notag
+\end{align}
+Note that Equation \eqref{pruning_ineq} is true even if there are some $b\in\{ 1,\dotsc,B\}, a\in\{ 1,\dotsc,A\}, j\in\{ 1,\dotsc,p_a\}$ such that $k_b=(i_{j-1,a}, i_{j,a}-1)$.
+We minimize over all $Q$ to get that $\Vstar(S)\geq V^*_{\Rfam^{\pr}}(S)$.
 :::
 
 ```pseudocode
