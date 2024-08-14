@@ -319,7 +319,12 @@ V^*_{\Rfam^{\pr}}(S)=\min_{Q\subseteq\cK^{\pr}}\left(\sum_{k'\in Q}\zeta_{k'}\we
 $$ {#eq-vstarpruned-Q}
 so we immediately get that $V^*_{\Rfam}(S)\leq V^*_{\Rfam^{\pr}}(S)$. 
 
-Let any $Q\subseteq \cK$. We split $Q$ in $A$ elements of $\cK\setminus\cK^{\pr}$, denoted $(i_{0,a}, i_{p_a,a}-1)$, $1\leq a\leq A$ for some $p_a\geq2$, and $B$ elements of $\cK^{\pr}$, simply denoted $k_b$, $1\leq b\leq B$. By the definition of $\cK^{\pr}$ and the previous remarks, for any $1\leq a \leq A$, there exist integers $i_{1,a},\dotsc,i_{p_a-1,a}$ such that $i_{0,a}<i_{1,a}<\dotsb<i_{p_a-1,a} < i_{p_a,a}$, $(i_{j-1,a},i_{j,a}-1)\in\cK^{\pr}$ for all $1\leq j\leq p_a$, and $\zeta_{(i_{0,a}, i_{p_a,a}-1)}\geq \sum_{j=1}^{p_a}\zeta_{(i_{j-1,a},i_{j,a}-1)}$. Now let 
+Let any $Q\subseteq \cK$. We split $Q$ in $A$ elements of $\cK\setminus\cK^{\pr}$, denoted $(i_{0,a}, i_{p_a,a}-1)$, $1\leq a\leq A$ for some $p_a\geq2$, and $B$ elements of $\cK^{\pr}$, simply denoted $k_b$, $1\leq b\leq B$. By the definition of $\cK^{\pr}$ and the previous remarks, for any $1\leq a \leq A$, there exist integers $i_{1,a},\dotsc,i_{p_a-1,a}$ such that $i_{0,a}<i_{1,a}<\dotsb<i_{p_a-1,a} < i_{p_a,a}$, $(i_{j-1,a},i_{j,a}-1)\in\cK^{\pr}$ for all $1\leq j\leq p_a$, and $\zeta_{(i_{0,a}, i_{p_a,a}-1)}\geq \sum_{j=1}^{p_a}\zeta_{(i_{j-1,a},i_{j,a}-1)}$. Now let
+$$
+Q^{\pr}=\{k_b : 1\leq b\leq B \} \cup \{ (i_{j-1,a},i_{j,a}-1) :  1\leq a\leq A, 1\leq j\leq p_a  \}.
+$$ {#eq-Qpr}
+We have that $Q^{\pr}\subseteq \cK^{\pr}$ and $\bigcup_{k\in Q}R_k=\bigcup_{k\in Q^{\pr}}R_k$. Then,
+
 :::
 
 ```pseudocode
