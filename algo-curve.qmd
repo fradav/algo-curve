@@ -295,6 +295,25 @@ The specific computation of the $R_k$'s and the $\zeta_k$'s such that @eq-jer-co
 
 ## Pruning the forest {#sec-pruning}
 
+We remark the simple fact that if, for example, $(1,1), (2,2), (1,2)\in\cK$, and $\zeta_{(1,2)}\geq \zeta_{(1,1)}+\zeta_{(2,2)}$, then $R_{(1,2)}$ never contributes to the computation of any $\Vstar(S)$ and it could just be removed from $\Rfam$. We now formalize and prove this pruning scheme.
+
+We define by $\cK^{\pr}$ ($\cK$ pruned) the set of elements of $\cK$ such that we removed all $(i,i')$ such that there exists $p\geq1$ and integers $i_1,\dotsc,i_p$ such that, when setting $i_0=i$ and $i_{p+1}=i'+1$, the sequence $(i_0,\dotsc,i_{p+1})$ is strictly increasing, $(i_j,i_{j+1}-1)\in\cK$ for all $0\leq j\leq p$ and finally $\zeta_{(i,i')}=\zeta_{(i_0,i_{p+1}-1)}\geq \sum_{j=0}^p \zeta_{(i_j, i_{j+1}-1)}$. 
+
+An important note is that for $(i,i')\in\cK\setminus\cK^{\pr}$, we can always choose the indices $i_1,\dotsc,i_p$ such that actually $(i_j,i_{j+1}-1)\in\cK^{\pr}$ and not only $\cK$, because if  $(i_j,i_{j+1}-1)\in\cK\setminus\cK^{\pr}$ it can itself be fragmented, and this decreasing recursion eventually ends (the later possible being at the atoms of the forest structure). Also note that removing elements from $\cK$ does not alter the fact that we have at hand a forest structure, that is, the reference family defined by $\Rfam^{\pr}=(R_k,\zeta_k)_{k\in\cK^{\pr}}$ has a forest structure. Because pruning a forest structure does not touch the atoms, note finally that if $\cK$ is complete then so is $\cK^{\pr}$.
+
+::: {#prp-pruning}
+
+## Pruning
+
+For any $S\subseteq \Nm^*$, $\Vstar(S)=V^*_{\Rfam^{\pr}}(S)$.
+
+:::
+
+::: {.proof}
+
+Content
+:::
+
 ```pseudocode
 #| label: alg-pruning
 #| html-indent-size: "1.2em"
@@ -333,10 +352,11 @@ The specific computation of the $R_k$'s and the $\zeta_k$'s such that @eq-jer-co
 ```
 
 
+## Fast algorithm to compute a curve of confidence bounds on a path of selection sets {#sec-fast-curve}
 
-::: {#prp-pruning}
+::: {#thm-curve-path}
 
-## Pruning
+## Fast curve computation
 
 :::
 
@@ -345,8 +365,11 @@ The specific computation of the $R_k$'s and the $\zeta_k$'s such that @eq-jer-co
 Content
 :::
 
+::: {#cor-easy-impl}
 
-## Fast algorithm to compute a curve of confidence bounds on a path of selection sets {#sec-fast-curve}
+## Easy implementation
+
+:::
 
 ```pseudocode
 #| label: alg-formal-curve
@@ -395,23 +418,6 @@ Content
 \end{algorithmic}
 \end{algorithm}
 ```
-
-::: {#thm-curve-path}
-
-## Fast curve computation
-
-:::
-
-::: {.proof}
-
-Content
-:::
-
-::: {#cor-easy-impl}
-
-## Easy implementation
-
-:::
 
 
 ```pseudocode
