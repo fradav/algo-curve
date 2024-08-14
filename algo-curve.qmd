@@ -260,7 +260,7 @@ Finally, that paper provides a polynomial algorithm to $V^*_{\Rfam}(S)$ for a si
 \begin{algorithm}
 \caption{Computation of a given $\Vstar(S)$}
 \begin{algorithmic}
-\Procedure{Vstar}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$  with $\mathfrak{R}$ complete}
+\Procedure{Vstar}{S, $\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$  with $\mathfrak{R}$ complete}
   \State $ H \gets \max_{k\in\mathcal{K}} \phi(k)  $ \Comment{maximum depth}
   \For{$h = H-1, \dotsc, 1$}
     \State $\mathcal{K}^h\gets \{ k\in\mathcal{K} : \phi(k) =h  \}$
@@ -282,7 +282,7 @@ Finally, that paper provides a polynomial algorithm to $V^*_{\Rfam}(S)$ for a si
 ```
 ::: {.callout-tip}
 
-In the practical implementation of this algorithm (and of the following @alg-pruning), $Vec$ and $newVec$ are always of size $N$ (the number of leaves) instead of the cardinality of $\cK^h$. And the sum $\sum_{k'\in Succ_k} Vec_{k'}$ is really easy to compute: if $R_k= R_{(i_0,i_{p+1}-1)}= \bigcup_{ j=0}^p R_{(i_{ j}, i_{ j+1}-1)}=\bigcup_{i_0\leq n\leq i_{p+1}-1}P_n\in\cK^h$ for some $p\geq1$, a strictly increasing sequence $(i_0,\dotsc,i_{p+1})$ and $R_{(i_{ j}, i_{ j+1}-1)}\in\cK^{h+1}$ for all $0\leq j\leq p$, then we simply sum $Vec$ over the indices from $i_{0}$ to $i_{p+1}-1$. So actually computing $Succ_k$ is not needed and not done.
+In the practical implementation of this algorithm (and of the following @alg-pruning), $Vec$ and $newVec$ are always of size $N$ (the number of leaves) instead of the cardinality of $\cK^h$. And the sum $\sum_{k'\in Succ_k} Vec_{k'}$ is really easy to compute: if $R_k= R_{(i_0,i_{p+1}-1)}= \bigcup_{ j=0}^p R_{(i_{ j}, i_{ j+1}-1)}=\bigcup_{i_0\leq n\leq i_{p+1}-1}P_n\in\cK^h$ for some $p\geq1$, a strictly increasing sequence $(i_0,\dotsc,i_{p+1})$ and $R_{(i_{ j}, i_{ j+1}-1)}\in\cK^{h+1}$ for all $0\leq j\leq p$, then we simply sum $Vec$ over the indices from $i_{0}$ to $i_{p+1}-1$. After that, the computed quantity is set in $newVec$ at index $i_0$. So actually computing $Succ_k$ is not needed and not done.
 :::
 
 ::: {#rem-zeta}
