@@ -246,9 +246,9 @@ The regions of @exm-toy-forest but with the labels of @exm-toy-leaves.
 
 :::
 
-When all leaves are regions of the family, it is said that the family is complete. If this is not the case, the family can easily be completed by adding the missing leaves (and using their cardinality as associated $\zeta$) without changing the value $\Vstar$. See Definition 2 and Lemma 6 of @MR4178188 for the details.
+When all leaves are regions of the family, it is said that the family is complete. If this is not the case, the family can easily be completed by adding the missing leaves (and using their cardinality as associated $\zeta$) without changing the value $\Vstar$. See Definition 2, Lemma 6 and Algorithm 2 of @MR4178188 for the details.
 
-@MR4178188 also prove in their Theorem 1 that: 
+@MR4178188 also proved in their Theorem 1 that: 
 \begin{equation}
 V^*_{\Rfam}(S)=\min_{Q\subseteq\cK}\left(\sum_{k'\in Q}\zeta_{k'}\wedge|S\cap R_{k'}|+\left| S\setminus\bigcup_{k'\in Q} R_{k'}   \right|\right)
 \label{eq_vstar_Q} 
