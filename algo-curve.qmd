@@ -311,15 +311,19 @@ The specific computation of the $R_k$'s and the $\zeta_k$'s such that Equation \
 
 We remark the simple fact that if, for example, $(1,1), (2,2), (1,2)\in\cK$, and $\zeta_{(1,2)}\geq \zeta_{(1,1)}+\zeta_{(2,2)}$, then $R_{(1,2)}$ never contributes to the computation of any $\Vstar(S)$ and it could just be removed from $\Rfam$. We now formalize and prove this pruning scheme.
 
-We define by $\cK^{\pr}$ ($\cK$ pruned) the set of elements of $\cK$ such that we removed all $(i,i')$ such that there exists $p\geq2$ and integers $i_1,\dotsc,i_{p-1}$ such that, when setting $i_0=i$ and $i_{p}=i'+1$, the sequence $(i_0,\dotsc,i_{p})$ is strictly increasing, $(i_{j-1},i_{j}-1)\in\cK$ for all $1\leq j\leq p$ and finally $\zeta_{(i,i')}=\zeta_{(i_0,i_{p}-1)}\geq \sum_{j=1}^{p} \zeta_{(i_{j-1}, i_{j}-1)}$. 
+::: {#def-pruning}
+
+## Pruning
+
+We define by $\cK^{\pr}$ ($\cK$ pruned) the set of elements of $\cK$ such that we removed all $(i,i')$ such that there exists $p\geq2$ and integers $i_1,\dotsc,i_{p-1}$ such that, when setting $i_0=i$ and $i_{p}=i'+1$, the sequence $(i_0,\dotsc,i_{p})$ is strictly increasing, $(i_{j-1},i_{j}-1)\in\cK$ for all $1\leq j\leq p$ and finally $\zeta_{(i,i')}=\zeta_{(i_0,i_{p}-1)}\geq \sum_{j=1}^{p} \zeta_{(i_{j-1}, i_{j}-1)}$.
+
+:::
 
 An important note is that for a removed $(i,i')\in\cK\setminus\cK^{\pr}$, we can always choose the indices $i_1,\dotsc,i_{p-1}$ such that actually $(i_j,i_{j+1}-1)\in\cK^{\pr}$ and not only $\cK$, because if  $(i_j,i_{j+1}-1)\in\cK\setminus\cK^{\pr}$ it can itself be fragmented, and this decreasing recursion eventually ends (the later possible being at the atoms of the forest structure). Also note that removing elements from $\cK$ does not alter the fact that we have at hand a forest structure, that is, the reference family defined by $\Rfam^{\pr}=(R_k,\zeta_k)_{k\in\cK^{\pr}}$ has a forest structure. Because pruning a forest structure does not touch the atoms, note finally that if $\cK$ is complete then so is $\cK^{\pr}$.
 
 The following proposition states that pruning the forest does not alter the bound.
 
 ::: {#prp-pruning}
-
-## Pruning
 
 For any $S\subseteq \Nm^*$, $\Vstar(S)=V^*_{\Rfam^{\pr}}(S)$.
 
@@ -369,7 +373,7 @@ We minimize over all $Q$ to get that $\Vstar(S)\geq V^*_{\Rfam^{\pr}}(S)$.
 
 This gives a practical way to speed up computations by first pruning the family before computing any $\Vstar(S)$, because $\cK^{\pr}$ is smaller than $\cK$, and by the above Proposition there is no theoretical loss in doing so. 
 
-Furthermore, pruning can be done really simply by following @alg-vstar for $S=\Nm^*$, and pruning when appropriate. This gives the following @alg-pruning, assuming, for simplicity, that the family is complete. The computation time of the algorithm is in $O(m|\cK|)$. Note that the only differences between @alg-pruning and @alg-vstar are the pruning step and $\zeta_k$ replacing $\zeta_k\wedge|S\cap R_k|$, because $\zeta_k\leq|R_k|$ and here $S=\Nm^*$, so $\zeta_k\wedge|\Nm^*\cap R_k|=\zeta_k$. Also note that the algorithm also returns $\Vstar(\Nm^*)$ as a by-product.
+Furthermore, pruning can be done really simply by following @alg-vstar for $S=\Nm^*$, and pruning when appropriate. This gives the following @alg-pruning, assuming, for simplicity, that the family is complete. The computation time of the algorithm is in $O(m|\cK|)$. Note that the only differences between @alg-pruning and @alg-vstar are the pruning step and $\zeta_k$ replacing $\zeta_k\wedge|S\cap R_k|$, because $\zeta_k\leq|R_k|$ and here $S=\Nm^*$, so $\zeta_k\wedge|\Nm^*\cap R_k|=\zeta_k$. Also note that the algorithm also returns $\Vstar(\Nm^*)$ as a by-product. The following proposition states that @alg-pruning indeed produces the pruned region as in @def-pruning. 
 
 ```pseudocode
 #| label: alg-pruning
@@ -384,7 +388,7 @@ Furthermore, pruning can be done really simply by following @alg-vstar for $S=\N
 \caption{Pruning of $\mathfrak{R}$}
 \begin{algorithmic}
 \Procedure{Pruning}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$  with $\mathfrak{R}$ complete}
-  \State $\mathcal{K}^{\mathfrak{pr}}\gets\mathcal{K}$
+  \State $\mathcal{L}\gets\mathcal{K}$
   \State $ H \gets \max_{k\in\mathcal{K}} \phi(k)  $ \Comment{maximum depth}
   \For{$h = H-1, \dotsc, 1$}
     \State $\mathcal{K}^h\gets \{ k\in\mathcal{K} : \phi(k) =h  \}$
@@ -395,18 +399,31 @@ Furthermore, pruning can be done really simply by following @alg-vstar for $S=\N
         \State $newVec_k \gets \zeta_k$
       \Else
         \If{$\zeta_{k} \geq  \sum_{k'\in Succ_k} Vec_{k'}$}
-          \State $\mathcal{K}^{\mathfrak{pr}}\gets \mathcal{K}^{\mathfrak{pr}}\setminus \{ k \}$ \Comment{pruning of the region indexed by $k$}
+          \State $\mathcal{L}\gets \mathcal{L}\setminus \{ k \}$ \Comment{pruning of the region indexed by $k$}
         \EndIf
         \State $newVec_k \gets \min\left( \zeta_{k} ,  \sum_{k'\in Succ_k} Vec_{k'}   \right)$
       \EndIf
     \EndFor
     \State $Vec\gets newVec$
   \EndFor
-  \State\Return $(\mathcal{K}^{\mathfrak{pr}},\sum_{k\in\mathcal{K}^1} Vec_k  )$
+  \State\Return $(\mathcal{L},\sum_{k\in\mathcal{K}^1} Vec_k  )$
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
 ```
+
+::: {#prp-pruning-correct}
+
+$\mathcal{L}=\cK^{\pr}$.
+
+:::
+
+::: {.proof}
+
+Assume that $\mathcal{L}$ contains an element $(i,i')$ that should have been pruned, then by @def-pruning there exists $p\geq2$ and integers $i_1,\dotsc,i_{p-1}$ such that, when setting $i_0=i$ and $i_{p}=i'+1$, the sequence $(i_0,\dotsc,i_{p})$ is strictly increasing, $(i_{j-1},i_{j}-1)\in\cK$ for all $1\leq j\leq p$ and finally $\zeta_{(i,i')}=\zeta_{(i_0,i_{p}-1)}\geq \sum_{j=1}^{p} \zeta_{(i_{j-1}, i_{j}-1)}$. <!--Let $h=\phi((i,i'))$.--> Then by the proof of Theorem 1 of @MR4178188 but applied to $S=R_k$ we have that $\sum_{j=1}^{p} \zeta_{(i_{j-1}, i_{j}-1)}\geq  \sum_{k'\in Succ_k} Vec_{k'}$ (see the unnumbered line just above Equation (A4) in that paper) and so $\zeta_{(i,i')}\geq  \sum_{k'\in Succ_k} Vec_{k'}$ hence $(i,i')$ should have been pruned and there is a contradiction. So $\mathcal{L}\subseteq\cK^{\pr}$.
+
+On the other hand, $\cK\setminus\mathcal{L}\subseteq\cK\setminus\cK^{\pr}$ is trivial: a $k$ such that $\zeta_{k} \geq  \sum_{k'\in Succ_k} Vec_{k'}$ obviously satisfies the condition of @def-pruning to be pruned.
+:::
 
 
 ## Fast algorithm to compute a curve of confidence bounds on a path of selection sets {#sec-fast-curve}
