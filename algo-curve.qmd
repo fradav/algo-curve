@@ -428,22 +428,7 @@ On the other hand, $\cK\setminus\mathcal{L}\subseteq\cK\setminus\cK^{\pr}$ is tr
 
 ## Fast algorithm to compute a curve of confidence bounds on a path of selection sets {#sec-fast-curve}
 
-::: {#thm-curve-path}
-
-## Fast curve computation
-
-:::
-
-::: {.proof}
-
-Content
-:::
-
-::: {#cor-easy-impl}
-
-## Easy implementation
-
-:::
+Let $(i_1,\dotsc, i_m)$ a permutation of $\Nm^*$, eventually random, and, for all $t\in\Nm^*$, let $S_t=\{i_1,\dotsc,i_t\}$ and $S_0=\varnothing$. For example, $(i_1,\dotsc, i_m)$ can be the permutation ordering the $p$-values in increasing order and in that case $S_t$ becomes the set of indices of the $t$ smallest $p$-values. Assume that we want to compute all $\Vstar(S_t)$ for all $t\in\{ 0,\dotsc,m\}$, this is what we call the curve of confidence bounds indexed by $(i_1,\dotsc, i_m)$. @alg-vstar applied to compute $\Vstar(S_t)$ for a given $t$ has complexity $O(t|\cK|)$, so using it to sequentially compute the full curve has complexity $O\left(\sum_{t=0}^m t |\cK|\right)=O\left(m^2|\cK|\right)$. In this section, we present a new algorithm that computes the curve with a $O\left(m|\cK|\right)$ complexity. The algorithm will need that $\Rfam$ is complete, so if that is not the case we first need to complete $\Rfam$ following the Algorithm 2 of @MR4178188, which has a $O(m|\cK|)$ complexity. In the remainder of this section we assume that $\Rfam$ is complete.
 
 ```pseudocode
 #| label: alg-formal-curve
@@ -493,6 +478,22 @@ Content
 \end{algorithm}
 ```
 
+::: {#thm-curve-path}
+
+## Fast curve computation
+
+:::
+
+::: {.proof}
+
+Content
+:::
+
+::: {#cor-easy-impl}
+
+## Easy implementation
+
+:::
 
 ```pseudocode
 #| label: alg-curve
