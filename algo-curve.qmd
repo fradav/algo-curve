@@ -301,7 +301,7 @@ In the practical implementation of this algorithm (and of the following @alg-pru
 
 ::: {#rem-zeta}
 
-The specific computation of the $R_k$'s and the $\zeta_k$'s such that Equation \eqref{eq_jer_control} holds is outside the scope of the present paper, but different computations can be found in @MR4124323, @MR4178188 or <!--notip--> for example.
+The specific computation of the $R_k$'s and the $\zeta_k$'s such that Equation \eqref{eq_jer_control} holds is outside the scope of the present paper, but different computations can be found in @MR4124323, @MR4178188 or @blain22notip for example.
 
 :::
 
