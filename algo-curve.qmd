@@ -414,7 +414,7 @@ Furthermore, pruning can be done really simply by following @alg-vstar for $S=\N
 
 ::: {#prp-pruning-correct}
 
-$\mathcal{L}=\cK^{\pr}$.
+The final $\mathcal{L}$ returned by @alg-pruning is equal to $\cK^{\pr}$: $\mathcal{L}=\cK^{\pr}$.
 
 :::
 
