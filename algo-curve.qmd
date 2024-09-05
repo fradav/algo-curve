@@ -421,10 +421,11 @@ The final $\mathcal{L}$ returned by @alg-pruning is equal to $\cK^{\pr}$: $\math
 :::
 
 ::: {.proof}
+First, $\cK\setminus\mathcal{L}\subseteq\cK\setminus\cK^{\pr}$ is trivial: a $k$ such that $\zeta_{k} \geq  \sum_{k'\in Succ_k} Vec_{k'}$ obviously satisfies the condition of @def-pruning to be pruned.
 
-Assume that $\mathcal{L}$ contains an element $(i,i')$ that should have been pruned, then by @def-pruning there exists $p\geq2$ and integers $i_1,\dotsc,i_{p-1}$ such that, when setting $i_0=i$ and $i_{p}=i'+1$, the sequence $(i_0,\dotsc,i_{p})$ is strictly increasing, $(i_{j-1},i_{j}-1)\in\cK$ for all $1\leq j\leq p$ and finally $\zeta_{(i,i')}=\zeta_{(i_0,i_{p}-1)}\geq \sum_{j=1}^{p} \zeta_{(i_{j-1}, i_{j}-1)}$. <!--Let $h=\phi((i,i'))$.--> Then by the proof of Theorem 1 of @MR4178188 but applied to $S=R_k$ we have that $\sum_{j=1}^{p} \zeta_{(i_{j-1}, i_{j}-1)}\geq  \sum_{k'\in Succ_k} Vec_{k'}$ (see the unnumbered line just above Equation (A4) in that paper) and so $\zeta_{(i,i')}\geq  \sum_{k'\in Succ_k} Vec_{k'}$ hence $(i,i')$ should have been pruned and there is a contradiction. So $\mathcal{L}\subseteq\cK^{\pr}$.
+Now let $(i,i')\in \cK\setminus\cK^{\pr}$ an element that is pruned by @def-pruning, so there exists $p\geq2$ and integers $i_1,\dotsc,i_{p-1}$ such that, when setting $i_0=i$ and $i_{p}=i'+1$, the sequence $(i_0,\dotsc,i_{p})$ is strictly increasing, $(i_{j-1},i_{j}-1)\in\cK$ for all $1\leq j\leq p$ and finally $\zeta_{(i,i')}=\zeta_{(i_0,i_{p}-1)}\geq \sum_{j=1}^{p} \zeta_{(i_{j-1}, i_{j}-1)}$. Then by the proof of Theorem 1 of @MR4178188 but applied to $S=R_{(i,i')}$ we have that $\sum_{j=1}^{p} \zeta_{(i_{j-1}, i_{j}-1)}\geq  \sum_{k'\in Succ_{(i,i')}} Vec_{k'}$ (see the unnumbered line just above Equation (A4) in that paper) and so $\zeta_{(i,i')}\geq \sum_{k'\in Succ_{(i,i')}} Vec_{k'}$ hence $(i,i')$ is pruned by @alg-pruning and $\cK\setminus\cK^{\pr}\subseteq\cK\setminus\mathcal{L}$.
 
-On the other hand, $\cK\setminus\mathcal{L}\subseteq\cK\setminus\cK^{\pr}$ is trivial: a $k$ such that $\zeta_{k} \geq  \sum_{k'\in Succ_k} Vec_{k'}$ obviously satisfies the condition of @def-pruning to be pruned.
+In the end, $\cK\setminus\cK^{\pr}=\cK\setminus\mathcal{L}$ so $\cK^{\pr}=\mathcal{L}$.
 :::
 
 
