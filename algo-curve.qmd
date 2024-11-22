@@ -372,7 +372,7 @@ Furthermore $\left|S\setminus\bigcup_{k\in Q} R_k\right|= \left|S\setminus\bigcu
 &\geq V^*_{\Rfam^{\pr}}(S). \notag
 \end{align}
 Note that Equation \eqref{pruning_ineq} is true even if there are some $b\in\{ 1,\dotsc,B\}, a\in\{ 1,\dotsc,A\}, j\in\{ 1,\dotsc,p_a\}$ such that $k_b=(i_{j-1,a}, i_{j,a}-1)$.
-We minimize over all $Q$ to get that $\Vstar(S)\geq V^*_{\Rfam^{\pr}}(S)$.
+We minimize over all $Q$ to get that $\Vstar(S)\geq V^*_{\Rfam^{\pr}}(S)$. $\square$
 :::
 
 This gives a practical way to speed up computations by first pruning the family before computing any $\Vstar(S)$, because $\cK^{\pr}$ is smaller than $\cK$, and by the above Proposition there is no theoretical loss in doing so. 
@@ -427,13 +427,13 @@ First, $\cK\setminus\mathcal{L}\subseteq\cK\setminus\cK^{\pr}$ is trivial: a $k$
 
 Now let $(i,i')\in \cK\setminus\cK^{\pr}$ an element that is pruned by @def-pruning, so there exists $p\geq2$ and integers $i_1,\dotsc,i_{p-1}$ such that, when setting $i_0=i$ and $i_{p}=i'+1$, the sequence $(i_0,\dotsc,i_{p})$ is strictly increasing, $(i_{j-1},i_{j}-1)\in\cK$ for all $1\leq j\leq p$ and finally $\zeta_{(i,i')}=\zeta_{(i_0,i_{p}-1)}\geq \sum_{j=1}^{p} \zeta_{(i_{j-1}, i_{j}-1)}$. Then by the proof of Theorem 1 of @MR4178188 but applied to $S=R_{(i,i')}$ we have that $\sum_{j=1}^{p} \zeta_{(i_{j-1}, i_{j}-1)}\geq  \sum_{k'\in Succ_{(i,i')}} Vec_{k'}$ (see the unnumbered line just above Equation (A4) in that paper) and so $\zeta_{(i,i')}\geq \sum_{k'\in Succ_{(i,i')}} Vec_{k'}$ hence $(i,i')$ is pruned by @alg-pruning and $\cK\setminus\cK^{\pr}\subseteq\cK\setminus\mathcal{L}$.
 
-In the end, $\cK\setminus\cK^{\pr}=\cK\setminus\mathcal{L}$ so $\cK^{\pr}=\mathcal{L}$.
+In the end, $\cK\setminus\cK^{\pr}=\cK\setminus\mathcal{L}$ so $\cK^{\pr}=\mathcal{L}$. $\square$
 :::
 
 
 ## Fast algorithm to compute a curve of confidence bounds on a path of selection sets {#sec-fast-curve}
 
-Let $(i_1,\dotsc, i_m)$ a permutation of $\Nm^*$, eventually random, and, for all $t\in\Nm^*$, let $S_t=\{i_1,\dotsc,i_t\}$ and $S_0=\varnothing$. For example, $(i_1,\dotsc, i_m)$ can be the permutation ordering the $p$-values in increasing order and in that case $S_t$ becomes the set of indices of the $t$ smallest $p$-values. Assume that we want to compute all $\Vstar(S_t)$ for all $t\in\{ 0,\dotsc,m\}$, this is what we call the curve of confidence bounds indexed by $(i_1,\dotsc, i_m)$. @alg-vstar applied to compute $\Vstar(S_t)$ for a given $t$ has complexity $O(t|\cK|)$, so using it to sequentially compute the full curve has complexity $O\left(\sum_{t=0}^m t |\cK|\right)=O\left(m^2|\cK|\right)$. In this section, we present a new algorithm that computes the curve with a $O\left(m|\cK|\right)$ complexity. The algorithm will need that $\Rfam$ is complete, so if that is not the case we first need to complete $\Rfam$ following the Algorithm 2 of @MR4178188, which has a $O(m|\cK|)$ complexity. In the remainder of this section we assume that $\Rfam$ is complete.
+Let $(i_1,\dotsc, i_m)$ a permutation of $\Nm^*$, eventually random, and, for all $t\in\Nm^*$, let $S_t=\{i_1,\dotsc,i_t\}$ and $S_0=\varnothing$. For example, $(i_1,\dotsc, i_m)$ can be the permutation ordering the $p$-values in increasing order and in that case $S_t$ becomes the set of indices of the $t$ smallest $p$-values. Assume that we want to compute all $\Vstar(S_t)$ for all $t\in\{ 0,\dotsc,m\}$, this is what we call the curve of confidence bounds indexed by $(i_1,\dotsc, i_m)$. Applying @alg-vstar to compute $\Vstar(S_t)$ for a given $t$ has complexity $O(t|\cK|)$, so using it to sequentially compute the full curve has complexity $O\left(\sum_{t=0}^m t |\cK|\right)=O\left(m^2|\cK|\right)$. In this section, we present a new algorithm that computes the curve with a $O\left(m|\cK|\right)$ complexity. The algorithm will need that $\Rfam$ is complete, so if that is not the case we first need to complete $\Rfam$ following the Algorithm 2 of @MR4178188, which has a $O(m|\cK|)$ complexity. In the remainder of this section we assume that $\Rfam$ is complete.
 
 We first recall and introduce some notation. Recall that $\phi$ is the depth function inside of $\Rfam$, that $\mathfrak P \subseteq \mathcal P(\cK)$ is the set of subsets of $\cK$ that realize a partition, recall the important result stated by Equation \eqref{eq_vstar_Qpartition}, and that $\cK^h=\{ k\in\cK : \phi(k)=h  \}$ for all $1\leq h\leq H$ where $H=\max_{k\in\cK}\phi(k)$. For any $t\in\Nm^*$ and $1\leq h\leq H$, we denote by $\kth{t}{h}$ the element of $\cK^h$ such that $i_t\in R_{\kth{t}{h}}$ if it exists, and we denote by $h_{\max}(t)$ the highest $h$ such that $\kth{t}{h}$ exists.
 
@@ -441,7 +441,7 @@ We first recall and introduce some notation. Recall that $\phi$ is the depth fun
 
 ## Continuation of @exm-toy-forest and @exm-toy-leaves
 
-Assume that the reference family of @exm-toy-forest has been labeled as in @exm-toy-leaves and completed. Let $(i_1,\dotsc, i_{25})$ such that $i_1=7$, $i_2=1$ and $i_3=24$. Then for $t=1$, then $\kth{t}{1}=(1,5)$, $\kth{t}{2}=(2,3)$, $\kth{t}{3}=(3,3)$ and $h_{\max}(t)=H=3$. For $t=2$, then $\kth{t}{1}=(1,5)$, $\kth{t}{2}=(1,1)$, $\kth{t}{3}$ does not exist and $h_{\max}(t)=2$. For $t=3$, $\kth{t}{1}=(8,8)$, $\kth{t}{2}$ does not exist and $h_{\max}(t)=1$.
+Assume that the reference family of @exm-toy-forest has been labeled as in @exm-toy-leaves and completed. Let $(i_1,\dotsc, i_{25})$ such that $i_1=7$, $i_2=1$ and $i_3=24$. Then for $t=1$, $\kth{t}{1}=(1,5)$, $\kth{t}{2}=(2,3)$, $\kth{t}{3}=(3,3)$ and $h_{\max}(t)=H=3$. For $t=2$, $\kth{t}{1}=(1,5)$, $\kth{t}{2}=(1,1)$, $\kth{t}{3}$ does not exist and $h_{\max}(t)=2$. For $t=3$, $\kth{t}{1}=(8,8)$, $\kth{t}{2}$ does not exist and $h_{\max}(t)=1$.
 
 :::
 
@@ -502,7 +502,7 @@ Assume that the reference family of @exm-toy-forest has been labeled as in @exm-
 
 ::: {.proof}
 
-Content
+ $\square$
 :::
 
 ::: {#cor-easy-impl}
