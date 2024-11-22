@@ -177,6 +177,7 @@ Let $m=25$, $R_1 = \{1, \dotsc , 20 \}$, $R_2  =  \{1, 2  \}$, $R_3   =   \{3 , 
 :::{#fig-forest-exm}
 
 ``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
+%%| filename: ../figure-tikz/fig-tikz-01
 \begin{tikzpicture}[scale=0.85]
  \tikzstyle{quadri}=[circle,draw,text=black, thick]
  \tikzstyle{estun}=[->,>=latex,very thick]
@@ -215,6 +216,7 @@ For the reference family given in @exm-toy-forest, a partition of atoms is given
 :::{#fig-leaves-exm}
 
 ``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
+%%| filename: ../figure-tikz/fig-tikz-02
 \begin{tikzpicture}[scale=0.85]
  \tikzstyle{quadri}=[circle,draw,text=black,thick]
  \tikzstyle{estun}=[->,>=latex,very thick]
