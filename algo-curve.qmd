@@ -526,14 +526,15 @@ Furthermore,
 
 ::: {.proof}
 
+
  $\square$
 :::
 
-::: {#cor-easy-impl}
+<!---::: {#cor-easy-impl}
 
 ## Easy implementation
 
-:::
+:::-->
 
 ```pseudocode
 #| label: alg-curve
