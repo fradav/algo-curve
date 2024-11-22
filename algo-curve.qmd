@@ -475,7 +475,7 @@ Now we can finally present the new algorithm and the proof that it computes the 
         \If{$\eta^t_{k^{(t,h)}}<\zeta_k$}
           \State Pass
         \Else
-          \State $h^f_t \gets h$.
+          \State $h^f_t \gets h$ \Comment{final depth}
           \State $\mathcal{P}^t \gets\left( \mathcal{P}^{t-1}\setminus \{ k\in \mathcal{P}^{t-1} : R_k\subseteq R_{k^{(t,h^f_t)}} \}\right)\cup \{ k^{(t,h^f_t)} \}$
           \State $\mathcal{K}^-_t \gets \mathcal{K}^-_{t-1} \cup \{k^{(t,h^f_t)}\}$
           \State Break the loop
