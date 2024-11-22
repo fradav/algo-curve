@@ -272,7 +272,7 @@ Finally, that paper provides a polynomial algorithm to $V^*_{\Rfam}(S)$ for a si
 #| pdf-placement: "htb!"
 #| pdf-line-number: true
 \begin{algorithm}
-\caption{Computation of a given $\Vstar(S)$}
+\caption{Computation of a given $V^*_{\mathfrak{R}}(S)$}
 \begin{algorithmic}
 \Procedure{Vstar}{S, $\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$  with $\mathfrak{R}$ complete}
   \State $ H \gets \max_{k\in\mathcal{K}} \phi(k)  $ \Comment{maximum depth}
