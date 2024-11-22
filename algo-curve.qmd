@@ -506,7 +506,21 @@ The elements of $\cK_t$ index the regions of the forest that ``are above'' the r
 
 ## Fast curve computation
 
-
+Let any $t\in\Nm$. Then, $\cP^t\in\mathfrak P$, and for all $k\in\cK_t$, we have
+\begin{equation}
+\Vstar(S_t\cap R_k) = \eta_k^t
+\label{vstar_inter_Rk_equal_eta}
+\end{equation}
+and
+\begin{equation}
+\Vstar(S_t\cap R_k) = \sum_{\substack{k'\in \cP^t\\ R_{k'}\subseteq R_k}} \zeta_{k'}\wedge|S_t \cap R_{k'}|.
+\label{Pt_good_partition}
+\end{equation}
+Furthermore,
+\begin{equation}
+\Vstar(S_t) = \sum_{k\in\cK^1} \eta_k^t = \sum_{{k\in \cP^t}} \zeta_{k}\wedge|S_t \cap R_{k}|.
+\label{vstar_equal_sum_eta}
+\end{equation}
 
 :::
 
