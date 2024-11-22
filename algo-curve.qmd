@@ -527,6 +527,30 @@ The first equality of Equation \eqref{eq_vstar_equal_sum_eta} confirms that the 
 
 ::: {.proof}
 
+$\bullet$ Derivation of \eqref{eq_vstar_equal_sum_eta}.
+
+We first derive \eqref{eq_vstar_equal_sum_eta} from \eqref{eq_vstar_inter_Rk_equal_eta} and \eqref{eq_Pt_good_partition}. First note that for all $Q\in\mathfrak P$, 
+\begin{equation}
+Q=\bigcup_{k\in\cK^1}\{ k' \in Q : R_{k'}\subseteq R_k\}
+\label{eq_part_K1}
+\end{equation}
+and the union is disjoint. From \eqref{eq_vstar_Qpartition}, let $Q^*\in\mathfrak P$ such that $\Vstar(S_t) = \sum_{k'\in Q^*} \zeta_{k'}\wedge |S_t\cap R_{k'}|$. Then by \eqref{eq_part_K1},
+\begin{align}
+\Vstar(S_t) &= \sum_{k'\in Q^*} \zeta_{k'}\wedge |S_t\cap R_{k'}|\notag\\
+&=\sum_{k\in\cK^1}  \sum_{\substack{k'\in Q^*\\ R_{k'}\subseteq R_k}} \zeta_{k'}\wedge |S_t\cap R_{k'}|\notag \\
+&=\sum_{k\in\cK^1}  \sum_{\substack{k'\in Q^*\\ R_{k'}\subseteq R_k}} \zeta_{k'}\wedge |S_t\cap (R_{k}\cap R_{k'})| \notag\\
+&=\sum_{k\in\cK^1}  \sum_{k'\in Q^*} \zeta_{k'}\wedge |(S_t\cap R_{k})\cap R_{k'}| \label{eq_delicate} \\
+&\geq \sum_{k\in\cK^1} \Vstar(S_t\cap R_k),\label{eq_delicate_vstar}
+\end{align}
+where the equality in \eqref{eq_delicate} comes from the fact that if $R_{k'}\not\subseteq R_k$, then $R_{k'}\cap R_k=\varnothing$, that is, $R_{k}\subseteq R_{k'}$ is impossible because $k\in\mathcal K^1$. Furthermore, \eqref{eq_delicate_vstar} holds again by \eqref{eq_vstar_Qpartition}. 
+
+Because $\cK^1\subseteq\cK_t$, by \eqref{eq_Pt_good_partition}, $\Vstar(S_t\cap R_k) = \sum_{\substack{k'\in \cP^t\\ R_{k'}\subseteq R_k}} \zeta_{k'}\wedge|S_t \cap R_{k'}|$ for all $k\in\cK^1$. Then,
+\begin{align*}
+ \sum_{k\in\cK^1} \Vstar(S_t\cap R_k)&=  \sum_{k\in\cK^1}\sum_{\substack{k'\in \cP^t\\ R_{k'}\subseteq R_k}} \zeta_{k'}\wedge|S_t \cap R_{k'}|\\
+ &=\sum_{k\in\cP^t} \zeta_{k}\wedge |S_t\cap R_{k}| \text{ by \eqref{eq_part_K1}}\\
+ &\geq \Vstar(S_t) \text{ by \eqref{eq_vstar_Qpartition}}.\\
+\end{align*}
+So we proved that $\Vstar(S_t)= \sum_{k\in\cP^t} \zeta_{k}\wedge |S_t\cap R_{k}|= \sum_{k\in\cK^1} \Vstar(S_t\cap R_k)$ and finally $\Vstar(S_t)=\sum_{k\in\cK^1} \Vstar(S_t\cap R_k)= \sum_{k\in\cK^1}  \eta_k^t$ by \eqref{eq_vstar_inter_Rk_equal_eta}, again because $\cK^1\subseteq\cK_t$. Every equality in \eqref{eq_vstar_equal_sum_eta} is proven.
 
  $\square$
 :::
