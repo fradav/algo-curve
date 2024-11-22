@@ -445,6 +445,8 @@ Assume that the reference family of @exm-toy-forest has been labeled as in @exm-
 
 :::
 
+Now we can finally present the new algorithm and the proof that it computes the curve $(\Vstar(S_t))_{t\in\Nm}$. We present two versions of the algorithm (strictly equivalent): one very formal (@alg-formal-curve), to introduce additional notation used in the proof, and, later, one that is more akin to @alg-vstar and alg-pruning, that is, it reuses notation from step to step, for implementation and simplicity purposes (@alg-curve). 
+
 
 ```pseudocode
 #| label: alg-formal-curve
