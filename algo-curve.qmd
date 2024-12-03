@@ -572,14 +572,50 @@ $\bullet\bullet$ First case: $i_{t+1}\in\bigcup_{k\in\cK^-_{t}}R_k$.
 In this case, $\cP^{t+1}=\cP^t\in\mathfrak P$ and $\cK_{t+1}=\cK_t$. For any $k\in\cK_{t+1}$ such that $i_{t+1}\not\in R_k$ (or, equivalently, such that $S_{t+1}\cap R_k=S_t\cap R_k$),
 \begin{align*}
 \sum_{\substack{k'\in\cP^{t+1} \\ R_{k'}\subseteq R_k}} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}|&=\sum_{\substack{k'\in\cP^{t} \\ R_{k'}\subseteq R_k}} \zeta_{k'}\wedge |S_{t}\cap R_{k'}| \\
-&=V^*_{\Rfam}(S_t\cap R_k) \text{ by~\eqref{Pt_good_partition}}\\
-&=\eta_k^t \text{ by~\eqref{vstar_inter_Rk_equal_eta}}\\
+&=V^*_{\Rfam}(S_t\cap R_k) \text{ by~\eqref{eq_Pt_good_partition}}\\
+&=\eta_k^t \text{ by~\eqref{eq_vstar_inter_Rk_equal_eta}}\\
 &=\eta_k^{t+1}
 \end{align*}
 because $\eta_k^t=\eta_k^{t+1}$ for all $k\in\cK$. Furthermore $S_{t+1}\cap R_k=S_t\cap R_k$ so $V^*_{\Rfam}(S_{t+1}\cap R_k)=V^*_{\Rfam}(S_t\cap R_k)$. So everything is proved for such a $k$.
 
+Now we let $k\in\cK_{t+1}$ such that $i_{t+1}\in R_k$ or, equivalently, such that $R_{\bar k}\subseteq R_k$. We first need to show that $\zeta_{\bar k}\leq |S_t\cap R_{\bar k}|$, and for that we need to distinguish two subcases: if $\bar k$ has been added to $\cP^t$ during a previous step of the algorithm, of if not.
 
+$\bullet\bullet\bullet$ First subcase: $\bar k$ has never been added during the process of line 17.
 
+Then $\bar k\in\cP^0$ and $R_{\bar k}$ is an atom, so $i_{t+1}\in\bigcup_{k'\in\cK^-_{t}}R_{k'}$ implies that $R_{\bar k}\subseteq \bigcup_{k'\in\cK^-_{t}}R_{k'}$ (because of the forest structure). Let $k'_{\max}$ such that
+\begin{equation*}
+R_{k'_{\max}}=\max\{ R_{k'}\telque k'\in\cK^-_t, R_{\bar k}\subseteq R_{k'}  \}
+\end{equation*}
+(this a maximum for the inclusion relation, and it is well defined thanks to the forest structure). By reductio ad absurdum we show that $k'_{\max}=\bar k$. If that wasn't the case, by the joint construction of $\cP^t$ and $\cK^-_t$ during the algorithm we would have $k'_{\max}\in\cP^t$ and a contradiction with the fact that $\cP^t\in\mathfrak P$: we can't have both $\bar k\in\cP^t$ and $k'_{\max}\in\cP^t$ if they are distinct. So $k'_{\max}=\bar k$, so $\bar k\in  \cK^-_t $, but it cannot have been added to $ \cK^-_t $ during a previous step of the algorithm, otherwise it would have been added to $\cP^t$, too. Hence $\bar k\in \cK^-_0$ which means that $\zeta_{\bar k}=0$ and $\zeta_{\bar k}=0\leq |S_t\cap R_{\bar k}|$.
+
+$\bullet\bullet\bullet$ Second subcase: $\bar k$ has been added to $\cP^t$ at a previous step.
+
+Let $t'\leq t$ be this step. This means that $\bar k = \kth{t'}{h^f_{t'}}$ and that at that step $\eta^{t'}_{\bar k}=\zeta_{\bar k}$. Indeed, the if condition in line 13 failed so $\eta^{t'}_{\bar k}\geq\zeta_{\bar k}$, but for all $t''<t'$ we had $\eta^{t''}_{\bar k}\leq\zeta_{\bar k}$ which implies equality. Also $\bar k\in \cP^{t'}$ so $\bar k\in \cK_{t'}$ so we can write 
+\begin{align*}
+\zeta_{\bar k}&=\eta^{t'}_{\bar k}\\
+&=\Vstar(S_{t'}\cap R_{\bar k})  \text{ by~\eqref{eq_vstar_inter_Rk_equal_eta}} \\
+&\leq | S_{t'}\cap R_{\bar k} |\\
+&\leq  | S_{t}\cap R_{\bar k} |.\\
+\end{align*}
+
+This concludes the two subcases dichotomy: $\zeta_{\bar k}\leq |S_t\cap R_{\bar k}|$ and we can go back to our $k\in\cK_{t+1}$ such that $i_{t+1}\in R_k$ and $R_{\bar k}\subseteq R_k$.
+
+We write the following chain:
+\begin{align*}
+\Vstar(S_{t+1}\cap R_k)&\leq \sum_{\substack{k'\in\cP^{t}\\R_{k'}\subseteq R_k}} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}|\text{ by~\eqref{eq_ineq_both_cases} and }\cK_{t+1}\subseteq\cK_t\\
+&=\sum_{\substack{k'\in\cP^{t}\\R_{k'}\subseteq R_k\\ k'\neq\bar k}} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}| + \zeta_{\bar k}\wedge |S_{t+1}\cap R_{\bar k}| \\
+&=\sum_{\substack{k'\in\cP^{t}\\R_{k'}\subseteq R_k\\ k'\neq\bar k}} \zeta_{k'}\wedge |S_{t}\cap R_{k'}| + \zeta_{\bar k}\wedge( |S_{t}\cap R_{\bar k}| +1)\\
+&=\sum_{\substack{k'\in\cP^{t}\\R_{k'}\subseteq R_k\\ k'\neq\bar k}} \zeta_{k'}\wedge |S_{t}\cap R_{k'}| + \zeta_{\bar k}\wedge|S_{t}\cap R_{\bar k}|\text{ because $\zeta_{\bar k}\leq |S_t\cap R_{\bar k}|$}\\
+&=\sum_{\substack{k'\in\cP^{t}\\R_{k'}\subseteq R_k}} \zeta_{k'}\wedge |S_{t}\cap R_{k'}| \\
+&=\Vstar(S_t\cap R_k)  \text{ by~\eqref{eq_Pt_good_partition}} \\
+&= \eta_k^t  \text{ by~\eqref{eq_vstar_inter_Rk_equal_eta}} \\
+&= \eta_k^{t+1}.\\
+\end{align*}
+But on the other hand, $S_t\subseteq S_{t+1}$ and so \eqref{eq_vstar_Qpartition} also gives $\Vstar(S_t\cap R_k) \leq \Vstar(S_{t+1}\cap R_k)$ and so in the end we have the desired outcome:
+\begin{equation*}
+\Vstar(S_{t+1}\cap R_k) =  \eta_k^{t+1} =  \sum_{\substack{k'\in\cP^{t+1}\\R_{k'}\subseteq R_k}} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}| ,
+\end{equation*}
+which concludes this first case.
 
 
 $\square$
