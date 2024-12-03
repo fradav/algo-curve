@@ -733,7 +733,7 @@ For $t\in\{0,\dotsc, m-1 \}$, $V^*_{\Rfam}(S_{t+1})=V^*_{\Rfam}(S_{t})$ if $i_{t
 
 :::
 
-Finally, here is @alg-curve, the alternative version of @alg-formal-curve, written with practical implementation in mind rather than formalism of notation, and using @cor-easy-impl. It is easy to see that each step $t$ has a complexity in $O(|\cK|)$ hence the total complexity is in $O(m|\cK|)$. This is because, if the regions are carefully stocked in memory, especially if their bounds (in terms of hypothesis index) are stocked, then finding $\kth th$ has a complexity in $O(|\cK^h|)$ and checking if $i_t\in\bigcup_{k\in\cK^-_{t-1}}R_k$ has a complexity in $O(|\cK|)$.
+Finally, we present @alg-curve, the alternative version of @alg-formal-curve, written with practical implementation in mind rather than formalism of notation, and using @cor-easy-impl. It is easy to see that each step $t$ has a complexity in $O(|\cK|)$ hence the total complexity is in $O(m|\cK|)$. This is because, if the regions are carefully stocked in memory, especially if their bounds (in terms of hypothesis index) are stocked, then finding $\kth th$ has a complexity in $O(|\cK^h|)$ and checking if $i_t\in\bigcup_{k\in\cK^-_{t-1}}R_k$ has a complexity in $O(|\cK|)$.
 
 ```pseudocode
 #| label: alg-curve
