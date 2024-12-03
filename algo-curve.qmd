@@ -617,6 +617,108 @@ But on the other hand, $S_t\subseteq S_{t+1}$ and so \eqref{eq_vstar_Qpartition}
 \end{equation*}
 which concludes this first case.
 
+$\bullet\bullet$ Second case: $i_{t+1}\not\in\bigcup_{k\in\cK^-_{t}}R_k$.
+
+First note that $\cP^{t+1}\in\mathfrak P$ whether it came form the adjustment in line 17 or it stayed equal to $\cP^t$.
+
+Like in the first case, considering a $k\in\cK_{t+1}\subseteq \cK_t$ such that $i_{t+1}\not\in R_k$ is not problematic, because in that case $k$ is not visited at all by the algorithm at step $t+1$ : $\eta^{t+1}_k=\eta^{t}_k$, $\{k'\in\cP^{t+1}\telque R_{k'}\subseteq R_k\}=\{k'\in\cP^{t}\telque R_{k'}\subseteq R_k\}$, and for all $k'\in \cK$ such that $R_{k'}\subseteq R_k$, $S_{t+1}\cap R_{k'}=S_{t}\cap R_{k'}$. Hence, from 
+\begin{equation*}
+\Vstar(S_{t}\cap R_k) =  \eta_k^{t} =  \sum_{\substack{k'\in\cP^{t}\\R_{k'}\subseteq R_k}} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}| ,
+\end{equation*}
+we directly have
+\begin{equation*}
+\Vstar(S_{t+1}\cap R_k) =  \eta_k^{t+1} =  \sum_{\substack{k'\in\cP^{t+1}\\R_{k'}\subseteq R_k}} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}| .
+\end{equation*}
+
+First note that for all $k\in\cK_{t+1}$ such that $i_{t+1}\in R_k$, 
+\begin{equation*}
+\eta^{t+1}_k=\eta^t_k+1=\Vstar(S_t\cap R_k)+1=\sum_{\substack{k'\in \cP^t\\ R_{k'}\subseteq R_k}}\zeta_{k'}\wedge|S_t\cap R_{k'}|+1
+\end{equation*}
+by construction, by \eqref{eq_vstar_inter_Rk_equal_eta} and by \eqref{eq_Pt_good_partition}. Indeed, such a $k$ is equal to a $\kth{t+1}h$ with $h\leq h_{max}(t+1)$, and even $h\leq h^f_{t+1}$ if the latter exists.
+
+Also, similarly to the first case, for all $k\in\cK_{t+1}$ such that $i_{t+1}\in R_k$ (recall that this is equivalent to $R_{\bar k}\subseteq R_k$), we can write:
+\begin{align}
+\Vstar(S_{t+1}\cap R_k)&\leq \sum_{\substack{k'\in\cP^{t}\\R_{k'}\subseteq R_k}} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}| \text{ by \eqref{eq_ineq_both_cases} and }\cK_{t+1}\subseteq\cK_t\notag\\
+&=\sum_{\substack{k'\in\cP^{t}\\R_{k'}\subseteq R_k\\ k'\neq\bar k}} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}| + \zeta_{\bar k}\wedge |S_{t+1}\cap R_{\bar k}| \notag\\
+&=\sum_{\substack{k'\in\cP^{t}\\R_{k'}\subseteq R_k\\ k'\neq\bar k}} \zeta_{k'}\wedge |S_{t}\cap R_{k'}| + \zeta_{\bar k}\wedge( |S_{t}\cap R_{\bar k}| +1)\notag\\
+&\leq \sum_{\substack{k'\in\cP^{t}\\R_{k'}\subseteq R_k\\ k'\neq\bar k}} \zeta_{k'}\wedge |S_{t}\cap R_{k'}| + \zeta_{\bar k}\wedge|S_{t}\cap R_{\bar k}| +1\notag\\
+&=\sum_{\substack{k'\in\cP^{t}\\R_{k'}\subseteq R_k}} \zeta_{k'}\wedge |S_{t}\cap R_{k'}|  + 1\notag\\
+&=\Vstar(S_t\cap R_k) +1  \text{ by \eqref{eq_Pt_good_partition}}.\label{eq_ineq_}
+\end{align}
+
+Note that by the joint construction of $\cK^-_t$ and $\cP^t$ on lines 17 and 18, the fact that $i_{t+1}\not\in\bigcup_{k\in\cK^-_{t}}R_k$ implies that $\bar k$ is the index of an atom, so actually $h_{\max}(t+1)=\phi(\bar k)$, $\bar k = \kth{t+1}{\phi(\bar k)}$ and the $R_k$, $k\in\cK_{t}$, such that $R_{\bar k}\subseteq R_k$ are nested and are exactly indexed by the $\kth{t+1}{h}$, $1\leq h\leq \phi(\bar k)$. We now prove that for all of them, $\Vstar(S_{t+1}\cap R_k)\geq \Vstar(S_{t}\cap R_k)+1$, which will be true in particular for the ones that are in $\cK_{t+1}$, given that $\cK_{t+1}\subseteq \cK_t$. We do that by constructing some sets $A_h$ with good properties with a descending recursion on $h$, starting from $\phi(\bar k)$. We only give the first two steps of the construction, because every other step is exactly the same as the second one, which contains the recursive arguments. We go back to the real definition of $\Vstar$ to do so, for any $S\subseteq \Nm$:
+\begin{equation}
+\label{eq_Vstar_au_max} \Vstar(S)=\max_{\substack{A\subseteq \Nm\\\forall k'\in\cK, |A\cap R_{k'}|\leq \zeta_{k'}}} |A\cap S| =\max_{\substack{A\subseteq S\\\forall k'\in\cK, |A\cap R_{k'}|\leq \zeta_{k'}}} |A|  . 
+\end{equation}
+
+By \eqref{eq_Vstar_au_max}, we have that $\Vstar(S_t \cap R_{\kth{t+1}{\phi(\bar k)}})=|A_{\phi(\bar k)}|$ for a given $A_{\phi(\bar k)}\subseteq S_t \cap R_{\kth{t+1}{\phi(\bar k)}}$ and such that $|A_{\phi(\bar k)}\cap R_{k'}|\leq \zeta_{k'}$ for all $k'\in\cK$. Now for the second set, we construct $A_{\phi(\bar k)-1}$. Note that $\Vstar(S_t \cap R_{\kth{t+1}{\phi(\bar k)-1}})=|B|$ for some $B\subseteq S_t \cap R_{\kth{t+1}{\phi(\bar k)-1}}$ and such that $|B\cap R_{k'}|\leq \zeta_{k'}$ for all $k'\in\cK$. By reductio ad absurdum, if there are strictly less than $\Vstar(S_t \cap R_{\kth{t+1}{\phi(\bar k)-1}}) - \Vstar(S_t \cap R_{\kth{t+1}{\phi(\bar k)}})=|B|-|A_{\phi(\bar k)}|$ elements in $S_t\cap R_{\kth{t+1}{\phi(\bar k)-1}} \setminus S_t\cap R_{\kth{t+1}{\phi(\bar k)}}$, then $|B|+|S_t \cap R_{\kth{t+1}{\phi(\bar k)}}|-|S_t \cap R_{\kth{t+1}{\phi(\bar k)-1}}|>|A_{\phi(\bar k)}|=\Vstar(S_t \cap R_{\kth{t+1}{\phi(\bar k)}})$. Given that $B\cup (S_t\cap R_{\kth{t+1}{\phi(\bar k)}})\subseteq S_t \cap R_{\kth{t+1}{\phi(\bar k)-1}}$, this entails $|B\cap S_t\cap R_{\kth{t+1}{\phi(\bar k)}}| =|B|+|S_t \cap R_{\kth{t+1}{\phi(\bar k)}}| -| B\cup (S_t\cap R_{\kth{t+1}{\phi(\bar k)}})| > \Vstar(S_t \cap R_{\kth{t+1}{\phi(\bar k)}})$ which contradicts the maximality of $A_{\phi(\bar k)}$ in \eqref{eq_Vstar_au_max}. 
+
+So we construct $A_{\phi(\bar k)-1}$ by taking the disjoint union of $A_{\phi(\bar k)}$ and $\Vstar(S_t \cap R_{\kth{t+1}{\phi(\bar k)-1}}) - \Vstar(S_t \cap R_{\kth{t+1}{\phi(\bar k)}})$ elements of $S_t\cap R_{\kth{t+1}{\phi(\bar k)-1}} \setminus S_t\cap R_{\kth{t+1}{\phi(\bar k)}}$. We now establish the properties of $A_{\phi(\bar k)-1}$. First, $A_{\phi(\bar k)-1}\subseteq S_t \cap R_{\kth{t+1}{\phi(\bar k)-1}}$, and $|A_{\phi(\bar k)-1}|=\Vstar(S_t \cap R_{\kth{t+1}{\phi(\bar k)-1}})$. For all $k'\in\cK$ such that $R_{\kth{t+1}{\phi(\bar k)-1}} \cap R_{k'}=\varnothing$, we have $|A_{\phi(\bar k)-1}\cap R_{k'}|=0\leq \zeta_k'$. Furthermore,
+\begin{align*}
+|A_{\phi(\bar k)-1}\cap R_{   \kth{t+1}{\phi(\bar k)}   }|&=|A_{\phi(\bar k)}\cap R_{   \kth{t+1}{\phi(\bar k)}   }|\\
+&\leq \zeta_{ \kth{t+1}{\phi(\bar k)} }
+\end{align*}
+by construction of $A_{\phi(\bar k)}$. Finally, for all $k'$ such that $R_{\kth{t+1}{\phi(\bar k)-1}}\subseteq R_{k'}$, $|A_{\phi(\bar k)-1}\cap R_{k'}|=|A_{\phi(\bar k)-1}|=\Vstar(S_t \cap R_{\kth{t+1}{\phi(\bar k)-1}})=|B|$ with the previously defined $B$, in particular $|B\cap R_{k'}|\leq \zeta_{k'}$, but given that $B\subseteq S_t \cap R_{\kth{t+1}{\phi(\bar k)-1}}$, $|B\cap R_{k'}|=|B|$. Wrapping all those equalities, it comes that $|A_{\phi(\bar k)-1}\cap R_{k'}|\leq \zeta_{k'}$. In the end, $|A_{\phi(\bar k)-1}\cap R_{k'}|\leq \zeta_{k'}$ for all $k'\in\cK$, so $A_{\phi(\bar k)-1}$ realizes the maximum in \eqref{eq_Vstar_au_max} for $S_t \cap R_{\kth{t+1}{\phi(\bar k)-1}}$.
+
+By applying exactly the same method, we recursively construct a non-increasing sequence $A_{\phi(\bar k)}\subseteq\dotsb\subseteq A_1$ such that for all $\ell\in\{1,\dotsc, \phi(\bar k)\}$ and $k'\in\cK$, $A_\ell\subseteq S_t\cap R_{\kth{t+1}{\ell}}$, $\Vstar(S_t\cap R_{\kth{t+1}{\ell}})=|A_\ell|$, and $|A_\ell\cap R_{k'}|\leq \zeta_{k'}$. Furthermore for $\ell'>\ell$, $A_{\ell}\setminus A_{\ell'}\subseteq S_t\cap R_{\kth{t+1}{\ell}}\setminus S_t\cap R_{\kth{t+1}{\ell'}}$. Also note that the fact that $i_{t+1}\not\in\bigcup_{k\in\cK^-_{t}}R_k$ implies that $\eta^t_{\kth{t+1}{\ell}}<\zeta_{\kth{t+1}{\ell}}$ for all $\ell\in\{1,\dotsc, \phi(\bar k)\}$. So by \eqref{eq_vstar_inter_Rk_equal_eta}, $|A_\ell|<\zeta_{\kth{t+1}{\ell}}$.
+
+Let, for any $\ell\in\{1,\dotsc, \phi(\bar k)\}$, $\widetilde A_\ell=A_\ell \cup \{ i_{t+1}\}$. Given that $A_\ell\subseteq S_t\cap R_{\kth{t+1}{\ell}}$ and that $i_{t+1}\in S_{t+1}\setminus S_t$, $\widetilde A_\ell\subseteq S_{t+1}\cap R_{\kth{t+1}{\ell}}$, $|\widetilde A_\ell|=| A_\ell|+1$, and for all $\ell'\in\{1,\dotsc, \phi(\bar k)\}$, $|\widetilde A_\ell \cap R_{\kth{t+1}{\ell'}} |=| A_\ell\cap R_{\kth{t+1}{\ell'}}|+1$. Note that if, furthermore, $\ell\geq \ell'$, then $A_\ell\subseteq A_{\ell'}$, so
+\begin{align*}
+|\widetilde A_\ell \cap R_{\kth{t+1}{\ell'}} |&=| A_\ell\cap R_{\kth{t+1}{\ell'}}|+1\\
+&\leq | A_{\ell'}\cap R_{\kth{t+1}{\ell'}}|+1\\
+&= | A_{\ell'}|+1\\
+&<\zeta_{\kth{t+1}{\ell'}}+1.\\
+\end{align*}
+On the contrary, if $\ell< \ell'$, we write that
+\begin{align*}
+|\widetilde A_\ell \cap R_{\kth{t+1}{\ell'}} |&=| A_\ell\cap R_{\kth{t+1}{\ell'}}|+1\\
+&= | (A_{\ell}\setminus A_{\ell'}) \cap R_{\kth{t+1}{\ell'}}   | + | A_{\ell'}\cap R_{\kth{t+1}{\ell'}}|+1\\
+&<  0 +  \zeta_{\kth{t+1}{\ell'}} +1,
+\end{align*}
+because $A_{\ell}\setminus A_{\ell'} \subseteq   R_{\kth{t+1}{\ell}}\setminus  R_{\kth{t+1}{\ell'}}$ hence $(A_{\ell}\setminus A_{\ell'}) \cap R_{\kth{t+1}{\ell'}}  =\varnothing$. In both cases, $|\widetilde A_\ell \cap R_{\kth{t+1}{\ell'}} |< \zeta_{\kth{t+1}{\ell'}} +1$ so $|\widetilde A_\ell \cap R_{\kth{t+1}{\ell'}} |\leq \zeta_{\kth{t+1}{\ell'}}$. Additionally, for all $k'\in\cK$ such that $i_{t+1}\not\in R_{k'}$,  $|\widetilde A_\ell \cap R_{k'} |=| A_\ell \cap R_{k'} |\leq \zeta_{k'}$. 
+
+In the end, $|\widetilde A_\ell \cap R_{k'} |\leq \zeta_{k'}$ for all $k'\in\cK$, so
+\begin{align*}
+\Vstar( S_{t+1}\cap R_{\kth{t+1}{\ell}})&\geq | \widetilde A_\ell | \text{ by \eqref{eq_Vstar_au_max}}\\
+&=  |  A_\ell | +1\\
+&= \Vstar( S_{t}\cap R_{\kth{t+1}{\ell}}) +1.
+\end{align*}
+So, as we wanted, $\Vstar(S_{t+1}\cap R_k)\geq \Vstar(S_{t}\cap R_k)+1$ for all $k\in\cK_{t}$ such that $i_{t+1}\in R_k$ and so for all such $k$ that are in $\cK_{t+1}$. So every inequality in \eqref{eq_ineq_} becomes an equality and we have proven that 
+\begin{equation*}
+\Vstar(S_{t+1}\cap R_k) = \Vstar(S_{t}\cap R_k)+1 =\eta^t_k+1= \eta^{t+1}_k,
+\end{equation*}
+that is, \eqref{eq_vstar_inter_Rk_equal_eta} is true at $t+1$.
+Looking at the first line of \eqref{eq_ineq_} , we also proved that
+\begin{equation}
+\Vstar(S_{t+1}\cap R_k) =  \sum_{\substack{k'\in\cP^{t}\\R_{k'}\subseteq R_k}} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}| . \label{eq_Pt_instead}
+\end{equation}
+The only thing left to prove is that \eqref{eq_Pt_instead} is also true with $\cP^{t+1}$ instead of $\cP^{t}$, that is, \eqref{eq_Pt_good_partition} also holds at $t+1$. If $h^f_{t+1}$ does not exist, meaning that we didn't break the loop, $\cP^{t+1}=\cP^t$ so there is nothing to prove.
+
+Now assume that $h^f_{t+1}$ exists. So 
+\begin{equation*}
+\cP^{t+1}=\left(\cP^t \setminus\{k\in\cP^t, R_k\subseteq R_{  \kth {t+1}{h^f_{t+1}}   }   \}  \right)\cup \{ \kth {t+1}{h^f_{t+1}} \}.
+\end{equation*}
+Note that for all $k\in\cK_{t+1}$ such that $i_{t+1}\in R_k$, we necessarily have $R_{  \kth {t+1}{h^f_{t+1}} }\subseteq R_k$, because $\kth {t+1}{h^f_{t+1}}\in \cP^{t+1}$. Also note that for $k'\in\cP^t$, we either have  $R_{k'}\cap  R_{  \kth {t+1}{h^f_{t+1}} } = \varnothing$ or  $R_{k'}\subseteq  R_{  \kth {t+1}{h^f_{t+1}}}$, by the operation made in line 17. So we can split
+\begin{equation*}
+ \sum_{\substack{k'\in\cP^{t}\\R_{k'}\subseteq R_k}} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}| =  \sum_{\substack{k'\in\cP^{t}\\R_{k'}\cap  R_{  \kth {t+1}{h^f_{t+1}} } = \varnothing \\R_{k'}\subseteq R_k }} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}|  \;   + \sum_{\substack{k'\in\cP^{t}\\R_{k'}\subseteq  R_{  \kth {t+1}{h^f_{t+1}}}}} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}| 
+\end{equation*}
+and
+\begin{align*}
+ \sum_{\substack{k'\in\cP^{t+1}\\R_{k'}\subseteq R_k}} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}| &=  \sum_{\substack{k'\in\cP^{t+1}\\R_{k'}\cap  R_{  \kth {t+1}{h^f_{t+1}} } = \varnothing \\R_{k'}\subseteq R_k }} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}| +  \zeta_{ \kth {t+1}{h^f_{t+1}}}\wedge |S_{t+1}\cap R_{ \kth {t+1}{h^f_{t+1}}}|\\ 
+ &=  \sum_{\substack{k'\in\cP^{t}\\R_{k'}\cap  R_{  \kth {t+1}{h^f_{t+1}} } = \varnothing \\R_{k'}\subseteq R_k }} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}| +  \zeta_{ \kth {t+1}{h^f_{t+1}}}\wedge |S_{t+1}\cap R_{ \kth {t+1}{h^f_{t+1}}}|.
+\end{align*}
+So, we just need to prove that 
+\begin{equation*}
+\sum_{\substack{k'\in\cP^{t}\\R_{k'}\subseteq  R_{  \kth {t+1}{h^f_{t+1}}} }} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}| =  \zeta_{ \kth {t+1}{h^f_{t+1}}}\wedge |S_{t+1}\cap R_{ \kth {t+1}{h^f_{t+1}}}|.
+\end{equation*}
+Interestingly, this does not depend  on $k$ anymore. By \eqref{eq_Pt_instead}, the left-hand side  is equal to $\Vstar( S_{t+1}\cap  R_{  \kth {t+1}{h^f_{t+1}}  } )$. Because we are breaking the loop at step  $h^f_{t+1}$, $\eta^{t+1}_{\kth {t+1}{h^f_{t+1}} }= \zeta_{ \kth {t+1}{h^f_{t+1}}}$. Finally, because \eqref{eq_vstar_inter_Rk_equal_eta} holds at $t+1$, $\eta^{t+1}_{\kth {t+1}{h^f_{t+1}} }=\Vstar( S_{t+1}\cap  R_{  \kth {t+1}{h^f_{t+1}}  } )$. Wrapping all this assertions:
+\begin{align*}
+\sum_{\substack{k'\in\cP^{t}\\R_{k'}\subseteq  R_{  \kth {t+1}{h^f_{t+1}}} }} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}| &= \Vstar( S_{t+1}\cap  R_{  \kth {t+1}{h^f_{t+1}}  } )\\
+&=\Vstar( S_{t+1}\cap  R_{  \kth {t+1}{h^f_{t+1}}  } )\wedge  |S_{t+1}\cap R_{ \kth {t+1}{h^f_{t+1}}}|\\
+&=\eta^{t+1}_{\kth {t+1}{h^f_{t+1}} }\wedge  |S_{t+1}\cap R_{ \kth {t+1}{h^f_{t+1}}}|\\
+&=  \zeta_{ \kth {t+1}{h^f_{t+1}}}\wedge |S_{t+1}\cap R_{ \kth {t+1}{h^f_{t+1}}}|,
+\end{align*}
+which achieves the second case and so the proof.
 
 $\square$
 :::
