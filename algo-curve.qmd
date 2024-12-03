@@ -586,7 +586,7 @@ Then $\bar k\in\cP^0$ and $R_{\bar k}$ is an atom, so $i_{t+1}\in\bigcup_{k'\in\
 \begin{equation*}
 R_{k'_{\max}}=\max\{ R_{k'}\telque k'\in\cK^-_t, R_{\bar k}\subseteq R_{k'}  \}
 \end{equation*}
-(this a maximum for the inclusion relation, and it is well defined thanks to the forest structure). By reductio ad absurdum we show that $k'_{\max}=\bar k$. If that wasn't the case, by the joint construction of $\cP^t$ and $\cK^-_t$ during the algorithm we would have $k'_{\max}\in\cP^t$ and a contradiction with the fact that $\cP^t\in\mathfrak P$: we can't have both $\bar k\in\cP^t$ and $k'_{\max}\in\cP^t$ if they are distinct. So $k'_{\max}=\bar k$, so $\bar k\in  \cK^-_t $, but it cannot have been added to $ \cK^-_t $ during a previous step of the algorithm, otherwise it would have been added to $\cP^t$, too. Hence $\bar k\in \cK^-_0$ which means that $\zeta_{\bar k}=0$ and $\zeta_{\bar k}=0\leq |S_t\cap R_{\bar k}|$.
+(this a maximum for the inclusion relation, and it is well defined thanks to the forest structure). By reductio ad absurdum we show that $k'_{\max}=\bar k$. If that wasn't the case, by the joint construction of $\cP^t$ and $\cK^-_t$ during the algorithm we would have $k'_{\max}\in\cP^t$ and a contradiction with the fact that $\cP^t\in\mathfrak P$: we can't have both $\bar k\in\cP^t$ and $k'_{\max}\in\cP^t$ if they are distinct. So $k'_{\max}=\bar k$, so $\bar k\in  \cK^-_t$, but it cannot have been added to $\cK^-_t$ during a previous step of the algorithm, otherwise it would have been added to $\cP^t$, too. Hence $\bar k\in \cK^-_0$ which means that $\zeta_{\bar k}=0$ and $\zeta_{\bar k}=0\leq |S_t\cap R_{\bar k}|$.
 
 $\bullet\bullet\bullet$ Second subcase: $\bar k$ has been added to $\cP^t$ at a previous step.
 
