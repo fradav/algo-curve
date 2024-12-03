@@ -566,7 +566,22 @@ Indeed, by \eqref{eq_vstar_Qpartition},
 \end{align*}
 For any $k'\in\cP^{t}$, we have either $R_{k'}\cap R_k=\varnothing$, in which case $|S_{t+1}\cap R_k \cap R_{k'}|=0$, either $R_{k'}\subseteq R_k$, in which case $|S_{t+1}\cap R_k \cap R_{k'}|=|S_{t+1} \cap R_{k'}|$, but $R_{k}\subsetneq R_{k'}$ is impossible. Indeed, by definition of $\cK_t$, there exists $\tilde k\in \cP^t$ such that $R_{\tilde k}\subseteq R_k$, so $R_{k}\subsetneq R_{k'}$ would entail $R_{\tilde k}\subsetneq R_{k'}$ which is impossible since $k', \tilde k\in \cP^t\in\mathfrak P$ and so $R_{\tilde k}$ and $R_{k'}$ are part of a partition of $\Nm^*$. This gives \eqref{eq_ineq_both_cases}.
 
- $\square$
+$\bullet\bullet$ First case: $i_{t+1}\in\bigcup_{k\in\cK^-_{t}}R_k$.
+
+In this case, $\cP^{t+1}=\cP^t\in\mathfrak P$ and $\cK_{t+1}=\cK_t$. For any $k\in\cK_{t+1}$ such that $i_{t+1}\not\in R_k$ (or, equivalently, such that $S_{t+1}\cap R_k=S_t\cap R_k$),
+\begin{align*}
+\sum_{\substack{k'\in\cP^{t+1} \\ R_{k'}\subseteq R_k}} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}|&=\sum_{\substack{k'\in\cP^{t} \\ R_{k'}\subseteq R_k}} \zeta_{k'}\wedge |S_{t}\cap R_{k'}| \\
+&=V^*_{\Rfam}(S_t\cap R_k) \text{ by~\eqref{Pt_good_partition}}\\
+&=\eta_k^t \text{ by~\eqref{vstar_inter_Rk_equal_eta}}\\
+&=\eta_k^{t+1}
+\end{align*}
+because $\eta_k^t=\eta_k^{t+1}$ for all $k\in\cK$. Furthermore $S_{t+1}\cap R_k=S_t\cap R_k$ so $V^*_{\Rfam}(S_{t+1}\cap R_k)=V^*_{\Rfam}(S_t\cap R_k)$. So everything is proved for such a $k$.
+
+
+
+
+
+$\square$
 :::
 
 <!---::: {#cor-easy-impl}
