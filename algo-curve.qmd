@@ -723,11 +723,17 @@ which achieves the second case and so the proof.
 $\square$
 :::
 
-<!---::: {#cor-easy-impl}
+We deduce from the proof the following light corollary, that is useful for the implementation, because it makes it useless to compute $\cK^1$. It justifies the line 19 of @alg-curve.
+
+::: {#cor-easy-impl}
 
 ## Easy implementation
 
-:::-->
+For $t\in\{0,\dotsc, m-1 \}$, $V^*_{\Rfam}(S_{t+1})=V^*_{\Rfam}(S_{t})$ if $i_{t+1}\in \bigcup_{k\in\cK^-_t}R_k$, and  $V^*_{\Rfam}(S_{t+1})=V^*_{\Rfam}(S_{t}) + 1$ if not.
+
+:::
+
+Finally, here is @alg-curve, the alternative version of @alg-curve-formal, written more with practical implementation in mind than formalism of notation, and using @cor-easy-impl. It is easy to see that each step $t$ has a complexity in $O(|\cK|)$ hence the total complexity is in $O(m|\cK|)$. This is because, if the regions are carefully stocked in memory, especially if their bounds (in terms of hypothesis index) are stocked, then finding $\kth th$ has a complexity in $O(|\cK^h|)$ and checking if $i_t\in\bigcup_{k\in\cK^-_{t-1}}R_k$ has a complexity in $O(|\cK|)$.
 
 ```pseudocode
 #| label: alg-curve
