@@ -782,6 +782,7 @@ The functions `dyadic.from.leaf_list`, `dyadic.from.window.size`, and `dyadic.fr
 
 # Numerical experiments {#sec-numeric}
 
+In this Section, we present some numerical experiments aiming to demonstrate the impact of the pruning of @alg-pruning (with and without the optimization of the `delete.gaps` option mentioned in @sec-implementation) and of the fast @alg-curve, in terms of computation time, compared to the only previously available method to compute a curve of confidence bounds. As mentioned in @sec-forest-structure and @sec-implementation, this naive method simply consisted in a `for` loop repeatedly applying @alg-vstar.
 # Conclusion
 
 <!--- future work : changer le stockage des données C leaf_list en qq chose de meilleur, plus user friendly ?
