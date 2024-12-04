@@ -55,12 +55,12 @@ for (i in 1:2){
                            fast.pruned.no.gaps = curve.V.star.forest.fast(perm, pruned.no.gaps$C, pruned.no.gaps$ZL, leaf_list, is.pruned = TRUE),
                            times = n_repl, check = "equal")
   write.csv(mbench, paste0("benchmark_0", i, ".csv"), row.names = F)
-  loaded <- read.csv("benchmark_01.csv")
+  loaded <- read.csv(paste0("benchmark_0", i, ".csv"))
   class(loaded) <- c("microbenchmark", class(loaded))
   attr(loaded, "unit") <- "t"
-  # print(loaded)
-  # boxplot(loaded)
+  # # print(loaded)
+  # # boxplot(loaded)
   sum <- summary(loaded, unit="s")
   sum <- sum[c(4, 5, 6, 1, 2, 3), ]
-  sum
+  print(sum)
 }
