@@ -52,7 +52,8 @@ write.csv(mbench, "benchmark_01.csv", row.names = F)
 loaded <- read.csv("benchmark_01.csv")
 class(loaded) <- c("microbenchmark", class(loaded))
 attr(loaded, "unit") <- "t"
-print(loaded)
-boxplot(loaded)
-summary(loaded, unit="s")
-
+# print(loaded)
+# boxplot(loaded)
+sum <- summary(loaded, unit="s")
+sum <- sum[c(4, 5, 6, 1, 2, 3), ]
+sum
