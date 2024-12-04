@@ -3,97 +3,42 @@ library(microbenchmark)
 
 set.seed(12)
 
-#########################################################
-################ FIRST EXAMPLE
-#########################################################
-m <- 16
-example <- dyadic.from.height(m, 3, 2)
-leaf_list <- example$leaf_list
-C <- example$C
-pval <- runif(n = m)
-alpha <- 0.05
-method <- zeta.HB
-pval[13:16] <- 1e-15
-ZL <- zetas.tree(C, leaf_list, method, pval, alpha, refine = TRUE, verbose = FALSE)
+get_groups <- function(list_groups, leaf_list){
+  res <- list()
+  for (group in list_groups){
+    res <- c(res, list(leaf_list[[group[1]]][1]:rev(leaf_list[[group[2]]])[1]))
+  }
+  return(list(res = res, total = unlist(res)))
+}
 
-print("The pvalues are:")
-print(pval)
-print("The zetas are:")
-print(ZL)
-
-perm <- 1:m
-
-pruned <- pruning(C, ZL, leaf_list, prune.leafs = FALSE)
-
-print("Comparing execution times:")
-mbench <- microbenchmark(naive.not.pruned = curve.V.star.forest.naive(perm, C, ZL, leaf_list),
-												 naive.pruned = curve.V.star.forest.naive(perm, pruned$C, pruned$ZL, leaf_list),
-												 fast.not.pruned = curve.V.star.forest.fast(perm, C, ZL, leaf_list),
-												 fast.pruned = curve.V.star.forest.fast(perm, pruned$C, pruned$ZL, leaf_list, is.pruned = TRUE),
-												 times=10, check="equal")
-print(mbench)
-
-perm <- m:1
-
-#########################################################
-################ SECOND EXAMPLE
-#########################################################
-m <- 20
-C <- list(
-	list(c(2, 5), c(8, 15), c(16, 19)),
-	list(c(3, 5), c(8, 10), c(12, 15), c(16, 16), c(17, 19)),
-	list(c(4, 5), c(8, 9), c(10, 10), c(12, 12), c(13, 15), c(17, 17), c(18, 19)),
-	list(c(8, 8), c(9, 9), c(13, 13), c(14, 15), c(18, 18), c(19, 19))
-)
-ZL <- list(
-	c(4, 8, 4),
-	c(3, 3, 4, 1, 3),
-	c(2, 2, 1, 1, 2, 1, 2),
-	c(1, 1, 1, 2, 1, 1)
-)
-leaf_list <- as.list(1:m)
-completed <- forest.completion(C, ZL, leaf_list)
-C <- completed$C
-ZL <- completed$ZL
-
-print("The zetas are:")
-print(ZL)
-
-perm <- 1:m
-
-pruned <- pruning(C, ZL, leaf_list, prune.leafs = FALSE)
-
-print("Comparing execution times:")
-mbench <- microbenchmark(naive.not.pruned = curve.V.star.forest.naive(perm, C, ZL, leaf_list),
-												 naive.pruned = curve.V.star.forest.naive(perm, pruned$C, pruned$ZL, leaf_list),
-												 fast.not.pruned = curve.V.star.forest.fast(perm, C, ZL, leaf_list),
-												 fast.pruned = curve.V.star.forest.fast(perm, pruned$C, pruned$ZL, leaf_list, is.pruned = TRUE),
-												 times=10, check="equal")
-print(mbench)
-
-
-#########################################################
-################ THIRD EXAMPLE
-#########################################################
 pow <- 10
 m <- 2 ^ pow
 example <- dyadic.from.height(m, pow, 2)
 leaf_list <- example$leaf_list
 C <- example$C
-pval <- runif(n = m)
+signal <- 4
+mu <- rep(0, m)
+H1 <- get_groups(example$C[[6]][c(1, 5, 9, 10)], leaf_list)$total
+mu[H1] <- signal
+
+pval <- 1 - pnorm(mu + rnorm(n = m))
 alpha <- 0.05
-method <- zeta.trivial
+method <- zeta.DKWM
+# method <- zeta.trivial
 ZL <- zetas.tree(C, leaf_list, method, pval, alpha, refine = TRUE, verbose = FALSE)
 
-print("The pvalues are:")
-print(pval)
-print("The zetas are:")
-print(ZL)
-
-perm <- 1:m
+# print("The pvalues are:")
+# print(pval)
+# print("The zetas are:")
+# print(ZL)
 
 pruned <- pruning(C, ZL, leaf_list, prune.leafs = FALSE)
 pruned.no.gaps <- pruning(C, ZL, leaf_list, prune.leafs = FALSE, delete.gaps = TRUE)
+
+print(nb.elements(C))
+print(nb.elements(pruned.no.gaps$C))
+
+perm <- 1:m
 
 print("Comparing execution times:")
 mbench <- microbenchmark(naive.not.pruned = curve.V.star.forest.naive(perm, C, ZL, leaf_list),
@@ -102,5 +47,12 @@ mbench <- microbenchmark(naive.not.pruned = curve.V.star.forest.naive(perm, C, Z
                          fast.not.pruned = curve.V.star.forest.fast(perm, C, ZL, leaf_list),
                          fast.pruned = curve.V.star.forest.fast(perm, pruned$C, pruned$ZL, leaf_list, is.pruned = TRUE),
                          fast.pruned.no.gaps = curve.V.star.forest.fast(perm, pruned.no.gaps$C, pruned.no.gaps$ZL, leaf_list, is.pruned = TRUE),
-                         times=10, check="equal")
-print(mbench)
+                         times = 2, check = "equal")
+write.csv(mbench, "benchmark_01.csv", row.names = F)
+loaded <- read.csv("benchmark_01.csv")
+class(loaded) <- c("microbenchmark", class(loaded))
+attr(loaded, "unit") <- "t"
+print(loaded)
+boxplot(loaded)
+summary(loaded, unit="s")
+
