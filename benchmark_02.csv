@@ -1,0 +1,7 @@
+"expr","time"
+"naive.pruned.no.gaps",3458594811
+"naive.not.pruned",3885417890
+"naive.pruned",3504230845
+"fast.not.pruned",139264372
+"fast.pruned",97801933
+"fast.pruned.no.gaps",95999860
