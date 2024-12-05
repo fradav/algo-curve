@@ -1,5 +1,13 @@
+#!/usr/bin/env Rscript
 library(sanssouci)
 library(microbenchmark)
+
+args = commandArgs(trailingOnly=TRUE)
+if (length(args) == 0){
+  n_repl <- 1
+} else {
+  n_repl <- args[1]
+}
 
 set.seed(12)
 
@@ -10,8 +18,6 @@ get_groups <- function(list_groups, leaf_list){
   }
   return(list(res = res, total = unlist(res)))
 }
-
-n_repl <- 10
 
 pow <- 10
 m <- 2 ^ pow
@@ -30,7 +36,7 @@ methods <- c(zeta.DKWM, zeta.trivial)
 
 for (i in 1:2){
   
-  method <- methods[i]
+  method <- methods[[i]]
   ZL <- zetas.tree(C, leaf_list, method, pval, alpha, refine = TRUE, verbose = FALSE)
   
   # print("The pvalues are:")
@@ -55,12 +61,4 @@ for (i in 1:2){
                            fast.pruned.no.gaps = curve.V.star.forest.fast(perm, pruned.no.gaps$C, pruned.no.gaps$ZL, leaf_list, is.pruned = TRUE),
                            times = n_repl, check = "equal")
   write.csv(mbench, paste0("benchmark_0", i, ".csv"), row.names = F)
-  loaded <- read.csv(paste0("benchmark_0", i, ".csv"))
-  class(loaded) <- c("microbenchmark", class(loaded))
-  attr(loaded, "unit") <- "t"
-  # # print(loaded)
-  # # boxplot(loaded)
-  sum <- summary(loaded, unit="s")
-  sum <- sum[c(4, 5, 6, 1, 2, 3), ]
-  print(sum)
 }
