@@ -20,7 +20,7 @@ get_groups <- function(list_groups, leaf_list){
 }
 
 pow <- 10
-m <- 2 ^ pow
+m <- (2 ^ pow) * 10
 example <- dyadic.from.height(m, pow, 2)
 leaf_list <- example$leaf_list
 C <- example$C
@@ -60,5 +60,5 @@ for (i in 1:2){
                            fast.pruned = curve.V.star.forest.fast(perm, pruned$C, pruned$ZL, leaf_list, is.pruned = TRUE),
                            fast.pruned.no.gaps = curve.V.star.forest.fast(perm, pruned.no.gaps$C, pruned.no.gaps$ZL, leaf_list, is.pruned = TRUE),
                            times = n_repl, check = "equal")
-  write.csv(mbench, paste0("benchmark_0", i, ".csv"), row.names = F)
+  write.csv(mbench, paste0("benchmark_0", i + 2, ".csv"), row.names = F)
 }
