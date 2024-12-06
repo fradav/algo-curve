@@ -555,7 +555,7 @@ So we proved that $\Vstar(S_t)= \sum_{k\in\cP^t} \zeta_{k}\wedge |S_t\cap R_{k}|
 
 $\bullet$ Proof of \eqref{eq_vstar_inter_Rk_equal_eta} and \eqref{eq_Pt_good_partition}.
 
-We show the remainder of the statements by strong recursion over $t$. We have $\cP^0\in\mathfrak P$ by definition, and given that $S_0=\varnothing$ and $\eta^0_k=0$ for all $k\in\cK$ (recall that $\cK_0=\cK$), everything is equal to 0 in \eqref{eq_vstar_inter_Rk_equal_eta} and \eqref{eq_Pt_good_partition}.
+We show the remainder of the statements by a strong recursion over $t$. We have $\cP^0\in\mathfrak P$ by definition, and given that $S_0=\varnothing$ and $\eta^0_k=0$ for all $k\in\cK$ (recall that $\cK_0=\cK$), everything is equal to 0 in \eqref{eq_vstar_inter_Rk_equal_eta} and \eqref{eq_Pt_good_partition}.
 
 So we let $t\in\{ 0,\dotsc,m-1\}$, and assume that $\cP^{t'}\in\mathfrak P$ and that \eqref{eq_vstar_inter_Rk_equal_eta} and \eqref{eq_Pt_good_partition} hold for all $t'\leq t$. In all the following, $\bar k$ is the element of $\cP^t$ such that $i_{t+1}\in R_{\bar k}$. We will distinguish two cases: if $i_{t+1}\in\bigcup_{k\in\cK^-_{t}}R_k$ or not. First we show an inequality that will be used in both cases. We have, for all $k\in\cK_t$,
 \begin{align}
@@ -796,7 +796,7 @@ The functions `dyadic.from.leaf_list`, `dyadic.from.window.size`, and `dyadic.fr
 
 In this Section, we present some numerical experiments aiming to demonstrate the impact of the pruning of @alg-pruning (using the `delete.gaps` option mentioned in @sec-implementation) and of the fast @alg-curve, in terms of computation time, compared to the only previously available method to compute a curve of confidence bounds. As mentioned in @sec-forest-structure and @sec-implementation, this naive method simply consisted in a `for` loop repeatedly applying @alg-vstar.
 
-To compare the computation time, we use the `R` package `microbenchmark` version 1.5.0 [@Mersmann:2024aa] with `R` version 4.4.0 (2024-04-24), on a MacBook Air M1 (2020) running macOS 15.1.1. The package `microbenchmark` allows to run code snippets a given number `n_repl` of times, and to compute summary statistics on the computation time.
+To compare the computation time, we use the `R` package `microbenchmark` version 1.5.0 [@Mersmann:2024aa] with `R` version 4.4.0 (2024-04-24) and `sanssouci` version 0.13.0, on a MacBook Air M1 (2020) running macOS 15.1.1. The package `microbenchmark` allows to run code snippets a given number `n_repl` of times, and to compute summary statistics on the computation time.
 
 Four scenarios are studied, all based on a common setting which we first describe.
 
