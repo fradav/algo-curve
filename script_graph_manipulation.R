@@ -1,9 +1,9 @@
-#!/usr/bin/env Rscript
+#! /usr/bin/env Rscript
 library(microbenchmark)
 
 def_mar <- c(5, 4, 4, 2) + 0.1
 
-i <- 1
+i <- 2
 unit <- "s"
 
 loaded <- read.csv(paste0("benchmark_0", i, ".csv"))
@@ -12,7 +12,7 @@ loaded$expr <- factor(loaded$expr, levels = c("naive.not.pruned",
                                               "naive.pruned", 
                                               # "naive.pruned.no.gaps",
                                               "fast.not.pruned",
-                                              "fast.pruned",
+                                              "fast.pruned"
                                               # "fast.pruned.no.gaps"
                                               )
 )
