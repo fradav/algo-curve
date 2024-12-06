@@ -8,11 +8,13 @@ unit <- "s"
 
 loaded <- read.csv(paste0("benchmark_0", i, ".csv"))
 class(loaded) <- c("microbenchmark", class(loaded))
-loaded$expr <- factor(loaded$expr, levels = c("naive.not.pruned", "naive.pruned", 
-                                              "naive.pruned.no.gaps",
+loaded$expr <- factor(loaded$expr, levels = c("naive.not.pruned", 
+                                              "naive.pruned", 
+                                              # "naive.pruned.no.gaps",
                                               "fast.not.pruned",
                                               "fast.pruned",
-                                              "fast.pruned.no.gaps")
+                                              # "fast.pruned.no.gaps"
+                                              )
 )
 sum <- summary(loaded, unit=unit)
 print(sum)

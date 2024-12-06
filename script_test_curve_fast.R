@@ -2,12 +2,12 @@
 library(sanssouci)
 library(microbenchmark)
 
-args = commandArgs(trailingOnly=TRUE)
-if (length(args) == 0){
-  n_repl <- 1
-} else {
-  n_repl <- args[1]
-}
+# args = commandArgs(trailingOnly=TRUE)
+# if (length(args) == 0){
+#   n_repl <- 1
+# } else {
+#   n_repl <- args[1]
+# }
 
 set.seed(12)
 
@@ -20,23 +20,29 @@ get_groups <- function(list_groups, leaf_list){
 }
 
 pow <- 10
-m <- (2 ^ pow) * 10
-example <- dyadic.from.height(m, pow, 2)
-leaf_list <- example$leaf_list
-C <- example$C
-signal <- 4
-mu <- rep(0, m)
-H1 <- get_groups(example$C[[6]][c(1, 5, 9, 10)], leaf_list)$total
-mu[H1] <- signal
-
-pval <- 1 - pnorm(mu + rnorm(n = m))
 alpha <- 0.05
 
-methods <- c(zeta.DKWM, zeta.trivial)
+vec_factor <- c(1, 10)
+vec_n_repl <- c(100, 10)
+vec_method <- c(zeta.DKWM, zeta.trivial)
 
-for (i in 1:2){
+for (i in 1:4){
   
-  method <- methods[[i]]
+  factor <- vec_factor[floor((i+1)/2)]
+  n_repl <- vec_n_repl[floor((i+1)/2)]
+  method <- vec_method[[i %% 2 + 1]]
+  
+  m <- (2 ^ pow) * factor
+  example <- dyadic.from.height(m, pow, 2)
+  leaf_list <- example$leaf_list
+  C <- example$C
+  signal <- 4
+  mu <- rep(0, m)
+  H1 <- get_groups(example$C[[6]][c(1, 5, 9, 10)], leaf_list)$total
+  mu[H1] <- signal
+  
+  pval <- 1 - pnorm(mu + rnorm(n = m))
+  
   ZL <- zetas.tree(C, leaf_list, method, pval, alpha, refine = TRUE, verbose = FALSE)
   
   # print("The pvalues are:")
@@ -47,6 +53,7 @@ for (i in 1:2){
   # pruned <- pruning(C, ZL, leaf_list, prune.leafs = FALSE)
   pruned.no.gaps <- pruning(C, ZL, leaf_list, prune.leafs = FALSE, delete.gaps = TRUE)
   
+  print(m)
   print(nb.elements(C))
   print(nb.elements(pruned.no.gaps$C))
   
@@ -60,5 +67,5 @@ for (i in 1:2){
                            # fast.pruned = curve.V.star.forest.fast(perm, pruned$C, pruned$ZL, leaf_list, is.pruned = TRUE),
                            fast.pruned = curve.V.star.forest.fast(perm, pruned.no.gaps$C, pruned.no.gaps$ZL, leaf_list, is.pruned = TRUE),
                            times = n_repl, check = "equal")
-  write.csv(mbench, paste0("benchmark_0", i + 4, ".csv"), row.names = F)
+  write.csv(mbench, paste0("benchmark_0", i, ".csv"), row.names = F)
 }
