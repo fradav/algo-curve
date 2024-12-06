@@ -44,7 +44,7 @@ for (i in 1:2){
   # print("The zetas are:")
   # print(ZL)
   
-  pruned <- pruning(C, ZL, leaf_list, prune.leafs = FALSE)
+  # pruned <- pruning(C, ZL, leaf_list, prune.leafs = FALSE)
   pruned.no.gaps <- pruning(C, ZL, leaf_list, prune.leafs = FALSE, delete.gaps = TRUE)
   
   print(nb.elements(C))
@@ -54,11 +54,11 @@ for (i in 1:2){
   
   print("Comparing execution times:")
   mbench <- microbenchmark(naive.not.pruned = curve.V.star.forest.naive(perm, C, ZL, leaf_list),
-                           naive.pruned = curve.V.star.forest.naive(perm, pruned$C, pruned$ZL, leaf_list),
-                           naive.pruned.no.gaps = curve.V.star.forest.naive(perm, pruned.no.gaps$C, pruned.no.gaps$ZL, leaf_list),
+                           # naive.pruned = curve.V.star.forest.naive(perm, pruned$C, pruned$ZL, leaf_list),
+                           naive.pruned = curve.V.star.forest.naive(perm, pruned.no.gaps$C, pruned.no.gaps$ZL, leaf_list),
                            fast.not.pruned = curve.V.star.forest.fast(perm, C, ZL, leaf_list),
-                           fast.pruned = curve.V.star.forest.fast(perm, pruned$C, pruned$ZL, leaf_list, is.pruned = TRUE),
-                           fast.pruned.no.gaps = curve.V.star.forest.fast(perm, pruned.no.gaps$C, pruned.no.gaps$ZL, leaf_list, is.pruned = TRUE),
+                           # fast.pruned = curve.V.star.forest.fast(perm, pruned$C, pruned$ZL, leaf_list, is.pruned = TRUE),
+                           fast.pruned = curve.V.star.forest.fast(perm, pruned.no.gaps$C, pruned.no.gaps$ZL, leaf_list, is.pruned = TRUE),
                            times = n_repl, check = "equal")
-  write.csv(mbench, paste0("benchmark_0", i + 2, ".csv"), row.names = F)
+  write.csv(mbench, paste0("benchmark_0", i + 4, ".csv"), row.names = F)
 }
