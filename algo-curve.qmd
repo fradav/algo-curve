@@ -619,7 +619,15 @@ which concludes this first case.
 
 $\bullet\bullet$ Second case: $i_{t+1}\not\in\bigcup_{k\in\cK^-_{t}}R_k$.
 
-First note that $\cP^{t+1}\in\mathfrak P$ whether it came form the adjustment in line 17 or it stayed equal to $\cP^t$.
+We first prove that $\cP^{t+1}\in\mathfrak P$ whether it came form the adjustment in line 17 or not. If it didn't, it stayed equal to $\cP^t\in\mathfrak P$. If it did, we have
+\begin{equation}\label{eq_rel_rec_p}
+\cP^{t+1}=\left(\cP^t \setminus\{k\in\cP^t, R_k\subseteq R_{  \kth {t+1}{h^f_{t+1}}   }   \}  \right)\cup \{ \kth {t+1}{h^f_{t+1}} \}.
+\end{equation}
+To prove that $\cP^{t+1}\in\mathfrak P$ in that case, it suffices to prove there are no $k'\in\cP^t$ such that $R_{  \kth {t+1}{h^f_{t+1}}} \subsetneq  R_{k'}$. If it was the case, because of the strict inclusion, we would have $k'\not\in\cP^0$, so $k'$ would have been added to $\cP^{t'}$ at a previous step $t'\leq t$ of the algorithm, but in that case it would also have been added to $\cK_{t'}^-\subseteq \cK_{t}^-$. So in the end we would have
+\begin{equation*}
+i_{t+1}\in R_{  \kth {t+1}{h^f_{t+1}}} \subsetneq R_{k'} \subseteq \bigcup_{k\in\cK^-_{t}}R_k
+\end{equation*}
+which is a contradiction and so $\cP^{t+1}\in\mathfrak P$.
 
 Like in the first case, considering a $k\in\cK_{t+1}\subseteq \cK_t$ such that $i_{t+1}\not\in R_k$ is not problematic, because in that case $k$ is not visited at all by the algorithm at step $t+1$ : $\eta^{t+1}_k=\eta^{t}_k$, $\{k'\in\cP^{t+1}\telque R_{k'}\subseteq R_k\}=\{k'\in\cP^{t}\telque R_{k'}\subseteq R_k\}$, and for all $k'\in \cK$ such that $R_{k'}\subseteq R_k$, $S_{t+1}\cap R_{k'}=S_{t}\cap R_{k'}$. Hence, from 
 \begin{equation*}
@@ -630,7 +638,7 @@ we directly have
 \Vstar(S_{t+1}\cap R_k) =  \eta_k^{t+1} =  \sum_{\substack{k'\in\cP^{t+1}\\R_{k'}\subseteq R_k}} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}| .
 \end{equation*}
 
-First note that for all $k\in\cK_{t+1}$ such that $i_{t+1}\in R_k$, 
+So we now focus on the $k\in\cK_{t+1}$ such that $i_{t+1}\in R_k$. Note that for such $k$, 
 \begin{equation*}
 \eta^{t+1}_k=\eta^t_k+1=\Vstar(S_t\cap R_k)+1=\sum_{\substack{k'\in \cP^t\\ R_{k'}\subseteq R_k}}\zeta_{k'}\wedge|S_t\cap R_{k'}|+1
 \end{equation*}
@@ -692,26 +700,30 @@ Looking at the first line of \eqref{eq_ineq_} , we also proved that
 \begin{equation}
 \Vstar(S_{t+1}\cap R_k) =  \sum_{\substack{k'\in\cP^{t}\\R_{k'}\subseteq R_k}} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}| . \label{eq_Pt_instead}
 \end{equation}
-The only thing left to prove is that \eqref{eq_Pt_instead} is also true with $\cP^{t+1}$ instead of $\cP^{t}$, that is, \eqref{eq_Pt_good_partition} also holds at $t+1$. If $h^f_{t+1}$ does not exist, meaning that we didn't break the loop, $\cP^{t+1}=\cP^t$ so there is nothing to prove.
+The only thing left to prove is that \eqref{eq_Pt_instead} is also true with $\cP^{t+1}$ instead of $\cP^{t}$, that is that \eqref{eq_Pt_good_partition} also holds at $t+1$, or, put differently, that
+\begin{equation}\label{eq_last_goal}
+\sum_{\substack{k'\in\cP^{t}\\R_{k'}\subseteq R_k}} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}|=\sum_{\substack{k'\in\cP^{t+1}\\R_{k'}\subseteq R_k}} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}|.
+\end{equation}
+If $h^f_{t+1}$ does not exist, meaning that we didn't break the loop, $\cP^{t+1}=\cP^t$ so there is nothing to prove.
 
-Now assume that $h^f_{t+1}$ exists. So 
-\begin{equation*}
-\cP^{t+1}=\left(\cP^t \setminus\{k\in\cP^t, R_k\subseteq R_{  \kth {t+1}{h^f_{t+1}}   }   \}  \right)\cup \{ \kth {t+1}{h^f_{t+1}} \}.
-\end{equation*}
-Note that for all $k\in\cK_{t+1}$ such that $i_{t+1}\in R_k$, we necessarily have $R_{  \kth {t+1}{h^f_{t+1}} }\subseteq R_k$, because $\kth {t+1}{h^f_{t+1}}\in \cP^{t+1}$. Also note that for $k'\in\cP^t$, we either have  $R_{k'}\cap  R_{  \kth {t+1}{h^f_{t+1}} } = \varnothing$ or  $R_{k'}\subseteq  R_{  \kth {t+1}{h^f_{t+1}}}$, by the operation made in line 17. So we can split
-\begin{equation*}
- \sum_{\substack{k'\in\cP^{t}\\R_{k'}\subseteq R_k}} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}| =  \sum_{\substack{k'\in\cP^{t}\\R_{k'}\cap  R_{  \kth {t+1}{h^f_{t+1}} } = \varnothing \\R_{k'}\subseteq R_k }} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}|  \;   + \sum_{\substack{k'\in\cP^{t}\\R_{k'}\subseteq  R_{  \kth {t+1}{h^f_{t+1}}}}} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}| 
-\end{equation*}
-and
+Now assume that $h^f_{t+1}$ exists. So \eqref{eq_rel_rec_p} holds. We will split each term in \eqref{eq_last_goal} in a sum of two terms. First, note that by \eqref{eq_rel_rec_p}, for any $k'\in\cK$ such that $R_{k'}\cap  R_{  \kth {t+1}{h^f_{t+1}} } = \varnothing$, we have that $k'\in\cP^{t+1}$ if and only if $k'\in \cP^{t}$. And so,
 \begin{align*}
  \sum_{\substack{k'\in\cP^{t+1}\\R_{k'}\subseteq R_k}} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}| &=  \sum_{\substack{k'\in\cP^{t+1}\\R_{k'}\cap  R_{  \kth {t+1}{h^f_{t+1}} } = \varnothing \\R_{k'}\subseteq R_k }} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}| +  \zeta_{ \kth {t+1}{h^f_{t+1}}}\wedge |S_{t+1}\cap R_{ \kth {t+1}{h^f_{t+1}}}|\\ 
  &=  \sum_{\substack{k'\in\cP^{t}\\R_{k'}\cap  R_{  \kth {t+1}{h^f_{t+1}} } = \varnothing \\R_{k'}\subseteq R_k }} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}| +  \zeta_{ \kth {t+1}{h^f_{t+1}}}\wedge |S_{t+1}\cap R_{ \kth {t+1}{h^f_{t+1}}}|.
 \end{align*}
-So, we just need to prove that 
+
+Recall that we already proved that there is no $k'\in \cP^t$ such that $R_{  \kth {t+1}{h^f_{t+1}} }\subsetneq R_{k'}$, so for any $k'\in \cP^t$, either $R_{k'}\cap  R_{  \kth {t+1}{h^f_{t+1}} } = \varnothing$ or $R_{k'}\subseteq  R_{  \kth {t+1}{h^f_{t+1}}}$. Hence the split
+\begin{align*}
+ \sum_{\substack{k'\in\cP^{t}\\R_{k'}\subseteq R_k}} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}| &=  \sum_{\substack{k'\in\cP^{t}\\R_{k'}\cap  R_{  \kth {t+1}{h^f_{t+1}} } = \varnothing \\R_{k'}\subseteq R_k }} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}|  \;   + \sum_{\substack{k'\in\cP^{t}\\R_{k'}\subseteq  R_{  \kth {t+1}{h^f_{t+1}}}\\ R_{k'}\subseteq R_k}} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}|\\
+ &=\sum_{\substack{k'\in\cP^{t}\\R_{k'}\cap  R_{  \kth {t+1}{h^f_{t+1}} } = \varnothing \\R_{k'}\subseteq R_k }} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}|  \;   + \sum_{\substack{k'\in\cP^{t}\\R_{k'}\subseteq  R_{  \kth {t+1}{h^f_{t+1}}}}} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}|,
+\end{align*}
+where the last equality comes from the fact that $R_{  \kth {t+1}{h^f_{t+1}} }\subseteq R_k$, because $k\in\cK_{t+1}$, $i_{t+1}\in R_k$, and $\kth {t+1}{h^f_{t+1}}\in \cP^{t+1}$.
+
+Given the two previously made splits, it remains to prove that 
 \begin{equation*}
 \sum_{\substack{k'\in\cP^{t}\\R_{k'}\subseteq  R_{  \kth {t+1}{h^f_{t+1}}} }} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}| =  \zeta_{ \kth {t+1}{h^f_{t+1}}}\wedge |S_{t+1}\cap R_{ \kth {t+1}{h^f_{t+1}}}|.
 \end{equation*}
-Interestingly, this does not depend  on $k$ anymore. By \eqref{eq_Pt_instead}, the left-hand side  is equal to $\Vstar( S_{t+1}\cap  R_{  \kth {t+1}{h^f_{t+1}}  } )$. Because we are breaking the loop at step  $h^f_{t+1}$, $\eta^{t+1}_{\kth {t+1}{h^f_{t+1}} }= \zeta_{ \kth {t+1}{h^f_{t+1}}}$. Finally, because \eqref{eq_vstar_inter_Rk_equal_eta} holds at $t+1$, $\eta^{t+1}_{\kth {t+1}{h^f_{t+1}} }=\Vstar( S_{t+1}\cap  R_{  \kth {t+1}{h^f_{t+1}}  } )$. Wrapping all this assertions:
+Interestingly, this does not depend  on $k$ anymore. By \eqref{eq_Pt_instead}, the left-hand side  is equal to $\Vstar( S_{t+1}\cap  R_{  \kth {t+1}{h^f_{t+1}}  } )$. Because we are breaking the loop at step  $h^f_{t+1}$, $\eta^{t+1}_{\kth {t+1}{h^f_{t+1}} }= \zeta_{ \kth {t+1}{h^f_{t+1}}}$. Finally, because \eqref{eq_vstar_inter_Rk_equal_eta} holds at $t+1$, $\eta^{t+1}_{\kth {t+1}{h^f_{t+1}} }=\Vstar( S_{t+1}\cap  R_{  \kth {t+1}{h^f_{t+1}}  } )$. Wrapping all these assertions:
 \begin{align*}
 \sum_{\substack{k'\in\cP^{t}\\R_{k'}\subseteq  R_{  \kth {t+1}{h^f_{t+1}}} }} \zeta_{k'}\wedge |S_{t+1}\cap R_{k'}| &= \Vstar( S_{t+1}\cap  R_{  \kth {t+1}{h^f_{t+1}}  } )\\
 &=\Vstar( S_{t+1}\cap  R_{  \kth {t+1}{h^f_{t+1}}  } )\wedge  |S_{t+1}\cap R_{ \kth {t+1}{h^f_{t+1}}}|\\
