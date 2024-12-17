@@ -798,9 +798,121 @@ In this Section, we present some numerical experiments aiming to demonstrate the
 
 To compare the computation time, we use the `R` package `microbenchmark` version 1.5.0 [@microbenchmark] with `R` version 4.4.0 (2024-04-24) and `sanssouci` version 0.13.0, on a MacBook Air M1 (2020) running macOS 15.1.1. The package `microbenchmark` allows to run code snippets a given number `n_repl` of times, and to compute summary statistics on the computation time.
 
-Four scenarios are studied, all based on a common setting which we first describe. A number $m$ of hypotheses is tested. We use a reference family $(R_k,\zeta_k)$ such that the $R_k$'s have a forest structure of maximal depth $H=10$. The graph of the inclusion relations between the $R_k$'s is a binary tree, hence there are $2^H-1=1023$ $R_k$'s and in particular $2^{H-1}=512$ atoms. $P$-values are generated in a gaussian one-sided fashion where $\Hoi= \{ \mathcal N(\boldsymbol{\mu}, \mathrm{Id})  :\mu_i=0 \}$, $H_{1,i}=\{ \mathcal N(\boldsymbol{\mu}, \mathrm{Id}) :\mu_i=4 \}$, and $p_i(X)=1-\Phi(X_i)$. $\cH_1$ is comprised of the leafs 1, 5, 9 and 10, that is $\cH_1=P_1\cup P_5\cup P_9\cup P_{10}$. In scenarios 1 and 2, $m=1024$ (so the atoms are of size 2), in scenarios 3 and 4, $m=10240$ (so the atoms are of size 10). In scenarios 1 and 3, the $\zeta_k$'s are estimated trivially by $\zeta_k=|R_k|$, and in scenarios 2 and 4, they are computed as in @MR4178188 with the DKWM inequality [@MR0083864 ; @MR1062069].
+Four scenarios are studied, all based on a common setting which we first describe. A number $m$ of hypotheses is tested. We use a reference family $(R_k,\zeta_k)$ such that the $R_k$'s have a forest structure of maximal depth $H=10$. The graph of the inclusion relations between the $R_k$'s is a binary tree, hence there are $2^H-1=1023$ $R_k$'s and in particular $2^{H-1}=512$ atoms. $P$-values are generated in a gaussian one-sided fashion where $\Hoi= \{ \mathcal N(\boldsymbol{\mu}, \mathrm{Id})  :\mu_i=0 \}$, $H_{1,i}=\{ \mathcal N(\boldsymbol{\mu}, \mathrm{Id}) :\mu_i=4 \}$, and $p_i(X)=1-\Phi(X_i)$. $\cH_1$ is comprised of the leafs 1, 5, 9 and 10, that is $\cH_1=P_1\cup P_5\cup P_9\cup P_{10}$. In scenarios 1 and 2, $m=1024$ (so the atoms are of size 2), in scenarios 3 and 4, $m=10240$ (so the atoms are of size 10). In scenarios 1 and 3, the $\zeta_k$'s are estimated trivially by $\zeta_k=|R_k|$, and in scenarios 2 and 4, they are computed as in @MR4178188 with the DKWM inequality [@MR0083864 ; @MR1062069]. Because of the size of $m$ and the poor performances of the naive approach, we set `n_repl=100` in scenarios 1 and 2 and `n_repl=10` only in scenario s 3 and 4.
 
 For the trivial $\zeta_k$ computation of scenarios 1 and 3, the pruning obviously deletes all non-atom regions so $|\cK^{\pr}|=512$. Whereas, for the particular instance $\omega\in\Omega$ in the experiments, $|\cK^{\pr}|=541$ for scenario 2, and $|\cK^{\pr}|=573$ for scenario 4. Those results alone illustrate the benefits of pruning with respect to the reduction of the cardinality of the reference family: the regions above atoms with no signal (or no detectable signal in the trivial scenarios) are pruned. The fact that the regions above atoms with detectable signal are not pruned means that they are relevant for the confidences bounds (which had already been demonstrated in the simulation study of @MR4178188).
+
+The summary statistics of the computation time in each scenario are presented in @tbl-benchmark01, @tbl-benchmark02, @tbl-benchmark03, and @tbl-benchmark04, and they are also presented as boxplots in @fig-benchmark01, @fig-benchmark02, @fig-benchmark03 and @fig-benchmark04. The time unit is the second.
+
+```{r loading, echo=FALSE}
+library(microbenchmark)
+
+unit <- "s"
+loaded_list <- list()
+summary_list <- list()
+
+for (i in 1:4){
+  loaded <- read.csv(paste0("benchmark_0", i, ".csv"))
+  class(loaded) <- c("microbenchmark", class(loaded))
+  loaded$expr <- factor(loaded$expr, levels = c("naive.not.pruned", 
+                                                "naive.pruned", 
+                                                # "naive.pruned.no.gaps",
+                                                "fast.not.pruned",
+                                                "fast.pruned"
+                                                # "fast.pruned.no.gaps"
+  )
+  )
+  loaded$time <- microbenchmark:::convert_to_unit(loaded, unit)
+  loaded_list[[i]] <- loaded
+  summary_list[[i]] <- summary(loaded)
+}
+```
+
+```{r echo=FALSE}
+#| label: tbl-benchmark01
+i <- 1
+knitr::kable(summary_list[[i]], caption = paste0("Scenario ", i))
+```
+```{r echo=FALSE}
+#| label: tbl-benchmark02
+i <- 2
+knitr::kable(summary_list[[i]], caption = paste0("Scenario ", i))
+```
+```{r echo=FALSE}
+#| label: tbl-benchmark03
+i <- 3
+knitr::kable(summary_list[[i]], caption = paste0("Scenario ", i))
+```
+```{r echo=FALSE}
+#| label: tbl-benchmark04
+i <- 4
+knitr::kable(summary_list[[i]], caption = paste0("Scenario ", i))
+```
+
+```{r echo=FALSE}
+def_mar <- c(5, 4, 4, 2) + 0.1
+```
+
+```{r echo=FALSE}
+#| label: fig-benchmark01
+#| message: false
+#| warning: false
+i <- 1
+
+par(mar = def_mar + c(3.8, 0, 0, 0))
+
+bp <- boxplot(time ~ expr, data=loaded_list[[i]], ylab="time [s]", xlab="", 
+              ylim=NULL, horizontal=F, main=paste0("Microbenchmark timings, scenario ", i), 
+              xaxt = "n")
+tick <- seq_along(bp$names)
+axis(1, at = tick, labels = FALSE)
+text(tick, par("usr")[1] - 1.9, bp$names, srt = 60, xpd = TRUE)
+```
+```{r echo=FALSE}
+#| label: fig-benchmark02
+#| message: false
+#| warning: false
+i <- 2
+
+par(mar = def_mar + c(3.8, 0, 0, 0))
+
+bp <- boxplot(time ~ expr, data=loaded_list[[i]], ylab="time [s]", xlab="", 
+              ylim=NULL, horizontal=F, main=paste0("Microbenchmark timings, scenario ", i), 
+              xaxt = "n")
+tick <- seq_along(bp$names)
+axis(1, at = tick, labels = FALSE)
+text(tick, par("usr")[1] - 1.8, bp$names, srt = 60, xpd = TRUE)
+```
+```{r echo=FALSE}
+#| label: fig-benchmark03
+#| message: false
+#| warning: false
+i <- 3
+
+par(mar = def_mar + c(3.8, 0, 0, 0))
+
+bp <- boxplot(time ~ expr, data=loaded_list[[i]], ylab="time [s]", xlab="", 
+              ylim=NULL, horizontal=F, main=paste0("Microbenchmark timings, scenario ", i), 
+              xaxt = "n")
+tick <- seq_along(bp$names)
+axis(1, at = tick, labels = FALSE)
+text(tick, par("usr")[1] - 120, bp$names, srt = 60, xpd = TRUE)
+```
+```{r echo=FALSE}
+#| label: fig-benchmark04
+#| message: false
+#| warning: false
+i <- 4
+
+par(mar = def_mar + c(3.8, 0, 0, 0))
+
+bp <- boxplot(time ~ expr, data=loaded_list[[i]], ylab="time [s]", xlab="", 
+              ylim=NULL, horizontal=F, main=paste0("Microbenchmark timings, scenario ", i), 
+              xaxt = "n")
+tick <- seq_along(bp$names)
+axis(1, at = tick, labels = FALSE)
+text(tick, par("usr")[1] - 170, bp$names, srt = 60, xpd = TRUE)
+```
 
 # Conclusion
 

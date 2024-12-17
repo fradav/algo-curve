@@ -3,7 +3,7 @@ library(microbenchmark)
 
 def_mar <- c(5, 4, 4, 2) + 0.1
 
-i <- 2
+i <- 4
 unit <- "s"
 
 loaded <- read.csv(paste0("benchmark_0", i, ".csv"))
@@ -42,4 +42,4 @@ bp <- boxplot(time ~ expr, data=loaded, ylab="time [s]", xlab="",
               xaxt = "n")
 tick <- seq_along(bp$names)
 axis(1, at = tick, labels = FALSE)
-text(tick, par("usr")[1] - 2, bp$names, srt = 60, xpd = TRUE)
+text(tick, par("usr")[1] - 170, bp$names, srt = 60, xpd = TRUE)
