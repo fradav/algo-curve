@@ -938,7 +938,7 @@ Finally, comparing scenarios 3 & 4 with scenarios 1 & 2, we see that multiplying
 
 In conclusion, we effectively introduced a new algorithm to compute a curve of confidence upper bounds, much faster the previous alternative, with one power of $m$ less in the complexity.
 
-To develop new confidence upper bounds methodology and test them on simulations, it was previously not conceivable to replicate experiments a sufficient number of times while computing whole curves. For instance, in the simulation study of @MR4178188, the number of replications chosen was 10 and the whole curve was not computed, only ten values along the curve were computed, for an `m` set to 12800, that is 0.078% of the curve had been computed. Now, simulation studies with an adequate number of replications become feasible.
+To develop new confidence upper bounds methodology and test them on simulations, it was previously not conceivable to replicate experiments a sufficient number of times while computing whole curves. For instance, in the simulation study of @MR4178188, the number of replications chosen was 10 and the whole curve was not computed, only ten values along the curve were computed, for an `m` set to 12800, that is 0.078% of the curve had been computed. Now, simulation studies with an adequate number of replications and 100% of the curve become feasible.
 
 A lot of work remains to be done on the `sanssouci` package. For example, to make the data format of a forest structure $(R_k)_{k\in\cK}$ less convoluted and more user-friendly is an interesting project. Another one would be to implement inside the package the methods of the paper @blain22notip which are currently only available in the Python language [@10.5555/1593511].
 
