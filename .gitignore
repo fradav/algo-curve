@@ -18,3 +18,8 @@ README.html
 /.quarto/
 _extensions/
 renv/
+
+tikz/tikz.aux
+tikz/tikz.log
+tikz/tikz.synctex.gz
+tikz/tikz.pdf
