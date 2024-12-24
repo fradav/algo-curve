@@ -27,13 +27,13 @@
 % \draw[estun] (R8)--(R9);
 %\end{tikzpicture}
 
+Brouillon :
 
 \begin{tikzpicture}[scale=1]
-
  \tikzstyle{quadri}=[circle,draw,text=black,thick]
  \tikzstyle{estun}=[->,>=latex,very thick]
- 
- \node[quadri, align=center] (P15) at (0,3) {$P_{1:5}$\\text};
+ %
+ \node[quadri, align=center] (P15) at (0,3) {$P_{1:5}$\\ $\zeta_{(1,5)}=5$ \\ $\eta_{(1,5)}^1=1$};
  \node[quadri, fill=gray!25] (P1) at (-2,1) {$P_1$};
  \node[quadri] (P23) at (0,1) {$P_{2:3}$};
  \node[quadri] (P45) at (2,1) {$P_{4:5}$};
@@ -45,9 +45,7 @@
  \node[quadri,dashed,fill=gray!25] (P6) at (3.5,1) {$P_6$};
  \node[quadri,fill=gray!25] (P7) at (4.5,1) {$P_7$};
  \node[quadri,dashed,fill=gray!25] (P8) at (6,3) {$P_8$};
- 
- 
- 
+ %
  \draw[estun] (P15)--(P1);
  \draw[estun] (P15)--(P23);
  \draw[estun] (P15)--(P45);
@@ -59,7 +57,40 @@
  \draw[estun,dashed] (P67)--(P6);
 \end{tikzpicture}
 
+Première figure avec les zetas avant pruning :
 
+\begin{tikzpicture}[scale=1]
+ \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]
+ \tikzstyle{estun}=[->, >=latex, very thick]
+ %
+ \node[quadri] (P15) at (0, 3) {$P_{1:5}$\\$\zeta_{(1, 5)}=5$};
+ \node[quadri] (P67) at (4, 3) {$P_{6:7}$\\$\zeta_{(6, 7)}=2$};
+ \node[quadri] (P8) at (8, 3) {$P_8$\\$\zeta_{(8, 8)}=3$};
+ %
+ \node[quadri] (P1) at (-3, 0) {$P_1$\\$\zeta_{(1, 1)}=2$};
+ \node[quadri] (P23) at (0, 0) {$P_{2:3}$\\$\zeta_{(2, 3)}=1$};
+ \node[quadri] (P45) at (3, 0) {$P_{4:5}$\\$\zeta_{(4, 5)}=3$};
+ \node[quadri] (P6) at (5, 0) {$P_6$\\$\zeta_{(6, 6)}=1$};
+ \node[quadri] (P7) at (7, 0) {$P_7$\\$\zeta_{(7, 7)}=0$};
+ %
+ \node[quadri] (P2) at (-0.5, -3) {$P_2$\\$\zeta_{(2, 2)}=2$};
+ \node[quadri] (P3) at (0.5, -3) {$P_3$\\$\zeta_{(3, 3)}=4$};
+ \node[quadri] (P4) at (1.5, -3) {$P_4$\\$\zeta_{(4, 4)}=2$};
+ \node[quadri] (P5) at (2.5, -3) {$P_5$\\$\zeta_{(5, 5)}=2$};
+
+
+ 
+ %
+ \draw[estun] (P15)--(P1);
+ \draw[estun] (P15)--(P23);
+ \draw[estun] (P15)--(P45);
+ \draw[estun] (P23)--(P3);
+ \draw[estun] (P23)--(P2);
+ \draw[estun] (P45)--(P4);
+ \draw[estun] (P45)--(P5);
+ \draw[estun] (P67)--(P7);
+ \draw[estun] (P67)--(P6);
+\end{tikzpicture}
 
 
 
