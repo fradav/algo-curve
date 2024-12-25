@@ -265,6 +265,41 @@ provided that the family is complete. Here, $\mathfrak P \subseteq \mathcal P(\c
 
 Finally, that paper provides a polynomial algorithm to $V^*_{\Rfam}(S)$ for a single $S\subseteq\Nm^*$, which we reproduce here in @alg-vstar. The family is assumed complete, otherwise the first step would be to complete it. In the original paper, $\cK^h$ used to designate the elements of $\cK$ at depth $h$ plus the atoms at depth $\leq h$. Actually one can realize that the last assumption is not needed for this algorithm to perform exactly the same, with the added benefit of not repeating computations at the atoms that don't have the maximal depth. The only change is that sometimes $Succ_k$ can be empty, in which case we simply let $newVec_k=\zeta_k\wedge|S\cap R_k|$. Thus, here in this paper, we define $\cK^h$ as only the elements of $\cK$ at depth $h$ (the previous intricate definition may still be necessary for the proof of Theorem 1 of @MR4178188): $\cK^h=\{ (i,j)\in\cK : \phi(i,j)=h      \}, \:\:\:h\geq 1.$ This is the only deviation from the notation of @MR4178188. Finally note that in the ongoing analogy with graph theory, the elements of $\cK^1$ are the roots of the different trees making up the forest.
 
+::: {.content-visible when-format="html"}
+```pseudocode
+#| label: alg-vstar
+#| html-indent-size: "1.2em"
+#| html-comment-delimiter: "//"
+#| html-line-number: true
+#| html-line-number-punc: ":"
+#| html-no-end: false
+#| pdf-placement: "htb!"
+#| pdf-line-number: true
+\begin{algorithm}
+\caption{Computation of a given $V^*_{\mathfrak{R}}(S)$}
+\begin{algorithmic}
+\Procedure{Vstar}{S, $\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$  with $\mathfrak{R}$ complete}
+  \State $ H \gets \max_{k\in\mathcal{K}} \phi(k)  $ \Comment{maximum depth}
+  \For{$h = H-1, \dotsc, 1$}
+    \State $\mathcal{K}^h\gets \{ k\in\mathcal{K} : \phi(k) =h  \}$
+    \State $newVec\gets (0)_{k \in  \mathcal{K}^h}$
+    \For{$k \in  \mathcal{K}^h$}
+      \State $Succ_k \gets \{ k' \in  \mathcal{K}^{h+1} : R_{k'}\subseteq R_k\}$
+      \If{$Succ_k=\varnothing$}
+        \State $newVec_k \gets \zeta_k\wedge|S\cap R_k|$
+      \Else
+        \State $newVec_k \gets \min\left( \zeta_{k}\wedge|S\cap R_k| ,  \sum_{k'\in Succ_k} Vec_{k'}   \right)$
+      \EndIf
+    \EndFor
+    \State $Vec\gets newVec$
+  \EndFor
+  \Return $\sum_{k\in\mathcal{K}^1} Vec_k  $
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+```
+:::
+::: {.content-hidden when-format="html"}
 ```pseudocode
 #| label: alg-vstar
 #| html-indent-size: "1.2em"
@@ -297,6 +332,8 @@ Finally, that paper provides a polynomial algorithm to $V^*_{\Rfam}(S)$ for a si
 \end{algorithmic}
 \end{algorithm}
 ```
+:::
+
 ::: {.callout-tip}
 
 In the practical implementation of this algorithm (and of the following @alg-pruning), $Vec$ and $newVec$ are always of size $N$ (the number of leaves) instead of the cardinality of $\cK^h$. And the sum $\sum_{k'\in Succ_k} Vec_{k'}$ is really easy to compute: if $R_k= R_{(i_0,i_{p}-1)}= \bigcup_{ j=1}^{p} R_{(i_{ j-1}, i_{ j}-1)}=\bigcup_{i_0\leq n\leq i_{p}-1}P_n\in\cK^h$ for some $p\geq2$, a strictly increasing sequence $(i_0,\dotsc,i_{p})$ and $R_{(i_{ j-1}, i_{ j}-1)}\in\cK^{h+1}$ for all $1\leq j\leq p$, then we simply sum $Vec$ over the indices from $i_{0}$ to $i_{p}-1$. After that, the computed quantity is set in $newVec$ at index $i_0$. So actually computing $Succ_k$ is not needed and not done.
@@ -380,6 +417,45 @@ This gives a practical way to speed up computations by first pruning the family 
 
 Furthermore, pruning can be done really simply by following @alg-vstar for $S=\Nm^*$, and pruning when appropriate. This gives the following @alg-pruning, assuming, for simplicity, that the family is complete. The computation time of the algorithm is the same as @alg-vstar, that is $O(m|\cK|)$. Note that the only differences between @alg-pruning and @alg-vstar are the pruning step and $\zeta_k$ replacing $\zeta_k\wedge|S\cap R_k|$, because $\zeta_k\leq|R_k|$ and here $S=\Nm^*$, so $\zeta_k\wedge|\Nm^*\cap R_k|=\zeta_k$. Also note that the algorithm returns $\Vstar(\Nm^*)$ as a by-product. The following proposition states that @alg-pruning indeed produces the pruned region as in @def-pruning. 
 
+::: {.content-visible when-format="html"}
+```pseudocode
+#| label: alg-pruning
+#| html-indent-size: "1.2em"
+#| html-comment-delimiter: "//"
+#| html-line-number: true
+#| html-line-number-punc: ":"
+#| html-no-end: false
+#| pdf-placement: "htb!"
+#| pdf-line-number: true
+\begin{algorithm}
+\caption{Pruning of $\mathfrak{R}$}
+\begin{algorithmic}
+\Procedure{Pruning}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$  with $\mathfrak{R}$ complete}
+  \State $\mathcal{L}\gets\mathcal{K}$
+  \State $ H \gets \max_{k\in\mathcal{K}} \phi(k)  $ \Comment{maximum depth}
+  \For{$h = H-1, \dotsc, 1$}
+    \State $\mathcal{K}^h\gets \{ k\in\mathcal{K} : \phi(k) =h  \}$
+    \State $newVec\gets (0)_{k \in  \mathcal{K}^h}$
+    \For{$k \in  \mathcal{K}^h$}
+      \State $Succ_k \gets \{ k' \in  \mathcal{K}^{h+1} : R_{k'}\subseteq R_k\}$
+      \If{$Succ_k=\varnothing$}
+        \State $newVec_k \gets \zeta_k$
+      \Else
+        \If{$\zeta_{k} \geq  \sum_{k'\in Succ_k} Vec_{k'}$}
+          \State $\mathcal{L}\gets \mathcal{L}\setminus \{ k \}$ \Comment{pruning of the region indexed by $k$}
+        \EndIf
+        \State $newVec_k \gets \min\left( \zeta_{k} ,  \sum_{k'\in Succ_k} Vec_{k'}   \right)$
+      \EndIf
+    \EndFor
+    \State $Vec\gets newVec$
+  \EndFor
+  \Return $(\mathcal{L},\sum_{k\in\mathcal{K}^1} Vec_k  )$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+```
+:::
+::: {.content-hidden when-format="html"}
 ```pseudocode
 #| label: alg-pruning
 #| html-indent-size: "1.2em"
@@ -416,6 +492,7 @@ Furthermore, pruning can be done really simply by following @alg-vstar for $S=\N
 \end{algorithmic}
 \end{algorithm}
 ```
+:::
 
 ::: {#prp-pruning-correct}
 
@@ -448,7 +525,56 @@ Assume that the reference family of @exm-toy-forest has been labeled as in @exm-
 
 Now we can finally present the new algorithm and the proof that it computes the curve $(\Vstar(S_t))_{t\in\Nm}$. We present two versions of the algorithm (strictly equivalent): one very formal (@alg-formal-curve), to introduce additional notation used in the proof, and, later, one that is more akin to @alg-vstar and @alg-pruning, that is, it reuses notation from step to step, for implementation and simplicity purposes (@alg-curve). 
 
-
+::: {.content-visible when-format="html"}
+```pseudocode
+#| label: alg-formal-curve
+#| html-indent-size: "1.2em"
+#| html-comment-delimiter: "//"
+#| html-line-number: true
+#| html-line-number-punc: ":"
+#| html-no-end: false
+#| pdf-placement: "htb!"
+#| pdf-line-number: true
+\begin{algorithm}
+\caption{Formal computation of $(V^*_{\mathfrak{R}}(S_t))_{0\leq t\leq m}$}
+\begin{algorithmic}
+\Procedure{Curve}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$  with $\mathfrak{R}$ complete, path $(S_t)_{1\leq t \leq m}$ with $S_t=\{i_1, \dotsc, i_t\}$}
+  \State $\mathcal{P}^0\gets\{(i,i): 1\leq i \leq n\}$ \Comment{the set of all atoms indices}
+  \State $\mathcal{K}^-_0\gets\{k\in\mathcal{K} : \zeta_k=0  \}$
+  \State $\eta^0_k\gets0$ for all $k\in\mathcal{K}$
+  \For{$t=1,\dotsc, m$}
+    \If{$i_t\in\bigcup_{k\in\mathcal{K}^-_{t-1}}R_k$}
+      \State $\mathcal{P}^t \gets \mathcal{P}^{t-1}$
+      \State $\mathcal{K}^-_t \gets \mathcal{K}^-_{t-1}$
+      \State $\eta^t_k\gets\eta^{t-1}_k$ for all $k\in\mathcal{K}$
+    \Else
+      \For{$h=1,\dotsc,h_{\max}(t)$}
+        \State $\eta^t_{k^{(t,h)}}\gets\eta^{t-1}_{k^{(t,h)}} + 1$
+        \If{$\eta^t_{k^{(t,h)}}<\zeta_k$}
+          \State Pass
+        \Else
+          \State $h^f_t \gets h$ \Comment{final depth}
+          \State $\mathcal{P}^t \gets\left( \mathcal{P}^{t-1}\setminus \{ k\in \mathcal{P}^{t-1} : R_k\subseteq R_{k^{(t,h^f_t)}} \}\right)\cup \{ k^{(t,h^f_t)} \}$
+          \State $\mathcal{K}^-_t \gets \mathcal{K}^-_{t-1} \cup \{k^{(t,h^f_t)}\}$
+          \State Break the loop
+        \EndIf
+      \EndFor
+      \If{the loop has been broken}
+        \State $\eta^t_k\gets\eta^{t-1}_k$ for all $k\in\mathcal{K}$ not visited during the loop, that is all $k\not\in\{k^{(t,h)}, 1\leq h\leq h^f_t   \}$
+      \Else
+        \State $\mathcal{P}^t \gets \mathcal{P}^{t-1}$
+        \State $\mathcal{K}^-_t \gets \mathcal{K}^-_{t-1}$
+        \State $\eta^t_k\gets\eta^{t-1}_k$ for all $k\in\mathcal{K}$ not visited during the loop, that is all $k\not\in\{k^{(t,h)}, 1\leq h\leq h_{\max}(t)   \}$
+      \EndIf
+    \EndIf
+  \EndFor
+  \Return $\mathcal{P}^t, \eta^t_k$ for all $t=1,\dotsc, m$ and $k\in\mathcal{K}$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+```
+:::
+::: {.content-hidden when-format="html"}
 ```pseudocode
 #| label: alg-formal-curve
 #| html-indent-size: "1.2em"
@@ -496,7 +622,7 @@ Now we can finally present the new algorithm and the proof that it computes the 
 \end{algorithmic}
 \end{algorithm}
 ```
-
+:::
 The core idea of the algorithm is that, as we increase $t$ and add new hypotheses in $S_t$, we inflate a counter $\eta_k^t$ for each region $R_k$, by one if $i_t\in R_k$ (line 12), by 0 if not (lines 23 and 27), but only until the counter reaches $\zeta_k$ (line 13). After this point, the hypotheses in $R_k$ don't contribute to $\Vstar(S_t)$, we keep track of those hypotheses with $\cK^-_t$ (line 6), so as soon as $\eta^t_{\kth th}=\zeta_k$ we update $\cK^-_t$ by adding $\kth th$ (line 18) to it and we update $\cP^t$ accordingly (line 17). We will see that $\Vstar(S_t)$ is the sum of the $\eta_k^t$ counters for $k\in\cK^1$. Furthermore, the algorithm provides the partition $\cP^t\in\mathfrak P$ where the minimum in \eqref{eq_vstar_Qpartition} is realized. We formalize all of that in the following Theorem. We first need a final notation. Let
 \begin{equation*}
 \cK_t=\{k\in\cK : \exists k'\in \cP^t : R_{k'}\subseteq R_k   \}.
@@ -747,6 +873,47 @@ For $t\in\{0,\dotsc, m-1 \}$, $V^*_{\Rfam}(S_{t+1})=V^*_{\Rfam}(S_{t})$ if $i_{t
 
 Finally, we present @alg-curve, the alternative version of @alg-formal-curve, written with practical implementation in mind rather than formalism of notation, and using @cor-easy-impl. It is easy to see that each step $t$ has a complexity in $O(|\cK|)$ hence the total complexity is in $O(m|\cK|)$. This is because, if the regions are carefully stocked in memory, especially if their bounds (in terms of hypothesis index) are stocked, then finding $\kth th$ has a complexity in $O(|\cK^h|)$ and checking if $i_t\in\bigcup_{k\in\cK^-_{t-1}}R_k$ has a complexity in $O(|\cK|)$.
 
+::: {.content-visible when-format="html"}
+```pseudocode
+#| label: alg-curve
+#| html-indent-size: "1.2em"
+#| html-comment-delimiter: "//"
+#| html-line-number: true
+#| html-line-number-punc: ":"
+#| html-no-end: false
+#| pdf-placement: "htb!"
+#| pdf-line-number: true
+\begin{algorithm}
+\caption{Practical computation of $(V^*_{\mathfrak{R}}(S_t))_{0\leq t\leq m}$}
+\begin{algorithmic}
+\Procedure{Curve}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$  with $\mathfrak{R}$ complete, path $(S_t)_{1\leq t \leq m}$ with $S_t=\{i_1, \dotsc, i_t\}$}
+  \State $V_0\gets 0$
+  \State $\mathcal{K}^-\gets\{k\in\mathcal{K} : \zeta_k=0  \}$
+  \State $\eta_k\gets 0$ for all $k\in\mathcal{K}$
+  \For{$t=1,\dotsc, m$}
+    \If{$i_t\in\bigcup_{k\in\mathcal{K}^-}R_k$}
+      \State $V_{t}\gets V_{t-1}$
+    \Else
+      \For{$h=1,\dotsc,h_{\max}(t)$}
+        \State find $k^{(t,h)}\in\mathcal{K}^{h}$ such that $i_t\in R_{k^{(t,h)}}$
+        \State $\eta_{k^{(t,h)}}\gets\eta_{k^{(t,h)}} + 1$
+        \If{$\eta_{k^{(t,h)}}<\zeta_k$}
+          \State pass
+        \Else
+          \State $\mathcal{K}^- \gets \mathcal{K}^-\cup \{ k^{(t,h)} \}$
+          \State break the loop
+        \EndIf
+      \EndFor
+     \State $V_{t}\gets V_{t-1} + 1$
+    \EndIf
+  \EndFor
+  \Return $(V_t)_{1\leq t \leq m}$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+```
+:::
+::: {.content-hidden when-format="html"}
 ```pseudocode
 #| label: alg-curve
 #| html-indent-size: "1.2em"
@@ -785,6 +952,7 @@ Finally, we present @alg-curve, the alternative version of @alg-formal-curve, wr
 \end{algorithmic}
 \end{algorithm}
 ```
+:::
 
 # Implementation {#sec-implementation}
 
