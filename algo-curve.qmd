@@ -523,7 +523,7 @@ Assume that the reference family of @exm-toy-forest has been labeled as in @exm-
 
 :::
 
-Now we can finally present the new algorithm and the proof that it computes the curve $(\Vstar(S_t))_{t\in\Nm}$. We present two versions of the algorithm (strictly equivalent): one very formal (@alg-formal-curve), to introduce additional notation used in the proof of @thm-curve-path, and, later, one that is more akin to @alg-vstar and @alg-pruning, that is, it reuses notation from step to step, for implementation and simplicity purposes (@alg-curve). 
+Now we can finally present the new algorithm and the proof that it computes the curve $(\Vstar(S_t))_{t\in\Nm}$. We present two versions of the algorithm (strictly equivalent): one very formal (@alg-formal-curve), to introduce additional notation used in the proof of @thm-curve-path, and, later, a simpler version that is the one actually implemented (@alg-curve). 
 
 ::: {.content-visible when-format="html"}
 ```pseudocode
@@ -623,7 +623,9 @@ Now we can finally present the new algorithm and the proof that it computes the 
 \end{algorithm}
 ```
 :::
-The core idea of the algorithm is that, as we increase $t$ and add new hypotheses in $S_t$, we inflate a counter $\eta_k^t$ for each region $R_k$, by one if $i_t\in R_k$ (line 12), by 0 if not (lines 23 and 27), but only until the counter reaches $\zeta_k$ (line 13). After this point, the hypotheses in $R_k$ don't contribute to $\Vstar(S_t)$, we keep track of those hypotheses with $\cK^-_t$ (line 6), so as soon as $\eta^t_{\kth th}=\zeta_k$ we update $\cK^-_t$ by adding $\kth th$ (line 18) to it and we update $\cP^t$ accordingly (line 17). We will see that $\Vstar(S_t)$ is the sum of the $\eta_k^t$ counters for $k\in\cK^1$. Furthermore, the algorithm provides the partition $\cP^t\in\mathfrak P$ where the minimum in \eqref{eq_vstar_Qpartition} is realized. We formalize all of that in the following Theorem. We first need a final notation. Let
+The core idea of the algorithm is that, as we increase $t$ and add new hypotheses in $S_t$, we inflate a counter $\eta_k^t$ for each region $R_k$, by one if $i_t\in R_k$ (line 12), by 0 if not (lines 23 and 27), but only until the counter reaches $\zeta_k$ (line 13). After this point, the hypotheses in $R_k$ don't contribute to $\Vstar(S_t)$, we keep track of those hypotheses with $\cK^-_t$ (line 6), so as soon as $\eta^t_{\kth th}=\zeta_k$ we update $\cK^-_t$ by adding $\kth th$ (line 18) to it and we update $\cP^t$ accordingly (line 17). 
+
+We will see that $\Vstar(S_t)$ is the sum of the $\eta_k^t$ counters for $k\in\cK^1$. Furthermore, the algorithm provides the partition $\cP^t\in\mathfrak P$ where the minimum in \eqref{eq_vstar_Qpartition} is realized. We formalize all of that in the following Theorem. We first need a final notation. Let
 \begin{equation*}
 \cK_t=\{k\in\cK : \exists k'\in \cP^t : R_{k'}\subseteq R_k   \}.
 \end{equation*}
@@ -661,8 +663,11 @@ We deduce from the proof the following light corollary, that is useful for the i
 For $t\in\{0,\dotsc, m-1 \}$, $V^*_{\Rfam}(S_{t+1})=V^*_{\Rfam}(S_{t})$ if $i_{t+1}\in \bigcup_{k\in\cK^-_t}R_k$, and  $V^*_{\Rfam}(S_{t+1})=V^*_{\Rfam}(S_{t}) + 1$ if not.
 
 :::
+::: {.proof}
+From \eqref{eq_vstar_equal_sum_eta}, $V^*_{\Rfam}(S_{t+1})=\sum_{k\in\cK^1} \eta_k^{t+1}$ and $V^*_{\Rfam}(S_{t})=\sum_{k\in\cK^1} \eta_k^{t}$. If $i_{t+1}\in \bigcup_{k\in\cK^-_t}R_k$, $\eta_k^{t+1}=\eta_k^{t}$ for all $k\in\cK^1$. If not, $\eta_k^{t+1}=\eta_k^{t}$ for all $k\in\cK^1$, $k\neq \kth{t+1}{1}$. And for $k= \kth{t+1}{1}$, $\eta_k^{t+1}=\eta_k^{t}+1$. $\square$
+:::
 
-Finally, we present @alg-curve, the alternative version of @alg-formal-curve, written with practical implementation in mind rather than formalism of notation, and using @cor-easy-impl. It is easy to see that each step $t$ has a complexity in $O(|\cK|)$ hence the total complexity is in $O(m|\cK|)$. This is because, if the regions are carefully stocked in memory, especially if their bounds (in terms of hypothesis index) are stocked, then finding $\kth th$ has a complexity in $O(|\cK^h|)$ and checking if $i_t\in\bigcup_{k\in\cK^-_{t-1}}R_k$ has a complexity in $O(|\cK|)$.
+Finally, we present @alg-curve, the alternative version of @alg-formal-curve, written with practical implementation in mind rather than formalism of notation, and using @cor-easy-impl. 
 
 ::: {.content-visible when-format="html"}
 ```pseudocode
@@ -744,6 +749,8 @@ Finally, we present @alg-curve, the alternative version of @alg-formal-curve, wr
 \end{algorithm}
 ```
 :::
+
+It is easy to see that each step $t$ has a complexity in $O(|\cK|)$ hence the total complexity is in $O(m|\cK|)$. This is because, if the regions are carefully stocked in memory, especially if their bounds (in terms of hypothesis index) are stocked, then finding $\kth th$ has a complexity in $O(|\cK^h|)$ and checking if $i_t\in\bigcup_{k\in\cK^-_{t-1}}R_k$ has a complexity in $O(|\cK|)$.
 
 ## Proof of @thm-curve-path
 
