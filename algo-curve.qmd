@@ -179,7 +179,7 @@ Let $m=25$, $R_1 = \{1, \dotsc , 20 \}$, $R_2  =  \{1, 2  \}$, $R_3   =   \{3 , 
 
 ``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
 %%| filename: ../figure-tikz/fig-tikz-01
-\begin{tikzpicture}[scale=0.85]
+\begin{tikzpicture}[scale=1]
  \tikzstyle{quadri}=[circle,draw,text=black, thick]
  \tikzstyle{estun}=[->,>=latex,very thick]
  \node[quadri] (R1) at (0,3) {$R_1$};
@@ -218,7 +218,7 @@ For the reference family given in @exm-toy-forest, a partition of atoms is given
 
 ``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
 %%| filename: ../figure-tikz/fig-tikz-02
-\begin{tikzpicture}[scale=0.85]
+\begin{tikzpicture}[scale=1]
  \tikzstyle{quadri}=[circle,draw,text=black,thick]
  \tikzstyle{estun}=[->,>=latex,very thick]
  \node[quadri] (R1) at (0,3) {$P_{1:5}$};
