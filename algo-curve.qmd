@@ -747,7 +747,7 @@ Finally, we present @alg-curve, the alternative version of @alg-formal-curve, wr
 
 ## Proof of @thm-curve-path
 
-$\bullet$ Derivation of \eqref{eq_vstar_equal_sum_eta}.
+### Derivation of \eqref{eq_vstar_equal_sum_eta}
 
 We first derive \eqref{eq_vstar_equal_sum_eta} from \eqref{eq_vstar_inter_Rk_equal_eta} and \eqref{eq_Pt_good_partition}. First note that for all $Q\in\mathfrak P$, 
 \begin{equation}
@@ -772,7 +772,7 @@ Because $\cK^1\subseteq\cK_t$, by \eqref{eq_Pt_good_partition}, $\Vstar(S_t\cap 
 \end{align*}
 So we proved that $\Vstar(S_t)= \sum_{k\in\cP^t} \zeta_{k}\wedge |S_t\cap R_{k}|= \sum_{k\in\cK^1} \Vstar(S_t\cap R_k)$ and finally $\Vstar(S_t)=\sum_{k\in\cK^1} \Vstar(S_t\cap R_k)= \sum_{k\in\cK^1}  \eta_k^t$ by \eqref{eq_vstar_inter_Rk_equal_eta}, again because $\cK^1\subseteq\cK_t$. Every equality in \eqref{eq_vstar_equal_sum_eta} is proven.
 
-$\bullet$ Proof of \eqref{eq_vstar_inter_Rk_equal_eta} and \eqref{eq_Pt_good_partition}.
+### Proof of \eqref{eq_vstar_inter_Rk_equal_eta} and \eqref{eq_Pt_good_partition}
 
 We show the remainder of the statements by a strong recursion over $t$. We have $\cP^0\in\mathfrak P$ by definition, and given that $S_0=\varnothing$ and $\eta^0_k=0$ for all $k\in\cK$ (recall that $\cK_0=\cK$), everything is equal to 0 in \eqref{eq_vstar_inter_Rk_equal_eta} and \eqref{eq_Pt_good_partition}.
 
@@ -786,7 +786,7 @@ Indeed, by \eqref{eq_vstar_Qpartition},
 \end{align*}
 For any $k'\in\cP^{t}$, we have either $R_{k'}\cap R_k=\varnothing$, in which case $|S_{t+1}\cap R_k \cap R_{k'}|=0$, either $R_{k'}\subseteq R_k$, in which case $|S_{t+1}\cap R_k \cap R_{k'}|=|S_{t+1} \cap R_{k'}|$, but $R_{k}\subsetneq R_{k'}$ is impossible. Indeed, by definition of $\cK_t$, there exists $\tilde k\in \cP^t$ such that $R_{\tilde k}\subseteq R_k$, so $R_{k}\subsetneq R_{k'}$ would entail $R_{\tilde k}\subsetneq R_{k'}$ which is impossible since $k', \tilde k\in \cP^t\in\mathfrak P$ and so $R_{\tilde k}$ and $R_{k'}$ are part of a partition of $\Nm^*$. This gives \eqref{eq_ineq_both_cases}.
 
-$\bullet\bullet$ First case: $i_{t+1}\in\bigcup_{k\in\cK^-_{t}}R_k$.
+#### First case: $i_{t+1}\in\bigcup_{k\in\cK^-_{t}}R_k$
 
 In this case, $\cP^{t+1}=\cP^t\in\mathfrak P$ and $\cK_{t+1}=\cK_t$. For any $k\in\cK_{t+1}$ such that $i_{t+1}\not\in R_k$ (or, equivalently, such that $S_{t+1}\cap R_k=S_t\cap R_k$),
 \begin{align*}
@@ -799,7 +799,7 @@ because $\eta_k^t=\eta_k^{t+1}$ for all $k\in\cK$. Furthermore $S_{t+1}\cap R_k=
 
 Now we let $k\in\cK_{t+1}$ such that $i_{t+1}\in R_k$ or, equivalently, such that $R_{\bar k}\subseteq R_k$. We first need to show that $\zeta_{\bar k}\leq |S_t\cap R_{\bar k}|$, and for that we need to distinguish two subcases: if $\bar k$ has been added to $\cP^t$ during a previous step of the algorithm, of if not.
 
-$\bullet\bullet\bullet$ First subcase: $\bar k$ has never been added during the process of line 17.
+##### First subcase: $\bar k$ has never been added during the process of line 17
 
 Then $\bar k\in\cP^0$ and $R_{\bar k}$ is an atom, so $i_{t+1}\in\bigcup_{k'\in\cK^-_{t}}R_{k'}$ implies that $R_{\bar k}\subseteq \bigcup_{k'\in\cK^-_{t}}R_{k'}$ (because of the forest structure). Let $k'_{\max}$ such that
 \begin{equation*}
@@ -807,7 +807,7 @@ R_{k'_{\max}}=\max\{ R_{k'}\telque k'\in\cK^-_t, R_{\bar k}\subseteq R_{k'}  \}
 \end{equation*}
 (this a maximum for the inclusion relation, and it is well defined thanks to the forest structure). By reductio ad absurdum we show that $k'_{\max}=\bar k$. If that wasn't the case, by the joint construction of $\cP^t$ and $\cK^-_t$ during the algorithm we would have $k'_{\max}\in\cP^t$ and a contradiction with the fact that $\cP^t\in\mathfrak P$: we can't have both $\bar k\in\cP^t$ and $k'_{\max}\in\cP^t$ if they are distinct. So $k'_{\max}=\bar k$, so $\bar k\in  \cK^-_t$, but it cannot have been added to $\cK^-_t$ during a previous step of the algorithm, otherwise it would have been added to $\cP^t$, too. Hence $\bar k\in \cK^-_0$ which means that $\zeta_{\bar k}=0$ and $\zeta_{\bar k}=0\leq |S_t\cap R_{\bar k}|$.
 
-$\bullet\bullet\bullet$ Second subcase: $\bar k$ has been added to $\cP^t$ at a previous step.
+##### Second subcase: $\bar k$ has been added to $\cP^t$ at a previous step
 
 Let $t'\leq t$ be this step. This means that $\bar k = \kth{t'}{h^f_{t'}}$ and that at that step $\eta^{t'}_{\bar k}=\zeta_{\bar k}$. Indeed, the if condition in line 13 failed so $\eta^{t'}_{\bar k}\geq\zeta_{\bar k}$, but for all $t''<t'$ we had $\eta^{t''}_{\bar k}\leq\zeta_{\bar k}$ which implies equality. Also $\bar k\in \cP^{t'}$ so $\bar k\in \cK_{t'}$ so we can write 
 \begin{align*}
@@ -836,7 +836,7 @@ But on the other hand, $S_t\subseteq S_{t+1}$ and so \eqref{eq_vstar_Qpartition}
 \end{equation*}
 which concludes this first case.
 
-$\bullet\bullet$ Second case: $i_{t+1}\not\in\bigcup_{k\in\cK^-_{t}}R_k$.
+#### Second case: $i_{t+1}\not\in\bigcup_{k\in\cK^-_{t}}R_k$
 
 We first prove that $\cP^{t+1}\in\mathfrak P$ whether it came form the adjustment in line 17 or not. If it didn't, it stayed equal to $\cP^t\in\mathfrak P$. If it did, we have
 \begin{equation}\label{eq_rel_rec_p}
