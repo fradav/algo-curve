@@ -1277,7 +1277,18 @@ which achieves the second case and so the proof. $\square$
 
 All algorithms discussed in this manuscript are already implemented in the `R` [@R-base] package `sanssouci` [@sanssouci] which is available on GitHub (see the References for the link) and is dedicated to the computation of confidence bounds for the number of false positives. It also hosts the implementation of the methods described in @MR4124323 and @10.1093/bioinformatics/btac693. @alg-vstar is implemented as the `V.star` function, @alg-pruning is implemented as the `pruning` function, and @alg-curve is implemented as the `curve.V.star.forest.fast` function (whereas the `curve.V.star.forest.naive` function just repeatedly calls `V.star`). Note that the `pruning` function has a `delete.gaps` option that speeds up the computation even more by removing unnecessary gaps introduced in the data structure by the pruning operation, those gaps being due to the specific structure that is used to store the information of $\cK$. 
 
-The functions `dyadic.from.leaf_list`, `dyadic.from.window.size`, and `dyadic.from.height` return the appropriate data structure to represent a $\cK$ that can be described as a dyadic tree, based on some entry parameters that can be inferred from the names of the functions. The completion of a forest structure, mentioned in @sec-forest-structure, is done by the `forest.completion` function. Finally, the $\zeta_k$ are computed as in @MR4178188 by the `zetas.tree` function with `method=zeta.DKWM`.
+Speaking of the data structure, we briefly describe it, with an example. We represent $(R_k)_{k\in\cK}$ by two lists, `C` and `leaf_list`. `leaf_list` is a list of vectors, where `leaf_list[[i]]` is the vector listing the hypotheses in the atom $P_i$. `C` is a list of lists. For $1\leq h\leq H$, `C[[h]]` lists the regions at depth $h$, using the index bounds of the atoms they are composed of. That is, the elements of the list `C[[h]]` are vectors of size two, and if there is `k`, `i`  and `j` such that `C[[h]][[k]] = c(i, j)`, it means that $(i, j)\in\cK$, or in other words that $P_{i:j}$ is one of the regions, and that $\phi((i, j))=h$. We emphasize that the 1D structure of the hypotheses has to be respected by the user as the current implementation implicitly uses it: that is, $P_1$ has to contain the hypotheses labeled $1, 2, \dotsc, p$, $P_2$ has to contain the hypotheses labeled $p+1, \dotsc$, and so on. Also, the hypotheses have to be in non-decreasing order: `leaf_list[[1]]` has to be equal to `c(1, 2, 3, ..., p)` and not, say, `c(2, 1, 3, ..., p)`.
+
+::: {#exm-implementation}
+
+## Implementation of @exm-toy-leaves
+
+For the reference family given in @exm-toy-forest and completed in @exm-toy-leaves, $H=3$. For $h=1$, we have `C[[1]][[1]] = c(1, 5)`, `C[[1]][[2]] = c(6, 7)`, `C[[1]][[3]] = c(8, 8)`. For $h=2$, we have `C[[2]][[1]] = c(1, 1)`, `C[[2]][[2]] = c(2, 3)`, `C[[2]][[3]] = c(4, 5)`, `C[[2]][[4]] = c(6, 6)`, `C[[2]][[5]] = c(7, 7)`. For $h=3$, we have `C[[3]][[1]] = c(2, 2)`, `C[[3]][[2]] = c(3, 3)`, `C[[3]][[3]] = c(4, 4)`, `C[[3]][[4]] = c(5, 5)`. 
+
+And then for the atoms, we have `leaf_list[[1]] = c(1, 2)`, `leaf_list[[2]] = c(3, 4)`, `leaf_list[[3]] = c(5, 6, 7, 8, 9, 10)`, `leaf_list[[4]] = c(11, 12, 13, 14, 15, 16)`, `leaf_list[[5]] = c(17, 18, 19, 20)`, `leaf_list[[6]] = 21`, `leaf_list[[7]] = 22` and finally `leaf_list[[8]] = c(23, 24, 25)`.
+:::
+
+The functions `dyadic.from.leaf_list`, `dyadic.from.window.size`, and `dyadic.from.height` return the appropriate data structure to represent a $\cK$ that can be described as a dyadic tree, based on some entry parameters that can be inferred from the names of the functions. The completion of a forest structure, mentioned in @sec-forest-structure, is done by the `forest.completion` function. Finally, the $\zeta_k$'s are computed as in @MR4178188 by the `zetas.tree` function with `method=zeta.DKWM`.
 
 # Numerical experiments {#sec-numeric}
 
