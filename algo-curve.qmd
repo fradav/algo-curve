@@ -750,6 +750,323 @@ We note that, from @thm-curve-path and @cor-easy-impl, if one is only interested
 
 It is easy to see that each step $t$ has a complexity in $O(|\cK|)$ hence the total complexity is in $O(m|\cK|)$. This is because, if the regions are carefully stocked in memory, especially if their bounds (in terms of hypothesis index) are stocked, then finding $\kth th$ has a complexity in $O(|\cK^h|)$ and checking if $i_t\in\bigcup_{k\in\cK^-_{t-1}}R_k$ has a complexity in $O(|\cK|)$.
 
+## Illustration on a detailed example {#sec-example}
+
+We still continue @exm-toy-forest and @exm-toy-leaves. Recall that $m=25$, $P_{1:5}=R_1 = \{1, \dotsc , 20 \}$, $P_1=R_2  =  \{1, 2  \}$, $P_{2:3}=R_3   =   \{3 , \dotsc , 10 \}$, $P_{4:5}=R_4  =    \{11, \dotsc , 20 \}$, $P_2=\{3,4\}$, $P_3=R_5 =  \{5, \dotsc , 10 \}$, $P_4=R_6   =     \{11, \dotsc , 16 \}$, $P_5=R_7  =   \{17, \dotsc ,20  \}$, $P_{6:7}=R_8=\{21,22\}$, $P_6=\{21\}$, $P_7=R_9 = \{22\}$ and $P_8=\{23,24,25\}$. 
+
+Now assume that we have the following values for the $\zeta_k$'s: $\zeta_{(1,5)}=6$, $\zeta_{(1, 1)}=2$, $\zeta_{(2, 3)}=1$, $\zeta_{(3, 3)}=4$, $\zeta_{(4, 5)}=4$, $\zeta_{(4, 4)}=2$, $\zeta_{(5, 5)}=3$, $\zeta_{(6, 7)}=2$, $\zeta_{(7, 7)}=0$. Because $P_2$, $P_6$ and $P_8$ come from the completion operation, we also have $\zeta_{(2, 2)}=|P_2|=2$, $\zeta_{(6, 6)}=|P_6|=1$ and $\zeta_{(8, 8)}=|P_8|=3$. Theses values are summarized in @fig-zetas.
+
+:::{#fig-zetas}
+
+``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
+%%| filename: ../figure-tikz/fig-tikz-02
+\begin{tikzpicture}[scale=1]
+ \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]
+ \tikzstyle{estun}=[->, >=latex, very thick]
+ %
+ \node[quadri] (P15) at (0, 3) {$P_{1:5}$\\$\zeta_{(1, 5)}=6$};
+ \node[quadri] (P67) at (7.5, 3) {$P_{6:7}$\\$\zeta_{(6, 7)}=2$};
+ \node[quadri] (P8) at (10.5, 3) {$P_8$\\$\zeta_{(8, 8)}=3$};
+ %
+ \node[quadri] (P1) at (-3, 0) {$P_1$\\$\zeta_{(1, 1)}=2$};
+ \node[quadri] (P23) at (0, 0) {$P_{2:3}$\\$\zeta_{(2, 3)}=1$};
+ \node[quadri] (P45) at (3, 0) {$P_{4:5}$\\$\zeta_{(4, 5)}=4$};
+ \node[quadri] (P6) at (6, 0) {$P_6$\\$\zeta_{(6, 6)}=1$};
+ \node[quadri] (P7) at (9, 0) {$P_7$\\$\zeta_{(7, 7)}=0$};
+ %
+ \node[quadri] (P2) at (-2, -3) {$P_2$\\$\zeta_{(2, 2)}=2$};
+ \node[quadri] (P3) at (0.25, -3) {$P_3$\\$\zeta_{(3, 3)}=4$};
+ \node[quadri] (P4) at (2.75, -3) {$P_4$\\$\zeta_{(4, 4)}=2$};
+ \node[quadri] (P5) at (5, -3) {$P_5$\\$\zeta_{(5, 5)}=3$};
+ %%
+ \draw[estun] (P15)--(P1);
+ \draw[estun] (P15)--(P23);
+ \draw[estun] (P15)--(P45);
+ \draw[estun] (P23)--(P3);
+ \draw[estun] (P23)--(P2);
+ \draw[estun] (P45)--(P4);
+ \draw[estun] (P45)--(P5);
+ \draw[estun] (P67)--(P7);
+ \draw[estun] (P67)--(P6);
+\end{tikzpicture}
+```
+
+The regions of @exm-toy-forest with the $\zeta_k$ values.
+
+:::
+
+We want to compute the curve $\left(\Vstar\left(S_t\right)\right)_{1\leq t\leq 9}$ with $S_t=\{i_1,\dotsc, i_t\}$ and $i_1=11$, $i_2=17$, $i_3=12$, $i_4=13$, $i_5=18$, $i_6=3$, $i_7=19$, $i_8=22$ and $i_9=5$.
+
+First, we apply @alg-pruning to the family. This results in pruning $P_{6:7}$ (and only this region), because $2=\zeta_{(6, 7)}\geq \zeta_{(6, 6)}+\zeta_{(7, 7)}=1+0$. This gives @fig-pruned.
+
+:::{#fig-pruned}
+
+``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
+%%| filename: ../figure-tikz/fig-tikz-03
+\begin{tikzpicture}[scale=1]
+ \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]
+ \tikzstyle{estun}=[->, >=latex, very thick]
+ %
+ \node[quadri] (P15) at (0, 3) {$P_{1:5}$\\$\zeta_{(1, 5)}=6$};
+ \node[quadri] (P8) at (11, 3) {$P_8$\\$\zeta_{(8, 8)}=3$};
+ %
+ \node[quadri] (P1) at (-3, 0) {$P_1$\\$\zeta_{(1, 1)}=2$};
+ \node[quadri] (P23) at (0, 0) {$P_{2:3}$\\$\zeta_{(2, 3)}=1$};
+ \node[quadri] (P45) at (3, 0) {$P_{4:5}$\\$\zeta_{(4, 5)}=4$};
+ \node[quadri] (P6) at (5, 3) {$P_6$\\$\zeta_{(6, 6)}=1$};
+ \node[quadri] (P7) at (8, 3) {$P_7$\\$\zeta_{(7, 7)}=0$};
+ %
+ \node[quadri] (P2) at (-2, -3) {$P_2$\\$\zeta_{(2, 2)}=2$};
+ \node[quadri] (P3) at (0.25, -3) {$P_3$\\$\zeta_{(3, 3)}=4$};
+ \node[quadri] (P4) at (2.75, -3) {$P_4$\\$\zeta_{(4, 4)}=2$};
+ \node[quadri] (P5) at (5, -3) {$P_5$\\$\zeta_{(5, 5)}=3$};
+ %%
+ \draw[estun] (P15)--(P1);
+ \draw[estun] (P15)--(P23);
+ \draw[estun] (P15)--(P45);
+ \draw[estun] (P23)--(P3);
+ \draw[estun] (P23)--(P2);
+ \draw[estun] (P45)--(P4);
+ \draw[estun] (P45)--(P5);
+\end{tikzpicture}
+```
+
+The regions of @exm-toy-forest after pruning.
+
+:::
+
+Now we initialize @alg-formal-curve, that is we let $t=0$. Because $\zeta_{(7,7)}=0$, $(7, 7)$ is added to $\cK^-_t$: $\cK^-_0=\{(7, 7)\}$. Furthermore, all $\eta_k^t$ are set to 0. The initial state of @alg-formal-curve is shown in @fig-t0, with $(7, 7)$ being in red to show that it will not contribute to the computations.
+
+:::{#fig-t0}
+
+``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
+%%| filename: ../figure-tikz/fig-tikz-04
+\begin{tikzpicture}[scale=1]
+ \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]
+ \tikzstyle{estun}=[->, >=latex, very thick]
+ %
+ \node[quadri] (P15) at (0, 3) {$P_{1:5}$\\$\zeta_{(1, 5)}=6$\\$\eta_{(1, 5)}^0=0$};
+ \node[quadri] (P8) at (11, 3) {$P_8$\\$\zeta_{(8, 8)}=3$\\$\eta_{(8, 8)}^0=0$};
+ %
+ \node[quadri] (P1) at (-3, 0) {$P_1$\\$\zeta_{(1, 1)}=2$\\$\eta_{(1, 1)}^0=0$};
+ \node[quadri] (P23) at (0, 0) {$P_{2:3}$\\$\zeta_{(2, 3)}=1$\\$\eta_{(2, 3)}^0=0$};
+ \node[quadri] (P45) at (3, 0) {$P_{4:5}$\\$\zeta_{(4, 5)}=4$\\$\eta_{(4, 5)}^0=0$};
+ \node[quadri] (P6) at (5, 3) {$P_6$\\$\zeta_{(6, 6)}=1$\\$\eta_{(6, 6)}^0=0$};
+ \node[quadri, red] (P7) at (8, 3) {$P_7$\\$\zeta_{(7, 7)}=0$\\$\eta_{(7, 7)}^0=0$};
+ %
+ \node[quadri] (P2) at (-3, -3) {$P_2$\\$\zeta_{(2, 2)}=2$\\$\eta_{(2, 2)}^0=0$};
+ \node[quadri] (P3) at (-0, -3) {$P_3$\\$\zeta_{(3, 3)}=4$\\$\eta_{(3, 3)}^0=0$};
+ \node[quadri] (P4) at (3, -3) {$P_4$\\$\zeta_{(4, 4)}=2$\\$\eta_{(4, 4)}^0=0$};
+ \node[quadri] (P5) at (6, -3) {$P_5$\\$\zeta_{(5, 5)}=3$\\$\eta_{(5, 5)}^0=0$};
+ %%
+ \draw[estun] (P15)--(P1);
+ \draw[estun] (P15)--(P23);
+ \draw[estun] (P15)--(P45);
+ \draw[estun] (P23)--(P3);
+ \draw[estun] (P23)--(P2);
+ \draw[estun] (P45)--(P4);
+ \draw[estun] (P45)--(P5);
+\end{tikzpicture}
+```
+
+The regions of @exm-toy-forest at $t=0$ in @alg-formal-curve.
+
+:::
+
+We move on to $t=1$, with $i_1=11$. $i_1\in P_4\subseteq P_{4:5}\subseteq P_{1:5}$. The appropriate $\eta_k^t$ are increased by one, and by \eqref{eq_vstar_equal_sum_eta} we have $\Vstar(S_1)=\eta_{(1, 5)}^1+\eta_{(6, 6)}^1+\eta_{(7, 7)}^1+\eta_{(8, 8)}^1=1+0+0+0=1$. The state of the step is summarized in @fig-t1.
+
+:::{#fig-t1}
+
+``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
+%%| filename: ../figure-tikz/fig-tikz-05
+\begin{tikzpicture}[scale=1]
+ \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]
+ \tikzstyle{estun}=[->, >=latex, very thick]
+ %
+ \node[quadri] (P15) at (0, 3) {$P_{1:5}$\\$\zeta_{(1, 5)}=6$\\$\eta_{(1, 5)}^1=1$};
+ \node[quadri] (P8) at (11, 3) {$P_8$\\$\zeta_{(8, 8)}=3$\\$\eta_{(8, 8)}^1=0$};
+ %
+ \node[quadri] (P1) at (-3, 0) {$P_1$\\$\zeta_{(1, 1)}=2$\\$\eta_{(1, 1)}^1=0$};
+ \node[quadri] (P23) at (0, 0) {$P_{2:3}$\\$\zeta_{(2, 3)}=1$\\$\eta_{(2, 3)}^1=0$};
+ \node[quadri] (P45) at (3, 0) {$P_{4:5}$\\$\zeta_{(4, 5)}=4$\\$\eta_{(4, 5)}^1=1$};
+ \node[quadri] (P6) at (5, 3) {$P_6$\\$\zeta_{(6, 6)}=1$\\$\eta_{(6, 6)}^1=0$};
+ \node[quadri, red] (P7) at (8, 3) {$P_7$\\$\zeta_{(7, 7)}=0$\\$\eta_{(7, 7)}^1=0$};
+ %
+ \node[quadri] (P2) at (-3, -3) {$P_2$\\$\zeta_{(2, 2)}=2$\\$\eta_{(2, 2)}^1=0$};
+ \node[quadri] (P3) at (-0, -3) {$P_3$\\$\zeta_{(3, 3)}=4$\\$\eta_{(3, 3)}^1=0$};
+ \node[quadri] (P4) at (3, -3) {$P_4$\\$\zeta_{(4, 4)}=2$\\$\eta_{(4, 4)}^1=1$};
+ \node[quadri] (P5) at (6, -3) {$P_5$\\$\zeta_{(5, 5)}=3$\\$\eta_{(5, 5)}^1=0$};
+ %%
+ \draw[estun] (P15)--(P1);
+ \draw[estun] (P15)--(P23);
+ \draw[estun] (P15)--(P45);
+ \draw[estun] (P23)--(P3);
+ \draw[estun] (P23)--(P2);
+ \draw[estun] (P45)--(P4);
+ \draw[estun] (P45)--(P5);
+\end{tikzpicture}
+```
+
+The regions of @exm-toy-forest at $t=1$ in @alg-formal-curve.
+
+:::
+
+We move on to $t=2$, with $i_2=17$. $i_1\in P_5\subseteq P_{4:5}\subseteq P_{1:5}$. The appropriate $\eta_k^t$ are increased by one, and by \eqref{eq_vstar_equal_sum_eta} we have $\Vstar(S_2)=2$. The state of the step is summarized in @fig-t2.
+
+:::{#fig-t2}
+
+``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
+%%| filename: ../figure-tikz/fig-tikz-06
+\begin{tikzpicture}[scale=1]
+ \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]
+ \tikzstyle{estun}=[->, >=latex, very thick]
+ %
+ \node[quadri] (P15) at (0, 3) {$P_{1:5}$\\$\zeta_{(1, 5)}=6$\\$\eta_{(1, 5)}^2=2$};
+ \node[quadri] (P8) at (11, 3) {$P_8$\\$\zeta_{(8, 8)}=3$\\$\eta_{(8, 8)}^2=0$};
+ %
+ \node[quadri] (P1) at (-3, 0) {$P_1$\\$\zeta_{(1, 1)}=2$\\$\eta_{(1, 1)}^2=0$};
+ \node[quadri] (P23) at (0, 0) {$P_{2:3}$\\$\zeta_{(2, 3)}=1$\\$\eta_{(2, 3)}^2=0$};
+ \node[quadri] (P45) at (3, 0) {$P_{4:5}$\\$\zeta_{(4, 5)}=4$\\$\eta_{(4, 5)}^2=2$};
+ \node[quadri] (P6) at (5, 3) {$P_6$\\$\zeta_{(6, 6)}=1$\\$\eta_{(6, 6)}^2=0$};
+ \node[quadri, red] (P7) at (8, 3) {$P_7$\\$\zeta_{(7, 7)}=0$\\$\eta_{(7, 7)}^2=0$};
+ %
+ \node[quadri] (P2) at (-3, -3) {$P_2$\\$\zeta_{(2, 2)}=2$\\$\eta_{(2, 2)}^2=0$};
+ \node[quadri] (P3) at (-0, -3) {$P_3$\\$\zeta_{(3, 3)}=4$\\$\eta_{(3, 3)}^2=0$};
+ \node[quadri] (P4) at (3, -3) {$P_4$\\$\zeta_{(4, 4)}=2$\\$\eta_{(4, 4)}^2=1$};
+ \node[quadri] (P5) at (6, -3) {$P_5$\\$\zeta_{(5, 5)}=3$\\$\eta_{(5, 5)}^2=1$};
+ %%
+ \draw[estun] (P15)--(P1);
+ \draw[estun] (P15)--(P23);
+ \draw[estun] (P15)--(P45);
+ \draw[estun] (P23)--(P3);
+ \draw[estun] (P23)--(P2);
+ \draw[estun] (P45)--(P4);
+ \draw[estun] (P45)--(P5);
+\end{tikzpicture}
+```
+
+The regions of @exm-toy-forest at $t=2$ in @alg-formal-curve.
+
+:::
+
+We move on to $t=3$, with $i_3=12$. $i_3\in P_4\subseteq P_{4:5}\subseteq P_{1:5}$. The appropriate $\eta_k^t$ are increased by one, and we notice that $\eta_{(4, 4)}^3=2=\zeta_{(4, 4)}$. So $P_4$ will stop contributing, we add it to $\cK^-_t$: $\cK^-_3=\{(4, 4), (7, 7)\}$. By \eqref{eq_vstar_equal_sum_eta}, we have $\Vstar(S_3)=3$. The state of the step is summarized in @fig-t3, with $P_4$ now also in red.
+
+:::{#fig-t3}
+
+``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
+%%| filename: ../figure-tikz/fig-tikz-07
+\begin{tikzpicture}[scale=1]
+ \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]
+ \tikzstyle{estun}=[->, >=latex, very thick]
+ %
+ \node[quadri] (P15) at (0, 3) {$P_{1:5}$\\$\zeta_{(1, 5)}=6$\\$\eta_{(1, 5)}^3=3$};
+ \node[quadri] (P8) at (11, 3) {$P_8$\\$\zeta_{(8, 8)}=3$\\$\eta_{(8, 8)}^3=0$};
+ %
+ \node[quadri] (P1) at (-3, 0) {$P_1$\\$\zeta_{(1, 1)}=2$\\$\eta_{(1, 1)}^3=0$};
+ \node[quadri] (P23) at (0, 0) {$P_{2:3}$\\$\zeta_{(2, 3)}=1$\\$\eta_{(2, 3)}^3=0$};
+ \node[quadri] (P45) at (3, 0) {$P_{4:5}$\\$\zeta_{(4, 5)}=4$\\$\eta_{(4, 5)}^3=3$};
+ \node[quadri] (P6) at (5, 3) {$P_6$\\$\zeta_{(6, 6)}=1$\\$\eta_{(6, 6)}^3=0$};
+ \node[quadri, red] (P7) at (8, 3) {$P_7$\\$\zeta_{(7, 7)}=0$\\$\eta_{(7, 7)}^3=0$};
+ %
+ \node[quadri] (P2) at (-3, -3) {$P_2$\\$\zeta_{(2, 2)}=2$\\$\eta_{(2, 2)}^3=0$};
+ \node[quadri] (P3) at (-0, -3) {$P_3$\\$\zeta_{(3, 3)}=4$\\$\eta_{(3, 3)}^3=0$};
+ \node[quadri, red] (P4) at (3, -3) {$P_4$\\$\zeta_{(4, 4)}=2$\\$\eta_{(4, 4)}^3=2$};
+ \node[quadri] (P5) at (6, -3) {$P_5$\\$\zeta_{(5, 5)}=3$\\$\eta_{(5, 5)}^3=1$};
+ %%
+ \draw[estun] (P15)--(P1);
+ \draw[estun] (P15)--(P23);
+ \draw[estun] (P15)--(P45);
+ \draw[estun] (P23)--(P3);
+ \draw[estun] (P23)--(P2);
+ \draw[estun] (P45)--(P4);
+ \draw[estun] (P45)--(P5);
+\end{tikzpicture}
+```
+
+The regions of @exm-toy-forest at $t=3$ in @alg-formal-curve.
+
+:::
+
+We move on to $t=4$, with $i_4=13$. $i_4\in P_4\in \bigcup_{k\in\cK^-_3}R_k$. No $\eta_k^t$ is increased (see line 9 of @alg-formal-curve), and by \eqref{eq_vstar_equal_sum_eta}, we have $\Vstar(S_4)=3$.
+
+We move on to $t=5$, with $i_5=18$. $i_5\in P_5\subseteq P_{4:5}\subseteq P_{1:5}$. We first increase $\eta_{(1,5)}^t$: $\eta_{(1,5)}^5=4<\zeta_{(1,5)}$, then $\eta_{(4,5)}^t$: $\eta_{(4,5)}^5=4$, and we stop there because $\eta_{(4,5)}^5=4=\zeta_{(4,5)}$. $P_{4:5}$ will stop contributing, we add it to $\cK^-_t$: $\cK^-_5=\{(4,5), (4, 4), (7, 7)\}$. Note that $\eta_{(5,5)}^t$ is not updated because we stopped the loop before, see line 23 of @alg-formal-curve. By \eqref{eq_vstar_equal_sum_eta}, we have $\Vstar(S_5)=4$. The state of the step is summarized in @fig-t5, with $P_{4:5}$ now also in red.
+
+:::{#fig-t5}
+
+``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
+%%| filename: ../figure-tikz/fig-tikz-08
+\begin{tikzpicture}[scale=1]
+ \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]
+ \tikzstyle{estun}=[->, >=latex, very thick]
+ %
+ \node[quadri] (P15) at (0, 3) {$P_{1:5}$\\$\zeta_{(1, 5)}=6$\\$\eta_{(1, 5)}^5=4$};
+ \node[quadri] (P8) at (11, 3) {$P_8$\\$\zeta_{(8, 8)}=3$\\$\eta_{(8, 8)}^5=0$};
+ %
+ \node[quadri] (P1) at (-3, 0) {$P_1$\\$\zeta_{(1, 1)}=2$\\$\eta_{(1, 1)}^5=0$};
+ \node[quadri] (P23) at (0, 0) {$P_{2:3}$\\$\zeta_{(2, 3)}=1$\\$\eta_{(2, 3)}^5=0$};
+ \node[quadri, red] (P45) at (3, 0) {$P_{4:5}$\\$\zeta_{(4, 5)}=4$\\$\eta_{(4, 5)}^5=4$};
+ \node[quadri] (P6) at (5, 3) {$P_6$\\$\zeta_{(6, 6)}=1$\\$\eta_{(6, 6)}^5=0$};
+ \node[quadri, red] (P7) at (8, 3) {$P_7$\\$\zeta_{(7, 7)}=0$\\$\eta_{(7, 7)}^5=0$};
+ %
+ \node[quadri] (P2) at (-3, -3) {$P_2$\\$\zeta_{(2, 2)}=2$\\$\eta_{(2, 2)}^5=0$};
+ \node[quadri] (P3) at (-0, -3) {$P_3$\\$\zeta_{(3, 3)}=4$\\$\eta_{(3, 3)}^5=0$};
+ \node[quadri, red] (P4) at (3, -3) {$P_4$\\$\zeta_{(4, 4)}=2$\\$\eta_{(4, 4)}^5=2$};
+ \node[quadri] (P5) at (6, -3) {$P_5$\\$\zeta_{(5, 5)}=3$\\$\eta_{(5, 5)}^5=1$};
+ %%
+ \draw[estun] (P15)--(P1);
+ \draw[estun] (P15)--(P23);
+ \draw[estun] (P15)--(P45);
+ \draw[estun] (P23)--(P3);
+ \draw[estun] (P23)--(P2);
+ \draw[estun] (P45)--(P4);
+ \draw[estun] (P45)--(P5);
+\end{tikzpicture}
+```
+
+The regions of @exm-toy-forest at $t=5$ in @alg-formal-curve.
+
+:::
+
+We move on to $t=6$, with $i_6=3$. $i_6\in P_3\subseteq P_{2:3}\subseteq P_{1:5}$. We first increase $\eta_{(1,5)}^t$: $\eta_{(1,5)}^6=5<\zeta_{(1,5)}$, then $\eta_{(2,3)}^t$: $\eta_{(2,3)}^6=1$, and we stop there because $\eta_{(2,3)}^6=1=\zeta_{(2,3)}$. $P_{2:3}$ will stop contributing, we add it to $\cK^-_t$: $\cK^-_6=\{(2,3), (4,5), (4, 4), (7, 7)\}$. Note that $\eta_{(3,3)}^t$ is not updated because we stopped the loop before, see line 23 of @alg-formal-curve. By \eqref{eq_vstar_equal_sum_eta}, we have $\Vstar(S_6)=5$. The state of the step is summarized in @fig-t6, with $P_{2:3}$ now also in red.
+
+:::{#fig-t6}
+
+``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
+%%| filename: ../figure-tikz/fig-tikz-09
+\begin{tikzpicture}[scale=1]
+ \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]
+ \tikzstyle{estun}=[->, >=latex, very thick]
+ %
+ \node[quadri] (P15) at (0, 3) {$P_{1:5}$\\$\zeta_{(1, 5)}=6$\\$\eta_{(1, 5)}^6=5$};
+ \node[quadri] (P8) at (11, 3) {$P_8$\\$\zeta_{(8, 8)}=3$\\$\eta_{(8, 8)}^6=0$};
+ %
+ \node[quadri] (P1) at (-3, 0) {$P_1$\\$\zeta_{(1, 1)}=2$\\$\eta_{(1, 1)}^6=0$};
+ \node[quadri, red] (P23) at (0, 0) {$P_{2:3}$\\$\zeta_{(2, 3)}=1$\\$\eta_{(2, 3)}^6=1$};
+ \node[quadri, red] (P45) at (3, 0) {$P_{4:5}$\\$\zeta_{(4, 5)}=4$\\$\eta_{(4, 5)}^6=4$};
+ \node[quadri] (P6) at (5, 3) {$P_6$\\$\zeta_{(6, 6)}=1$\\$\eta_{(6, 6)}^6=0$};
+ \node[quadri, red] (P7) at (8, 3) {$P_7$\\$\zeta_{(7, 7)}=0$\\$\eta_{(7, 7)}^6=0$};
+ %
+ \node[quadri] (P2) at (-3, -3) {$P_2$\\$\zeta_{(2, 2)}=2$\\$\eta_{(2, 2)}^6=0$};
+ \node[quadri] (P3) at (-0, -3) {$P_3$\\$\zeta_{(3, 3)}=4$\\$\eta_{(3, 3)}^6=0$};
+ \node[quadri, red] (P4) at (3, -3) {$P_4$\\$\zeta_{(4, 4)}=2$\\$\eta_{(4, 4)}^6=2$};
+ \node[quadri] (P5) at (6, -3) {$P_5$\\$\zeta_{(5, 5)}=3$\\$\eta_{(5, 5)}^6=1$};
+ %%
+ \draw[estun] (P15)--(P1);
+ \draw[estun] (P15)--(P23);
+ \draw[estun] (P15)--(P45);
+ \draw[estun] (P23)--(P3);
+ \draw[estun] (P23)--(P2);
+ \draw[estun] (P45)--(P4);
+ \draw[estun] (P45)--(P5);
+\end{tikzpicture}
+```
+
+The regions of @exm-toy-forest at $t=6$ in @alg-formal-curve.
+
+:::
+
+We move on to the remaining steps. $i_7=19\in P_{4:5}$, $i_8=22\in P_{7}$ and $i_9=5\in P_{2:3}$ are all in $\bigcup_{k\in\cK^-_6}R_k$ so no $\eta_k^t$ is increased at their step (see line 9 of @alg-formal-curve), and by \eqref{eq_vstar_equal_sum_eta}, we have $\Vstar(S_7)=\Vstar(S_8)=\Vstar(S_9)=5$.
+
 ## Proof of @thm-curve-path {#sec-proof}
 
 ### Derivation of \eqref{eq_vstar_equal_sum_eta}
