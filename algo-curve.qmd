@@ -652,7 +652,100 @@ Furthermore,
 
 The first equality of Equation \eqref{eq_vstar_equal_sum_eta} confirms that the minimum in \eqref{eq_vstar_Qpartition} is indeed realized on $\cP^t$, and the last equality of the same Equation justifies the simpler @alg-curve to compute the curve on the nested path of selection sets (the $V_t$ notation of @alg-curve is exactly the $\sum_{k\in\cK^1} \eta_k^t$ of @alg-formal-curve).
 
-::: {.proof}
+We deduce from the proof the following light corollary, that is useful for the implementation, because it makes it useless to compute $\cK^1$. It justifies the line 19 of @alg-curve.
+
+::: {#cor-easy-impl}
+
+## Easy computation
+
+For $t\in\{0,\dotsc, m-1 \}$, $V^*_{\Rfam}(S_{t+1})=V^*_{\Rfam}(S_{t})$ if $i_{t+1}\in \bigcup_{k\in\cK^-_t}R_k$, and  $V^*_{\Rfam}(S_{t+1})=V^*_{\Rfam}(S_{t}) + 1$ if not.
+
+:::
+
+Finally, we present @alg-curve, the alternative version of @alg-formal-curve, written with practical implementation in mind rather than formalism of notation, and using @cor-easy-impl. It is easy to see that each step $t$ has a complexity in $O(|\cK|)$ hence the total complexity is in $O(m|\cK|)$. This is because, if the regions are carefully stocked in memory, especially if their bounds (in terms of hypothesis index) are stocked, then finding $\kth th$ has a complexity in $O(|\cK^h|)$ and checking if $i_t\in\bigcup_{k\in\cK^-_{t-1}}R_k$ has a complexity in $O(|\cK|)$.
+
+::: {.content-visible when-format="html"}
+```pseudocode
+#| label: alg-curve
+#| html-indent-size: "1.2em"
+#| html-comment-delimiter: "//"
+#| html-line-number: true
+#| html-line-number-punc: ":"
+#| html-no-end: false
+#| pdf-placement: "htb!"
+#| pdf-line-number: true
+\begin{algorithm}
+\caption{Practical computation of $(V^*_{\mathfrak{R}}(S_t))_{0\leq t\leq m}$}
+\begin{algorithmic}
+\Procedure{Curve}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$  with $\mathfrak{R}$ complete, path $(S_t)_{1\leq t \leq m}$ with $S_t=\{i_1, \dotsc, i_t\}$}
+  \State $V_0\gets 0$
+  \State $\mathcal{K}^-\gets\{k\in\mathcal{K} : \zeta_k=0  \}$
+  \State $\eta_k\gets 0$ for all $k\in\mathcal{K}$
+  \For{$t=1,\dotsc, m$}
+    \If{$i_t\in\bigcup_{k\in\mathcal{K}^-}R_k$}
+      \State $V_{t}\gets V_{t-1}$
+    \Else
+      \For{$h=1,\dotsc,h_{\max}(t)$}
+        \State find $k^{(t,h)}\in\mathcal{K}^{h}$ such that $i_t\in R_{k^{(t,h)}}$
+        \State $\eta_{k^{(t,h)}}\gets\eta_{k^{(t,h)}} + 1$
+        \If{$\eta_{k^{(t,h)}}<\zeta_k$}
+          \State pass
+        \Else
+          \State $\mathcal{K}^- \gets \mathcal{K}^-\cup \{ k^{(t,h)} \}$
+          \State break the loop
+        \EndIf
+      \EndFor
+     \State $V_{t}\gets V_{t-1} + 1$
+    \EndIf
+  \EndFor
+  \Return $(V_t)_{1\leq t \leq m}$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+```
+:::
+::: {.content-hidden when-format="html"}
+```pseudocode
+#| label: alg-curve
+#| html-indent-size: "1.2em"
+#| html-comment-delimiter: "//"
+#| html-line-number: true
+#| html-line-number-punc: ":"
+#| html-no-end: false
+#| pdf-placement: "htb!"
+#| pdf-line-number: true
+\begin{algorithm}
+\caption{Practical computation of $(V^*_{\mathfrak{R}}(S_t))_{0\leq t\leq m}$}
+\begin{algorithmic}
+\Procedure{Curve}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$  with $\mathfrak{R}$ complete, path $(S_t)_{1\leq t \leq m}$ with $S_t=\{i_1, \dotsc, i_t\}$}
+  \State $V_0\gets 0$
+  \State $\mathcal{K}^-\gets\{k\in\mathcal{K} : \zeta_k=0  \}$
+  \State $\eta_k\gets 0$ for all $k\in\mathcal{K}$
+  \For{$t=1,\dotsc, m$}
+    \If{$i_t\in\bigcup_{k\in\mathcal{K}^-}R_k$}
+      \State $V_{t}\gets V_{t-1}$
+    \Else
+      \For{$h=1,\dotsc,h_{\max}(t)$}
+        \State find $k^{(t,h)}\in\mathcal{K}^{h}$ such that $i_t\in R_{k^{(t,h)}}$
+        \State $\eta_{k^{(t,h)}}\gets\eta_{k^{(t,h)}} + 1$
+        \If{$\eta_{k^{(t,h)}}<\zeta_k$}
+          \State pass
+        \Else
+          \State $\mathcal{K}^- \gets \mathcal{K}^-\cup \{ k^{(t,h)} \}$
+          \State break the loop
+        \EndIf
+      \EndFor
+     \State $V_{t}\gets V_{t-1} + 1$
+    \EndIf
+  \EndFor
+  \State\Return $(V_t)_{1\leq t \leq m}$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+```
+:::
+
+## Proof of @thm-curve-path
 
 $\bullet$ Derivation of \eqref{eq_vstar_equal_sum_eta}.
 
@@ -856,103 +949,7 @@ Interestingly, this does not depend  on $k$ anymore. By \eqref{eq_Pt_instead}, t
 &=\eta^{t+1}_{\kth {t+1}{h^f_{t+1}} }\wedge  |S_{t+1}\cap R_{ \kth {t+1}{h^f_{t+1}}}|\\
 &=  \zeta_{ \kth {t+1}{h^f_{t+1}}}\wedge |S_{t+1}\cap R_{ \kth {t+1}{h^f_{t+1}}}|,
 \end{align*}
-which achieves the second case and so the proof.
-
-$\square$
-:::
-
-We deduce from the proof the following light corollary, that is useful for the implementation, because it makes it useless to compute $\cK^1$. It justifies the line 19 of @alg-curve.
-
-::: {#cor-easy-impl}
-
-## Easy computation
-
-For $t\in\{0,\dotsc, m-1 \}$, $V^*_{\Rfam}(S_{t+1})=V^*_{\Rfam}(S_{t})$ if $i_{t+1}\in \bigcup_{k\in\cK^-_t}R_k$, and  $V^*_{\Rfam}(S_{t+1})=V^*_{\Rfam}(S_{t}) + 1$ if not.
-
-:::
-
-Finally, we present @alg-curve, the alternative version of @alg-formal-curve, written with practical implementation in mind rather than formalism of notation, and using @cor-easy-impl. It is easy to see that each step $t$ has a complexity in $O(|\cK|)$ hence the total complexity is in $O(m|\cK|)$. This is because, if the regions are carefully stocked in memory, especially if their bounds (in terms of hypothesis index) are stocked, then finding $\kth th$ has a complexity in $O(|\cK^h|)$ and checking if $i_t\in\bigcup_{k\in\cK^-_{t-1}}R_k$ has a complexity in $O(|\cK|)$.
-
-::: {.content-visible when-format="html"}
-```pseudocode
-#| label: alg-curve
-#| html-indent-size: "1.2em"
-#| html-comment-delimiter: "//"
-#| html-line-number: true
-#| html-line-number-punc: ":"
-#| html-no-end: false
-#| pdf-placement: "htb!"
-#| pdf-line-number: true
-\begin{algorithm}
-\caption{Practical computation of $(V^*_{\mathfrak{R}}(S_t))_{0\leq t\leq m}$}
-\begin{algorithmic}
-\Procedure{Curve}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$  with $\mathfrak{R}$ complete, path $(S_t)_{1\leq t \leq m}$ with $S_t=\{i_1, \dotsc, i_t\}$}
-  \State $V_0\gets 0$
-  \State $\mathcal{K}^-\gets\{k\in\mathcal{K} : \zeta_k=0  \}$
-  \State $\eta_k\gets 0$ for all $k\in\mathcal{K}$
-  \For{$t=1,\dotsc, m$}
-    \If{$i_t\in\bigcup_{k\in\mathcal{K}^-}R_k$}
-      \State $V_{t}\gets V_{t-1}$
-    \Else
-      \For{$h=1,\dotsc,h_{\max}(t)$}
-        \State find $k^{(t,h)}\in\mathcal{K}^{h}$ such that $i_t\in R_{k^{(t,h)}}$
-        \State $\eta_{k^{(t,h)}}\gets\eta_{k^{(t,h)}} + 1$
-        \If{$\eta_{k^{(t,h)}}<\zeta_k$}
-          \State pass
-        \Else
-          \State $\mathcal{K}^- \gets \mathcal{K}^-\cup \{ k^{(t,h)} \}$
-          \State break the loop
-        \EndIf
-      \EndFor
-     \State $V_{t}\gets V_{t-1} + 1$
-    \EndIf
-  \EndFor
-  \Return $(V_t)_{1\leq t \leq m}$
-\EndProcedure
-\end{algorithmic}
-\end{algorithm}
-```
-:::
-::: {.content-hidden when-format="html"}
-```pseudocode
-#| label: alg-curve
-#| html-indent-size: "1.2em"
-#| html-comment-delimiter: "//"
-#| html-line-number: true
-#| html-line-number-punc: ":"
-#| html-no-end: false
-#| pdf-placement: "htb!"
-#| pdf-line-number: true
-\begin{algorithm}
-\caption{Practical computation of $(V^*_{\mathfrak{R}}(S_t))_{0\leq t\leq m}$}
-\begin{algorithmic}
-\Procedure{Curve}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$  with $\mathfrak{R}$ complete, path $(S_t)_{1\leq t \leq m}$ with $S_t=\{i_1, \dotsc, i_t\}$}
-  \State $V_0\gets 0$
-  \State $\mathcal{K}^-\gets\{k\in\mathcal{K} : \zeta_k=0  \}$
-  \State $\eta_k\gets 0$ for all $k\in\mathcal{K}$
-  \For{$t=1,\dotsc, m$}
-    \If{$i_t\in\bigcup_{k\in\mathcal{K}^-}R_k$}
-      \State $V_{t}\gets V_{t-1}$
-    \Else
-      \For{$h=1,\dotsc,h_{\max}(t)$}
-        \State find $k^{(t,h)}\in\mathcal{K}^{h}$ such that $i_t\in R_{k^{(t,h)}}$
-        \State $\eta_{k^{(t,h)}}\gets\eta_{k^{(t,h)}} + 1$
-        \If{$\eta_{k^{(t,h)}}<\zeta_k$}
-          \State pass
-        \Else
-          \State $\mathcal{K}^- \gets \mathcal{K}^-\cup \{ k^{(t,h)} \}$
-          \State break the loop
-        \EndIf
-      \EndFor
-     \State $V_{t}\gets V_{t-1} + 1$
-    \EndIf
-  \EndFor
-  \State\Return $(V_t)_{1\leq t \leq m}$
-\EndProcedure
-\end{algorithmic}
-\end{algorithm}
-```
-:::
+which achieves the second case and so the proof. $\square$
 
 # Implementation {#sec-implementation}
 
