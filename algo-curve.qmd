@@ -754,7 +754,7 @@ It is easy to see that each step $t$ has a complexity in $O(|\cK|)$ hence the to
 
 We still continue @exm-toy-forest and @exm-toy-leaves. Recall that $m=25$, $P_{1:5}=R_1 = \{1, \dotsc , 20 \}$, $P_1=R_2  =  \{1, 2  \}$, $P_{2:3}=R_3   =   \{3 , \dotsc , 10 \}$, $P_{4:5}=R_4  =    \{11, \dotsc , 20 \}$, $P_2=\{3,4\}$, $P_3=R_5 =  \{5, \dotsc , 10 \}$, $P_4=R_6   =     \{11, \dotsc , 16 \}$, $P_5=R_7  =   \{17, \dotsc ,20  \}$, $P_{6:7}=R_8=\{21,22\}$, $P_6=\{21\}$, $P_7=R_9 = \{22\}$ and $P_8=\{23,24,25\}$. 
 
-Now assume that we have the following values for the $\zeta_k$'s: $\zeta_{(1,5)}=6$, $\zeta_{(1, 1)}=2$, $\zeta_{(2, 3)}=1$, $\zeta_{(3, 3)}=4$, $\zeta_{(4, 5)}=4$, $\zeta_{(4, 4)}=2$, $\zeta_{(5, 5)}=3$, $\zeta_{(6, 7)}=2$, $\zeta_{(7, 7)}=0$. Because $P_2$, $P_6$ and $P_8$ come from the completion operation, we also have $\zeta_{(2, 2)}=|P_2|=2$, $\zeta_{(6, 6)}=|P_6|=1$ and $\zeta_{(8, 8)}=|P_8|=3$. Theses values are summarized in @fig-zetas.
+Now assume that we have the following values for the $\zeta_k$'s: $\zeta_{(1,5)}=6$, $\zeta_{(1, 1)}=2$, $\zeta_{(2, 3)}=1$, $\zeta_{(3, 3)}=4$, $\zeta_{(4, 5)}=4$, $\zeta_{(4, 4)}=2$, $\zeta_{(5, 5)}=3$, $\zeta_{(6, 7)}=2$, $\zeta_{(7, 7)}=0$. Because $P_2$, $P_6$ and $P_8$ come from the completion operation (see @sec-forest-structure), we also have $\zeta_{(2, 2)}=|P_2|=2$, $\zeta_{(6, 6)}=|P_6|=1$ and $\zeta_{(8, 8)}=|P_8|=3$. Theses values are summarized in @fig-zetas.
 
 :::{#fig-zetas}
 
