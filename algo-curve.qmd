@@ -759,7 +759,7 @@ Now assume that we have the following values for the $\zeta_k$'s: $\zeta_{(1,5)}
 :::{#fig-zetas}
 
 ``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
-%%| filename: ../figure-tikz/fig-tikz-02
+%%| filename: ../figure-tikz/fig-tikz-03
 \begin{tikzpicture}[scale=1]
  \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]
  \tikzstyle{estun}=[->, >=latex, very thick]
@@ -802,7 +802,7 @@ First, we apply @alg-pruning to the family. This results in pruning $P_{6:7}$ (a
 :::{#fig-pruned}
 
 ``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
-%%| filename: ../figure-tikz/fig-tikz-03
+%%| filename: ../figure-tikz/fig-tikz-04
 \begin{tikzpicture}[scale=1]
  \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]
  \tikzstyle{estun}=[->, >=latex, very thick]
@@ -840,7 +840,7 @@ Now we initialize @alg-formal-curve, that is we let $t=0$. Because $\zeta_{(7,7)
 :::{#fig-t0}
 
 ``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
-%%| filename: ../figure-tikz/fig-tikz-04
+%%| filename: ../figure-tikz/fig-tikz-05
 \begin{tikzpicture}[scale=1]
  \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]
  \tikzstyle{estun}=[->, >=latex, very thick]
@@ -878,7 +878,7 @@ We move on to $t=1$, with $i_1=11$. $i_1\in P_4\subseteq P_{4:5}\subseteq P_{1:5
 :::{#fig-t1}
 
 ``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
-%%| filename: ../figure-tikz/fig-tikz-05
+%%| filename: ../figure-tikz/fig-tikz-06
 \begin{tikzpicture}[scale=1]
  \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]
  \tikzstyle{estun}=[->, >=latex, very thick]
@@ -916,7 +916,7 @@ We move on to $t=2$, with $i_2=17$. $i_1\in P_5\subseteq P_{4:5}\subseteq P_{1:5
 :::{#fig-t2}
 
 ``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
-%%| filename: ../figure-tikz/fig-tikz-06
+%%| filename: ../figure-tikz/fig-tikz-07
 \begin{tikzpicture}[scale=1]
  \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]
  \tikzstyle{estun}=[->, >=latex, very thick]
@@ -954,7 +954,7 @@ We move on to $t=3$, with $i_3=12$. $i_3\in P_4\subseteq P_{4:5}\subseteq P_{1:5
 :::{#fig-t3}
 
 ``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
-%%| filename: ../figure-tikz/fig-tikz-07
+%%| filename: ../figure-tikz/fig-tikz-08
 \begin{tikzpicture}[scale=1]
  \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]
  \tikzstyle{estun}=[->, >=latex, very thick]
@@ -994,7 +994,7 @@ We move on to $t=5$, with $i_5=18$. $i_5\in P_5\subseteq P_{4:5}\subseteq P_{1:5
 :::{#fig-t5}
 
 ``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
-%%| filename: ../figure-tikz/fig-tikz-08
+%%| filename: ../figure-tikz/fig-tikz-09
 \begin{tikzpicture}[scale=1]
  \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]
  \tikzstyle{estun}=[->, >=latex, very thick]
@@ -1032,7 +1032,7 @@ We move on to $t=6$, with $i_6=3$. $i_6\in P_3\subseteq P_{2:3}\subseteq P_{1:5}
 :::{#fig-t6}
 
 ``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
-%%| filename: ../figure-tikz/fig-tikz-09
+%%| filename: ../figure-tikz/fig-tikz-10
 \begin{tikzpicture}[scale=1]
  \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]
  \tikzstyle{estun}=[->, >=latex, very thick]
