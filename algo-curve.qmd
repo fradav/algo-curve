@@ -523,7 +523,7 @@ Assume that the reference family of @exm-toy-forest has been labeled as in @exm-
 
 :::
 
-Now we can finally present the new algorithm and the proof that it computes the curve $(\Vstar(S_t))_{t\in\Nm}$. We present two versions of the algorithm (strictly equivalent): one very formal (@alg-formal-curve), to introduce additional notation used in the proof of @thm-curve-path, and, later, a simpler version that is the one actually implemented (@alg-curve). 
+Now we can finally present the new algorithm and the proof that it computes the curve $(\Vstar(S_t))_{t\in\Nm}$. We present two versions of the algorithm (strictly equivalent): one very formal (@alg-formal-curve), to introduce additional notation used in the proof of @thm-curve-path, and, later, a simpler version that is the one actually implemented (@alg-curve). Recall that a detailed illustration of the steps of the algorithms will be provided in @sec-example.
 
 ::: {.content-visible when-format="html"}
 ```pseudocode
