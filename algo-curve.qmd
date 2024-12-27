@@ -41,7 +41,7 @@ format:
             }
           };
           </script>
-    crossrefs-hover: true
+    crossrefs-hover: false
   computo-pdf: 
     include-in-header:
       - text: |
@@ -49,7 +49,7 @@ format:
     cite-method: natbib
     natbiboptions: round
     keep-tex: true
-    crossrefs-hover: true
+    crossrefs-hover: false
 ---
 
 ::: {.hidden}
