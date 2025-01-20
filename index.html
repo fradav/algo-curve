@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.39">
+<meta name="generator" content="quarto-1.6.40">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Guillermo Durand">
-<meta name="dcterms.date" content="2024-12-27">
+<meta name="dcterms.date" content="2025-01-20">
 <meta name="keywords" content="multiple testing, algorithmic, post hoc inference, false discovery proportion, confidence bound">
 
 <title>A fast algorithm to compute a curve of confidence upper bounds for the False Discovery Proportion using a reference family with a forest structure</title>
@@ -86,7 +86,7 @@ div.csl-indent {
 <script src="algo-curve_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="algo-curve_files/libs/quarto-html/anchor.min.js"></script>
 <link href="algo-curve_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="algo-curve_files/libs/quarto-html/quarto-syntax-highlighting-0626ff4d7a71b55c8707dcae1d04a9b6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="algo-curve_files/libs/quarto-html/quarto-syntax-highlighting-86daaaaad7353f9cc0c554efc1dd6d94.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="algo-curve_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="algo-curve_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="algo-curve_files/libs/bootstrap/bootstrap-cde7780d289188dc44a061be387cb41e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -186,14 +186,14 @@ ISSN 2824-7795</p>
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">December 27, 2024</p>
+        <p class="date">January 20, 2025</p>
       </div>
     </div>
                                     
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">December 27, 2024</p>
+        <p class="date-modified">January 20, 2025</p>
       </div>
     </div>
       
@@ -407,7 +407,7 @@ V^*_{\mathfrak{R}}(S) = \min_{Q\in \mathfrak P}\sum_{k'\in Q}\zeta_{k'}\wedge|S\
 \label{eq_vstar_Qpartition}
 \end{equation}\]</span> provided that the family is complete. Here, <span class="math inline">\(\mathfrak P \subseteq \mathcal P(\mathcal{K})\)</span> is the set of subsets of <span class="math inline">\(\mathcal{K}\)</span> that realize a partition, that is, the set of <span class="math inline">\(Q\subseteq\mathcal{K}\)</span> such that the <span class="math inline">\(R_k\)</span>, <span class="math inline">\(k\in Q\)</span>, form a partition of <span class="math inline">\(\mathbb{N}_m^*\)</span>. So the minimum in Equation <span class="math inline">\(\eqref{eq_vstar_Qpartition}\)</span> is over way less elements than in Equation <span class="math inline">\(\eqref{eq_vstar_Q}\)</span>.</p>
 <p>Finally, that paper provides a polynomial algorithm to <span class="math inline">\(V^*_{\mathfrak{R}}(S)\)</span> for a single <span class="math inline">\(S\subseteq\mathbb{N}_m^*\)</span>, which we reproduce here in <a href="#alg-vstar" class="quarto-xref">Algorithm 1</a>. The family is assumed complete, otherwise the first step would be to complete it. In the original paper, <span class="math inline">\(\mathcal{K}^h\)</span> used to designate the elements of <span class="math inline">\(\mathcal{K}\)</span> at depth <span class="math inline">\(h\)</span> plus the atoms at depth <span class="math inline">\(\leq h\)</span>. Actually one can realize that the last assumption is not needed for this algorithm to perform exactly the same, with the added benefit of not repeating computations at the atoms that don’t have the maximal depth. The only change is that sometimes <span class="math inline">\(Succ_k\)</span> can be empty, in which case we simply let <span class="math inline">\(newVec_k=\zeta_k\wedge|S\cap R_k|\)</span>. Thus, here in this paper, we define <span class="math inline">\(\mathcal{K}^h\)</span> as only the elements of <span class="math inline">\(\mathcal{K}\)</span> at depth <span class="math inline">\(h\)</span> (the previous intricate definition may still be necessary for the proof of Theorem 1 of <span class="citation" data-cites="MR4178188">Durand et al. (<a href="#ref-MR4178188" role="doc-biblioref">2020</a>)</span>): <span class="math inline">\(\mathcal{K}^h=\{ (i,j)\in\mathcal{K}: \phi(i,j)=h      \}, \:\:\:h\geq 1.\)</span> This is the only deviation from the notation of <span class="citation" data-cites="MR4178188">Durand et al. (<a href="#ref-MR4178188" role="doc-biblioref">2020</a>)</span>. Finally note that in the ongoing analogy with graph theory, the elements of <span class="math inline">\(\mathcal{K}^1\)</span> are the roots of the different trees making up the forest.</p>
-<div id="alg-vstar" class="pseudocode-container quarto-float" data-line-number="true" data-comment-delimiter="//" data-indent-size="1.2em" data-pseudocode-number="1" data-caption-prefix="Algorithm" data-no-end="false" data-line-number-punc=":">
+<div id="alg-vstar" class="pseudocode-container quarto-float" data-pseudocode-number="1" data-indent-size="1.2em" data-caption-prefix="Algorithm" data-comment-delimiter="//" data-line-number="true" data-line-number-punc=":" data-no-end="false">
 <div class="pseudocode">
 \begin{algorithm} \caption{Computation of a given $V^*_{\mathfrak{R}}(S)$} \begin{algorithmic} \Procedure{Vstar}{S, $\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$ with $\mathfrak{R}$ complete} \State $ H \gets \max_{k\in\mathcal{K}} \phi(k) $ \Comment{maximum depth} \For{$h = H-1, \dotsc, 1$} \State $\mathcal{K}^h\gets \{ k\in\mathcal{K} : \phi(k) =h \}$ \State $newVec\gets (0)_{k \in \mathcal{K}^h}$ \For{$k \in \mathcal{K}^h$} \State $Succ_k \gets \{ k' \in \mathcal{K}^{h+1} : R_{k'}\subseteq R_k\}$ \If{$Succ_k=\varnothing$} \State $newVec_k \gets \zeta_k\wedge|S\cap R_k|$ \Else \State $newVec_k \gets \min\left( \zeta_{k}\wedge|S\cap R_k| , \sum_{k'\in Succ_k} Vec_{k'} \right)$ \EndIf \EndFor \State $Vec\gets newVec$ \EndFor \Return $\sum_{k\in\mathcal{K}^1} Vec_k $ \EndProcedure \end{algorithmic} \end{algorithm}
 </div>
@@ -470,7 +470,7 @@ Q^{\mathfrak{pr}}=\{k_b : 1\leq b\leq B \} \cup \{ (i_{j-1,a},i_{j,a}-1) :  1\le
 </div>
 <p>This gives a practical way to speed up computations by first pruning the family before computing any <span class="math inline">\(V^*_{\mathfrak{R}}(S)\)</span>, because <span class="math inline">\(\mathcal{K}^{\mathfrak{pr}}\)</span> is smaller than <span class="math inline">\(\mathcal{K}\)</span>, and by the above Proposition there is no theoretical loss in doing so.</p>
 <p>Furthermore, pruning can be done really simply by following <a href="#alg-vstar" class="quarto-xref">Algorithm 1</a> for <span class="math inline">\(S=\mathbb{N}_m^*\)</span>, and pruning when appropriate. This gives the following <a href="#alg-pruning" class="quarto-xref">Algorithm 2</a>, assuming, for simplicity, that the family is complete. The computation time of the algorithm is the same as <a href="#alg-vstar" class="quarto-xref">Algorithm 1</a>, that is <span class="math inline">\(O(m|\mathcal{K}|)\)</span>. Note that the only differences between <a href="#alg-pruning" class="quarto-xref">Algorithm 2</a> and <a href="#alg-vstar" class="quarto-xref">Algorithm 1</a> are the pruning step and <span class="math inline">\(\zeta_k\)</span> replacing <span class="math inline">\(\zeta_k\wedge|S\cap R_k|\)</span>, because <span class="math inline">\(\zeta_k\leq|R_k|\)</span> and here <span class="math inline">\(S=\mathbb{N}_m^*\)</span>, so <span class="math inline">\(\zeta_k\wedge|\mathbb{N}_m^*\cap R_k|=\zeta_k\)</span>. Also note that the algorithm returns <span class="math inline">\(V^*_{\mathfrak{R}}(\mathbb{N}_m^*)\)</span> as a by-product. The following proposition states that <a href="#alg-pruning" class="quarto-xref">Algorithm 2</a> indeed produces the pruned region as in <a href="#def-pruning" class="quarto-xref">Definition&nbsp;1</a>.</p>
-<div id="alg-pruning" class="pseudocode-container quarto-float" data-line-number="true" data-comment-delimiter="//" data-indent-size="1.2em" data-pseudocode-number="2" data-caption-prefix="Algorithm" data-no-end="false" data-line-number-punc=":">
+<div id="alg-pruning" class="pseudocode-container quarto-float" data-pseudocode-number="2" data-indent-size="1.2em" data-caption-prefix="Algorithm" data-comment-delimiter="//" data-line-number="true" data-line-number-punc=":" data-no-end="false">
 <div class="pseudocode">
 \begin{algorithm} \caption{Pruning of $\mathfrak{R}$} \begin{algorithmic} \Procedure{Pruning}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$ with $\mathfrak{R}$ complete} \State $\mathcal{L}\gets\mathcal{K}$ \State $ H \gets \max_{k\in\mathcal{K}} \phi(k) $ \Comment{maximum depth} \For{$h = H-1, \dotsc, 1$} \State $\mathcal{K}^h\gets \{ k\in\mathcal{K} : \phi(k) =h \}$ \State $newVec\gets (0)_{k \in \mathcal{K}^h}$ \For{$k \in \mathcal{K}^h$} \State $Succ_k \gets \{ k' \in \mathcal{K}^{h+1} : R_{k'}\subseteq R_k\}$ \If{$Succ_k=\varnothing$} \State $newVec_k \gets \zeta_k$ \Else \If{$\zeta_{k} \geq \sum_{k'\in Succ_k} Vec_{k'}$} \State $\mathcal{L}\gets \mathcal{L}\setminus \{ k \}$ \Comment{pruning of the region indexed by $k$} \EndIf \State $newVec_k \gets \min\left( \zeta_{k} , \sum_{k'\in Succ_k} Vec_{k'} \right)$ \EndIf \EndFor \State $Vec\gets newVec$ \EndFor \Return $(\mathcal{L},\sum_{k\in\mathcal{K}^1} Vec_k )$ \EndProcedure \end{algorithmic} \end{algorithm}
 </div>
@@ -492,7 +492,7 @@ Q^{\mathfrak{pr}}=\{k_b : 1\leq b\leq B \} \cup \{ (i_{j-1,a},i_{j,a}-1) :  1\le
 <p><span class="theorem-title"><strong>Example 4 (Continuation of <a href="#exm-toy-forest" class="quarto-xref">Example&nbsp;2</a> and <a href="#exm-toy-leaves" class="quarto-xref">Example&nbsp;3</a>)</strong></span> Assume that the reference family of <a href="#exm-toy-forest" class="quarto-xref">Example&nbsp;2</a> has been labeled as in <a href="#exm-toy-leaves" class="quarto-xref">Example&nbsp;3</a> and completed. Let <span class="math inline">\((i_1,\dotsc, i_{25})\)</span> such that <span class="math inline">\(i_1=7\)</span>, <span class="math inline">\(i_2=1\)</span> and <span class="math inline">\(i_3=24\)</span>. Then for <span class="math inline">\(t=1\)</span>, <span class="math inline">\(k^{(t,1)}=(1,5)\)</span>, <span class="math inline">\(k^{(t,2)}=(2,3)\)</span>, <span class="math inline">\(k^{(t,3)}=(3,3)\)</span> and <span class="math inline">\(h_{\max}(t)=H=3\)</span>. For <span class="math inline">\(t=2\)</span>, <span class="math inline">\(k^{(t,1)}=(1,5)\)</span>, <span class="math inline">\(k^{(t,2)}=(1,1)\)</span>, <span class="math inline">\(k^{(t,3)}\)</span> does not exist and <span class="math inline">\(h_{\max}(t)=2\)</span>. For <span class="math inline">\(t=3\)</span>, <span class="math inline">\(k^{(t,1)}=(8,8)\)</span>, <span class="math inline">\(k^{(t,2)}\)</span> does not exist and <span class="math inline">\(h_{\max}(t)=1\)</span>.</p>
 </div>
 <p>Now we can finally present the new algorithm and the proof that it computes the curve <span class="math inline">\((V^*_{\mathfrak{R}}(S_t))_{t\in\mathbb{N}_m}\)</span>. We present two versions of the algorithm (strictly equivalent): one very formal (<a href="#alg-formal-curve" class="quarto-xref">Algorithm 3</a>), to introduce additional notation used in the proof of <a href="#thm-curve-path" class="quarto-xref">Theorem&nbsp;1</a>, and, later, a simpler version that is the one actually implemented (<a href="#alg-curve" class="quarto-xref">Algorithm 4</a>). Recall that a detailed illustration of the steps of the algorithms will be provided in <a href="#sec-example" class="quarto-xref">Section&nbsp;3.3</a>.</p>
-<div id="alg-formal-curve" class="pseudocode-container quarto-float" data-line-number="true" data-comment-delimiter="//" data-indent-size="1.2em" data-pseudocode-number="3" data-caption-prefix="Algorithm" data-no-end="false" data-line-number-punc=":">
+<div id="alg-formal-curve" class="pseudocode-container quarto-float" data-pseudocode-number="3" data-indent-size="1.2em" data-caption-prefix="Algorithm" data-comment-delimiter="//" data-line-number="true" data-line-number-punc=":" data-no-end="false">
 <div class="pseudocode">
 \begin{algorithm} \caption{Formal computation of $(V^*_{\mathfrak{R}}(S_t))_{0\leq t\leq m}$} \begin{algorithmic} \Procedure{Curve}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$ with $\mathfrak{R}$ complete, path $(S_t)_{1\leq t \leq m}$ with $S_t=\{i_1, \dotsc, i_t\}$} \State $\mathcal{P}^0\gets\{(i,i): 1\leq i \leq n\}$ \Comment{the set of all atoms indices} \State $\mathcal{K}^-_0\gets\{k\in\mathcal{K} : \zeta_k=0 \}$ \State $\eta^0_k\gets0$ for all $k\in\mathcal{K}$ \For{$t=1,\dotsc, m$} \If{$i_t\in\bigcup_{k\in\mathcal{K}^-_{t-1}}R_k$} \State $\mathcal{P}^t \gets \mathcal{P}^{t-1}$ \State $\mathcal{K}^-_t \gets \mathcal{K}^-_{t-1}$ \State $\eta^t_k\gets\eta^{t-1}_k$ for all $k\in\mathcal{K}$ \Else \For{$h=1,\dotsc,h_{\max}(t)$} \State $\eta^t_{k^{(t,h)}}\gets\eta^{t-1}_{k^{(t,h)}} + 1$ \If{$\eta^t_{k^{(t,h)}}&lt;\zeta_k$} \State Pass \Else \State $h^f_t \gets h$ \Comment{final depth} \State $\mathcal{P}^t \gets\left( \mathcal{P}^{t-1}\setminus \{ k\in \mathcal{P}^{t-1} : R_k\subseteq R_{k^{(t,h^f_t)}} \}\right)\cup \{ k^{(t,h^f_t)} \}$ \State $\mathcal{K}^-_t \gets \mathcal{K}^-_{t-1} \cup \{k^{(t,h^f_t)}\}$ \State Break the loop \EndIf \EndFor \If{the loop has been broken} \State $\eta^t_k\gets\eta^{t-1}_k$ for all $k\in\mathcal{K}$ not visited during the loop, that is all $k\not\in\{k^{(t,h)}, 1\leq h\leq h^f_t \}$ \Else \State $\mathcal{P}^t \gets \mathcal{P}^{t-1}$ \State $\mathcal{K}^-_t \gets \mathcal{K}^-_{t-1}$ \State $\eta^t_k\gets\eta^{t-1}_k$ for all $k\in\mathcal{K}$ not visited during the loop, that is all $k\not\in\{k^{(t,h)}, 1\leq h\leq h_{\max}(t) \}$ \EndIf \EndIf \EndFor \Return $\mathcal{P}^t, \eta^t_k$ for all $t=1,\dotsc, m$ and $k\in\mathcal{K}$ \EndProcedure \end{algorithmic} \end{algorithm}
 </div>
@@ -521,7 +521,7 @@ V^*_{\mathfrak{R}}(S_t)  = \sum_{{k\in \mathcal{P}^t}} \zeta_{k}\wedge|S_t \cap 
 <p><span class="proof-title"><em>Proof</em>. </span>From <span class="math inline">\(\eqref{eq_vstar_equal_sum_eta}\)</span>, <span class="math inline">\(V^*_{\mathfrak{R}}(S_{t+1})=\sum_{k\in\mathcal{K}^1} \eta_k^{t+1}\)</span> and <span class="math inline">\(V^*_{\mathfrak{R}}(S_{t})=\sum_{k\in\mathcal{K}^1} \eta_k^{t}\)</span>. If <span class="math inline">\(i_{t+1}\in \bigcup_{k\in\mathcal{K}^-_t}R_k\)</span>, <span class="math inline">\(\eta_k^{t+1}=\eta_k^{t}\)</span> for all <span class="math inline">\(k\in\mathcal{K}^1\)</span>. If not, <span class="math inline">\(\eta_k^{t+1}=\eta_k^{t}\)</span> for all <span class="math inline">\(k\in\mathcal{K}^1\)</span>, <span class="math inline">\(k\neq k^{(t+1,1)}\)</span>, whereas for <span class="math inline">\(k= k^{(t+1,1)}\)</span>, <span class="math inline">\(\eta_k^{t+1}=\eta_k^{t}+1\)</span>. <span class="math inline">\(\square\)</span></p>
 </div>
 <p>We note that, from <a href="#thm-curve-path" class="quarto-xref">Theorem&nbsp;1</a> and <a href="#cor-easy-impl" class="quarto-xref">Corollary&nbsp;1</a>, if one is only interested in the computation of the curve <span class="math inline">\(\left(V^*_{\mathfrak{R}}(S_{t})\right)_{1\leq t\leq m}\)</span>, tracking <span class="math inline">\(\mathcal{P}^t\)</span> is actually useless, what is important is to track and update <span class="math inline">\(\mathcal{K}^-_t\)</span> correctly. Hence the simpler, alternative <a href="#alg-curve" class="quarto-xref">Algorithm 4</a>. Note that <a href="#alg-curve" class="quarto-xref">Algorithm 4</a> is less formal than <a href="#alg-formal-curve" class="quarto-xref">Algorithm 3</a>: as in <a href="#alg-vstar" class="quarto-xref">Algorithm 1</a> and <a href="#alg-pruning" class="quarto-xref">Algorithm 2</a>, it recycles notation (mimicking the actual code implementation) so the <span class="math inline">\(t\)</span> subscript or superscript is dropped from the <span class="math inline">\(\mathcal{K}^-_t\)</span> and the <span class="math inline">\(\eta_k^t\)</span>. In <a href="#alg-curve" class="quarto-xref">Algorithm 4</a>, the notation <span class="math inline">\(V_t\)</span> is actually equal to <span class="math inline">\(V^*_{\mathfrak{R}}(S_{t})\)</span> by <a href="#cor-easy-impl" class="quarto-xref">Corollary&nbsp;1</a>.</p>
-<div id="alg-curve" class="pseudocode-container quarto-float" data-line-number="true" data-comment-delimiter="//" data-indent-size="1.2em" data-pseudocode-number="4" data-caption-prefix="Algorithm" data-no-end="false" data-line-number-punc=":">
+<div id="alg-curve" class="pseudocode-container quarto-float" data-pseudocode-number="4" data-indent-size="1.2em" data-caption-prefix="Algorithm" data-comment-delimiter="//" data-line-number="true" data-line-number-punc=":" data-no-end="false">
 <div class="pseudocode">
 \begin{algorithm} \caption{Practical computation of $(V^*_{\mathfrak{R}}(S_t))_{0\leq t\leq m}$} \begin{algorithmic} \Procedure{Curve}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$ with $\mathfrak{R}$ complete, path $(S_t)_{1\leq t \leq m}$ with $S_t=\{i_1, \dotsc, i_t\}$} \State $V_0\gets 0$ \State $\mathcal{K}^-\gets\{k\in\mathcal{K} : \zeta_k=0 \}$ \State $\eta_k\gets 0$ for all $k\in\mathcal{K}$ \For{$t=1,\dotsc, m$} \If{$i_t\in\bigcup_{k\in\mathcal{K}^-}R_k$} \State $V_{t}\gets V_{t-1}$ \Else \For{$h=1,\dotsc,h_{\max}(t)$} \State find $k^{(t,h)}\in\mathcal{K}^{h}$ such that $i_t\in R_{k^{(t,h)}}$ \State $\eta_{k^{(t,h)}}\gets\eta_{k^{(t,h)}} + 1$ \If{$\eta_{k^{(t,h)}}&lt;\zeta_k$} \State pass \Else \State $\mathcal{K}^- \gets \mathcal{K}^-\cup \{ k^{(t,h)} \}$ \State break the loop \EndIf \EndFor \State $V_{t}\gets V_{t-1} + 1$ \EndIf \EndFor \Return $(V_t)_{1\leq t \leq m}$ \EndProcedure \end{algorithmic} \end{algorithm}
 </div>
@@ -1415,7 +1415,7 @@ Figure&nbsp;14
 <h1 data-number="6"><span class="header-section-number">6</span> Conclusion</h1>
 <p>In conclusion, we effectively introduced a new algorithm to compute a curve of confidence upper bounds, much faster the previous alternative, with one power of <span class="math inline">\(m\)</span> less in the complexity.</p>
 <p>To develop new confidence upper bounds methodology and test them on simulations, it was previously not conceivable to replicate experiments a sufficient number of times while computing whole curves. For instance, in the simulation study of <span class="citation" data-cites="MR4178188">Durand et al. (<a href="#ref-MR4178188" role="doc-biblioref">2020</a>)</span>, the number of replications chosen was 10 and the whole curve was not computed, only ten values along the curve were computed, for an <code>m</code> set to 12800, that is 0.078% of the curve had been computed. Now, simulation studies with an adequate number of replications and 100% of the curve become feasible.</p>
-<p>A lot of work remains to be done on the <code>sanssouci</code> package. For example, to make the data format of a forest structure <span class="math inline">\((R_k)_{k\in\mathcal{K}}\)</span> less convoluted and more user-friendly is an interesting project. Another one would be to implement inside the package the methods of the paper <span class="citation" data-cites="blain22notip">Blain, Thirion, and Neuvial (<a href="#ref-blain22notip" role="doc-biblioref">2022</a>)</span>, which are currently only available in the Python language <span class="citation" data-cites="10.5555/1593511">(<a href="#ref-10.5555/1593511" role="doc-biblioref">Van Rossum and Drake 2009</a>)</span>, and the methods of the paper <span class="citation" data-cites="JMLR:v25:23-1025">Iqraa, Gilles, and Etienne (<a href="#ref-JMLR:v25:23-1025" role="doc-biblioref">2024</a>)</span>.</p>
+<p>A lot of work remains to be done on the <code>sanssouci</code> package. For example, to make the data format of a forest structure <span class="math inline">\((R_k)_{k\in\mathcal{K}}\)</span> less convoluted and more user-friendly is an interesting project. Another one would be to implement inside the package the methods of the paper <span class="citation" data-cites="blain22notip">Blain, Thirion, and Neuvial (<a href="#ref-blain22notip" role="doc-biblioref">2022</a>)</span>, which are currently only available in the Python language <span class="citation" data-cites="10.5555/1593511">(<a href="#ref-10.5555/1593511" role="doc-biblioref">Van Rossum and Drake 2009</a>)</span>, and the methods of the paper <span class="citation" data-cites="JMLR:v25:23-1025">Meah, Blanchard, and Roquain (<a href="#ref-JMLR:v25:23-1025" role="doc-biblioref">2024</a>)</span>.</p>
 <p>Other current works include the development of new reference families with theoretical JER control that could better account for realistic models, such as models with dependence between the <span class="math inline">\(p\)</span>-values, see for example <span class="citation" data-cites="perrot2023selective">Perrot-Dockès et al. (<a href="#ref-perrot2023selective" role="doc-biblioref">2023</a>)</span>, or models with discreteness.</p>
 </section>
 <section id="acknowledgements" class="level1" data-number="7">
@@ -1452,14 +1452,14 @@ Genovese, Christopher R., and Larry Wasserman. 2006. <span>“Exceedance Control
 <div id="ref-MR2951390" class="csl-entry" role="listitem">
 Goeman, Jelle J., and Aldo Solari. 2011. <span>“Multiple Testing for Exploratory Research.”</span> <em>Statist. Sci.</em> 26 (4): 584–97. <a href="https://doi.org/10.1214/11-STS356">https://doi.org/10.1214/11-STS356</a>.
 </div>
-<div id="ref-JMLR:v25:23-1025" class="csl-entry" role="listitem">
-Iqraa, Meah, Blanchard Gilles, and Roquain Etienne. 2024. <span>“False Discovery Proportion Envelopes with m-Consistency.”</span> <em>Journal of Machine Learning Research</em> 25 (270): 1–52. <a href="http://jmlr.org/papers/v25/23-1025.html">http://jmlr.org/papers/v25/23-1025.html</a>.
-</div>
 <div id="ref-MR468056" class="csl-entry" role="listitem">
 Marcus, Ruth, Eric Peritz, and K. R. Gabriel. 1976. <span>“On Closed Testing Procedures with Special Reference to Ordered Analysis of Variance.”</span> <em>Biometrika</em> 63 (3): 655–60. <a href="https://doi.org/10.1093/biomet/63.3.655">https://doi.org/10.1093/biomet/63.3.655</a>.
 </div>
 <div id="ref-MR1062069" class="csl-entry" role="listitem">
 Massart, P. 1990. <span>“The Tight Constant in the <span>D</span>voretzky-<span>K</span>iefer-<span>W</span>olfowitz Inequality.”</span> <em>Ann. Probab.</em> 18 (3): 1269–83. <a href="http://links.jstor.org/sici?sici=0091-1798(199007)18:3<1269:TTCITD>2.0.CO;2-Q&amp;origin=MSN">http://links.jstor.org/sici?sici=0091-1798(199007)18:3&lt;1269:TTCITD&gt;2.0.CO;2-Q&amp;origin=MSN</a>.
+</div>
+<div id="ref-JMLR:v25:23-1025" class="csl-entry" role="listitem">
+Meah, Iqraa, Gilles Blanchard, and Etienne Roquain. 2024. <span>“False Discovery Proportion Envelopes with m-Consistency.”</span> <em>Journal of Machine Learning Research</em> 25 (270): 1–52. <a href="http://jmlr.org/papers/v25/23-1025.html">http://jmlr.org/papers/v25/23-1025.html</a>.
 </div>
 <div id="ref-MR3305943" class="csl-entry" role="listitem">
 Meijer, Rosa J., Thijmen J. P. Krebs, and Jelle J. Goeman. 2015. <span>“A Region-Based Multiple Testing Method for Hypotheses Ordered in Space or Time.”</span> <em>Stat. Appl. Genet. Mol. Biol.</em> 14 (1): 1–19. <a href="https://doi.org/10.1515/sagmb-2013-0075">https://doi.org/10.1515/sagmb-2013-0075</a>.
@@ -1529,14 +1529,14 @@ loaded via a namespace (and not attached):
 </div>
 <!-- -->
 
-</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{durand2024,
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{durand2025,
   author = {Durand, Guillermo},
   publisher = {Société Française de Statistique},
   title = {A Fast Algorithm to Compute a Curve of Confidence Upper
     Bounds for the {False} {Discovery} {Proportion} Using a Reference
     Family with a Forest Structure},
   journal = {Computo},
-  date = {2024-12-27},
+  date = {2025-01-20},
   url = {https://computo.sfds.asso.fr/algo-curve},
   doi = {xxxx},
   issn = {2824-7795},
@@ -1555,11 +1555,11 @@ loaded via a namespace (and not attached):
     that going from \$S\_t\$ to \$S\_\{t+1\}\$ is done by adding only
     one hypothesis.}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-durand2024" class="csl-entry quarto-appendix-citeas" role="listitem">
-Durand, Guillermo. 2024. <span>“A Fast Algorithm to Compute a Curve of
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-durand2025" class="csl-entry quarto-appendix-citeas" role="listitem">
+Durand, Guillermo. 2025. <span>“A Fast Algorithm to Compute a Curve of
 Confidence Upper Bounds for the False Discovery Proportion Using a
 Reference Family with a Forest Structure.”</span> <em>Computo</em>,
-December. <a href="https://doi.org/xxxx">https://doi.org/xxxx</a>.
+January. <a href="https://doi.org/xxxx">https://doi.org/xxxx</a>.
 </div></div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
