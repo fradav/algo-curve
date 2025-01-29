@@ -1428,7 +1428,7 @@ text(tick, par("usr")[1] - 170, bp$names, srt = 60, xpd = TRUE)
 
 On each scenario, using the fast algorithm is much faster than the naive approach, while pruning always gives a slight improvement over not pruning. 
 
-Comparing scenarios 1 and 2 first, we see that, as expected, there is no significant change in computation time for `naive.not.pruned`, while `naive.pruned` is faster in scenario 1, given that we prune more. But, on the other hand, `fast.not.pruned` and `fast.pruned` are both faster in scenario 2, even if we prune less. This is because, for the regions with signal, said signal is detected and so those regions are quickly saturated, in the sense that we quickly have $\eta_k^t=\zeta_k$ and $k$ added $\cK^-_k$, which saves a lot of time. 
+Comparing scenarios 1 and 2 first, we see that, as expected, there is no significant change in computation time for `naive.not.pruned`, while `naive.pruned` is faster in scenario 1, given that we prune more. But, on the other hand, `fast.not.pruned` and `fast.pruned` are both faster in scenario 2, even if we prune less. This is because, for the regions with signal, said signal is detected and so those regions are quickly saturated, in the sense that we quickly have $\eta_k^t=\zeta_k$ and $k$ added to $\cK^-_k$, which saves a lot of time. 
 
 The comparison between scenarios 3 and 4 is similar, except that this time we prune even less in scenario 4 and so the effect of the saturation is not enough to compensate. Although, with only `n_repl=10`, the statistics seem less accurate, this can be confirmed with additional experiments (`n_repl` can also be set to 100 without problem is we don't include `naive` methods).
 
