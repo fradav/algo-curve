@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Guillermo Durand">
-<meta name="dcterms.date" content="2025-01-29">
+<meta name="dcterms.date" content="2025-01-31">
 <meta name="keywords" content="multiple testing, algorithmic, post hoc inference, false discovery proportion, confidence bound">
 
 <title>A fast algorithm to compute a curve of confidence upper bounds for the False Discovery Proportion using a reference family with a forest structure</title>
@@ -186,14 +186,14 @@ ISSN 2824-7795</p>
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">January 29, 2025</p>
+        <p class="date">January 31, 2025</p>
       </div>
     </div>
                                     
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">January 29, 2025</p>
+        <p class="date-modified">January 31, 2025</p>
       </div>
     </div>
       
@@ -407,7 +407,7 @@ V^*_{\mathfrak{R}}(S) = \min_{Q\in \mathfrak P}\sum_{k'\in Q}\zeta_{k'}\wedge|S\
 \label{eq_vstar_Qpartition}
 \end{equation}\]</span> provided that the family is complete. Here, <span class="math inline">\(\mathfrak P \subseteq \mathcal P(\mathcal{K})\)</span> is the set of subsets of <span class="math inline">\(\mathcal{K}\)</span> that realize a partition, that is, the set of <span class="math inline">\(Q\subseteq\mathcal{K}\)</span> such that the <span class="math inline">\(R_k\)</span>, <span class="math inline">\(k\in Q\)</span>, form a partition of <span class="math inline">\(\mathbb{N}_m^*\)</span>. So the minimum in Equation <span class="math inline">\(\eqref{eq_vstar_Qpartition}\)</span> is over way less elements than in Equation <span class="math inline">\(\eqref{eq_vstar_Q}\)</span>.</p>
 <p>Finally, that paper provides a polynomial algorithm to <span class="math inline">\(V^*_{\mathfrak{R}}(S)\)</span> for a single <span class="math inline">\(S\subseteq\mathbb{N}_m^*\)</span>, which we reproduce here in <a href="#alg-vstar" class="quarto-xref">Algorithm 1</a>. The family is assumed complete, otherwise the first step would be to complete it. In the original paper, <span class="math inline">\(\mathcal{K}^h\)</span> used to designate the elements of <span class="math inline">\(\mathcal{K}\)</span> at depth <span class="math inline">\(h\)</span> plus the atoms at depth <span class="math inline">\(\leq h\)</span>. Actually one can realize that the last assumption is not needed for this algorithm to perform exactly the same, with the added benefit of not repeating computations at the atoms that don’t have the maximal depth. The only change is that sometimes <span class="math inline">\(Succ_k\)</span> can be empty, in which case we simply let <span class="math inline">\(newVec_k=\zeta_k\wedge|S\cap R_k|\)</span>. Thus, here in this paper, we define <span class="math inline">\(\mathcal{K}^h\)</span> as only the elements of <span class="math inline">\(\mathcal{K}\)</span> at depth <span class="math inline">\(h\)</span> (the previous intricate definition may still be necessary for the proof of Theorem 1 of <span class="citation" data-cites="MR4178188">Durand et al. (<a href="#ref-MR4178188" role="doc-biblioref">2020</a>)</span>): <span class="math inline">\(\mathcal{K}^h=\{ (i,j)\in\mathcal{K}: \phi(i,j)=h      \}, \:\:\:h\geq 1.\)</span> This is the only deviation from the notation of <span class="citation" data-cites="MR4178188">Durand et al. (<a href="#ref-MR4178188" role="doc-biblioref">2020</a>)</span>. Finally note that in the ongoing analogy with graph theory, the elements of <span class="math inline">\(\mathcal{K}^1\)</span> are the roots of the different trees making up the forest.</p>
-<div id="alg-vstar" class="pseudocode-container quarto-float" data-comment-delimiter="//" data-caption-prefix="Algorithm" data-line-number="true" data-line-number-punc=":" data-indent-size="1.2em" data-no-end="false" data-pseudocode-number="1">
+<div id="alg-vstar" class="pseudocode-container quarto-float" data-indent-size="1.2em" data-line-number="true" data-no-end="false" data-caption-prefix="Algorithm" data-comment-delimiter="//" data-line-number-punc=":" data-pseudocode-number="1">
 <div class="pseudocode">
 \begin{algorithm} \caption{Computation of a given $V^*_{\mathfrak{R}}(S)$} \begin{algorithmic} \Procedure{Vstar}{S, $\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$ with $\mathfrak{R}$ complete} \State $ H \gets \max_{k\in\mathcal{K}} \phi(k) $ \Comment{maximum depth} \For{$h = H-1, \dotsc, 1$} \State $\mathcal{K}^h\gets \{ k\in\mathcal{K} : \phi(k) =h \}$ \State $newVec\gets (0)_{k \in \mathcal{K}^h}$ \For{$k \in \mathcal{K}^h$} \State $Succ_k \gets \{ k' \in \mathcal{K}^{h+1} : R_{k'}\subseteq R_k\}$ \If{$Succ_k=\varnothing$} \State $newVec_k \gets \zeta_k\wedge|S\cap R_k|$ \Else \State $newVec_k \gets \min\left( \zeta_{k}\wedge|S\cap R_k| , \sum_{k'\in Succ_k} Vec_{k'} \right)$ \EndIf \EndFor \State $Vec\gets newVec$ \EndFor \Return $\sum_{k\in\mathcal{K}^1} Vec_k $ \EndProcedure \end{algorithmic} \end{algorithm}
 </div>
@@ -470,7 +470,7 @@ Q^{\mathfrak{pr}}=\{k_b : 1\leq b\leq B \} \cup \{ (i_{j-1,a},i_{j,a}-1) :  1\le
 </div>
 <p>This gives a practical way to speed up computations by first pruning the family before computing any <span class="math inline">\(V^*_{\mathfrak{R}}(S)\)</span>, because <span class="math inline">\(\mathcal{K}^{\mathfrak{pr}}\)</span> is smaller than <span class="math inline">\(\mathcal{K}\)</span>, and by the above Proposition there is no theoretical loss in doing so.</p>
 <p>Furthermore, pruning can be done really simply by following <a href="#alg-vstar" class="quarto-xref">Algorithm 1</a> for <span class="math inline">\(S=\mathbb{N}_m^*\)</span>, and pruning when appropriate. This gives the following <a href="#alg-pruning" class="quarto-xref">Algorithm 2</a>, assuming, for simplicity, that the family is complete. The computation time of the algorithm is the same as <a href="#alg-vstar" class="quarto-xref">Algorithm 1</a>, that is <span class="math inline">\(O(m|\mathcal{K}|)\)</span>. Note that the only differences between <a href="#alg-pruning" class="quarto-xref">Algorithm 2</a> and <a href="#alg-vstar" class="quarto-xref">Algorithm 1</a> are the pruning step and <span class="math inline">\(\zeta_k\)</span> replacing <span class="math inline">\(\zeta_k\wedge|S\cap R_k|\)</span>, because <span class="math inline">\(\zeta_k\leq|R_k|\)</span> and here <span class="math inline">\(S=\mathbb{N}_m^*\)</span>, so <span class="math inline">\(\zeta_k\wedge|\mathbb{N}_m^*\cap R_k|=\zeta_k\)</span>. Also note that the algorithm returns <span class="math inline">\(V^*_{\mathfrak{R}}(\mathbb{N}_m^*)\)</span> as a by-product. The following proposition states that <a href="#alg-pruning" class="quarto-xref">Algorithm 2</a> indeed produces the pruned region as in <a href="#def-pruning" class="quarto-xref">Definition&nbsp;1</a>.</p>
-<div id="alg-pruning" class="pseudocode-container quarto-float" data-comment-delimiter="//" data-caption-prefix="Algorithm" data-line-number="true" data-line-number-punc=":" data-indent-size="1.2em" data-no-end="false" data-pseudocode-number="2">
+<div id="alg-pruning" class="pseudocode-container quarto-float" data-indent-size="1.2em" data-line-number="true" data-no-end="false" data-caption-prefix="Algorithm" data-comment-delimiter="//" data-line-number-punc=":" data-pseudocode-number="2">
 <div class="pseudocode">
 \begin{algorithm} \caption{Pruning of $\mathfrak{R}$} \begin{algorithmic} \Procedure{Pruning}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$ with $\mathfrak{R}$ complete} \State $\mathcal{L}\gets\mathcal{K}$ \State $ H \gets \max_{k\in\mathcal{K}} \phi(k) $ \Comment{maximum depth} \For{$h = H-1, \dotsc, 1$} \State $\mathcal{K}^h\gets \{ k\in\mathcal{K} : \phi(k) =h \}$ \State $newVec\gets (0)_{k \in \mathcal{K}^h}$ \For{$k \in \mathcal{K}^h$} \State $Succ_k \gets \{ k' \in \mathcal{K}^{h+1} : R_{k'}\subseteq R_k\}$ \If{$Succ_k=\varnothing$} \State $newVec_k \gets \zeta_k$ \Else \If{$\zeta_{k} \geq \sum_{k'\in Succ_k} Vec_{k'}$} \State $\mathcal{L}\gets \mathcal{L}\setminus \{ k \}$ \Comment{pruning of the region indexed by $k$} \EndIf \State $newVec_k \gets \min\left( \zeta_{k} , \sum_{k'\in Succ_k} Vec_{k'} \right)$ \EndIf \EndFor \State $Vec\gets newVec$ \EndFor \Return $(\mathcal{L},\sum_{k\in\mathcal{K}^1} Vec_k )$ \EndProcedure \end{algorithmic} \end{algorithm}
 </div>
@@ -492,7 +492,7 @@ Q^{\mathfrak{pr}}=\{k_b : 1\leq b\leq B \} \cup \{ (i_{j-1,a},i_{j,a}-1) :  1\le
 <p><span class="theorem-title"><strong>Example 4 (Continuation of <a href="#exm-toy-forest" class="quarto-xref">Example&nbsp;2</a> and <a href="#exm-toy-leaves" class="quarto-xref">Example&nbsp;3</a>)</strong></span> Assume that the reference family of <a href="#exm-toy-forest" class="quarto-xref">Example&nbsp;2</a> has been labeled as in <a href="#exm-toy-leaves" class="quarto-xref">Example&nbsp;3</a> and completed. Let <span class="math inline">\((i_1,\dotsc, i_{25})\)</span> such that <span class="math inline">\(i_1=7\)</span>, <span class="math inline">\(i_2=1\)</span> and <span class="math inline">\(i_3=24\)</span>. Then for <span class="math inline">\(t=1\)</span>, <span class="math inline">\(k^{(t,1)}=(1,5)\)</span>, <span class="math inline">\(k^{(t,2)}=(2,3)\)</span>, <span class="math inline">\(k^{(t,3)}=(3,3)\)</span> and <span class="math inline">\(h_{\max}(t)=H=3\)</span>. For <span class="math inline">\(t=2\)</span>, <span class="math inline">\(k^{(t,1)}=(1,5)\)</span>, <span class="math inline">\(k^{(t,2)}=(1,1)\)</span>, <span class="math inline">\(k^{(t,3)}\)</span> does not exist and <span class="math inline">\(h_{\max}(t)=2\)</span>. For <span class="math inline">\(t=3\)</span>, <span class="math inline">\(k^{(t,1)}=(8,8)\)</span>, <span class="math inline">\(k^{(t,2)}\)</span> does not exist and <span class="math inline">\(h_{\max}(t)=1\)</span>.</p>
 </div>
 <p>Now we can finally present the new algorithm and the proof that it computes the curve <span class="math inline">\((V^*_{\mathfrak{R}}(S_t))_{t\in\mathbb{N}_m}\)</span>. We present two versions of the algorithm (strictly equivalent): one very formal (<a href="#alg-formal-curve" class="quarto-xref">Algorithm 3</a>), to introduce additional notation used in the proof of <a href="#thm-curve-path" class="quarto-xref">Theorem&nbsp;1</a>, and, later, a simpler version that is the one actually implemented (<a href="#alg-curve" class="quarto-xref">Algorithm 4</a>). Recall that a detailed illustration of the steps of the algorithms will be provided in <a href="#sec-example" class="quarto-xref">Section&nbsp;3.3</a>.</p>
-<div id="alg-formal-curve" class="pseudocode-container quarto-float" data-comment-delimiter="//" data-caption-prefix="Algorithm" data-line-number="true" data-line-number-punc=":" data-indent-size="1.2em" data-no-end="false" data-pseudocode-number="3">
+<div id="alg-formal-curve" class="pseudocode-container quarto-float" data-indent-size="1.2em" data-line-number="true" data-no-end="false" data-caption-prefix="Algorithm" data-comment-delimiter="//" data-line-number-punc=":" data-pseudocode-number="3">
 <div class="pseudocode">
 \begin{algorithm} \caption{Formal computation of $(V^*_{\mathfrak{R}}(S_t))_{0\leq t\leq m}$} \begin{algorithmic} \Procedure{Curve}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$ with $\mathfrak{R}$ complete, path $(S_t)_{1\leq t \leq m}$ with $S_t=\{i_1, \dotsc, i_t\}$} \State $\mathcal{P}^0\gets\{(i,i): 1\leq i \leq n\}$ \Comment{the set of all atoms indices} \State $\mathcal{K}^-_0\gets\{k\in\mathcal{K} : \zeta_k=0 \}$ \State $\eta^0_k\gets0$ for all $k\in\mathcal{K}$ \For{$t=1,\dotsc, m$} \If{$i_t\in\bigcup_{k\in\mathcal{K}^-_{t-1}}R_k$} \State $\mathcal{P}^t \gets \mathcal{P}^{t-1}$ \State $\mathcal{K}^-_t \gets \mathcal{K}^-_{t-1}$ \State $\eta^t_k\gets\eta^{t-1}_k$ for all $k\in\mathcal{K}$ \Else \For{$h=1,\dotsc,h_{\max}(t)$} \State $\eta^t_{k^{(t,h)}}\gets\eta^{t-1}_{k^{(t,h)}} + 1$ \If{$\eta^t_{k^{(t,h)}}&lt;\zeta_k$} \State Pass \Else \State $h^f_t \gets h$ \Comment{final depth} \State $\mathcal{P}^t \gets\left( \mathcal{P}^{t-1}\setminus \{ k\in \mathcal{P}^{t-1} : R_k\subseteq R_{k^{(t,h^f_t)}} \}\right)\cup \{ k^{(t,h^f_t)} \}$ \State $\mathcal{K}^-_t \gets \mathcal{K}^-_{t-1} \cup \{k^{(t,h^f_t)}\}$ \State Break the loop \EndIf \EndFor \If{the loop has been broken} \State $\eta^t_k\gets\eta^{t-1}_k$ for all $k\in\mathcal{K}$ not visited during the loop, that is all $k\not\in\{k^{(t,h)}, 1\leq h\leq h^f_t \}$ \Else \State $\mathcal{P}^t \gets \mathcal{P}^{t-1}$ \State $\mathcal{K}^-_t \gets \mathcal{K}^-_{t-1}$ \State $\eta^t_k\gets\eta^{t-1}_k$ for all $k\in\mathcal{K}$ not visited during the loop, that is all $k\not\in\{k^{(t,h)}, 1\leq h\leq h_{\max}(t) \}$ \EndIf \EndIf \EndFor \Return $\mathcal{P}^t, \eta^t_k$ for all $t=1,\dotsc, m$ and $k\in\mathcal{K}$ \EndProcedure \end{algorithmic} \end{algorithm}
 </div>
@@ -521,7 +521,7 @@ V^*_{\mathfrak{R}}(S_t)  = \sum_{{k\in \mathcal{P}^t}} \zeta_{k}\wedge|S_t \cap 
 <p><span class="proof-title"><em>Proof</em>. </span>From <span class="math inline">\(\eqref{eq_vstar_equal_sum_eta}\)</span>, <span class="math inline">\(V^*_{\mathfrak{R}}(S_{t+1})=\sum_{k\in\mathcal{K}^1} \eta_k^{t+1}\)</span> and <span class="math inline">\(V^*_{\mathfrak{R}}(S_{t})=\sum_{k\in\mathcal{K}^1} \eta_k^{t}\)</span>. If <span class="math inline">\(i_{t+1}\in \bigcup_{k\in\mathcal{K}^-_t}R_k\)</span>, <span class="math inline">\(\eta_k^{t+1}=\eta_k^{t}\)</span> for all <span class="math inline">\(k\in\mathcal{K}^1\)</span>. If not, <span class="math inline">\(\eta_k^{t+1}=\eta_k^{t}\)</span> for all <span class="math inline">\(k\in\mathcal{K}^1\)</span>, <span class="math inline">\(k\neq k^{(t+1,1)}\)</span>, whereas for <span class="math inline">\(k= k^{(t+1,1)}\)</span>, <span class="math inline">\(\eta_k^{t+1}=\eta_k^{t}+1\)</span>. <span class="math inline">\(\square\)</span></p>
 </div>
 <p>We note that, from <a href="#thm-curve-path" class="quarto-xref">Theorem&nbsp;1</a> and <a href="#cor-easy-impl" class="quarto-xref">Corollary&nbsp;1</a>, if one is only interested in the computation of the curve <span class="math inline">\(\left(V^*_{\mathfrak{R}}(S_{t})\right)_{1\leq t\leq m}\)</span>, tracking <span class="math inline">\(\mathcal{P}^t\)</span> is actually useless, what is important is to track and update <span class="math inline">\(\mathcal{K}^-_t\)</span> correctly. Hence the simpler, alternative <a href="#alg-curve" class="quarto-xref">Algorithm 4</a>. Note that <a href="#alg-curve" class="quarto-xref">Algorithm 4</a> is less formal than <a href="#alg-formal-curve" class="quarto-xref">Algorithm 3</a>: as in <a href="#alg-vstar" class="quarto-xref">Algorithm 1</a> and <a href="#alg-pruning" class="quarto-xref">Algorithm 2</a>, it recycles notation (mimicking the actual code implementation) so the <span class="math inline">\(t\)</span> subscript or superscript is dropped from the <span class="math inline">\(\mathcal{K}^-_t\)</span> and the <span class="math inline">\(\eta_k^t\)</span>. In <a href="#alg-curve" class="quarto-xref">Algorithm 4</a>, the notation <span class="math inline">\(V_t\)</span> is actually equal to <span class="math inline">\(V^*_{\mathfrak{R}}(S_{t})\)</span> by <a href="#cor-easy-impl" class="quarto-xref">Corollary&nbsp;1</a>.</p>
-<div id="alg-curve" class="pseudocode-container quarto-float" data-comment-delimiter="//" data-caption-prefix="Algorithm" data-line-number="true" data-line-number-punc=":" data-indent-size="1.2em" data-no-end="false" data-pseudocode-number="4">
+<div id="alg-curve" class="pseudocode-container quarto-float" data-indent-size="1.2em" data-line-number="true" data-no-end="false" data-caption-prefix="Algorithm" data-comment-delimiter="//" data-line-number-punc=":" data-pseudocode-number="4">
 <div class="pseudocode">
 \begin{algorithm} \caption{Practical computation of $(V^*_{\mathfrak{R}}(S_t))_{0\leq t\leq m}$} \begin{algorithmic} \Procedure{Curve}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$ with $\mathfrak{R}$ complete, path $(S_t)_{1\leq t \leq m}$ with $S_t=\{i_1, \dotsc, i_t\}$} \State $V_0\gets 0$ \State $\mathcal{K}^-\gets\{k\in\mathcal{K} : \zeta_k=0 \}$ \State $\eta_k\gets 0$ for all $k\in\mathcal{K}$ \For{$t=1,\dotsc, m$} \If{$i_t\in\bigcup_{k\in\mathcal{K}^-}R_k$} \State $V_{t}\gets V_{t-1}$ \Else \For{$h=1,\dotsc,h_{\max}(t)$} \State find $k^{(t,h)}\in\mathcal{K}^{h}$ such that $i_t\in R_{k^{(t,h)}}$ \State $\eta_{k^{(t,h)}}\gets\eta_{k^{(t,h)}} + 1$ \If{$\eta_{k^{(t,h)}}&lt;\zeta_k$} \State pass \Else \State $\mathcal{K}^- \gets \mathcal{K}^-\cup \{ k^{(t,h)} \}$ \State break the loop \EndIf \EndFor \State $V_{t}\gets V_{t-1} + 1$ \EndIf \EndFor \Return $(V_t)_{1\leq t \leq m}$ \EndProcedure \end{algorithmic} \end{algorithm}
 </div>
@@ -1033,7 +1033,7 @@ Table&nbsp;1: Differences between the scenarios
 </figure>
 </div>
 <p>For the trivial <span class="math inline">\(\zeta_k\)</span> computation of scenarios 1 and 3, the pruning obviously deletes all non-atom regions so <span class="math inline">\(|\mathcal{K}^{\mathfrak{pr}}|=512\)</span>. Whereas, for the particular instance <span class="math inline">\(\omega\in\Omega\)</span> in the experiments, <span class="math inline">\(|\mathcal{K}^{\mathfrak{pr}}|=541\)</span> for scenario 2, and <span class="math inline">\(|\mathcal{K}^{\mathfrak{pr}}|=573\)</span> for scenario 4. Those results alone illustrate the benefits of pruning with respect to the reduction of the cardinality of the reference family: the regions above atoms with no signal (or no detectable signal in the trivial scenarios) are pruned. The fact that the regions above atoms with detectable signal are not pruned means that they are relevant for the confidences bounds (which had already been demonstrated in the simulation study of <span class="citation" data-cites="MR4178188">Durand et al. (<a href="#ref-MR4178188" role="doc-biblioref">2020</a>)</span>).</p>
-<p>The summary statistics of the computation time in each scenario are presented in <a href="#tbl-benchmark01" class="quarto-xref">Table&nbsp;2</a>, <a href="#tbl-benchmark02" class="quarto-xref">Table&nbsp;3</a>, <a href="#tbl-benchmark03" class="quarto-xref">Table&nbsp;4</a>, and <a href="#tbl-benchmark04" class="quarto-xref">Table&nbsp;5</a>, and they are also presented as boxplots in <a href="#fig-benchmark01" class="quarto-xref">Figure&nbsp;11</a>, <a href="#fig-benchmark02" class="quarto-xref">Figure&nbsp;12</a>, <a href="#fig-benchmark03" class="quarto-xref">Figure&nbsp;13</a> and <a href="#fig-benchmark04" class="quarto-xref">Figure&nbsp;14</a>. The time unit is the second.</p>
+<p>The summary statistics of the computation time in each scenario are presented in <a href="#tbl-benchmark01" class="quarto-xref">Table&nbsp;2</a>, <a href="#tbl-benchmark02" class="quarto-xref">Table&nbsp;3</a>, <a href="#tbl-benchmark03" class="quarto-xref">Table&nbsp;4</a>, and <a href="#tbl-benchmark04" class="quarto-xref">Table&nbsp;5</a>, and they are also presented as boxplots in <a href="#fig-benchmark01" class="quarto-xref">Figure&nbsp;11</a>. The time unit is the second (in logarithmic scale in the boxplots).</p>
 <div class="cell">
 <div id="tbl-benchmark01" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -1355,52 +1355,10 @@ Table&nbsp;5: Scenario 4
 <div id="fig-benchmark01" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-benchmark01-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="algo-curve_files/figure-html/fig-benchmark01-1.svg" id="fig-benchmark01" class="img-fluid figure-img">
+<img src="algo-curve_files/figure-html/fig-benchmark01-1.svg" class="img-fluid figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-benchmark01-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;11
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-benchmark02" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-benchmark02-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="algo-curve_files/figure-html/fig-benchmark02-1.svg" id="fig-benchmark02" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-benchmark02-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;12
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-benchmark03" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-benchmark03-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="algo-curve_files/figure-html/fig-benchmark03-1.svg" id="fig-benchmark03" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-benchmark03-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;13
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-benchmark04" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-benchmark04-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="algo-curve_files/figure-html/fig-benchmark04-1.svg" id="fig-benchmark04" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-benchmark04-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-benchmark01-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11: Computation times in scenario, in log seconds
 </figcaption>
 </figure>
 </div>
@@ -1536,7 +1494,7 @@ loaded via a namespace (and not attached):
     Bounds for the {False} {Discovery} {Proportion} Using a Reference
     Family with a Forest Structure},
   journal = {Computo},
-  date = {2025-01-29},
+  date = {2025-01-31},
   url = {https://computo.sfds.asso.fr/algo-curve},
   doi = {xxxx},
   issn = {2824-7795},
@@ -3233,7 +3191,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-1314"><a href="#cb3-1314" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-1315"><a href="#cb3-1315" aria-hidden="true" tabindex="-1"></a>For the trivial $\zeta_k$ computation of scenarios 1 and 3, the pruning obviously deletes all non-atom regions so $|\cK^{\pr}|=512$. Whereas, for the particular instance $\omega\in\Omega$ in the experiments, $|\cK^{\pr}|=541$ for scenario 2, and $|\cK^{\pr}|=573$ for scenario 4. Those results alone illustrate the benefits of pruning with respect to the reduction of the cardinality of the reference family: the regions above atoms with no signal (or no detectable signal in the trivial scenarios) are pruned. The fact that the regions above atoms with detectable signal are not pruned means that they are relevant for the confidences bounds (which had already been demonstrated in the simulation study of @MR4178188).</span>
 <span id="cb3-1316"><a href="#cb3-1316" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-1317"><a href="#cb3-1317" aria-hidden="true" tabindex="-1"></a>The summary statistics of the computation time in each scenario are presented in @tbl-benchmark01, @tbl-benchmark02, @tbl-benchmark03, and @tbl-benchmark04, and they are also presented as boxplots in @fig-benchmark01, @fig-benchmark02, @fig-benchmark03 and @fig-benchmark04. The time unit is the second.</span>
+<span id="cb3-1317"><a href="#cb3-1317" aria-hidden="true" tabindex="-1"></a>The summary statistics of the computation time in each scenario are presented in @tbl-benchmark01, @tbl-benchmark02, @tbl-benchmark03, and @tbl-benchmark04, and they are also presented as boxplots in @fig-benchmark01. The time unit is the second (in logarithmic scale in the boxplots).</span>
 <span id="cb3-1318"><a href="#cb3-1318" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-1319"><a href="#cb3-1319" aria-hidden="true" tabindex="-1"></a><span class="in">```{r loading, echo=FALSE}</span></span>
 <span id="cb3-1320"><a href="#cb3-1320" aria-hidden="true" tabindex="-1"></a><span class="in">library(microbenchmark)</span></span>
@@ -3280,103 +3238,75 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-1361"><a href="#cb3-1361" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::kable(summary_list[[i]], caption = paste0("Scenario ", i))</span></span>
 <span id="cb3-1362"><a href="#cb3-1362" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb3-1363"><a href="#cb3-1363" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-1364"><a href="#cb3-1364" aria-hidden="true" tabindex="-1"></a><span class="in">```{r echo=FALSE}</span></span>
-<span id="cb3-1365"><a href="#cb3-1365" aria-hidden="true" tabindex="-1"></a><span class="in">def_mar &lt;- c(5, 4, 4, 2) + 0.1</span></span>
-<span id="cb3-1366"><a href="#cb3-1366" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-1367"><a href="#cb3-1367" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-1368"><a href="#cb3-1368" aria-hidden="true" tabindex="-1"></a><span class="in">```{r echo=FALSE}</span></span>
-<span id="cb3-1369"><a href="#cb3-1369" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: fig-benchmark01</span></span>
-<span id="cb3-1370"><a href="#cb3-1370" aria-hidden="true" tabindex="-1"></a><span class="in">#| message: false</span></span>
-<span id="cb3-1371"><a href="#cb3-1371" aria-hidden="true" tabindex="-1"></a><span class="in">#| warning: false</span></span>
-<span id="cb3-1372"><a href="#cb3-1372" aria-hidden="true" tabindex="-1"></a><span class="in">i &lt;- 1</span></span>
-<span id="cb3-1373"><a href="#cb3-1373" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-1374"><a href="#cb3-1374" aria-hidden="true" tabindex="-1"></a><span class="in">par(mar = def_mar + c(3.8, 0, 0, 0))</span></span>
-<span id="cb3-1375"><a href="#cb3-1375" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-1376"><a href="#cb3-1376" aria-hidden="true" tabindex="-1"></a><span class="in">bp &lt;- boxplot(time ~ expr, data=loaded_list[[i]], ylab="time [s]", xlab="", </span></span>
-<span id="cb3-1377"><a href="#cb3-1377" aria-hidden="true" tabindex="-1"></a><span class="in">              ylim=NULL, horizontal=F, main=paste0("Microbenchmark timings, scenario ", i), </span></span>
-<span id="cb3-1378"><a href="#cb3-1378" aria-hidden="true" tabindex="-1"></a><span class="in">              xaxt = "n")</span></span>
-<span id="cb3-1379"><a href="#cb3-1379" aria-hidden="true" tabindex="-1"></a><span class="in">tick &lt;- seq_along(bp$names)</span></span>
-<span id="cb3-1380"><a href="#cb3-1380" aria-hidden="true" tabindex="-1"></a><span class="in">axis(1, at = tick, labels = FALSE)</span></span>
-<span id="cb3-1381"><a href="#cb3-1381" aria-hidden="true" tabindex="-1"></a><span class="in">text(tick, par("usr")[1] - 1.9, bp$names, srt = 60, xpd = TRUE)</span></span>
-<span id="cb3-1382"><a href="#cb3-1382" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-1383"><a href="#cb3-1383" aria-hidden="true" tabindex="-1"></a><span class="in">```{r echo=FALSE}</span></span>
-<span id="cb3-1384"><a href="#cb3-1384" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: fig-benchmark02</span></span>
-<span id="cb3-1385"><a href="#cb3-1385" aria-hidden="true" tabindex="-1"></a><span class="in">#| message: false</span></span>
-<span id="cb3-1386"><a href="#cb3-1386" aria-hidden="true" tabindex="-1"></a><span class="in">#| warning: false</span></span>
-<span id="cb3-1387"><a href="#cb3-1387" aria-hidden="true" tabindex="-1"></a><span class="in">i &lt;- 2</span></span>
-<span id="cb3-1388"><a href="#cb3-1388" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-1389"><a href="#cb3-1389" aria-hidden="true" tabindex="-1"></a><span class="in">par(mar = def_mar + c(3.8, 0, 0, 0))</span></span>
-<span id="cb3-1390"><a href="#cb3-1390" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-1391"><a href="#cb3-1391" aria-hidden="true" tabindex="-1"></a><span class="in">bp &lt;- boxplot(time ~ expr, data=loaded_list[[i]], ylab="time [s]", xlab="", </span></span>
-<span id="cb3-1392"><a href="#cb3-1392" aria-hidden="true" tabindex="-1"></a><span class="in">              ylim=NULL, horizontal=F, main=paste0("Microbenchmark timings, scenario ", i), </span></span>
-<span id="cb3-1393"><a href="#cb3-1393" aria-hidden="true" tabindex="-1"></a><span class="in">              xaxt = "n")</span></span>
-<span id="cb3-1394"><a href="#cb3-1394" aria-hidden="true" tabindex="-1"></a><span class="in">tick &lt;- seq_along(bp$names)</span></span>
-<span id="cb3-1395"><a href="#cb3-1395" aria-hidden="true" tabindex="-1"></a><span class="in">axis(1, at = tick, labels = FALSE)</span></span>
-<span id="cb3-1396"><a href="#cb3-1396" aria-hidden="true" tabindex="-1"></a><span class="in">text(tick, par("usr")[1] - 1.8, bp$names, srt = 60, xpd = TRUE)</span></span>
-<span id="cb3-1397"><a href="#cb3-1397" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-1398"><a href="#cb3-1398" aria-hidden="true" tabindex="-1"></a><span class="in">```{r echo=FALSE}</span></span>
-<span id="cb3-1399"><a href="#cb3-1399" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: fig-benchmark03</span></span>
-<span id="cb3-1400"><a href="#cb3-1400" aria-hidden="true" tabindex="-1"></a><span class="in">#| message: false</span></span>
-<span id="cb3-1401"><a href="#cb3-1401" aria-hidden="true" tabindex="-1"></a><span class="in">#| warning: false</span></span>
-<span id="cb3-1402"><a href="#cb3-1402" aria-hidden="true" tabindex="-1"></a><span class="in">i &lt;- 3</span></span>
-<span id="cb3-1403"><a href="#cb3-1403" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-1404"><a href="#cb3-1404" aria-hidden="true" tabindex="-1"></a><span class="in">par(mar = def_mar + c(3.8, 0, 0, 0))</span></span>
-<span id="cb3-1405"><a href="#cb3-1405" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-1406"><a href="#cb3-1406" aria-hidden="true" tabindex="-1"></a><span class="in">bp &lt;- boxplot(time ~ expr, data=loaded_list[[i]], ylab="time [s]", xlab="", </span></span>
-<span id="cb3-1407"><a href="#cb3-1407" aria-hidden="true" tabindex="-1"></a><span class="in">              ylim=NULL, horizontal=F, main=paste0("Microbenchmark timings, scenario ", i), </span></span>
-<span id="cb3-1408"><a href="#cb3-1408" aria-hidden="true" tabindex="-1"></a><span class="in">              xaxt = "n")</span></span>
-<span id="cb3-1409"><a href="#cb3-1409" aria-hidden="true" tabindex="-1"></a><span class="in">tick &lt;- seq_along(bp$names)</span></span>
-<span id="cb3-1410"><a href="#cb3-1410" aria-hidden="true" tabindex="-1"></a><span class="in">axis(1, at = tick, labels = FALSE)</span></span>
-<span id="cb3-1411"><a href="#cb3-1411" aria-hidden="true" tabindex="-1"></a><span class="in">text(tick, par("usr")[1] - 120, bp$names, srt = 60, xpd = TRUE)</span></span>
-<span id="cb3-1412"><a href="#cb3-1412" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-1413"><a href="#cb3-1413" aria-hidden="true" tabindex="-1"></a><span class="in">```{r echo=FALSE}</span></span>
-<span id="cb3-1414"><a href="#cb3-1414" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: fig-benchmark04</span></span>
-<span id="cb3-1415"><a href="#cb3-1415" aria-hidden="true" tabindex="-1"></a><span class="in">#| message: false</span></span>
-<span id="cb3-1416"><a href="#cb3-1416" aria-hidden="true" tabindex="-1"></a><span class="in">#| warning: false</span></span>
-<span id="cb3-1417"><a href="#cb3-1417" aria-hidden="true" tabindex="-1"></a><span class="in">i &lt;- 4</span></span>
+<span id="cb3-1364"><a href="#cb3-1364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-1365"><a href="#cb3-1365" aria-hidden="true" tabindex="-1"></a><span class="in">```{r fig.height=10, fig.width=10, echo=FALSE}</span></span>
+<span id="cb3-1366"><a href="#cb3-1366" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: fig-benchmark01</span></span>
+<span id="cb3-1367"><a href="#cb3-1367" aria-hidden="true" tabindex="-1"></a><span class="in">#| message: false</span></span>
+<span id="cb3-1368"><a href="#cb3-1368" aria-hidden="true" tabindex="-1"></a><span class="in">#| warning: false</span></span>
+<span id="cb3-1369"><a href="#cb3-1369" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-cap: "Computation times in scenario, in log seconds"</span></span>
+<span id="cb3-1370"><a href="#cb3-1370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-1371"><a href="#cb3-1371" aria-hidden="true" tabindex="-1"></a><span class="in">def_mar &lt;- c(5, 4, 4, 2) + 0.1</span></span>
+<span id="cb3-1372"><a href="#cb3-1372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-1373"><a href="#cb3-1373" aria-hidden="true" tabindex="-1"></a><span class="in">shift_fig &lt;- c(0.307, 0.310, 0.13, 0.145)</span></span>
+<span id="cb3-1374"><a href="#cb3-1374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-1375"><a href="#cb3-1375" aria-hidden="true" tabindex="-1"></a><span class="in">par(mfrow = c(2, 2))</span></span>
+<span id="cb3-1376"><a href="#cb3-1376" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-1377"><a href="#cb3-1377" aria-hidden="true" tabindex="-1"></a><span class="in">for (i in 1:4) {</span></span>
+<span id="cb3-1378"><a href="#cb3-1378" aria-hidden="true" tabindex="-1"></a><span class="in">  par(mar = def_mar + c(3.8, 0, 0, 0))</span></span>
+<span id="cb3-1379"><a href="#cb3-1379" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
+<span id="cb3-1380"><a href="#cb3-1380" aria-hidden="true" tabindex="-1"></a><span class="in">  bp &lt;- boxplot(</span></span>
+<span id="cb3-1381"><a href="#cb3-1381" aria-hidden="true" tabindex="-1"></a><span class="in">    time ~ expr,</span></span>
+<span id="cb3-1382"><a href="#cb3-1382" aria-hidden="true" tabindex="-1"></a><span class="in">    data = loaded_list[[i]],</span></span>
+<span id="cb3-1383"><a href="#cb3-1383" aria-hidden="true" tabindex="-1"></a><span class="in">    ylab = "log seconds",</span></span>
+<span id="cb3-1384"><a href="#cb3-1384" aria-hidden="true" tabindex="-1"></a><span class="in">    xlab = "",</span></span>
+<span id="cb3-1385"><a href="#cb3-1385" aria-hidden="true" tabindex="-1"></a><span class="in">    ylim = NULL,</span></span>
+<span id="cb3-1386"><a href="#cb3-1386" aria-hidden="true" tabindex="-1"></a><span class="in">    horizontal = F,</span></span>
+<span id="cb3-1387"><a href="#cb3-1387" aria-hidden="true" tabindex="-1"></a><span class="in">    main = paste0("Comp. time, scenario ", i),</span></span>
+<span id="cb3-1388"><a href="#cb3-1388" aria-hidden="true" tabindex="-1"></a><span class="in">    xaxt = "n",</span></span>
+<span id="cb3-1389"><a href="#cb3-1389" aria-hidden="true" tabindex="-1"></a><span class="in">    log = "y"</span></span>
+<span id="cb3-1390"><a href="#cb3-1390" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb3-1391"><a href="#cb3-1391" aria-hidden="true" tabindex="-1"></a><span class="in">  tick &lt;- seq_along(bp$names)</span></span>
+<span id="cb3-1392"><a href="#cb3-1392" aria-hidden="true" tabindex="-1"></a><span class="in">  axis(1, at = tick, labels = FALSE)</span></span>
+<span id="cb3-1393"><a href="#cb3-1393" aria-hidden="true" tabindex="-1"></a><span class="in">  text(tick,</span></span>
+<span id="cb3-1394"><a href="#cb3-1394" aria-hidden="true" tabindex="-1"></a><span class="in">       par("usr")[1] - shift_fig[i],</span></span>
+<span id="cb3-1395"><a href="#cb3-1395" aria-hidden="true" tabindex="-1"></a><span class="in">       bp$names,</span></span>
+<span id="cb3-1396"><a href="#cb3-1396" aria-hidden="true" tabindex="-1"></a><span class="in">       srt = 60,</span></span>
+<span id="cb3-1397"><a href="#cb3-1397" aria-hidden="true" tabindex="-1"></a><span class="in">       xpd = TRUE)</span></span>
+<span id="cb3-1398"><a href="#cb3-1398" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb3-1399"><a href="#cb3-1399" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-1400"><a href="#cb3-1400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-1401"><a href="#cb3-1401" aria-hidden="true" tabindex="-1"></a>On each scenario, using the fast algorithm is much faster than the naive approach, while pruning always gives a slight improvement over not pruning. </span>
+<span id="cb3-1402"><a href="#cb3-1402" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-1403"><a href="#cb3-1403" aria-hidden="true" tabindex="-1"></a>Comparing scenarios 1 and 2 first, we see that, as expected, there is no significant change in computation time for <span class="in">`naive.not.pruned`</span>, while <span class="in">`naive.pruned`</span> is faster in scenario 1, given that we prune more. But, on the other hand, <span class="in">`fast.not.pruned`</span> and <span class="in">`fast.pruned`</span> are both faster in scenario 2, even if we prune less. This is because, for the regions with signal, said signal is detected and so those regions are quickly saturated, in the sense that we quickly have $\eta_k^t=\zeta_k$ and $k$ added to $\cK^-_k$, which saves a lot of time. </span>
+<span id="cb3-1404"><a href="#cb3-1404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-1405"><a href="#cb3-1405" aria-hidden="true" tabindex="-1"></a>The comparison between scenarios 3 and 4 is similar, except that this time we prune even less in scenario 4 and so the effect of the saturation is not enough to compensate. Although, with only <span class="in">`n_repl=10`</span>, the statistics seem less accurate, this can be confirmed with additional experiments (<span class="in">`n_repl`</span> can also be set to 100 without problem is we don't include <span class="in">`naive`</span> methods).</span>
+<span id="cb3-1406"><a href="#cb3-1406" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-1407"><a href="#cb3-1407" aria-hidden="true" tabindex="-1"></a>Finally, comparing scenarios 3 &amp; 4 with scenarios 1 &amp; 2, we see that multiplying the number of hypotheses by 10 effectively multiplies the computation time by $\sim10$ when using @alg-curve and by $\sim100$ when using @alg-vstar naively, which illustrates the stated complexities of $O(m|\cK|)$ and $O(m^2|\cK|)$, respectively.</span>
+<span id="cb3-1408"><a href="#cb3-1408" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-1409"><a href="#cb3-1409" aria-hidden="true" tabindex="-1"></a><span class="fu"># Conclusion</span></span>
+<span id="cb3-1410"><a href="#cb3-1410" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-1411"><a href="#cb3-1411" aria-hidden="true" tabindex="-1"></a>In conclusion, we effectively introduced a new algorithm to compute a curve of confidence upper bounds, much faster the previous alternative, with one power of $m$ less in the complexity.</span>
+<span id="cb3-1412"><a href="#cb3-1412" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-1413"><a href="#cb3-1413" aria-hidden="true" tabindex="-1"></a>To develop new confidence upper bounds methodology and test them on simulations, it was previously not conceivable to replicate experiments a sufficient number of times while computing whole curves. For instance, in the simulation study of @MR4178188, the number of replications chosen was 10 and the whole curve was not computed, only ten values along the curve were computed, for an <span class="in">`m`</span> set to 12800, that is 0.078% of the curve had been computed. Now, simulation studies with an adequate number of replications and 100% of the curve become feasible.</span>
+<span id="cb3-1414"><a href="#cb3-1414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-1415"><a href="#cb3-1415" aria-hidden="true" tabindex="-1"></a>A lot of work remains to be done on the <span class="in">`sanssouci`</span> package. For example, to make the data format of a forest structure $(R_k)_{k\in\cK}$ less convoluted and more user-friendly is an interesting project. Another one would be to implement inside the package the methods of the paper @blain22notip, which are currently only available in the Python language <span class="co">[</span><span class="ot">@10.5555/1593511</span><span class="co">]</span>, and the methods of the paper @JMLR:v25:23-1025.</span>
+<span id="cb3-1416"><a href="#cb3-1416" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-1417"><a href="#cb3-1417" aria-hidden="true" tabindex="-1"></a>Other current works include the development of new reference families with theoretical JER control that could better account for realistic models, such as models with dependence between the $p$-values, see for example @perrot2023selective, or models with discreteness.</span>
 <span id="cb3-1418"><a href="#cb3-1418" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-1419"><a href="#cb3-1419" aria-hidden="true" tabindex="-1"></a><span class="in">par(mar = def_mar + c(3.8, 0, 0, 0))</span></span>
+<span id="cb3-1419"><a href="#cb3-1419" aria-hidden="true" tabindex="-1"></a><span class="fu"># Acknowledgements</span></span>
 <span id="cb3-1420"><a href="#cb3-1420" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-1421"><a href="#cb3-1421" aria-hidden="true" tabindex="-1"></a><span class="in">bp &lt;- boxplot(time ~ expr, data=loaded_list[[i]], ylab="time [s]", xlab="", </span></span>
-<span id="cb3-1422"><a href="#cb3-1422" aria-hidden="true" tabindex="-1"></a><span class="in">              ylim=NULL, horizontal=F, main=paste0("Microbenchmark timings, scenario ", i), </span></span>
-<span id="cb3-1423"><a href="#cb3-1423" aria-hidden="true" tabindex="-1"></a><span class="in">              xaxt = "n")</span></span>
-<span id="cb3-1424"><a href="#cb3-1424" aria-hidden="true" tabindex="-1"></a><span class="in">tick &lt;- seq_along(bp$names)</span></span>
-<span id="cb3-1425"><a href="#cb3-1425" aria-hidden="true" tabindex="-1"></a><span class="in">axis(1, at = tick, labels = FALSE)</span></span>
-<span id="cb3-1426"><a href="#cb3-1426" aria-hidden="true" tabindex="-1"></a><span class="in">text(tick, par("usr")[1] - 170, bp$names, srt = 60, xpd = TRUE)</span></span>
-<span id="cb3-1427"><a href="#cb3-1427" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-1428"><a href="#cb3-1428" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-1429"><a href="#cb3-1429" aria-hidden="true" tabindex="-1"></a>On each scenario, using the fast algorithm is much faster than the naive approach, while pruning always gives a slight improvement over not pruning. </span>
-<span id="cb3-1430"><a href="#cb3-1430" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-1431"><a href="#cb3-1431" aria-hidden="true" tabindex="-1"></a>Comparing scenarios 1 and 2 first, we see that, as expected, there is no significant change in computation time for <span class="in">`naive.not.pruned`</span>, while <span class="in">`naive.pruned`</span> is faster in scenario 1, given that we prune more. But, on the other hand, <span class="in">`fast.not.pruned`</span> and <span class="in">`fast.pruned`</span> are both faster in scenario 2, even if we prune less. This is because, for the regions with signal, said signal is detected and so those regions are quickly saturated, in the sense that we quickly have $\eta_k^t=\zeta_k$ and $k$ added to $\cK^-_k$, which saves a lot of time. </span>
-<span id="cb3-1432"><a href="#cb3-1432" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-1433"><a href="#cb3-1433" aria-hidden="true" tabindex="-1"></a>The comparison between scenarios 3 and 4 is similar, except that this time we prune even less in scenario 4 and so the effect of the saturation is not enough to compensate. Although, with only <span class="in">`n_repl=10`</span>, the statistics seem less accurate, this can be confirmed with additional experiments (<span class="in">`n_repl`</span> can also be set to 100 without problem is we don't include <span class="in">`naive`</span> methods).</span>
-<span id="cb3-1434"><a href="#cb3-1434" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-1435"><a href="#cb3-1435" aria-hidden="true" tabindex="-1"></a>Finally, comparing scenarios 3 &amp; 4 with scenarios 1 &amp; 2, we see that multiplying the number of hypotheses by 10 effectively multiplies the computation time by $\sim10$ when using @alg-curve and by $\sim100$ when using @alg-vstar naively, which illustrates the stated complexities of $O(m|\cK|)$ and $O(m^2|\cK|)$, respectively.</span>
-<span id="cb3-1436"><a href="#cb3-1436" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-1437"><a href="#cb3-1437" aria-hidden="true" tabindex="-1"></a><span class="fu"># Conclusion</span></span>
-<span id="cb3-1438"><a href="#cb3-1438" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-1439"><a href="#cb3-1439" aria-hidden="true" tabindex="-1"></a>In conclusion, we effectively introduced a new algorithm to compute a curve of confidence upper bounds, much faster the previous alternative, with one power of $m$ less in the complexity.</span>
-<span id="cb3-1440"><a href="#cb3-1440" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-1441"><a href="#cb3-1441" aria-hidden="true" tabindex="-1"></a>To develop new confidence upper bounds methodology and test them on simulations, it was previously not conceivable to replicate experiments a sufficient number of times while computing whole curves. For instance, in the simulation study of @MR4178188, the number of replications chosen was 10 and the whole curve was not computed, only ten values along the curve were computed, for an <span class="in">`m`</span> set to 12800, that is 0.078% of the curve had been computed. Now, simulation studies with an adequate number of replications and 100% of the curve become feasible.</span>
-<span id="cb3-1442"><a href="#cb3-1442" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-1443"><a href="#cb3-1443" aria-hidden="true" tabindex="-1"></a>A lot of work remains to be done on the <span class="in">`sanssouci`</span> package. For example, to make the data format of a forest structure $(R_k)_{k\in\cK}$ less convoluted and more user-friendly is an interesting project. Another one would be to implement inside the package the methods of the paper @blain22notip, which are currently only available in the Python language <span class="co">[</span><span class="ot">@10.5555/1593511</span><span class="co">]</span>, and the methods of the paper @JMLR:v25:23-1025.</span>
-<span id="cb3-1444"><a href="#cb3-1444" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-1445"><a href="#cb3-1445" aria-hidden="true" tabindex="-1"></a>Other current works include the development of new reference families with theoretical JER control that could better account for realistic models, such as models with dependence between the $p$-values, see for example @perrot2023selective, or models with discreteness.</span>
-<span id="cb3-1446"><a href="#cb3-1446" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-1447"><a href="#cb3-1447" aria-hidden="true" tabindex="-1"></a><span class="fu"># Acknowledgements</span></span>
-<span id="cb3-1448"><a href="#cb3-1448" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-1449"><a href="#cb3-1449" aria-hidden="true" tabindex="-1"></a>This work has been supported by ANR-20-IDEES-0002 (PIA), ANR-19-CHIA-0021 (BISCOTTE), ANR-23-CE40-0018 (BACKUP) and ANR-21-CE23-0035 (ASCAI). Thanks to Romain Périer for being the first to extensively use the new implemented algorithms.</span>
-<span id="cb3-1450"><a href="#cb3-1450" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-1451"><a href="#cb3-1451" aria-hidden="true" tabindex="-1"></a><span class="fu"># References {.unnumbered}</span></span>
-<span id="cb3-1452"><a href="#cb3-1452" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-1453"><a href="#cb3-1453" aria-hidden="true" tabindex="-1"></a>::: {#refs}</span>
-<span id="cb3-1454"><a href="#cb3-1454" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb3-1455"><a href="#cb3-1455" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-1456"><a href="#cb3-1456" aria-hidden="true" tabindex="-1"></a><span class="fu"># Session information {.appendix .unnumbered}</span></span>
-<span id="cb3-1457"><a href="#cb3-1457" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-1458"><a href="#cb3-1458" aria-hidden="true" tabindex="-1"></a><span class="in">```{r session-info}</span></span>
-<span id="cb3-1459"><a href="#cb3-1459" aria-hidden="true" tabindex="-1"></a><span class="in">sessionInfo()</span></span>
-<span id="cb3-1460"><a href="#cb3-1460" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb3-1421"><a href="#cb3-1421" aria-hidden="true" tabindex="-1"></a>This work has been supported by ANR-20-IDEES-0002 (PIA), ANR-19-CHIA-0021 (BISCOTTE), ANR-23-CE40-0018 (BACKUP) and ANR-21-CE23-0035 (ASCAI). Thanks to Romain Périer for being the first to extensively use the new implemented algorithms.</span>
+<span id="cb3-1422"><a href="#cb3-1422" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-1423"><a href="#cb3-1423" aria-hidden="true" tabindex="-1"></a><span class="fu"># References {.unnumbered}</span></span>
+<span id="cb3-1424"><a href="#cb3-1424" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-1425"><a href="#cb3-1425" aria-hidden="true" tabindex="-1"></a>::: {#refs}</span>
+<span id="cb3-1426"><a href="#cb3-1426" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb3-1427"><a href="#cb3-1427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-1428"><a href="#cb3-1428" aria-hidden="true" tabindex="-1"></a><span class="fu"># Session information {.appendix .unnumbered}</span></span>
+<span id="cb3-1429"><a href="#cb3-1429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-1430"><a href="#cb3-1430" aria-hidden="true" tabindex="-1"></a><span class="in">```{r session-info}</span></span>
+<span id="cb3-1431"><a href="#cb3-1431" aria-hidden="true" tabindex="-1"></a><span class="in">sessionInfo()</span></span>
+<span id="cb3-1432"><a href="#cb3-1432" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
     <script type="text/javascript">
