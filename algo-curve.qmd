@@ -1314,7 +1314,7 @@ Differences between the scenarios
 
 For the trivial $\zeta_k$ computation of scenarios 1 and 3, the pruning obviously deletes all non-atom regions so $|\cK^{\pr}|=512$. Whereas, for the particular instance $\omega\in\Omega$ in the experiments, $|\cK^{\pr}|=541$ for scenario 2, and $|\cK^{\pr}|=573$ for scenario 4. Those results alone illustrate the benefits of pruning with respect to the reduction of the cardinality of the reference family: the regions above atoms with no signal (or no detectable signal in the trivial scenarios) are pruned. The fact that the regions above atoms with detectable signal are not pruned means that they are relevant for the confidences bounds (which had already been demonstrated in the simulation study of @MR4178188).
 
-The summary statistics of the computation time in each scenario are presented in @tbl-benchmark01, @tbl-benchmark02, @tbl-benchmark03, and @tbl-benchmark04, and they are also presented as boxplots in @fig-benchmark01, @fig-benchmark02, @fig-benchmark03 and @fig-benchmark04. The time unit is the second.
+The summary statistics of the computation time in each scenario are presented in @tbl-benchmark01, @tbl-benchmark02, @tbl-benchmark03, and @tbl-benchmark04, and they are also presented as boxplots in @fig-benchmark01. The time unit is the second (in logarithmic scale in the boxplots).
 
 ```{r loading, echo=FALSE}
 library(microbenchmark)
@@ -1361,69 +1361,41 @@ i <- 4
 knitr::kable(summary_list[[i]], caption = paste0("Scenario ", i))
 ```
 
-```{r echo=FALSE}
-def_mar <- c(5, 4, 4, 2) + 0.1
-```
 
-```{r echo=FALSE}
+```{r fig.height=10, fig.width=10, echo=FALSE}
 #| label: fig-benchmark01
 #| message: false
 #| warning: false
-i <- 1
+#| fig-cap: "Computation times in scenario, in log seconds"
 
-par(mar = def_mar + c(3.8, 0, 0, 0))
+def_mar <- c(5, 4, 4, 2) + 0.1
 
-bp <- boxplot(time ~ expr, data=loaded_list[[i]], ylab="time [s]", xlab="", 
-              ylim=NULL, horizontal=F, main=paste0("Microbenchmark timings, scenario ", i), 
-              xaxt = "n")
-tick <- seq_along(bp$names)
-axis(1, at = tick, labels = FALSE)
-text(tick, par("usr")[1] - 1.9, bp$names, srt = 60, xpd = TRUE)
-```
-```{r echo=FALSE}
-#| label: fig-benchmark02
-#| message: false
-#| warning: false
-i <- 2
+shift_fig <- c(0.307, 0.310, 0.13, 0.145)
 
-par(mar = def_mar + c(3.8, 0, 0, 0))
+par(mfrow = c(2, 2))
 
-bp <- boxplot(time ~ expr, data=loaded_list[[i]], ylab="time [s]", xlab="", 
-              ylim=NULL, horizontal=F, main=paste0("Microbenchmark timings, scenario ", i), 
-              xaxt = "n")
-tick <- seq_along(bp$names)
-axis(1, at = tick, labels = FALSE)
-text(tick, par("usr")[1] - 1.8, bp$names, srt = 60, xpd = TRUE)
-```
-```{r echo=FALSE}
-#| label: fig-benchmark03
-#| message: false
-#| warning: false
-i <- 3
-
-par(mar = def_mar + c(3.8, 0, 0, 0))
-
-bp <- boxplot(time ~ expr, data=loaded_list[[i]], ylab="time [s]", xlab="", 
-              ylim=NULL, horizontal=F, main=paste0("Microbenchmark timings, scenario ", i), 
-              xaxt = "n")
-tick <- seq_along(bp$names)
-axis(1, at = tick, labels = FALSE)
-text(tick, par("usr")[1] - 120, bp$names, srt = 60, xpd = TRUE)
-```
-```{r echo=FALSE}
-#| label: fig-benchmark04
-#| message: false
-#| warning: false
-i <- 4
-
-par(mar = def_mar + c(3.8, 0, 0, 0))
-
-bp <- boxplot(time ~ expr, data=loaded_list[[i]], ylab="time [s]", xlab="", 
-              ylim=NULL, horizontal=F, main=paste0("Microbenchmark timings, scenario ", i), 
-              xaxt = "n")
-tick <- seq_along(bp$names)
-axis(1, at = tick, labels = FALSE)
-text(tick, par("usr")[1] - 170, bp$names, srt = 60, xpd = TRUE)
+for (i in 1:4) {
+  par(mar = def_mar + c(3.8, 0, 0, 0))
+  
+  bp <- boxplot(
+    time ~ expr,
+    data = loaded_list[[i]],
+    ylab = "log seconds",
+    xlab = "",
+    ylim = NULL,
+    horizontal = F,
+    main = paste0("Comp. time, scenario ", i),
+    xaxt = "n",
+    log = "y"
+  )
+  tick <- seq_along(bp$names)
+  axis(1, at = tick, labels = FALSE)
+  text(tick,
+       par("usr")[1] - shift_fig[i],
+       bp$names,
+       srt = 60,
+       xpd = TRUE)
+}
 ```
 
 On each scenario, using the fast algorithm is much faster than the naive approach, while pruning always gives a slight improvement over not pruning. 
