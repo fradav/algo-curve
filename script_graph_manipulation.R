@@ -75,8 +75,8 @@ for (i in 1:4) {
 ##
 def_mar <- c(5, 4, 4, 2) + 0.1
 
-shift_fig <- c(1.9, 1.8, 120, 170)
-shift_fig <- rep(0, 4)
+shift_fig <- c(0.305, 0.305, 0.1, 0.1)
+# shift_fig <- rep(0, 4)
 
 par(mfrow = c(2, 2))
 
