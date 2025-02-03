@@ -10,7 +10,7 @@ algo-curve.Rproj
 *_cache/
 /cache/
 *_files/
-logo_text_white.pdf
+/logo_text_white.pdf
 algo-curve.pdf
 algo-curve.html
 algo-curve.aux
@@ -18,8 +18,8 @@ algo-curve.blg
 algo-curve.log
 algo-curve.synctex.gz
 algo-curve.toc
-algo-curve.tex
-algo-curve.bbl
+/algo-curve.tex
+/algo-curve.bbl
 README.html
 /.quarto/
 _extensions/

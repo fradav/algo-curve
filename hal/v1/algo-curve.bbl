@@ -1,0 +1,174 @@
+ \newcommand{\noop}[1]{}
+\begin{thebibliography}{20}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Benjamini and Hochberg(1995)]{MR1325392}
+Yoav Benjamini and Yosef Hochberg.
+\newblock Controlling the false discovery rate: a practical and powerful
+  approach to multiple testing.
+\newblock \emph{J. Roy. Statist. Soc. Ser. B}, 57\penalty0 (1):\penalty0
+  289--300, 1995.
+\newblock ISSN 0035-9246.
+\newblock URL \url{https://www.jstor.org/stable/2346101}.
+
+\bibitem[Blain et~al.(2022)Blain, Thirion, and Neuvial]{blain22notip}
+Alexandre Blain, Bertrand Thirion, and Pierre Neuvial.
+\newblock {Notip: Non-parametric True Discovery Proportion control for brain
+  imaging}.
+\newblock \emph{Neuroimage}, 260, October 2022.
+\newblock URL \url{https://doi.org/10.1016/j.neuroimage.2022.119492}.
+
+\bibitem[Blanchard et~al.(2020)Blanchard, Neuvial, and Roquain]{MR4124323}
+Gilles Blanchard, Pierre Neuvial, and Etienne Roquain.
+\newblock Post hoc confidence bounds on false positives using reference
+  families.
+\newblock \emph{Ann. Statist.}, 48\penalty0 (3):\penalty0 1281--1303, 2020.
+\newblock ISSN 0090-5364.
+\newblock \doi{10.1214/19-AOS1847}.
+\newblock URL \url{https://doi.org/10.1214/19-AOS1847}.
+
+\bibitem[Bogdan et~al.(2015)Bogdan, van~den Berg, Sabatti, Su, and
+  Cand\`es]{MR3418717}
+Ma{\l}gorzata Bogdan, Ewout van~den Berg, Chiara Sabatti, Weijie Su, and
+  Emmanuel~J. Cand\`es.
+\newblock S{LOPE}---adaptive variable selection via convex optimization.
+\newblock \emph{Ann. Appl. Stat.}, 9\penalty0 (3):\penalty0 1103--1140, 2015.
+\newblock ISSN 1932-6157,1941-7330.
+\newblock \doi{10.1214/15-AOAS842}.
+\newblock URL \url{https://doi.org/10.1214/15-AOAS842}.
+
+\bibitem[Durand et~al.(2020)Durand, Blanchard, Neuvial, and Roquain]{MR4178188}
+Guillermo Durand, Gilles Blanchard, Pierre Neuvial, and Etienne Roquain.
+\newblock Post hoc false positive control for structured hypotheses.
+\newblock \emph{Scand. J. Stat.}, 47\penalty0 (4):\penalty0 1114--1148, 2020.
+\newblock ISSN 0303-6898.
+\newblock \doi{10.1111/sjos.12453}.
+\newblock URL \url{https://doi.org/10.1111/sjos.12453}.
+
+\bibitem[Dvoretzky et~al.(1956)Dvoretzky, Kiefer, and Wolfowitz]{MR0083864}
+A.~Dvoretzky, J.~Kiefer, and J.~Wolfowitz.
+\newblock Asymptotic minimax character of the sample distribution function and
+  of the classical multinomial estimator.
+\newblock \emph{Ann. Math. Statist.}, 27:\penalty0 642--669, 1956.
+\newblock ISSN 0003-4851.
+\newblock \doi{10.1214/aoms/1177728174}.
+\newblock URL \url{https://doi.org/10.1214/aoms/1177728174}.
+
+\bibitem[Enjalbert-Courrech and Neuvial(2022)]{10.1093/bioinformatics/btac693}
+Nicolas Enjalbert-Courrech and Pierre Neuvial.
+\newblock Powerful and interpretable control of false discoveries in two-group
+  differential expression studies.
+\newblock \emph{Bioinformatics}, 38\penalty0 (23):\penalty0 5214--5221, 10
+  2022.
+\newblock ISSN 1367-4803.
+\newblock \doi{10.1093/bioinformatics/btac693}.
+\newblock URL \url{https://doi.org/10.1093/bioinformatics/btac693}.
+
+\bibitem[Genovese and Wasserman(2006)]{MR2279468}
+Christopher~R. Genovese and Larry Wasserman.
+\newblock Exceedance control of the false discovery proportion.
+\newblock \emph{J. Amer. Statist. Assoc.}, 101\penalty0 (476):\penalty0
+  1408--1417, 2006.
+\newblock ISSN 0162-1459.
+\newblock \doi{10.1198/016214506000000339}.
+\newblock URL \url{https://doi.org/10.1198/016214506000000339}.
+
+\bibitem[Goeman and Solari(2011)]{MR2951390}
+Jelle~J. Goeman and Aldo Solari.
+\newblock Multiple testing for exploratory research.
+\newblock \emph{Statist. Sci.}, 26\penalty0 (4):\penalty0 584--597, 2011.
+\newblock ISSN 0883-4237.
+\newblock \doi{10.1214/11-STS356}.
+\newblock URL \url{https://doi.org/10.1214/11-STS356}.
+
+\bibitem[Marcus et~al.(1976)Marcus, Peritz, and Gabriel]{MR468056}
+Ruth Marcus, Eric Peritz, and K.~R. Gabriel.
+\newblock On closed testing procedures with special reference to ordered
+  analysis of variance.
+\newblock \emph{Biometrika}, 63\penalty0 (3):\penalty0 655--660, 1976.
+\newblock ISSN 0006-3444.
+\newblock \doi{10.1093/biomet/63.3.655}.
+\newblock URL \url{https://doi.org/10.1093/biomet/63.3.655}.
+
+\bibitem[Massart(1990)]{MR1062069}
+P.~Massart.
+\newblock The tight constant in the {D}voretzky-{K}iefer-{W}olfowitz
+  inequality.
+\newblock \emph{Ann. Probab.}, 18\penalty0 (3):\penalty0 1269--1283, 1990.
+\newblock ISSN 0091-1798,2168-894X.
+\newblock URL
+  \url{http://links.jstor.org/sici?sici=0091-1798(199007)18:3<1269:TTCITD>2.0.CO;2-Q&origin=MSN}.
+
+\bibitem[Meah et~al.(2024)Meah, Blanchard, and Roquain]{JMLR:v25:23-1025}
+Iqraa Meah, Gilles Blanchard, and Etienne Roquain.
+\newblock False discovery proportion envelopes with m-consistency.
+\newblock \emph{Journal of Machine Learning Research}, 25\penalty0
+  (270):\penalty0 1--52, 2024.
+\newblock URL \url{http://jmlr.org/papers/v25/23-1025.html}.
+
+\bibitem[Meijer et~al.(2015)Meijer, Krebs, and Goeman]{MR3305943}
+Rosa~J. Meijer, Thijmen J.~P. Krebs, and Jelle~J. Goeman.
+\newblock A region-based multiple testing method for hypotheses ordered in
+  space or time.
+\newblock \emph{Stat. Appl. Genet. Mol. Biol.}, 14\penalty0 (1):\penalty0
+  1--19, 2015.
+\newblock ISSN 2194-6302.
+\newblock \doi{10.1515/sagmb-2013-0075}.
+\newblock URL \url{https://doi.org/10.1515/sagmb-2013-0075}.
+
+\bibitem[Meinshausen(2006)]{MR2279639}
+Nicolai Meinshausen.
+\newblock False discovery control for multiple tests of association under
+  general dependence.
+\newblock \emph{Scand. J. Statist.}, 33\penalty0 (2):\penalty0 227--237, 2006.
+\newblock ISSN 0303-6898.
+\newblock \doi{10.1111/j.1467-9469.2005.00488.x}.
+\newblock URL \url{https://doi.org/10.1111/j.1467-9469.2005.00488.x}.
+
+\bibitem[Mersmann(2024)]{microbenchmark}
+Olaf Mersmann.
+\newblock \emph{microbenchmark: Accurate Timing Functions}, 2024.
+\newblock URL \url{https://CRAN.R-project.org/package=microbenchmark}.
+\newblock R package version 1.5.0.
+
+\bibitem[Neuvial et~al.(2024)Neuvial, Blanchard, Durand, Enjalbert-Courrech,
+  and Roquain]{sanssouci}
+Pierre Neuvial, Gilles Blanchard, Guillermo Durand, Nicolas Enjalbert-Courrech,
+  and Etienne Roquain.
+\newblock \emph{sanssouci: Post Hoc Multiple Testing Inference}, 2024.
+\newblock URL \url{https://sanssouci-org.github.io/sanssouci}.
+\newblock R package version 0.13.0.
+
+\bibitem[Perrot-Dock{\`e}s et~al.(2023)Perrot-Dock{\`e}s, Blanchard, Neuvial,
+  and Roquain]{perrot2023selective}
+Marie Perrot-Dock{\`e}s, Gilles Blanchard, Pierre Neuvial, and Etienne Roquain.
+\newblock Selective inference for false discovery proportion in a hidden markov
+  model.
+\newblock \emph{TEST}, pages 1--27, 2023.
+
+\bibitem[{R Core Team}(2024)]{R-base}
+{R Core Team}.
+\newblock \emph{R: A Language and Environment for Statistical Computing}.
+\newblock R Foundation for Statistical Computing, Vienna, Austria, 2024.
+\newblock URL \url{https://www.R-project.org/}.
+
+\bibitem[Van~Rossum and Drake(2009)]{10.5555/1593511}
+Guido Van~Rossum and Fred~L. Drake.
+\newblock \emph{Python 3 Reference Manual}.
+\newblock CreateSpace, Scotts Valley, CA, 2009.
+\newblock ISBN 1441412697.
+
+\bibitem[Vesely et~al.(2023)Vesely, Finos, and Goeman]{MR4731977}
+Anna Vesely, Livio Finos, and Jelle~J. Goeman.
+\newblock Permutation-based true discovery guarantee by sum tests.
+\newblock \emph{J. R. Stat. Soc. Ser. B. Stat. Methodol.}, 85\penalty0
+  (3):\penalty0 664--683, 2023.
+\newblock ISSN 1369-7412,1467-9868.
+\newblock \doi{10.1093/jrsssb/qkad019}.
+\newblock URL \url{https://doi.org/10.1093/jrsssb/qkad019}.
+
+\end{thebibliography}
