@@ -1,5 +1,8 @@
 project:
   title: "algo-curve"
 
-
-
+diagram:
+  engine:
+    tikz:
+      header-includes:
+        - '\usetikzlibrary{arrows}'

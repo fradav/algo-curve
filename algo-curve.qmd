@@ -177,7 +177,7 @@ Let $m=25$, $R_1 = \{1, \dotsc , 20 \}$, $R_2  =  \{1, 2  \}$, $R_3   =   \{3 , 
 
 :::{#fig-forest-exm}
 
-``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
+``` .tikz
 %%| filename: ../figure-tikz/fig-tikz-01
 \begin{tikzpicture}[scale=1]
  \tikzstyle{quadri}=[circle,draw,text=black, thick]
@@ -216,7 +216,7 @@ For the reference family given in @exm-toy-forest, a partition of atoms is given
 
 :::{#fig-leaves-exm}
 
-``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
+``` tikz 
 %%| filename: ../figure-tikz/fig-tikz-02
 \begin{tikzpicture}[scale=1]
  \tikzstyle{quadri}=[circle,draw,text=black,thick]
@@ -758,7 +758,7 @@ Now assume that we have the following values for the $\zeta_k$'s: $\zeta_{(1,5)}
 
 :::{#fig-zetas}
 
-``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
+``` tikz
 %%| filename: ../figure-tikz/fig-tikz-03
 \begin{tikzpicture}[scale=1]
  \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]
@@ -801,7 +801,7 @@ First, we apply @alg-pruning to the family. This results in pruning $P_{6:7}$ (a
 
 :::{#fig-pruned}
 
-``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
+``` tikz
 %%| filename: ../figure-tikz/fig-tikz-04
 \begin{tikzpicture}[scale=1]
  \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]
@@ -839,7 +839,7 @@ Now we initialize @alg-formal-curve, that is we let $t=0$. Because $\zeta_{(7,7)
 
 :::{#fig-t0}
 
-``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
+``` tikz
 %%| filename: ../figure-tikz/fig-tikz-05
 \begin{tikzpicture}[scale=1]
  \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]
@@ -877,7 +877,7 @@ We move on to $t=1$, with $i_1=11$. $i_1\in P_4\subseteq P_{4:5}\subseteq P_{1:5
 
 :::{#fig-t1}
 
-``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
+``` tikz
 %%| filename: ../figure-tikz/fig-tikz-06
 \begin{tikzpicture}[scale=1]
  \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]
@@ -915,7 +915,7 @@ We move on to $t=2$, with $i_2=17$. $i_1\in P_5\subseteq P_{4:5}\subseteq P_{1:5
 
 :::{#fig-t2}
 
-``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
+``` tikz
 %%| filename: ../figure-tikz/fig-tikz-07
 \begin{tikzpicture}[scale=1]
  \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]
@@ -953,7 +953,7 @@ We move on to $t=3$, with $i_3=12$. $i_3\in P_4\subseteq P_{4:5}\subseteq P_{1:5
 
 :::{#fig-t3}
 
-``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
+``` tikz
 %%| filename: ../figure-tikz/fig-tikz-08
 \begin{tikzpicture}[scale=1]
  \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]
@@ -993,7 +993,7 @@ We move on to $t=5$, with $i_5=18$. $i_5\in P_5\subseteq P_{4:5}\subseteq P_{1:5
 
 :::{#fig-t5}
 
-``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}
+``` tikz
 %%| filename: ../figure-tikz/fig-tikz-09
 \begin{tikzpicture}[scale=1]
  \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]
