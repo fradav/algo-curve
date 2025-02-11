@@ -177,7 +177,7 @@ Let $m=25$, $R_1 = \{1, \dotsc , 20 \}$, $R_2  =  \{1, 2  \}$, $R_3   =   \{3 , 
 
 :::{#fig-forest-exm}
 
-``` .tikz
+``` tikz
 %%| filename: ../figure-tikz/fig-tikz-01
 \begin{tikzpicture}[scale=1]
  \tikzstyle{quadri}=[circle,draw,text=black, thick]
