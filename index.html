@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Guillermo Durand">
-<meta name="dcterms.date" content="2025-02-10">
+<meta name="dcterms.date" content="2025-02-11">
 <meta name="keywords" content="multiple testing, algorithmic, post hoc inference, false discovery proportion, confidence bound">
 
 <title>A fast algorithm to compute a curve of confidence upper bounds for the False Discovery Proportion using a reference family with a forest structure</title>
@@ -89,7 +89,7 @@ div.csl-indent {
 <link href="algo-curve_files/libs/quarto-html/quarto-syntax-highlighting-86daaaaad7353f9cc0c554efc1dd6d94.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="algo-curve_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="algo-curve_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="algo-curve_files/libs/bootstrap/bootstrap-e68e5b51bda23ebd7e525de4502c0438.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="algo-curve_files/libs/bootstrap/bootstrap-f11e999d7f1636233620f09fa30e7671.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="algo-curve_files/libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.js"></script>
 <link href="algo-curve_files/libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.css" rel="stylesheet">
 <style>
@@ -186,14 +186,14 @@ ISSN 2824-7795</p>
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">February 10, 2025</p>
+        <p class="date">February 11, 2025</p>
       </div>
     </div>
                                     
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">February 10, 2025</p>
+        <p class="date-modified">February 11, 2025</p>
       </div>
     </div>
       
@@ -332,7 +332,7 @@ k &amp; \mapsto &amp; 1 + \left| \{k'\in\mathcal{K}: R_k\subsetneq R_{k'} \} \ri
 <div id="fig-forest-exm" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-forest-exm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode" id="fig-forest-exm" data-opt-additional-packages="\usetikzlibrary{arrows}"><pre class="sourceCode tikz code-with-copy"><code class="sourceCode latex"><span id="fig-forest-exm-1"><a href="#fig-forest-exm-1" aria-hidden="true" tabindex="-1"></a><span class="co">%%| filename: ../figure-tikz/fig-tikz-01</span></span>
+<div class="sourceCode" id="fig-forest-exm"><pre class="sourceCode .tikz code-with-copy"><code class="sourceCode latex"><span id="fig-forest-exm-1"><a href="#fig-forest-exm-1" aria-hidden="true" tabindex="-1"></a><span class="co">%%| filename: ../figure-tikz/fig-tikz-01</span></span>
 <span id="fig-forest-exm-2"><a href="#fig-forest-exm-2" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">tikzpicture</span>}[scale=1]</span>
 <span id="fig-forest-exm-3"><a href="#fig-forest-exm-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">\tikzstyle</span>{quadri}=[circle,draw,text=black, thick]</span>
 <span id="fig-forest-exm-4"><a href="#fig-forest-exm-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">\tikzstyle</span>{estun}=[-&gt;,&gt;=latex,very thick]</span>
@@ -366,32 +366,7 @@ Figure&nbsp;1: The regions of <a href="#exm-toy-forest" class="quarto-xref">Exam
 <div id="fig-leaves-exm" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-leaves-exm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode" id="fig-leaves-exm" data-opt-additional-packages="\usetikzlibrary{arrows}"><pre class="sourceCode tikz code-with-copy"><code class="sourceCode latex"><span id="fig-leaves-exm-1"><a href="#fig-leaves-exm-1" aria-hidden="true" tabindex="-1"></a><span class="co">%%| filename: ../figure-tikz/fig-tikz-02</span></span>
-<span id="fig-leaves-exm-2"><a href="#fig-leaves-exm-2" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">tikzpicture</span>}[scale=1]</span>
-<span id="fig-leaves-exm-3"><a href="#fig-leaves-exm-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">\tikzstyle</span>{quadri}=[circle,draw,text=black,thick]</span>
-<span id="fig-leaves-exm-4"><a href="#fig-leaves-exm-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">\tikzstyle</span>{estun}=[-&gt;,&gt;=latex,very thick]</span>
-<span id="fig-leaves-exm-5"><a href="#fig-leaves-exm-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (R1) at (0,3) {<span class="ss">$P_{1:5}$</span>};</span>
-<span id="fig-leaves-exm-6"><a href="#fig-leaves-exm-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri, fill=gray!25] (R2) at (-2,1) {<span class="ss">$P_1$</span>};</span>
-<span id="fig-leaves-exm-7"><a href="#fig-leaves-exm-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (R3) at (0,1) {<span class="ss">$P_{2:3}$</span>};</span>
-<span id="fig-leaves-exm-8"><a href="#fig-leaves-exm-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (R4) at (2,1) {<span class="ss">$P_{4:5}$</span>};</span>
-<span id="fig-leaves-exm-9"><a href="#fig-leaves-exm-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri, dashed,fill=gray!25] (P2) at (-0.5,-1) {<span class="ss">$P_2$</span>};</span>
-<span id="fig-leaves-exm-10"><a href="#fig-leaves-exm-10" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri,fill=gray!25] (R5) at (0.5,-1) {<span class="ss">$P_3$</span>};</span>
-<span id="fig-leaves-exm-11"><a href="#fig-leaves-exm-11" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri,fill=gray!25] (R6) at (1.5,-1) {<span class="ss">$P_4$</span>};</span>
-<span id="fig-leaves-exm-12"><a href="#fig-leaves-exm-12" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri,fill=gray!25] (R7) at (2.5,-1) {<span class="ss">$P_5$</span>};</span>
-<span id="fig-leaves-exm-13"><a href="#fig-leaves-exm-13" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (R8) at (4,3) {<span class="ss">$P_{6:7}$</span>};</span>
-<span id="fig-leaves-exm-14"><a href="#fig-leaves-exm-14" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri,dashed,fill=gray!25] (P6) at (3.5,1) {<span class="ss">$P_6$</span>};</span>
-<span id="fig-leaves-exm-15"><a href="#fig-leaves-exm-15" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri,fill=gray!25] (R9) at (4.5,1) {<span class="ss">$P_7$</span>};</span>
-<span id="fig-leaves-exm-16"><a href="#fig-leaves-exm-16" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri,dashed,fill=gray!25] (P8) at (6,3) {<span class="ss">$P_8$</span>};</span>
-<span id="fig-leaves-exm-17"><a href="#fig-leaves-exm-17" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (R1)--(R2);</span>
-<span id="fig-leaves-exm-18"><a href="#fig-leaves-exm-18" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (R1)--(R3);</span>
-<span id="fig-leaves-exm-19"><a href="#fig-leaves-exm-19" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (R1)--(R4);</span>
-<span id="fig-leaves-exm-20"><a href="#fig-leaves-exm-20" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (R3)--(R5);</span>
-<span id="fig-leaves-exm-21"><a href="#fig-leaves-exm-21" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun,dashed,thick] (R3)--(P2);</span>
-<span id="fig-leaves-exm-22"><a href="#fig-leaves-exm-22" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (R4)--(R6);</span>
-<span id="fig-leaves-exm-23"><a href="#fig-leaves-exm-23" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (R4)--(R7);</span>
-<span id="fig-leaves-exm-24"><a href="#fig-leaves-exm-24" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (R8)--(R9);</span>
-<span id="fig-leaves-exm-25"><a href="#fig-leaves-exm-25" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun,dashed,thick] (R8)--(P6);</span>
-<span id="fig-leaves-exm-26"><a href="#fig-leaves-exm-26" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">tikzpicture</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<img src="algo-curve_files/mediabag/../figure-tikz/fig-tikz-02.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-leaves-exm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2: The regions of <a href="#exm-toy-forest" class="quarto-xref">Example&nbsp;2</a> but with the labels of <a href="#exm-toy-leaves" class="quarto-xref">Example&nbsp;3</a>.
@@ -407,7 +382,7 @@ V^*_{\mathfrak{R}}(S) = \min_{Q\in \mathfrak P}\sum_{k'\in Q}\zeta_{k'}\wedge|S\
 \label{eq_vstar_Qpartition}
 \end{equation}\]</span> provided that the family is complete. Here, <span class="math inline">\(\mathfrak P \subseteq \mathcal P(\mathcal{K})\)</span> is the set of subsets of <span class="math inline">\(\mathcal{K}\)</span> that realize a partition, that is, the set of <span class="math inline">\(Q\subseteq\mathcal{K}\)</span> such that the <span class="math inline">\(R_k\)</span>, <span class="math inline">\(k\in Q\)</span>, form a partition of <span class="math inline">\(\mathbb{N}_m^*\)</span>. So the minimum in Equation <span class="math inline">\(\eqref{eq_vstar_Qpartition}\)</span> is over way less elements than in Equation <span class="math inline">\(\eqref{eq_vstar_Q}\)</span>.</p>
 <p>Finally, that paper provides a polynomial algorithm to <span class="math inline">\(V^*_{\mathfrak{R}}(S)\)</span> for a single <span class="math inline">\(S\subseteq\mathbb{N}_m^*\)</span>, which we reproduce here in <a href="#alg-vstar" class="quarto-xref">Algorithm 1</a>. The family is assumed complete, otherwise the first step would be to complete it. In the original paper, <span class="math inline">\(\mathcal{K}^h\)</span> used to designate the elements of <span class="math inline">\(\mathcal{K}\)</span> at depth <span class="math inline">\(h\)</span> plus the atoms at depth <span class="math inline">\(\leq h\)</span>. Actually one can realize that the last assumption is not needed for this algorithm to perform exactly the same, with the added benefit of not repeating computations at the atoms that don’t have the maximal depth. The only change is that sometimes <span class="math inline">\(Succ_k\)</span> can be empty, in which case we simply let <span class="math inline">\(newVec_k=\zeta_k\wedge|S\cap R_k|\)</span>. Thus, here in this paper, we define <span class="math inline">\(\mathcal{K}^h\)</span> as only the elements of <span class="math inline">\(\mathcal{K}\)</span> at depth <span class="math inline">\(h\)</span> (the previous intricate definition may still be necessary for the proof of Theorem 1 of <span class="citation" data-cites="MR4178188">Durand et al. (<a href="#ref-MR4178188" role="doc-biblioref">2020</a>)</span>): <span class="math inline">\(\mathcal{K}^h=\{ (i,j)\in\mathcal{K}: \phi(i,j)=h      \}, \:\:\:h\geq 1.\)</span> This is the only deviation from the notation of <span class="citation" data-cites="MR4178188">Durand et al. (<a href="#ref-MR4178188" role="doc-biblioref">2020</a>)</span>. Finally note that in the ongoing analogy with graph theory, the elements of <span class="math inline">\(\mathcal{K}^1\)</span> are the roots of the different trees making up the forest.</p>
-<div id="alg-vstar" class="pseudocode-container quarto-float" data-caption-prefix="Algorithm" data-pseudocode-number="1" data-no-end="false" data-indent-size="1.2em" data-line-number="true" data-comment-delimiter="//" data-line-number-punc=":">
+<div id="alg-vstar" class="pseudocode-container quarto-float" data-caption-prefix="Algorithm" data-line-number="true" data-line-number-punc=":" data-no-end="false" data-pseudocode-number="1" data-comment-delimiter="//" data-indent-size="1.2em">
 <div class="pseudocode">
 \begin{algorithm} \caption{Computation of a given $V^*_{\mathfrak{R}}(S)$} \begin{algorithmic} \Procedure{Vstar}{S, $\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$ with $\mathfrak{R}$ complete} \State $ H \gets \max_{k\in\mathcal{K}} \phi(k) $ \Comment{maximum depth} \For{$h = H-1, \dotsc, 1$} \State $\mathcal{K}^h\gets \{ k\in\mathcal{K} : \phi(k) =h \}$ \State $newVec\gets (0)_{k \in \mathcal{K}^h}$ \For{$k \in \mathcal{K}^h$} \State $Succ_k \gets \{ k' \in \mathcal{K}^{h+1} : R_{k'}\subseteq R_k\}$ \If{$Succ_k=\varnothing$} \State $newVec_k \gets \zeta_k\wedge|S\cap R_k|$ \Else \State $newVec_k \gets \min\left( \zeta_{k}\wedge|S\cap R_k| , \sum_{k'\in Succ_k} Vec_{k'} \right)$ \EndIf \EndFor \State $Vec\gets newVec$ \EndFor \Return $\sum_{k\in\mathcal{K}^1} Vec_k $ \EndProcedure \end{algorithmic} \end{algorithm}
 </div>
@@ -470,7 +445,7 @@ Q^{\mathfrak{pr}}=\{k_b : 1\leq b\leq B \} \cup \{ (i_{j-1,a},i_{j,a}-1) :  1\le
 </div>
 <p>This gives a practical way to speed up computations by first pruning the family before computing any <span class="math inline">\(V^*_{\mathfrak{R}}(S)\)</span>, because <span class="math inline">\(\mathcal{K}^{\mathfrak{pr}}\)</span> is smaller than <span class="math inline">\(\mathcal{K}\)</span>, and by the above Proposition there is no theoretical loss in doing so.</p>
 <p>Furthermore, pruning can be done really simply by following <a href="#alg-vstar" class="quarto-xref">Algorithm 1</a> for <span class="math inline">\(S=\mathbb{N}_m^*\)</span>, and pruning when appropriate. This gives the following <a href="#alg-pruning" class="quarto-xref">Algorithm 2</a>, assuming, for simplicity, that the family is complete. The computation time of the algorithm is the same as <a href="#alg-vstar" class="quarto-xref">Algorithm 1</a>, that is <span class="math inline">\(O(m|\mathcal{K}|)\)</span>. Note that the only differences between <a href="#alg-pruning" class="quarto-xref">Algorithm 2</a> and <a href="#alg-vstar" class="quarto-xref">Algorithm 1</a> are the pruning step and <span class="math inline">\(\zeta_k\)</span> replacing <span class="math inline">\(\zeta_k\wedge|S\cap R_k|\)</span>, because <span class="math inline">\(\zeta_k\leq|R_k|\)</span> and here <span class="math inline">\(S=\mathbb{N}_m^*\)</span>, so <span class="math inline">\(\zeta_k\wedge|\mathbb{N}_m^*\cap R_k|=\zeta_k\)</span>. Also note that the algorithm returns <span class="math inline">\(V^*_{\mathfrak{R}}(\mathbb{N}_m^*)\)</span> as a by-product. The following proposition states that <a href="#alg-pruning" class="quarto-xref">Algorithm 2</a> indeed produces the pruned region as in <a href="#def-pruning" class="quarto-xref">Definition&nbsp;1</a>.</p>
-<div id="alg-pruning" class="pseudocode-container quarto-float" data-caption-prefix="Algorithm" data-pseudocode-number="2" data-no-end="false" data-indent-size="1.2em" data-line-number="true" data-comment-delimiter="//" data-line-number-punc=":">
+<div id="alg-pruning" class="pseudocode-container quarto-float" data-caption-prefix="Algorithm" data-line-number="true" data-line-number-punc=":" data-no-end="false" data-pseudocode-number="2" data-comment-delimiter="//" data-indent-size="1.2em">
 <div class="pseudocode">
 \begin{algorithm} \caption{Pruning of $\mathfrak{R}$} \begin{algorithmic} \Procedure{Pruning}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$ with $\mathfrak{R}$ complete} \State $\mathcal{L}\gets\mathcal{K}$ \State $ H \gets \max_{k\in\mathcal{K}} \phi(k) $ \Comment{maximum depth} \For{$h = H-1, \dotsc, 1$} \State $\mathcal{K}^h\gets \{ k\in\mathcal{K} : \phi(k) =h \}$ \State $newVec\gets (0)_{k \in \mathcal{K}^h}$ \For{$k \in \mathcal{K}^h$} \State $Succ_k \gets \{ k' \in \mathcal{K}^{h+1} : R_{k'}\subseteq R_k\}$ \If{$Succ_k=\varnothing$} \State $newVec_k \gets \zeta_k$ \Else \If{$\zeta_{k} \geq \sum_{k'\in Succ_k} Vec_{k'}$} \State $\mathcal{L}\gets \mathcal{L}\setminus \{ k \}$ \Comment{pruning of the region indexed by $k$} \EndIf \State $newVec_k \gets \min\left( \zeta_{k} , \sum_{k'\in Succ_k} Vec_{k'} \right)$ \EndIf \EndFor \State $Vec\gets newVec$ \EndFor \Return $(\mathcal{L},\sum_{k\in\mathcal{K}^1} Vec_k )$ \EndProcedure \end{algorithmic} \end{algorithm}
 </div>
@@ -492,7 +467,7 @@ Q^{\mathfrak{pr}}=\{k_b : 1\leq b\leq B \} \cup \{ (i_{j-1,a},i_{j,a}-1) :  1\le
 <p><span class="theorem-title"><strong>Example 4 (Continuation of <a href="#exm-toy-forest" class="quarto-xref">Example&nbsp;2</a> and <a href="#exm-toy-leaves" class="quarto-xref">Example&nbsp;3</a>)</strong></span> Assume that the reference family of <a href="#exm-toy-forest" class="quarto-xref">Example&nbsp;2</a> has been labeled as in <a href="#exm-toy-leaves" class="quarto-xref">Example&nbsp;3</a> and completed. Let <span class="math inline">\((i_1,\dotsc, i_{25})\)</span> such that <span class="math inline">\(i_1=7\)</span>, <span class="math inline">\(i_2=1\)</span> and <span class="math inline">\(i_3=24\)</span>. Then for <span class="math inline">\(t=1\)</span>, <span class="math inline">\(k^{(t,1)}=(1,5)\)</span>, <span class="math inline">\(k^{(t,2)}=(2,3)\)</span>, <span class="math inline">\(k^{(t,3)}=(3,3)\)</span> and <span class="math inline">\(h_{\max}(t)=H=3\)</span>. For <span class="math inline">\(t=2\)</span>, <span class="math inline">\(k^{(t,1)}=(1,5)\)</span>, <span class="math inline">\(k^{(t,2)}=(1,1)\)</span>, <span class="math inline">\(k^{(t,3)}\)</span> does not exist and <span class="math inline">\(h_{\max}(t)=2\)</span>. For <span class="math inline">\(t=3\)</span>, <span class="math inline">\(k^{(t,1)}=(8,8)\)</span>, <span class="math inline">\(k^{(t,2)}\)</span> does not exist and <span class="math inline">\(h_{\max}(t)=1\)</span>.</p>
 </div>
 <p>Now we can finally present the new algorithm and the proof that it computes the curve <span class="math inline">\((V^*_{\mathfrak{R}}(S_t))_{t\in\mathbb{N}_m}\)</span>. We present two versions of the algorithm (strictly equivalent): one very formal (<a href="#alg-formal-curve" class="quarto-xref">Algorithm 3</a>), to introduce additional notation used in the proof of <a href="#thm-curve-path" class="quarto-xref">Theorem&nbsp;1</a>, and, later, a simpler version that is the one actually implemented (<a href="#alg-curve" class="quarto-xref">Algorithm 4</a>). Recall that a detailed illustration of the steps of the algorithms will be provided in <a href="#sec-example" class="quarto-xref">Section&nbsp;3.3</a>.</p>
-<div id="alg-formal-curve" class="pseudocode-container quarto-float" data-caption-prefix="Algorithm" data-pseudocode-number="3" data-no-end="false" data-indent-size="1.2em" data-line-number="true" data-comment-delimiter="//" data-line-number-punc=":">
+<div id="alg-formal-curve" class="pseudocode-container quarto-float" data-caption-prefix="Algorithm" data-line-number="true" data-line-number-punc=":" data-no-end="false" data-pseudocode-number="3" data-comment-delimiter="//" data-indent-size="1.2em">
 <div class="pseudocode">
 \begin{algorithm} \caption{Formal computation of $(V^*_{\mathfrak{R}}(S_t))_{0\leq t\leq m}$} \begin{algorithmic} \Procedure{Curve}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$ with $\mathfrak{R}$ complete, path $(S_t)_{1\leq t \leq m}$ with $S_t=\{i_1, \dotsc, i_t\}$} \State $\mathcal{P}^0\gets\{(i,i): 1\leq i \leq n\}$ \Comment{the set of all atoms indices} \State $\mathcal{K}^-_0\gets\{k\in\mathcal{K} : \zeta_k=0 \}$ \State $\eta^0_k\gets0$ for all $k\in\mathcal{K}$ \For{$t=1,\dotsc, m$} \If{$i_t\in\bigcup_{k\in\mathcal{K}^-_{t-1}}R_k$} \State $\mathcal{P}^t \gets \mathcal{P}^{t-1}$ \State $\mathcal{K}^-_t \gets \mathcal{K}^-_{t-1}$ \State $\eta^t_k\gets\eta^{t-1}_k$ for all $k\in\mathcal{K}$ \Else \For{$h=1,\dotsc,h_{\max}(t)$} \State $\eta^t_{k^{(t,h)}}\gets\eta^{t-1}_{k^{(t,h)}} + 1$ \If{$\eta^t_{k^{(t,h)}}&lt;\zeta_k$} \State Pass \Else \State $h^f_t \gets h$ \Comment{final depth} \State $\mathcal{P}^t \gets\left( \mathcal{P}^{t-1}\setminus \{ k\in \mathcal{P}^{t-1} : R_k\subseteq R_{k^{(t,h^f_t)}} \}\right)\cup \{ k^{(t,h^f_t)} \}$ \State $\mathcal{K}^-_t \gets \mathcal{K}^-_{t-1} \cup \{k^{(t,h^f_t)}\}$ \State Break the loop \EndIf \EndFor \If{the loop has been broken} \State $\eta^t_k\gets\eta^{t-1}_k$ for all $k\in\mathcal{K}$ not visited during the loop, that is all $k\not\in\{k^{(t,h)}, 1\leq h\leq h^f_t \}$ \Else \State $\mathcal{P}^t \gets \mathcal{P}^{t-1}$ \State $\mathcal{K}^-_t \gets \mathcal{K}^-_{t-1}$ \State $\eta^t_k\gets\eta^{t-1}_k$ for all $k\in\mathcal{K}$ not visited during the loop, that is all $k\not\in\{k^{(t,h)}, 1\leq h\leq h_{\max}(t) \}$ \EndIf \EndIf \EndFor \Return $\mathcal{P}^t, \eta^t_k$ for all $t=1,\dotsc, m$ and $k\in\mathcal{K}$ \EndProcedure \end{algorithmic} \end{algorithm}
 </div>
@@ -521,7 +496,7 @@ V^*_{\mathfrak{R}}(S_t)  = \sum_{{k\in \mathcal{P}^t}} \zeta_{k}\wedge|S_t \cap 
 <p><span class="proof-title"><em>Proof</em>. </span>From <span class="math inline">\(\eqref{eq_vstar_equal_sum_eta}\)</span>, <span class="math inline">\(V^*_{\mathfrak{R}}(S_{t+1})=\sum_{k\in\mathcal{K}^1} \eta_k^{t+1}\)</span> and <span class="math inline">\(V^*_{\mathfrak{R}}(S_{t})=\sum_{k\in\mathcal{K}^1} \eta_k^{t}\)</span>. If <span class="math inline">\(i_{t+1}\in \bigcup_{k\in\mathcal{K}^-_t}R_k\)</span>, <span class="math inline">\(\eta_k^{t+1}=\eta_k^{t}\)</span> for all <span class="math inline">\(k\in\mathcal{K}^1\)</span>. If not, <span class="math inline">\(\eta_k^{t+1}=\eta_k^{t}\)</span> for all <span class="math inline">\(k\in\mathcal{K}^1\)</span>, <span class="math inline">\(k\neq k^{(t+1,1)}\)</span>, whereas for <span class="math inline">\(k= k^{(t+1,1)}\)</span>, <span class="math inline">\(\eta_k^{t+1}=\eta_k^{t}+1\)</span>. <span class="math inline">\(\square\)</span></p>
 </div>
 <p>We note that, from <a href="#thm-curve-path" class="quarto-xref">Theorem&nbsp;1</a> and <a href="#cor-easy-impl" class="quarto-xref">Corollary&nbsp;1</a>, if one is only interested in the computation of the curve <span class="math inline">\(\left(V^*_{\mathfrak{R}}(S_{t})\right)_{1\leq t\leq m}\)</span>, tracking <span class="math inline">\(\mathcal{P}^t\)</span> is actually useless, what is important is to track and update <span class="math inline">\(\mathcal{K}^-_t\)</span> correctly. Hence the simpler, alternative <a href="#alg-curve" class="quarto-xref">Algorithm 4</a>. Note that <a href="#alg-curve" class="quarto-xref">Algorithm 4</a> is less formal than <a href="#alg-formal-curve" class="quarto-xref">Algorithm 3</a>: as in <a href="#alg-vstar" class="quarto-xref">Algorithm 1</a> and <a href="#alg-pruning" class="quarto-xref">Algorithm 2</a>, it recycles notation (mimicking the actual code implementation) so the <span class="math inline">\(t\)</span> subscript or superscript is dropped from the <span class="math inline">\(\mathcal{K}^-_t\)</span> and the <span class="math inline">\(\eta_k^t\)</span>. In <a href="#alg-curve" class="quarto-xref">Algorithm 4</a>, the notation <span class="math inline">\(V_t\)</span> is actually equal to <span class="math inline">\(V^*_{\mathfrak{R}}(S_{t})\)</span> by <a href="#cor-easy-impl" class="quarto-xref">Corollary&nbsp;1</a>.</p>
-<div id="alg-curve" class="pseudocode-container quarto-float" data-caption-prefix="Algorithm" data-pseudocode-number="4" data-no-end="false" data-indent-size="1.2em" data-line-number="true" data-comment-delimiter="//" data-line-number-punc=":">
+<div id="alg-curve" class="pseudocode-container quarto-float" data-caption-prefix="Algorithm" data-line-number="true" data-line-number-punc=":" data-no-end="false" data-pseudocode-number="4" data-comment-delimiter="//" data-indent-size="1.2em">
 <div class="pseudocode">
 \begin{algorithm} \caption{Practical computation of $(V^*_{\mathfrak{R}}(S_t))_{0\leq t\leq m}$} \begin{algorithmic} \Procedure{Curve}{$\mathfrak{R}=(R_{k},\zeta_{k})_{k\in\mathcal{K}}$ with $\mathfrak{R}$ complete, path $(S_t)_{1\leq t \leq m}$ with $S_t=\{i_1, \dotsc, i_t\}$} \State $V_0\gets 0$ \State $\mathcal{K}^-\gets\{k\in\mathcal{K} : \zeta_k=0 \}$ \State $\eta_k\gets 0$ for all $k\in\mathcal{K}$ \For{$t=1,\dotsc, m$} \If{$i_t\in\bigcup_{k\in\mathcal{K}^-}R_k$} \State $V_{t}\gets V_{t-1}$ \Else \For{$h=1,\dotsc,h_{\max}(t)$} \State find $k^{(t,h)}\in\mathcal{K}^{h}$ such that $i_t\in R_{k^{(t,h)}}$ \State $\eta_{k^{(t,h)}}\gets\eta_{k^{(t,h)}} + 1$ \If{$\eta_{k^{(t,h)}}&lt;\zeta_k$} \State pass \Else \State $\mathcal{K}^- \gets \mathcal{K}^-\cup \{ k^{(t,h)} \}$ \State break the loop \EndIf \EndFor \State $V_{t}\gets V_{t-1} + 1$ \EndIf \EndFor \Return $(V_t)_{1\leq t \leq m}$ \EndProcedure \end{algorithmic} \end{algorithm}
 </div>
@@ -535,36 +510,7 @@ V^*_{\mathfrak{R}}(S_t)  = \sum_{{k\in \mathcal{P}^t}} \zeta_{k}\wedge|S_t \cap 
 <div id="fig-zetas" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-zetas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode" id="fig-zetas" data-opt-additional-packages="\usetikzlibrary{arrows}"><pre class="sourceCode tikz code-with-copy"><code class="sourceCode latex"><span id="fig-zetas-1"><a href="#fig-zetas-1" aria-hidden="true" tabindex="-1"></a><span class="co">%%| filename: ../figure-tikz/fig-tikz-03</span></span>
-<span id="fig-zetas-2"><a href="#fig-zetas-2" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">tikzpicture</span>}[scale=1]</span>
-<span id="fig-zetas-3"><a href="#fig-zetas-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">\tikzstyle</span>{quadri}=[circle, draw, text=black, thick, align=center]</span>
-<span id="fig-zetas-4"><a href="#fig-zetas-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">\tikzstyle</span>{estun}=[-&gt;, &gt;=latex, very thick]</span>
-<span id="fig-zetas-5"><a href="#fig-zetas-5" aria-hidden="true" tabindex="-1"></a> <span class="co">%</span></span>
-<span id="fig-zetas-6"><a href="#fig-zetas-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P15) at (0, 3) {<span class="ss">$P_{1:5}$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(1, 5)}=6$</span>};</span>
-<span id="fig-zetas-7"><a href="#fig-zetas-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P67) at (7.5, 3) {<span class="ss">$P_{6:7}$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(6, 7)}=2$</span>};</span>
-<span id="fig-zetas-8"><a href="#fig-zetas-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P8) at (10.5, 3) {<span class="ss">$P_8$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(8, 8)}=3$</span>};</span>
-<span id="fig-zetas-9"><a href="#fig-zetas-9" aria-hidden="true" tabindex="-1"></a> <span class="co">%</span></span>
-<span id="fig-zetas-10"><a href="#fig-zetas-10" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P1) at (-3, 0) {<span class="ss">$P_1$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(1, 1)}=2$</span>};</span>
-<span id="fig-zetas-11"><a href="#fig-zetas-11" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P23) at (0, 0) {<span class="ss">$P_{2:3}$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(2, 3)}=1$</span>};</span>
-<span id="fig-zetas-12"><a href="#fig-zetas-12" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P45) at (3, 0) {<span class="ss">$P_{4:5}$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(4, 5)}=4$</span>};</span>
-<span id="fig-zetas-13"><a href="#fig-zetas-13" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P6) at (6, 0) {<span class="ss">$P_6$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(6, 6)}=1$</span>};</span>
-<span id="fig-zetas-14"><a href="#fig-zetas-14" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P7) at (9, 0) {<span class="ss">$P_7$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(7, 7)}=0$</span>};</span>
-<span id="fig-zetas-15"><a href="#fig-zetas-15" aria-hidden="true" tabindex="-1"></a> <span class="co">%</span></span>
-<span id="fig-zetas-16"><a href="#fig-zetas-16" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P2) at (-2, -3) {<span class="ss">$P_2$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(2, 2)}=2$</span>};</span>
-<span id="fig-zetas-17"><a href="#fig-zetas-17" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P3) at (0.25, -3) {<span class="ss">$P_3$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(3, 3)}=4$</span>};</span>
-<span id="fig-zetas-18"><a href="#fig-zetas-18" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P4) at (2.75, -3) {<span class="ss">$P_4$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(4, 4)}=2$</span>};</span>
-<span id="fig-zetas-19"><a href="#fig-zetas-19" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P5) at (5, -3) {<span class="ss">$P_5$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(5, 5)}=3$</span>};</span>
-<span id="fig-zetas-20"><a href="#fig-zetas-20" aria-hidden="true" tabindex="-1"></a> <span class="co">%%</span></span>
-<span id="fig-zetas-21"><a href="#fig-zetas-21" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P15)--(P1);</span>
-<span id="fig-zetas-22"><a href="#fig-zetas-22" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P15)--(P23);</span>
-<span id="fig-zetas-23"><a href="#fig-zetas-23" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P15)--(P45);</span>
-<span id="fig-zetas-24"><a href="#fig-zetas-24" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P23)--(P3);</span>
-<span id="fig-zetas-25"><a href="#fig-zetas-25" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P23)--(P2);</span>
-<span id="fig-zetas-26"><a href="#fig-zetas-26" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P45)--(P4);</span>
-<span id="fig-zetas-27"><a href="#fig-zetas-27" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P45)--(P5);</span>
-<span id="fig-zetas-28"><a href="#fig-zetas-28" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P67)--(P7);</span>
-<span id="fig-zetas-29"><a href="#fig-zetas-29" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P67)--(P6);</span>
-<span id="fig-zetas-30"><a href="#fig-zetas-30" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">tikzpicture</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<img src="algo-curve_files/mediabag/../figure-tikz/fig-tikz-03.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-zetas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3: The regions of <a href="#exm-toy-forest" class="quarto-xref">Example&nbsp;2</a> with the <span class="math inline">\(\zeta_k\)</span> values.
@@ -576,33 +522,7 @@ Figure&nbsp;3: The regions of <a href="#exm-toy-forest" class="quarto-xref">Exam
 <div id="fig-pruned" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-pruned-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode" id="fig-pruned" data-opt-additional-packages="\usetikzlibrary{arrows}"><pre class="sourceCode tikz code-with-copy"><code class="sourceCode latex"><span id="fig-pruned-1"><a href="#fig-pruned-1" aria-hidden="true" tabindex="-1"></a><span class="co">%%| filename: ../figure-tikz/fig-tikz-04</span></span>
-<span id="fig-pruned-2"><a href="#fig-pruned-2" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">tikzpicture</span>}[scale=1]</span>
-<span id="fig-pruned-3"><a href="#fig-pruned-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">\tikzstyle</span>{quadri}=[circle, draw, text=black, thick, align=center]</span>
-<span id="fig-pruned-4"><a href="#fig-pruned-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">\tikzstyle</span>{estun}=[-&gt;, &gt;=latex, very thick]</span>
-<span id="fig-pruned-5"><a href="#fig-pruned-5" aria-hidden="true" tabindex="-1"></a> <span class="co">%</span></span>
-<span id="fig-pruned-6"><a href="#fig-pruned-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P15) at (0, 3) {<span class="ss">$P_{1:5}$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(1, 5)}=6$</span>};</span>
-<span id="fig-pruned-7"><a href="#fig-pruned-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P8) at (11, 3) {<span class="ss">$P_8$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(8, 8)}=3$</span>};</span>
-<span id="fig-pruned-8"><a href="#fig-pruned-8" aria-hidden="true" tabindex="-1"></a> <span class="co">%</span></span>
-<span id="fig-pruned-9"><a href="#fig-pruned-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P1) at (-3, 0) {<span class="ss">$P_1$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(1, 1)}=2$</span>};</span>
-<span id="fig-pruned-10"><a href="#fig-pruned-10" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P23) at (0, 0) {<span class="ss">$P_{2:3}$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(2, 3)}=1$</span>};</span>
-<span id="fig-pruned-11"><a href="#fig-pruned-11" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P45) at (3, 0) {<span class="ss">$P_{4:5}$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(4, 5)}=4$</span>};</span>
-<span id="fig-pruned-12"><a href="#fig-pruned-12" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P6) at (5, 3) {<span class="ss">$P_6$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(6, 6)}=1$</span>};</span>
-<span id="fig-pruned-13"><a href="#fig-pruned-13" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P7) at (8, 3) {<span class="ss">$P_7$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(7, 7)}=0$</span>};</span>
-<span id="fig-pruned-14"><a href="#fig-pruned-14" aria-hidden="true" tabindex="-1"></a> <span class="co">%</span></span>
-<span id="fig-pruned-15"><a href="#fig-pruned-15" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P2) at (-2, -3) {<span class="ss">$P_2$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(2, 2)}=2$</span>};</span>
-<span id="fig-pruned-16"><a href="#fig-pruned-16" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P3) at (0.25, -3) {<span class="ss">$P_3$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(3, 3)}=4$</span>};</span>
-<span id="fig-pruned-17"><a href="#fig-pruned-17" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P4) at (2.75, -3) {<span class="ss">$P_4$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(4, 4)}=2$</span>};</span>
-<span id="fig-pruned-18"><a href="#fig-pruned-18" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P5) at (5, -3) {<span class="ss">$P_5$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(5, 5)}=3$</span>};</span>
-<span id="fig-pruned-19"><a href="#fig-pruned-19" aria-hidden="true" tabindex="-1"></a> <span class="co">%%</span></span>
-<span id="fig-pruned-20"><a href="#fig-pruned-20" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P15)--(P1);</span>
-<span id="fig-pruned-21"><a href="#fig-pruned-21" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P15)--(P23);</span>
-<span id="fig-pruned-22"><a href="#fig-pruned-22" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P15)--(P45);</span>
-<span id="fig-pruned-23"><a href="#fig-pruned-23" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P23)--(P3);</span>
-<span id="fig-pruned-24"><a href="#fig-pruned-24" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P23)--(P2);</span>
-<span id="fig-pruned-25"><a href="#fig-pruned-25" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P45)--(P4);</span>
-<span id="fig-pruned-26"><a href="#fig-pruned-26" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P45)--(P5);</span>
-<span id="fig-pruned-27"><a href="#fig-pruned-27" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">tikzpicture</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<img src="algo-curve_files/mediabag/../figure-tikz/fig-tikz-04.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pruned-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;4: The regions of <a href="#exm-toy-forest" class="quarto-xref">Example&nbsp;2</a> after pruning.
@@ -613,33 +533,7 @@ Figure&nbsp;4: The regions of <a href="#exm-toy-forest" class="quarto-xref">Exam
 <div id="fig-t0" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-t0-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode" id="fig-t0" data-opt-additional-packages="\usetikzlibrary{arrows}"><pre class="sourceCode tikz code-with-copy"><code class="sourceCode latex"><span id="fig-t0-1"><a href="#fig-t0-1" aria-hidden="true" tabindex="-1"></a><span class="co">%%| filename: ../figure-tikz/fig-tikz-05</span></span>
-<span id="fig-t0-2"><a href="#fig-t0-2" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">tikzpicture</span>}[scale=1]</span>
-<span id="fig-t0-3"><a href="#fig-t0-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">\tikzstyle</span>{quadri}=[circle, draw, text=black, thick, align=center]</span>
-<span id="fig-t0-4"><a href="#fig-t0-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">\tikzstyle</span>{estun}=[-&gt;, &gt;=latex, very thick]</span>
-<span id="fig-t0-5"><a href="#fig-t0-5" aria-hidden="true" tabindex="-1"></a> <span class="co">%</span></span>
-<span id="fig-t0-6"><a href="#fig-t0-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P15) at (0, 3) {<span class="ss">$P_{1:5}$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(1, 5)}=6$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(1, 5)}^0=0$</span>};</span>
-<span id="fig-t0-7"><a href="#fig-t0-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P8) at (11, 3) {<span class="ss">$P_8$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(8, 8)}=3$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(8, 8)}^0=0$</span>};</span>
-<span id="fig-t0-8"><a href="#fig-t0-8" aria-hidden="true" tabindex="-1"></a> <span class="co">%</span></span>
-<span id="fig-t0-9"><a href="#fig-t0-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P1) at (-3, 0) {<span class="ss">$P_1$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(1, 1)}=2$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(1, 1)}^0=0$</span>};</span>
-<span id="fig-t0-10"><a href="#fig-t0-10" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P23) at (0, 0) {<span class="ss">$P_{2:3}$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(2, 3)}=1$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(2, 3)}^0=0$</span>};</span>
-<span id="fig-t0-11"><a href="#fig-t0-11" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P45) at (3, 0) {<span class="ss">$P_{4:5}$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(4, 5)}=4$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(4, 5)}^0=0$</span>};</span>
-<span id="fig-t0-12"><a href="#fig-t0-12" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P6) at (5, 3) {<span class="ss">$P_6$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(6, 6)}=1$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(6, 6)}^0=0$</span>};</span>
-<span id="fig-t0-13"><a href="#fig-t0-13" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri, red] (P7) at (8, 3) {<span class="ss">$P_7$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(7, 7)}=0$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(7, 7)}^0=0$</span>};</span>
-<span id="fig-t0-14"><a href="#fig-t0-14" aria-hidden="true" tabindex="-1"></a> <span class="co">%</span></span>
-<span id="fig-t0-15"><a href="#fig-t0-15" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P2) at (-3, -3) {<span class="ss">$P_2$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(2, 2)}=2$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(2, 2)}^0=0$</span>};</span>
-<span id="fig-t0-16"><a href="#fig-t0-16" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P3) at (-0, -3) {<span class="ss">$P_3$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(3, 3)}=4$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(3, 3)}^0=0$</span>};</span>
-<span id="fig-t0-17"><a href="#fig-t0-17" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P4) at (3, -3) {<span class="ss">$P_4$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(4, 4)}=2$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(4, 4)}^0=0$</span>};</span>
-<span id="fig-t0-18"><a href="#fig-t0-18" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P5) at (6, -3) {<span class="ss">$P_5$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(5, 5)}=3$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(5, 5)}^0=0$</span>};</span>
-<span id="fig-t0-19"><a href="#fig-t0-19" aria-hidden="true" tabindex="-1"></a> <span class="co">%%</span></span>
-<span id="fig-t0-20"><a href="#fig-t0-20" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P15)--(P1);</span>
-<span id="fig-t0-21"><a href="#fig-t0-21" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P15)--(P23);</span>
-<span id="fig-t0-22"><a href="#fig-t0-22" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P15)--(P45);</span>
-<span id="fig-t0-23"><a href="#fig-t0-23" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P23)--(P3);</span>
-<span id="fig-t0-24"><a href="#fig-t0-24" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P23)--(P2);</span>
-<span id="fig-t0-25"><a href="#fig-t0-25" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P45)--(P4);</span>
-<span id="fig-t0-26"><a href="#fig-t0-26" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P45)--(P5);</span>
-<span id="fig-t0-27"><a href="#fig-t0-27" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">tikzpicture</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<img src="algo-curve_files/mediabag/../figure-tikz/fig-tikz-05.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-t0-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;5: The regions of <a href="#exm-toy-forest" class="quarto-xref">Example&nbsp;2</a> at <span class="math inline">\(t=0\)</span> in <a href="#alg-formal-curve" class="quarto-xref">Algorithm 3</a>.
@@ -650,33 +544,7 @@ Figure&nbsp;5: The regions of <a href="#exm-toy-forest" class="quarto-xref">Exam
 <div id="fig-t1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-t1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode" id="fig-t1" data-opt-additional-packages="\usetikzlibrary{arrows}"><pre class="sourceCode tikz code-with-copy"><code class="sourceCode latex"><span id="fig-t1-1"><a href="#fig-t1-1" aria-hidden="true" tabindex="-1"></a><span class="co">%%| filename: ../figure-tikz/fig-tikz-06</span></span>
-<span id="fig-t1-2"><a href="#fig-t1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">tikzpicture</span>}[scale=1]</span>
-<span id="fig-t1-3"><a href="#fig-t1-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">\tikzstyle</span>{quadri}=[circle, draw, text=black, thick, align=center]</span>
-<span id="fig-t1-4"><a href="#fig-t1-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">\tikzstyle</span>{estun}=[-&gt;, &gt;=latex, very thick]</span>
-<span id="fig-t1-5"><a href="#fig-t1-5" aria-hidden="true" tabindex="-1"></a> <span class="co">%</span></span>
-<span id="fig-t1-6"><a href="#fig-t1-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P15) at (0, 3) {<span class="ss">$P_{1:5}$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(1, 5)}=6$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(1, 5)}^1=1$</span>};</span>
-<span id="fig-t1-7"><a href="#fig-t1-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P8) at (11, 3) {<span class="ss">$P_8$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(8, 8)}=3$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(8, 8)}^1=0$</span>};</span>
-<span id="fig-t1-8"><a href="#fig-t1-8" aria-hidden="true" tabindex="-1"></a> <span class="co">%</span></span>
-<span id="fig-t1-9"><a href="#fig-t1-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P1) at (-3, 0) {<span class="ss">$P_1$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(1, 1)}=2$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(1, 1)}^1=0$</span>};</span>
-<span id="fig-t1-10"><a href="#fig-t1-10" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P23) at (0, 0) {<span class="ss">$P_{2:3}$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(2, 3)}=1$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(2, 3)}^1=0$</span>};</span>
-<span id="fig-t1-11"><a href="#fig-t1-11" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P45) at (3, 0) {<span class="ss">$P_{4:5}$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(4, 5)}=4$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(4, 5)}^1=1$</span>};</span>
-<span id="fig-t1-12"><a href="#fig-t1-12" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P6) at (5, 3) {<span class="ss">$P_6$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(6, 6)}=1$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(6, 6)}^1=0$</span>};</span>
-<span id="fig-t1-13"><a href="#fig-t1-13" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri, red] (P7) at (8, 3) {<span class="ss">$P_7$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(7, 7)}=0$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(7, 7)}^1=0$</span>};</span>
-<span id="fig-t1-14"><a href="#fig-t1-14" aria-hidden="true" tabindex="-1"></a> <span class="co">%</span></span>
-<span id="fig-t1-15"><a href="#fig-t1-15" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P2) at (-3, -3) {<span class="ss">$P_2$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(2, 2)}=2$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(2, 2)}^1=0$</span>};</span>
-<span id="fig-t1-16"><a href="#fig-t1-16" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P3) at (-0, -3) {<span class="ss">$P_3$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(3, 3)}=4$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(3, 3)}^1=0$</span>};</span>
-<span id="fig-t1-17"><a href="#fig-t1-17" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P4) at (3, -3) {<span class="ss">$P_4$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(4, 4)}=2$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(4, 4)}^1=1$</span>};</span>
-<span id="fig-t1-18"><a href="#fig-t1-18" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P5) at (6, -3) {<span class="ss">$P_5$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(5, 5)}=3$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(5, 5)}^1=0$</span>};</span>
-<span id="fig-t1-19"><a href="#fig-t1-19" aria-hidden="true" tabindex="-1"></a> <span class="co">%%</span></span>
-<span id="fig-t1-20"><a href="#fig-t1-20" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P15)--(P1);</span>
-<span id="fig-t1-21"><a href="#fig-t1-21" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P15)--(P23);</span>
-<span id="fig-t1-22"><a href="#fig-t1-22" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P15)--(P45);</span>
-<span id="fig-t1-23"><a href="#fig-t1-23" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P23)--(P3);</span>
-<span id="fig-t1-24"><a href="#fig-t1-24" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P23)--(P2);</span>
-<span id="fig-t1-25"><a href="#fig-t1-25" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P45)--(P4);</span>
-<span id="fig-t1-26"><a href="#fig-t1-26" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P45)--(P5);</span>
-<span id="fig-t1-27"><a href="#fig-t1-27" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">tikzpicture</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<img src="algo-curve_files/mediabag/../figure-tikz/fig-tikz-06.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-t1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;6: The regions of <a href="#exm-toy-forest" class="quarto-xref">Example&nbsp;2</a> at <span class="math inline">\(t=1\)</span> in <a href="#alg-formal-curve" class="quarto-xref">Algorithm 3</a>.
@@ -687,33 +555,7 @@ Figure&nbsp;6: The regions of <a href="#exm-toy-forest" class="quarto-xref">Exam
 <div id="fig-t2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-t2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode" id="fig-t2" data-opt-additional-packages="\usetikzlibrary{arrows}"><pre class="sourceCode tikz code-with-copy"><code class="sourceCode latex"><span id="fig-t2-1"><a href="#fig-t2-1" aria-hidden="true" tabindex="-1"></a><span class="co">%%| filename: ../figure-tikz/fig-tikz-07</span></span>
-<span id="fig-t2-2"><a href="#fig-t2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">tikzpicture</span>}[scale=1]</span>
-<span id="fig-t2-3"><a href="#fig-t2-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">\tikzstyle</span>{quadri}=[circle, draw, text=black, thick, align=center]</span>
-<span id="fig-t2-4"><a href="#fig-t2-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">\tikzstyle</span>{estun}=[-&gt;, &gt;=latex, very thick]</span>
-<span id="fig-t2-5"><a href="#fig-t2-5" aria-hidden="true" tabindex="-1"></a> <span class="co">%</span></span>
-<span id="fig-t2-6"><a href="#fig-t2-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P15) at (0, 3) {<span class="ss">$P_{1:5}$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(1, 5)}=6$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(1, 5)}^2=2$</span>};</span>
-<span id="fig-t2-7"><a href="#fig-t2-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P8) at (11, 3) {<span class="ss">$P_8$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(8, 8)}=3$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(8, 8)}^2=0$</span>};</span>
-<span id="fig-t2-8"><a href="#fig-t2-8" aria-hidden="true" tabindex="-1"></a> <span class="co">%</span></span>
-<span id="fig-t2-9"><a href="#fig-t2-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P1) at (-3, 0) {<span class="ss">$P_1$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(1, 1)}=2$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(1, 1)}^2=0$</span>};</span>
-<span id="fig-t2-10"><a href="#fig-t2-10" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P23) at (0, 0) {<span class="ss">$P_{2:3}$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(2, 3)}=1$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(2, 3)}^2=0$</span>};</span>
-<span id="fig-t2-11"><a href="#fig-t2-11" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P45) at (3, 0) {<span class="ss">$P_{4:5}$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(4, 5)}=4$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(4, 5)}^2=2$</span>};</span>
-<span id="fig-t2-12"><a href="#fig-t2-12" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P6) at (5, 3) {<span class="ss">$P_6$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(6, 6)}=1$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(6, 6)}^2=0$</span>};</span>
-<span id="fig-t2-13"><a href="#fig-t2-13" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri, red] (P7) at (8, 3) {<span class="ss">$P_7$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(7, 7)}=0$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(7, 7)}^2=0$</span>};</span>
-<span id="fig-t2-14"><a href="#fig-t2-14" aria-hidden="true" tabindex="-1"></a> <span class="co">%</span></span>
-<span id="fig-t2-15"><a href="#fig-t2-15" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P2) at (-3, -3) {<span class="ss">$P_2$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(2, 2)}=2$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(2, 2)}^2=0$</span>};</span>
-<span id="fig-t2-16"><a href="#fig-t2-16" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P3) at (-0, -3) {<span class="ss">$P_3$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(3, 3)}=4$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(3, 3)}^2=0$</span>};</span>
-<span id="fig-t2-17"><a href="#fig-t2-17" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P4) at (3, -3) {<span class="ss">$P_4$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(4, 4)}=2$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(4, 4)}^2=1$</span>};</span>
-<span id="fig-t2-18"><a href="#fig-t2-18" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P5) at (6, -3) {<span class="ss">$P_5$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(5, 5)}=3$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(5, 5)}^2=1$</span>};</span>
-<span id="fig-t2-19"><a href="#fig-t2-19" aria-hidden="true" tabindex="-1"></a> <span class="co">%%</span></span>
-<span id="fig-t2-20"><a href="#fig-t2-20" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P15)--(P1);</span>
-<span id="fig-t2-21"><a href="#fig-t2-21" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P15)--(P23);</span>
-<span id="fig-t2-22"><a href="#fig-t2-22" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P15)--(P45);</span>
-<span id="fig-t2-23"><a href="#fig-t2-23" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P23)--(P3);</span>
-<span id="fig-t2-24"><a href="#fig-t2-24" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P23)--(P2);</span>
-<span id="fig-t2-25"><a href="#fig-t2-25" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P45)--(P4);</span>
-<span id="fig-t2-26"><a href="#fig-t2-26" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P45)--(P5);</span>
-<span id="fig-t2-27"><a href="#fig-t2-27" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">tikzpicture</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<img src="algo-curve_files/mediabag/../figure-tikz/fig-tikz-07.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-t2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;7: The regions of <a href="#exm-toy-forest" class="quarto-xref">Example&nbsp;2</a> at <span class="math inline">\(t=2\)</span> in <a href="#alg-formal-curve" class="quarto-xref">Algorithm 3</a>.
@@ -724,33 +566,7 @@ Figure&nbsp;7: The regions of <a href="#exm-toy-forest" class="quarto-xref">Exam
 <div id="fig-t3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-t3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode" id="fig-t3" data-opt-additional-packages="\usetikzlibrary{arrows}"><pre class="sourceCode tikz code-with-copy"><code class="sourceCode latex"><span id="fig-t3-1"><a href="#fig-t3-1" aria-hidden="true" tabindex="-1"></a><span class="co">%%| filename: ../figure-tikz/fig-tikz-08</span></span>
-<span id="fig-t3-2"><a href="#fig-t3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">tikzpicture</span>}[scale=1]</span>
-<span id="fig-t3-3"><a href="#fig-t3-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">\tikzstyle</span>{quadri}=[circle, draw, text=black, thick, align=center]</span>
-<span id="fig-t3-4"><a href="#fig-t3-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">\tikzstyle</span>{estun}=[-&gt;, &gt;=latex, very thick]</span>
-<span id="fig-t3-5"><a href="#fig-t3-5" aria-hidden="true" tabindex="-1"></a> <span class="co">%</span></span>
-<span id="fig-t3-6"><a href="#fig-t3-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P15) at (0, 3) {<span class="ss">$P_{1:5}$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(1, 5)}=6$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(1, 5)}^3=3$</span>};</span>
-<span id="fig-t3-7"><a href="#fig-t3-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P8) at (11, 3) {<span class="ss">$P_8$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(8, 8)}=3$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(8, 8)}^3=0$</span>};</span>
-<span id="fig-t3-8"><a href="#fig-t3-8" aria-hidden="true" tabindex="-1"></a> <span class="co">%</span></span>
-<span id="fig-t3-9"><a href="#fig-t3-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P1) at (-3, 0) {<span class="ss">$P_1$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(1, 1)}=2$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(1, 1)}^3=0$</span>};</span>
-<span id="fig-t3-10"><a href="#fig-t3-10" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P23) at (0, 0) {<span class="ss">$P_{2:3}$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(2, 3)}=1$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(2, 3)}^3=0$</span>};</span>
-<span id="fig-t3-11"><a href="#fig-t3-11" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P45) at (3, 0) {<span class="ss">$P_{4:5}$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(4, 5)}=4$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(4, 5)}^3=3$</span>};</span>
-<span id="fig-t3-12"><a href="#fig-t3-12" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P6) at (5, 3) {<span class="ss">$P_6$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(6, 6)}=1$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(6, 6)}^3=0$</span>};</span>
-<span id="fig-t3-13"><a href="#fig-t3-13" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri, red] (P7) at (8, 3) {<span class="ss">$P_7$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(7, 7)}=0$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(7, 7)}^3=0$</span>};</span>
-<span id="fig-t3-14"><a href="#fig-t3-14" aria-hidden="true" tabindex="-1"></a> <span class="co">%</span></span>
-<span id="fig-t3-15"><a href="#fig-t3-15" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P2) at (-3, -3) {<span class="ss">$P_2$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(2, 2)}=2$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(2, 2)}^3=0$</span>};</span>
-<span id="fig-t3-16"><a href="#fig-t3-16" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P3) at (-0, -3) {<span class="ss">$P_3$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(3, 3)}=4$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(3, 3)}^3=0$</span>};</span>
-<span id="fig-t3-17"><a href="#fig-t3-17" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri, red] (P4) at (3, -3) {<span class="ss">$P_4$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(4, 4)}=2$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(4, 4)}^3=2$</span>};</span>
-<span id="fig-t3-18"><a href="#fig-t3-18" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P5) at (6, -3) {<span class="ss">$P_5$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(5, 5)}=3$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(5, 5)}^3=1$</span>};</span>
-<span id="fig-t3-19"><a href="#fig-t3-19" aria-hidden="true" tabindex="-1"></a> <span class="co">%%</span></span>
-<span id="fig-t3-20"><a href="#fig-t3-20" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P15)--(P1);</span>
-<span id="fig-t3-21"><a href="#fig-t3-21" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P15)--(P23);</span>
-<span id="fig-t3-22"><a href="#fig-t3-22" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P15)--(P45);</span>
-<span id="fig-t3-23"><a href="#fig-t3-23" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P23)--(P3);</span>
-<span id="fig-t3-24"><a href="#fig-t3-24" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P23)--(P2);</span>
-<span id="fig-t3-25"><a href="#fig-t3-25" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P45)--(P4);</span>
-<span id="fig-t3-26"><a href="#fig-t3-26" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P45)--(P5);</span>
-<span id="fig-t3-27"><a href="#fig-t3-27" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">tikzpicture</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<img src="algo-curve_files/mediabag/../figure-tikz/fig-tikz-08.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-t3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;8: The regions of <a href="#exm-toy-forest" class="quarto-xref">Example&nbsp;2</a> at <span class="math inline">\(t=3\)</span> in <a href="#alg-formal-curve" class="quarto-xref">Algorithm 3</a>.
@@ -762,33 +578,7 @@ Figure&nbsp;8: The regions of <a href="#exm-toy-forest" class="quarto-xref">Exam
 <div id="fig-t5" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-t5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode" id="fig-t5" data-opt-additional-packages="\usetikzlibrary{arrows}"><pre class="sourceCode tikz code-with-copy"><code class="sourceCode latex"><span id="fig-t5-1"><a href="#fig-t5-1" aria-hidden="true" tabindex="-1"></a><span class="co">%%| filename: ../figure-tikz/fig-tikz-09</span></span>
-<span id="fig-t5-2"><a href="#fig-t5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">tikzpicture</span>}[scale=1]</span>
-<span id="fig-t5-3"><a href="#fig-t5-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">\tikzstyle</span>{quadri}=[circle, draw, text=black, thick, align=center]</span>
-<span id="fig-t5-4"><a href="#fig-t5-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">\tikzstyle</span>{estun}=[-&gt;, &gt;=latex, very thick]</span>
-<span id="fig-t5-5"><a href="#fig-t5-5" aria-hidden="true" tabindex="-1"></a> <span class="co">%</span></span>
-<span id="fig-t5-6"><a href="#fig-t5-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P15) at (0, 3) {<span class="ss">$P_{1:5}$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(1, 5)}=6$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(1, 5)}^5=4$</span>};</span>
-<span id="fig-t5-7"><a href="#fig-t5-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P8) at (11, 3) {<span class="ss">$P_8$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(8, 8)}=3$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(8, 8)}^5=0$</span>};</span>
-<span id="fig-t5-8"><a href="#fig-t5-8" aria-hidden="true" tabindex="-1"></a> <span class="co">%</span></span>
-<span id="fig-t5-9"><a href="#fig-t5-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P1) at (-3, 0) {<span class="ss">$P_1$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(1, 1)}=2$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(1, 1)}^5=0$</span>};</span>
-<span id="fig-t5-10"><a href="#fig-t5-10" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P23) at (0, 0) {<span class="ss">$P_{2:3}$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(2, 3)}=1$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(2, 3)}^5=0$</span>};</span>
-<span id="fig-t5-11"><a href="#fig-t5-11" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri, red] (P45) at (3, 0) {<span class="ss">$P_{4:5}$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(4, 5)}=4$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(4, 5)}^5=4$</span>};</span>
-<span id="fig-t5-12"><a href="#fig-t5-12" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P6) at (5, 3) {<span class="ss">$P_6$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(6, 6)}=1$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(6, 6)}^5=0$</span>};</span>
-<span id="fig-t5-13"><a href="#fig-t5-13" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri, red] (P7) at (8, 3) {<span class="ss">$P_7$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(7, 7)}=0$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(7, 7)}^5=0$</span>};</span>
-<span id="fig-t5-14"><a href="#fig-t5-14" aria-hidden="true" tabindex="-1"></a> <span class="co">%</span></span>
-<span id="fig-t5-15"><a href="#fig-t5-15" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P2) at (-3, -3) {<span class="ss">$P_2$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(2, 2)}=2$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(2, 2)}^5=0$</span>};</span>
-<span id="fig-t5-16"><a href="#fig-t5-16" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P3) at (-0, -3) {<span class="ss">$P_3$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(3, 3)}=4$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(3, 3)}^5=0$</span>};</span>
-<span id="fig-t5-17"><a href="#fig-t5-17" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri, red] (P4) at (3, -3) {<span class="ss">$P_4$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(4, 4)}=2$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(4, 4)}^5=2$</span>};</span>
-<span id="fig-t5-18"><a href="#fig-t5-18" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P5) at (6, -3) {<span class="ss">$P_5$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(5, 5)}=3$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(5, 5)}^5=1$</span>};</span>
-<span id="fig-t5-19"><a href="#fig-t5-19" aria-hidden="true" tabindex="-1"></a> <span class="co">%%</span></span>
-<span id="fig-t5-20"><a href="#fig-t5-20" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P15)--(P1);</span>
-<span id="fig-t5-21"><a href="#fig-t5-21" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P15)--(P23);</span>
-<span id="fig-t5-22"><a href="#fig-t5-22" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P15)--(P45);</span>
-<span id="fig-t5-23"><a href="#fig-t5-23" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P23)--(P3);</span>
-<span id="fig-t5-24"><a href="#fig-t5-24" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P23)--(P2);</span>
-<span id="fig-t5-25"><a href="#fig-t5-25" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P45)--(P4);</span>
-<span id="fig-t5-26"><a href="#fig-t5-26" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P45)--(P5);</span>
-<span id="fig-t5-27"><a href="#fig-t5-27" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">tikzpicture</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<img src="algo-curve_files/mediabag/../figure-tikz/fig-tikz-09.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-t5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;9: The regions of <a href="#exm-toy-forest" class="quarto-xref">Example&nbsp;2</a> at <span class="math inline">\(t=5\)</span> in <a href="#alg-formal-curve" class="quarto-xref">Algorithm 3</a>.
@@ -799,33 +589,7 @@ Figure&nbsp;9: The regions of <a href="#exm-toy-forest" class="quarto-xref">Exam
 <div id="fig-t6" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-t6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode" id="fig-t6" data-opt-additional-packages="\usetikzlibrary{arrows}"><pre class="sourceCode tikz code-with-copy"><code class="sourceCode latex"><span id="fig-t6-1"><a href="#fig-t6-1" aria-hidden="true" tabindex="-1"></a><span class="co">%%| filename: ../figure-tikz/fig-tikz-10</span></span>
-<span id="fig-t6-2"><a href="#fig-t6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">tikzpicture</span>}[scale=1]</span>
-<span id="fig-t6-3"><a href="#fig-t6-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">\tikzstyle</span>{quadri}=[circle, draw, text=black, thick, align=center]</span>
-<span id="fig-t6-4"><a href="#fig-t6-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">\tikzstyle</span>{estun}=[-&gt;, &gt;=latex, very thick]</span>
-<span id="fig-t6-5"><a href="#fig-t6-5" aria-hidden="true" tabindex="-1"></a> <span class="co">%</span></span>
-<span id="fig-t6-6"><a href="#fig-t6-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P15) at (0, 3) {<span class="ss">$P_{1:5}$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(1, 5)}=6$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(1, 5)}^6=5$</span>};</span>
-<span id="fig-t6-7"><a href="#fig-t6-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P8) at (11, 3) {<span class="ss">$P_8$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(8, 8)}=3$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(8, 8)}^6=0$</span>};</span>
-<span id="fig-t6-8"><a href="#fig-t6-8" aria-hidden="true" tabindex="-1"></a> <span class="co">%</span></span>
-<span id="fig-t6-9"><a href="#fig-t6-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P1) at (-3, 0) {<span class="ss">$P_1$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(1, 1)}=2$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(1, 1)}^6=0$</span>};</span>
-<span id="fig-t6-10"><a href="#fig-t6-10" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri, red] (P23) at (0, 0) {<span class="ss">$P_{2:3}$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(2, 3)}=1$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(2, 3)}^6=1$</span>};</span>
-<span id="fig-t6-11"><a href="#fig-t6-11" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri, red] (P45) at (3, 0) {<span class="ss">$P_{4:5}$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(4, 5)}=4$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(4, 5)}^6=4$</span>};</span>
-<span id="fig-t6-12"><a href="#fig-t6-12" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P6) at (5, 3) {<span class="ss">$P_6$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(6, 6)}=1$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(6, 6)}^6=0$</span>};</span>
-<span id="fig-t6-13"><a href="#fig-t6-13" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri, red] (P7) at (8, 3) {<span class="ss">$P_7$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(7, 7)}=0$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(7, 7)}^6=0$</span>};</span>
-<span id="fig-t6-14"><a href="#fig-t6-14" aria-hidden="true" tabindex="-1"></a> <span class="co">%</span></span>
-<span id="fig-t6-15"><a href="#fig-t6-15" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P2) at (-3, -3) {<span class="ss">$P_2$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(2, 2)}=2$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(2, 2)}^6=0$</span>};</span>
-<span id="fig-t6-16"><a href="#fig-t6-16" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P3) at (-0, -3) {<span class="ss">$P_3$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(3, 3)}=4$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(3, 3)}^6=0$</span>};</span>
-<span id="fig-t6-17"><a href="#fig-t6-17" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri, red] (P4) at (3, -3) {<span class="ss">$P_4$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(4, 4)}=2$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(4, 4)}^6=2$</span>};</span>
-<span id="fig-t6-18"><a href="#fig-t6-18" aria-hidden="true" tabindex="-1"></a> <span class="fu">\node</span>[quadri] (P5) at (6, -3) {<span class="ss">$P_5$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\zeta</span><span class="ss">_{(5, 5)}=3$</span><span class="fu">\\</span><span class="ss">$</span><span class="sc">\eta</span><span class="ss">_{(5, 5)}^6=1$</span>};</span>
-<span id="fig-t6-19"><a href="#fig-t6-19" aria-hidden="true" tabindex="-1"></a> <span class="co">%%</span></span>
-<span id="fig-t6-20"><a href="#fig-t6-20" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P15)--(P1);</span>
-<span id="fig-t6-21"><a href="#fig-t6-21" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P15)--(P23);</span>
-<span id="fig-t6-22"><a href="#fig-t6-22" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P15)--(P45);</span>
-<span id="fig-t6-23"><a href="#fig-t6-23" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P23)--(P3);</span>
-<span id="fig-t6-24"><a href="#fig-t6-24" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P23)--(P2);</span>
-<span id="fig-t6-25"><a href="#fig-t6-25" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P45)--(P4);</span>
-<span id="fig-t6-26"><a href="#fig-t6-26" aria-hidden="true" tabindex="-1"></a> <span class="fu">\draw</span>[estun] (P45)--(P5);</span>
-<span id="fig-t6-27"><a href="#fig-t6-27" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">tikzpicture</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<img src="algo-curve_files/mediabag/../figure-tikz/fig-tikz-10.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-t6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;10: The regions of <a href="#exm-toy-forest" class="quarto-xref">Example&nbsp;2</a> at <span class="math inline">\(t=6\)</span> in <a href="#alg-formal-curve" class="quarto-xref">Algorithm 3</a>.
@@ -1494,7 +1258,7 @@ loaded via a namespace (and not attached):
     Bounds for the {False} {Discovery} {Proportion} Using a Reference
     Family with a Forest Structure},
   journal = {Computo},
-  date = {2025-02-10},
+  date = {2025-02-11},
   url = {https://computo.sfds.asso.fr/algo-curve},
   doi = {xxxx},
   issn = {2824-7795},
@@ -2054,7 +1818,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-177"><a href="#cb3-177" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-178"><a href="#cb3-178" aria-hidden="true" tabindex="-1"></a>:::{#fig-forest-exm}</span>
 <span id="cb3-179"><a href="#cb3-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-180"><a href="#cb3-180" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}</span></span>
+<span id="cb3-180"><a href="#cb3-180" aria-hidden="true" tabindex="-1"></a><span class="in">``` .tikz</span></span>
 <span id="cb3-181"><a href="#cb3-181" aria-hidden="true" tabindex="-1"></a><span class="in">%%| filename: ../figure-tikz/fig-tikz-01</span></span>
 <span id="cb3-182"><a href="#cb3-182" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{tikzpicture}[scale=1]</span></span>
 <span id="cb3-183"><a href="#cb3-183" aria-hidden="true" tabindex="-1"></a><span class="in"> \tikzstyle{quadri}=[circle,draw,text=black, thick]</span></span>
@@ -2093,7 +1857,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-216"><a href="#cb3-216" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-217"><a href="#cb3-217" aria-hidden="true" tabindex="-1"></a>:::{#fig-leaves-exm}</span>
 <span id="cb3-218"><a href="#cb3-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-219"><a href="#cb3-219" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}</span></span>
+<span id="cb3-219"><a href="#cb3-219" aria-hidden="true" tabindex="-1"></a><span class="in">``` tikz </span></span>
 <span id="cb3-220"><a href="#cb3-220" aria-hidden="true" tabindex="-1"></a><span class="in">%%| filename: ../figure-tikz/fig-tikz-02</span></span>
 <span id="cb3-221"><a href="#cb3-221" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{tikzpicture}[scale=1]</span></span>
 <span id="cb3-222"><a href="#cb3-222" aria-hidden="true" tabindex="-1"></a><span class="in"> \tikzstyle{quadri}=[circle,draw,text=black,thick]</span></span>
@@ -2635,7 +2399,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-758"><a href="#cb3-758" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-759"><a href="#cb3-759" aria-hidden="true" tabindex="-1"></a>:::{#fig-zetas}</span>
 <span id="cb3-760"><a href="#cb3-760" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-761"><a href="#cb3-761" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}</span></span>
+<span id="cb3-761"><a href="#cb3-761" aria-hidden="true" tabindex="-1"></a><span class="in">``` tikz</span></span>
 <span id="cb3-762"><a href="#cb3-762" aria-hidden="true" tabindex="-1"></a><span class="in">%%| filename: ../figure-tikz/fig-tikz-03</span></span>
 <span id="cb3-763"><a href="#cb3-763" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{tikzpicture}[scale=1]</span></span>
 <span id="cb3-764"><a href="#cb3-764" aria-hidden="true" tabindex="-1"></a><span class="in"> \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]</span></span>
@@ -2678,7 +2442,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-801"><a href="#cb3-801" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-802"><a href="#cb3-802" aria-hidden="true" tabindex="-1"></a>:::{#fig-pruned}</span>
 <span id="cb3-803"><a href="#cb3-803" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-804"><a href="#cb3-804" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}</span></span>
+<span id="cb3-804"><a href="#cb3-804" aria-hidden="true" tabindex="-1"></a><span class="in">``` tikz</span></span>
 <span id="cb3-805"><a href="#cb3-805" aria-hidden="true" tabindex="-1"></a><span class="in">%%| filename: ../figure-tikz/fig-tikz-04</span></span>
 <span id="cb3-806"><a href="#cb3-806" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{tikzpicture}[scale=1]</span></span>
 <span id="cb3-807"><a href="#cb3-807" aria-hidden="true" tabindex="-1"></a><span class="in"> \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]</span></span>
@@ -2716,7 +2480,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-839"><a href="#cb3-839" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-840"><a href="#cb3-840" aria-hidden="true" tabindex="-1"></a>:::{#fig-t0}</span>
 <span id="cb3-841"><a href="#cb3-841" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-842"><a href="#cb3-842" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}</span></span>
+<span id="cb3-842"><a href="#cb3-842" aria-hidden="true" tabindex="-1"></a><span class="in">``` tikz</span></span>
 <span id="cb3-843"><a href="#cb3-843" aria-hidden="true" tabindex="-1"></a><span class="in">%%| filename: ../figure-tikz/fig-tikz-05</span></span>
 <span id="cb3-844"><a href="#cb3-844" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{tikzpicture}[scale=1]</span></span>
 <span id="cb3-845"><a href="#cb3-845" aria-hidden="true" tabindex="-1"></a><span class="in"> \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]</span></span>
@@ -2754,7 +2518,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-877"><a href="#cb3-877" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-878"><a href="#cb3-878" aria-hidden="true" tabindex="-1"></a>:::{#fig-t1}</span>
 <span id="cb3-879"><a href="#cb3-879" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-880"><a href="#cb3-880" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}</span></span>
+<span id="cb3-880"><a href="#cb3-880" aria-hidden="true" tabindex="-1"></a><span class="in">``` tikz</span></span>
 <span id="cb3-881"><a href="#cb3-881" aria-hidden="true" tabindex="-1"></a><span class="in">%%| filename: ../figure-tikz/fig-tikz-06</span></span>
 <span id="cb3-882"><a href="#cb3-882" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{tikzpicture}[scale=1]</span></span>
 <span id="cb3-883"><a href="#cb3-883" aria-hidden="true" tabindex="-1"></a><span class="in"> \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]</span></span>
@@ -2792,7 +2556,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-915"><a href="#cb3-915" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-916"><a href="#cb3-916" aria-hidden="true" tabindex="-1"></a>:::{#fig-t2}</span>
 <span id="cb3-917"><a href="#cb3-917" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-918"><a href="#cb3-918" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}</span></span>
+<span id="cb3-918"><a href="#cb3-918" aria-hidden="true" tabindex="-1"></a><span class="in">``` tikz</span></span>
 <span id="cb3-919"><a href="#cb3-919" aria-hidden="true" tabindex="-1"></a><span class="in">%%| filename: ../figure-tikz/fig-tikz-07</span></span>
 <span id="cb3-920"><a href="#cb3-920" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{tikzpicture}[scale=1]</span></span>
 <span id="cb3-921"><a href="#cb3-921" aria-hidden="true" tabindex="-1"></a><span class="in"> \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]</span></span>
@@ -2830,7 +2594,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-953"><a href="#cb3-953" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-954"><a href="#cb3-954" aria-hidden="true" tabindex="-1"></a>:::{#fig-t3}</span>
 <span id="cb3-955"><a href="#cb3-955" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-956"><a href="#cb3-956" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}</span></span>
+<span id="cb3-956"><a href="#cb3-956" aria-hidden="true" tabindex="-1"></a><span class="in">``` tikz</span></span>
 <span id="cb3-957"><a href="#cb3-957" aria-hidden="true" tabindex="-1"></a><span class="in">%%| filename: ../figure-tikz/fig-tikz-08</span></span>
 <span id="cb3-958"><a href="#cb3-958" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{tikzpicture}[scale=1]</span></span>
 <span id="cb3-959"><a href="#cb3-959" aria-hidden="true" tabindex="-1"></a><span class="in"> \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]</span></span>
@@ -2870,7 +2634,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-993"><a href="#cb3-993" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-994"><a href="#cb3-994" aria-hidden="true" tabindex="-1"></a>:::{#fig-t5}</span>
 <span id="cb3-995"><a href="#cb3-995" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-996"><a href="#cb3-996" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.tikz opt-additional-packages="\usetikzlibrary{arrows}"}</span></span>
+<span id="cb3-996"><a href="#cb3-996" aria-hidden="true" tabindex="-1"></a><span class="in">``` tikz</span></span>
 <span id="cb3-997"><a href="#cb3-997" aria-hidden="true" tabindex="-1"></a><span class="in">%%| filename: ../figure-tikz/fig-tikz-09</span></span>
 <span id="cb3-998"><a href="#cb3-998" aria-hidden="true" tabindex="-1"></a><span class="in">\begin{tikzpicture}[scale=1]</span></span>
 <span id="cb3-999"><a href="#cb3-999" aria-hidden="true" tabindex="-1"></a><span class="in"> \tikzstyle{quadri}=[circle, draw, text=black, thick, align=center]</span></span>
